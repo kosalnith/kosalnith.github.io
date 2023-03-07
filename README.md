@@ -11,7 +11,7 @@ Code this free access and download from [Sebastián Otero](https://github.com/se
 
 With this site you can find my work and my adventure, especially the useful and useful links related to economics, econometrics and the famous author in economics.
 
-#### Main Menu in This Page:
+#### The Main Page of this Website:
 - [Home](https://nithkosal.github.io), it presents general information about Kosal, what is new and recent work update. 
 - [Research](https://nithkosal.github.io/research.html), it shows the research publication, working paper, policy paper, book, report, and work in progress.  
 - [Articles](https://nithkosal.github.io/articles.html), the article and OpEds publications on media outlets and other websites. 
