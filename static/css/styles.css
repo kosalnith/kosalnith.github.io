@@ -290,19 +290,19 @@ a > h4:hover  {
   /* color: #B1040E;
   color: green; */
   text-decoration: none;
-  color: #B1040E;
+  color: #e64a1e;
 }
 
 p > a {
   /* color: #B1040E;
   color: green; */
   text-decoration: none;
-  color: #B1040E;
+  color: #e64a1e;
 }
 
 a:hover {
   text-decoration: none;
-  color: #B1040E !important;
+  color: #e64a1e !important;
 }
 
 .font-alt {
@@ -4517,22 +4517,15 @@ body, html {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: #e64a1e;
 }
 
 .hero-text h1{
-	font-family: 'Quattrocento';
     font-size: 70px;
     font-weight: 530;
     line-height: 150px;
 }
 
-.hero-text h4{
-    font-family: 'Quattrocento';
-    font-size: 23px;
-    font-weight: 250;
-    line-height: 30px;
-}
 
 .hero-btn{
     text-decoration: none;
@@ -5165,8 +5158,8 @@ body, html {
     box-sizing: border-box;
     text-align: center;
     border-radius: 0px;
-    background: rgb(177,4,14);
-    filter: grayscale(30%);
+    background: rgb(230, 74, 30);
+    filter: grayscale(0%);
     color: #efefef;
     position: absolute;
     left: 50%;
