@@ -4,14 +4,14 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/kosalnith/kosalnith.github.io/total?logo=GitHub&style=flat-square)
 ![Twitter Follow](https://img.shields.io/twitter/follow/kosalnith?color=%231DA1F2&logo=Twitter&style=flat-square)
 
-Personal Webpage
+Personal Website
 
 The content of this web page is tracked by Kosal’s old personal web page: https://sites.google.com/site/nithkosal/. This new website was designed using templates and 
 Code this free access and download from [Sebastián Otero](https://github.com/sebotero/sebotero.github.io), a PhD candidate in economics from Stanford University. 
 
 With this site you can find my work and my adventure, especially the useful and useful links related to economics, econometrics and the famous author in economics.
 
-#### Main Menu in This Page:
+#### The Main Page of this Website:
 - [Home](https://nithkosal.github.io), it presents general information about Kosal, what is new and recent work update. 
 - [Research](https://nithkosal.github.io/research.html), it shows the research publication, working paper, policy paper, book, report, and work in progress.  
 - [Articles](https://nithkosal.github.io/articles.html), the article and OpEds publications on media outlets and other websites. 
@@ -25,5 +25,5 @@ With this site you can find my work and my adventure, especially the useful and 
 
 Version: 3.0.3
 
-© Nith Kosal 2018-2022. All rights reserved.
+© Kosal Nith 2018-2023. All rights reserved.
 
