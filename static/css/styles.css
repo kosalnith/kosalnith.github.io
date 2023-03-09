@@ -30,12 +30,14 @@ Table of contents
 19. padding
 ----------------------------------*/
 
-/* @import url('https://fonts.googleapis.com/css?family=Sunflower:300,500,700'); */
-/* @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i'); */
-/* @import url('https://fonts.googleapis.com/css?family=Belgrano|Source+Serif+Pro&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Sunflower:300,500,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i');
+@import url('https://fonts.googleapis.com/css?family=Belgrano|Source+Serif+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+SC&display=swap');
-/* @import url('https://fonts.googleapis.com/css?family=Asap&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Asap&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Asap|IBM+Plex+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quattrocento');
+
 
 
 /*---------------------------------
@@ -238,17 +240,17 @@ img {
 @media (max-width: 991px){
  .section {
     padding: 60px 0;
-  } 
+  }
 }
 @media (max-width: 767px){
  .section {
     padding: 40px 0;
-  } 
+  }
 }
 
 
 h1, h2, h3, h4, h5, h6 {
-  /* font-family: "Noto Sans SC", sans-serif; */
+   font-family: "Noto Sans SC", sans-serif;
 }
 
 
@@ -258,7 +260,7 @@ h4 {
 
 
 p {
-  font-family: 'IBM Plex Serif', serif;
+  font-family: "Noto Sans SC", serif, "IBM Plex Serif";
   font-size: 16px;
   line-height: 1.6;
 }
@@ -312,7 +314,7 @@ a:hover {
 	background: #f7f7f7;
 }
 .white-bg {
-  background: #fff;
+  background: #ffffff;
 }
 
 .social-icons {
@@ -353,7 +355,7 @@ a:hover {
   font-size: 35px;
   display: inline-block;
   z-index: 1;
-  color: #333;
+  color: #e64a1e;
 }
 .section-title p {
   margin: 0;
@@ -501,7 +503,7 @@ a.m-btn {
   -webkit-transition: ease all 0.3s;
      -moz-transition: ease all 0.3s;
        -o-transition: ease all 0.3s;
-          transition: ease all 0.3s; 
+          transition: ease all 0.3s;
 }
 /* .m-btn-link:hover {
   letter-spacing: 3px;
@@ -609,7 +611,7 @@ a.m-btn {
 	   -moz-transition: ease all 0.2s;
 		 -o-transition: ease all 0.2s;
 			transition: ease all 0.2s;
-	
+
 }
 .header-nav .navbar-nav .nav-link:hover:after,
 .header-nav .navbar-nav .nav-link.active:after {
@@ -1067,13 +1069,13 @@ a.m-btn {
   font-size: 22px;
 }
 
-@media (max-width: 767px){ 
+@media (max-width: 767px){
   .skill-left h3{
-    margin: 0 0 20px;  
+    margin: 0 0 20px;
     font-size: 22px;
     line-height: 34px;
   }
-  
+
 }
 
 
@@ -1109,8 +1111,8 @@ a.m-btn {
 .progress-lt .progress-bar {
   width: 0%;
   -webkit-transition: width 1.2s ease;
-     -moz-transition: width 1.2s ease;  
-       -o-transition: width 1.2s ease;  
+     -moz-transition: width 1.2s ease;
+       -o-transition: width 1.2s ease;
           transition: width 1.2s ease;
 }
 
@@ -1169,7 +1171,7 @@ a.m-btn {
 }
 @media (max-width: 767px){
   .services-section{
-    padding-top: 130px; 
+    padding-top: 130px;
   }
 }
 
@@ -1202,7 +1204,7 @@ a.m-btn {
   font-weight: 600;
 }
 
-@media (max-width: 767px){ 
+@media (max-width: 767px){
   .counter-section .counter-row {
     padding: 20px 0;
   }
@@ -1255,10 +1257,10 @@ section#portfolio {
 }
 
 .portfolio-cols-3 { margin: 0; padding: 0; }
-.portfolio-cols-3 .portfolio-item { 
-  padding: 0px; 
-  width: 25%; 
-  list-style-type: none; 
+.portfolio-cols-3 .portfolio-item {
+  padding: 0px;
+  width: 25%;
+  list-style-type: none;
 }
 
 .portfolio-col {
@@ -1284,7 +1286,7 @@ section#portfolio {
 .portfolio-col .portfolio-info span {
   font-size: 14px;
   color: #777;
-  font-weight: 600; 
+  font-weight: 600;
 }
 
 /*Portfolio Hover 01*/
@@ -1353,7 +1355,7 @@ section#portfolio {
 
 @media (max-width: 991px){
   .portfolio-cols-3 .portfolio-item {
-    width: 50%; 
+    width: 50%;
   }
 }
 @media (max-width: 767px){
@@ -1368,7 +1370,7 @@ section#portfolio {
 }
 @media (max-width: 640px){
   .portfolio-cols-3 .portfolio-item {
-    width: 100%; 
+    width: 100%;
   }
 }
 
@@ -1393,7 +1395,7 @@ section#portfolio {
 /*-----------------------------------------
 *  Testimonial
 -----------------------------------------*/
-.testimonial-col { 
+.testimonial-col {
   padding: 60px 30px 30px;
   background: #fff;
   position: relative;
@@ -1572,7 +1574,7 @@ section#portfolio {
 }
 
 /*---------------------------------
-* 14. Blog Lising 
+* 14. Blog Lising
 -----------------------------------*/
 section.section.blog-lising {
   padding-top: 0;
@@ -1739,25 +1741,25 @@ section.section.blog-lising div p {
 
 .pagination { margin:0px; }
 .pagination li a { font-size: 15px; font-weight: 500; margin: 0 5px; color: #626262; border-radius: 3px; }
-.pagination > li:first-child > a, 
+.pagination > li:first-child > a,
 .pagination > li:first-child >span { border-radius: 3px; }
-.pagination > li:last-child > a, 
+.pagination > li:last-child > a,
 .pagination > li:last-child >span { border-radius: 3px; }
 
-.pagination > .active > a, 
+.pagination > .active > a,
 .pagination > .active > a:hover { color: #626262; }
-.pagination > li > a, 
+.pagination > li > a,
 .pagination > li > span {   background: #f6f7f8; border:0px; text-align: center; }
 
-.pagination li a:focus, 
-.pagination li a:hover, 
-.pagination li span:focus, 
+.pagination li a:focus,
+.pagination li a:hover,
+.pagination li span:focus,
 .pagination li span:hover,
-.pagination > .active > a, 
-.pagination > .active > a:focus, 
-.pagination > .active > a:hover, 
-.pagination > .active > span, 
-.pagination > .active > span:focus, 
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
 .pagination > .active > span:hover { color: #ffffff; box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); background: #111; }
 .page-item.active .page-link { background: #111; }
 
@@ -1896,7 +1898,7 @@ blockquote.blockquote-left .parson { font-weight: 600; }
 }
 .contact-form .form-control {
   border-radius: 0;
-  font-size: 14px; 
+  font-size: 14px;
   height: 45px;
 }
 .contact-form .form-control.invalid {
@@ -1936,7 +1938,7 @@ blockquote.blockquote-left .parson { font-weight: 600; }
 -----------------------------------------*/
 
 .footer {
-  background: #595757;
+  background: #e64a1e;
 
   padding: 100px 0 50px;
   text-align: center;
@@ -4369,21 +4371,21 @@ blockquote.blockquote-left .parson { font-weight: 600; }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* This text is in Catamaran */
-.catamaran-text p{ 
-	font-family: 'Catamaran'; 
+.catamaran-text p{
+	font-family: 'Catamaran';
     font-size: 17px;
     line-height: 25px;
 }
 
-.catamaran-text h4{ 
-	font-family: 'Catamaran'; 
+.catamaran-text h4{
+	font-family: 'Catamaran';
     font-size: 40px;
     line-height: 22px;
 }
 
 
-.catamaran-text h6{ 
-	font-family: 'Catamaran'; 
+.catamaran-text h6{
+	font-family: 'Catamaran';
     font-size: 21px;
     line-height: 30px;
 }
@@ -4392,37 +4394,37 @@ blockquote.blockquote-left .parson { font-weight: 600; }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* Georgia font for the text in Article */
-.georgia-text h4{ 
-	font-family: 'Georgia', sans-serif; 
+.georgia-text h4{
+	font-family: 'Georgia', sans-serif;
     font-size: 10px;
     line-height: 40px;
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
-                                                                  
-                                                
+
+
 
 
 /* This text is in Quattrocento */
-.quattrocento-text p{ 
-	font-family: 'Quattrocento'; 
+.quattrocento-text p{
+	font-family: 'Quattrocento';
     font-size: 20px;
     line-height: 24px;
 }
 
-.quattrocento-text h4{ 
-	font-family: 'Quattrocento'; 
+.quattrocento-text h4{
+	font-family: 'Quattrocento';
     font-size: 40px;
     line-height: 22px;
 }
 
-.quattrocento-text h2{ 
-	font-family: 'Quattrocento'; 
+.quattrocento-text h2{
+	font-family: 'Quattrocento';
     font-size: 40px;
     line-height: 22px;
 }
 
-.quattrocento-text h1{ 
-	font-family: 'Quattrocento'; 
+.quattrocento-text h1{
+	font-family: 'Quattrocento';
     font-size: 60px;
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -4449,26 +4451,26 @@ blockquote.blockquote-left .parson { font-weight: 600; }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* This text is in Trebuchet MS */
-.trebuchet-text p{ 
-	font-family: 'Trebuchet MS'; 
+.trebuchet-text p{
+	font-family: 'Trebuchet MS';
     font-size: 16px;
     line-height: 20px;
 }
 
-.trebuchet-text h4{ 
-	font-family: 'Trebuchet MS'; 
+.trebuchet-text h4{
+	font-family: 'Trebuchet MS';
     font-size: 23px;
     line-height: 30px;
 }
 
-.trebuchet-text h5{ 
-	font-family: 'Trebuchet MS'; 
+.trebuchet-text h5{
+	font-family: 'Trebuchet MS';
     font-size: 20px;
     line-height: 1px;
 }
 
-.trebuchet-text h6{ 
-	font-family: 'Trebuchet MS'; 
+.trebuchet-text h6{
+	font-family: 'Trebuchet MS';
     font-size: 16px;
     line-height: 23px;
     margin: 3px;
@@ -4476,14 +4478,14 @@ blockquote.blockquote-left .parson { font-weight: 600; }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* This text is in Trebuchet MS in Teaching section*/
-.trebuchet1-text h5{ 
-	font-family: 'Trebuchet MS'; 
+.trebuchet1-text h5{
+	font-family: 'Trebuchet MS';
     font-size: 20px;
     line-height: 1px;
 }
 
-.trebuchet1-text h6{ 
-	font-family: 'Trebuchet MS'; 
+.trebuchet1-text h6{
+	font-family: 'Trebuchet MS';
     font-size: 16px;
     line-height: 20px;
 }
@@ -4519,14 +4521,14 @@ body, html {
 }
 
 .hero-text h1{
-	font-family: 'Quattrocento'; 
+	font-family: 'Quattrocento';
     font-size: 70px;
     font-weight: 530;
     line-height: 150px;
 }
 
 .hero-text h4{
-    font-family: 'Quattrocento'; 
+    font-family: 'Quattrocento';
     font-size: 23px;
     font-weight: 250;
     line-height: 30px;
@@ -4560,7 +4562,7 @@ body, html {
     width: 100%;
     display: flex;
     margin: 5% auto 0;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .image-box{
@@ -4574,7 +4576,7 @@ body, html {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: .5s; 
+    transition: .5s;
 }
 
 .image-box:hover{
@@ -4604,7 +4606,7 @@ body, html {
 .per1 img {
     width: 15vw;
     height: 16vw;
-    
+
 }
 
 .per1-cover img {
@@ -4661,7 +4663,7 @@ body, html {
 .per2 img {
     width: 48.5vw;
     height: 25vw;
-    
+
 }
 
 .per2-cover img {
@@ -4683,36 +4685,36 @@ body, html {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* This text is in Open Sans */
-.opensans-text p{ 
-    font-family: 'Open Sans'; 
+.opensans-text p{
+    font-family: 'Open Sans';
     font-size: 17px;
     line-height: 22px;
     color: red;
 }
 
-.opensans-text h4{ 
-	font-family: 'Open Sans'; 
+.opensans-text h4{
+	font-family: 'Open Sans';
     font-size: 40px;
     line-height: 22px;
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* This text is in Trebuchet MS */
-.georgia-text p{ 
-	font-family: 'Georgia'; 
+.georgia-text p{
+	font-family: 'Georgia';
     font-size: 17px;
     line-height: 5px;
     font-weight: bold;
 }
 
-.georgia-text h4{ 
-	font-family: 'Georgia'; 
+.georgia-text h4{
+	font-family: 'Georgia';
     font-size: 27px;
     line-height: 30px;
 }
 
-.georgia-text h6{ 
-	font-family: 'Georgia'; 
+.georgia-text h6{
+	font-family: 'Georgia';
     line-height: 19px;
 }
 
@@ -4727,8 +4729,8 @@ body, html {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* This text is in Catamaran Home */
-.catamaran1-text h6{ 
-	font-family: 'Catamaran'; 
+.catamaran1-text h6{
+	font-family: 'Catamaran';
     font-size: 17px;
     line-height: 30px;
 }
@@ -4736,22 +4738,22 @@ body, html {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* This text is in Quattrocento Home */
-.quattrocento1-text p{ 
-	font-family: 'Quattrocento'; 
+.quattrocento1-text p{
+	font-family: 'Quattrocento';
     font-size: 18.9px;
     line-height: 27px;
     margin: .2em;
 
 }
 
-.quattrocento1-text h4{ 
-	font-family: 'Quattrocento'; 
+.quattrocento1-text h4{
+	font-family: 'Quattrocento';
     font-size: 34px;
     line-height: 60px;
 }
 
-.quattrocento1-text h2{ 
-	font-family: 'Quattrocento'; 
+.quattrocento1-text h2{
+	font-family: 'Quattrocento';
     font-size: 40px;
     line-height: 80px;
 }
@@ -4760,29 +4762,29 @@ body, html {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* This text is in Quattrocento font in the Home Background*/
-.quattrocento2-text h1{ 
-	font-family: 'Quattrocento'; 
+.quattrocento2-text h1{
+	font-family: 'Quattrocento';
     font-size: 38px;
     line-height: 54px;
     margin: .2em;
 
 }
 
-.quattrocento2-text h4{ 
-	font-family: 'Quattrocento'; 
+.quattrocento2-text h4{
+	font-family: 'Quattrocento';
     font-size: 23px;
     line-height: 28px;
 }
 
-.quattrocento2-text h3{ 
-	font-family: 'Quattrocento'; 
+.quattrocento2-text h3{
+	font-family: 'Quattrocento';
     font-size: 20px;
     line-height: 25px;
 }
-.quattrocento2-text h6{ 
-	font-family: 'Quattrocento'; 
+.quattrocento2-text h6{
+	font-family: 'Quattrocento';
     font-size: 18px;
-    line-height: 22px;    
+    line-height: 22px;
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -4798,41 +4800,41 @@ body, html {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* This text is in Catamaran in Research */
-.catamaran2-text p{ 
-	font-family: 'Catamaran'; 
+.catamaran2-text p{
+	font-family: 'Catamaran';
     font-size: 16px;
     line-height: 23px;
-    margin: 0px; 
+    margin: 0px;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* This text is in Quattrocento in Research */
-.quattrocento3-text h3{ 
-	font-family: 'Quattrocento'; 
+.quattrocento3-text h3{
+	font-family: 'Quattrocento';
     font-size: 45px;
     line-height: 47px;
     /*color: #e72f11;*/
-    margin: 0.2em 0; 
+    margin: 0.2em 0;
 }
 
-.quattrocento3-text h4{ 
-	font-family: 'Quattrocento'; 
+.quattrocento3-text h4{
+	font-family: 'Quattrocento';
     font-size: 30px;
     line-height: 27px;
     /*color: #e72f11;*/
-    margin: 0.2em 0;    
+    margin: 0.2em 0;
 }
 
-.quattrocento3-text h5{ 
-	font-family: 'Quattrocento'; 
+.quattrocento3-text h5{
+	font-family: 'Quattrocento';
     font-size: 20px;
     line-height: 20px;
     color: #e72f11;
     margin: 0.2em 0;
 }
 
-.quattrocento3-text p{ 
-	font-family: 'Quattrocento'; 
+.quattrocento3-text p{
+	font-family: 'Quattrocento';
     font-size: 17px;
     line-height: 20px;
     /*color: #e72f11;*/
@@ -4841,8 +4843,8 @@ body, html {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* This text is in Segoe UI in Research */
-.segoe p{ 
-	font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+.segoe p{
+	font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
     font-size: 16px;
     line-height: 6px;
 
@@ -4850,7 +4852,7 @@ body, html {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 .space1{
-    margin: 50px; 
+    margin: 50px;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -4887,7 +4889,7 @@ body, html {
     background-position: center;
     background-repeat: no-repeat;
     transition: 15s;
-    
+
     animation-name: animate;
     animation-direction: alternate-reverse;
     animation-duration: 30s;
@@ -4923,14 +4925,14 @@ body, html {
 }
 
 .imaget-text h1{
-	font-family: 'Quattrocento'; 
+	font-family: 'Quattrocento';
     font-size: 50px;
     font-weight: 530;
     line-height: 60px;
 }
 
 .imaget-text h4{
-    font-family: 'Quattrocento'; 
+    font-family: 'Quattrocento';
     font-size: 23px;
     font-weight: 250;
     line-height: 27px;
@@ -5132,7 +5134,7 @@ body, html {
 .profile{
     margin-top: 25px;
     margin-bottom: 25px;
-    
+
 }
 .profile .img-box{
     opacity: 1;
@@ -5169,7 +5171,7 @@ body, html {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -20px;  
+    bottom: -20px;
 }
 .t-info h6{
     font-size: 15px;
@@ -5276,5 +5278,3 @@ body {
     grid-row: unset;
   }
 }
-
-
