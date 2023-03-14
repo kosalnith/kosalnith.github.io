@@ -4430,13 +4430,13 @@ blockquote.blockquote-left .parson { font-weight: 600; }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 .press {
-  margin: 0em 0;
+  margin: 0em 20;
   text-align: center;
 }
 
 .press img {
-  width: 15vw;
-  height: 23vw;
+  width: 21vw;
+  height: 26vw;
 }
 
 .press-cover img {
@@ -4448,6 +4448,7 @@ blockquote.blockquote-left .parson { font-weight: 600; }
 .hover-shadow:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 30px 30px 0 rgba(0, 0, 0, 0.4);
 }
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* This text is in Trebuchet MS */
@@ -4623,12 +4624,27 @@ body, html {
 
 /* Two column text in html */
 .links-column {
-  float: left;
+  float: center;
   width: 50%;
 }
 
 /* Clear floats after the columns */
 .links-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Two column text in html */
+.links-column-cv {
+  float: center;
+  width: 50%;
+  float: left;
+}
+
+
+/* Clear floats after the columns */
+.links-row-cv:after {
   content: "";
   display: table;
   clear: both;
