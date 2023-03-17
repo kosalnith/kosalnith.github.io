@@ -4624,7 +4624,7 @@ body, html {
 
 /* Two column text in html */
 .links-column {
-  float: center;
+  float: left;
   width: 50%;
 }
 
