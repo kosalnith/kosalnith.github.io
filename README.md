@@ -4,7 +4,7 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/kosalnith/kosalnith.github.io/total?logo=GitHub&style=flat-square)
 ![Twitter Follow](https://img.shields.io/twitter/follow/kosalnith?color=%231DA1F2&logo=Twitter&style=flat-square)
 
-Personal Website
+### Personal Website
 
 The content of this web page is tracked by Kosal’s old personal web page: https://sites.google.com/site/nithkosal/. This new website was designed using templates and 
 Code this free access and download from [Sebastián Otero](https://github.com/sebotero/sebotero.github.io), a PhD candidate in economics from Stanford University. 
