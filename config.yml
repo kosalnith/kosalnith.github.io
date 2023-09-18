@@ -1,4 +1,4 @@
-baseURL: "https://kosalnith.github.io/" 
+baseURL: "" 
 title: Kosal Nith
 paginate: 20
 theme: PaperMod
