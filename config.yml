@@ -26,6 +26,9 @@ menu:
         - name: Newsletter
           url: https://econlab.substack.com
           weight: 4
+        - name: Search
+          url: /search/
+          weight: 6
 
 params:
     description: "I am a Data Support at CDRI. My research covers unemployment, economic slack, business cycles, and macroeconomic policy."
