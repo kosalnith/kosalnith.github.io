@@ -1,4 +1,4 @@
-# Minimalist Hugo Template for Academic Websites
+# Kosal Template for Academic Websites
 
 This repository contains the source code to https://pascalmichaillat.org: a personal academic website created with [Hugo](https://github.com/gohugoio/hugo) and the [PaperMod theme](https://github.com/adityatelange/hugo-PaperMod). The website is hosted on [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages).
 

@@ -24,7 +24,7 @@ menu:
           url: /tags/
           weight: 5     
         - name: Newsletter
-          url: https://pmichaillat.substack.com
+          url: https://econlab.substack.com
           weight: 4
         - name: Personal
           url: /personal/
@@ -94,7 +94,7 @@ params:
         - name: Office Hours
           url: /officehours/
         - name: Google Scholar
-          url: https://scholar.google.com/citations?user=cL23w-4AAAAJ
+          url: https://scholar.google.com/citations?user=LG2mrO4AAAAJ&hl=en
         - name: YouTube
           url: https://www.youtube.com/@kosalnith
         - name: GitHub
