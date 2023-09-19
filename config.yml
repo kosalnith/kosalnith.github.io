@@ -1,5 +1,5 @@
-baseURL: "https://pascalmichaillat.org/" 
-title: Pascal Michaillat
+baseURL: "https://kosalnith.github.io/" 
+title: Kosal Nith
 paginate: 20
 theme: PaperMod
 
@@ -11,11 +11,11 @@ taxonomies:
 
 menu:
     main:
-        - name: Papers
-          url: /papers/
+        - name: Research
+          url: /research/
           weight: 1
-        - name: Courses
-          url: /courses/
+        - name: Teaching
+          url: /teaching/
           weight: 2
         - name: Design
           url: /design/
@@ -26,10 +26,21 @@ menu:
         - name: Newsletter
           url: https://pmichaillat.substack.com
           weight: 4
-
+        - name: Personal
+          url: /personal/
+          weight: 6
+        - name: Speeches
+          url: /speeches/
+          weight: 7
+        - name: Miscellaneous
+          url: /miscellaneous/
+          weight: 8
+        - name: Search
+          url: /search/
+          weight: 9
 params:
-    description: "I am an Associate Professor of Economics at UC Santa Cruz. My research covers unemployment, economic slack, business cycles, and macroeconomic policy."
-    author: Pascal Michaillat
+    description: "I am a Data Support Officer at Cambodia Development Resource Institute. My research covers unemployment, economic slack, business cycles, and macroeconomic policy."
+    author: Kosal Nith
     googleAnalyticsID: "G-97G4MZ4061"
     DateFormat: "January 2006"
     defaultTheme: light
@@ -52,26 +63,32 @@ params:
     math: true
     profileMode:
           enabled: true
-          title: Pascal Michaillat
-          subtitle: "I am an Associate Professor of Economics at the University of California, Santa Cruz. I try to understand why economic slack—especially unemployment—exists and why it fluctuates over the business cycle. I also study how macroeconomic policies—including monetary policy, government spending, unemployment insurance, and immigration—should respond to such cyclical fluctuations."
+          title: Kosal Nith
+          subtitle: "I am a Data Support Officer at Cambodia Development Resource Institute. I try to understand why economic slack—especially unemployment—exists and why it fluctuates over the business cycle. I also study how macroeconomic policies—including monetary policy, government spending, unemployment insurance, and immigration—should respond to such cyclical fluctuations."
           imageUrl: "/picture.jpeg"
           imageWidth: 160
           imageHeight: 160
-          imageTitle: Pascal Michaillat
+          imageTitle: Kosal Nith
           buttons:
-            - name: Papers
-              url: /papers/
-            - name: Courses
-              url: /courses/
+            - name: Research
+              url: /research/
+            - name: Teaching
+              url: /teaching/
             - name: Design
               url: /design/
             - name: Newsletter
-              url: https://pmichaillat.substack.com
+              url: https://econlab.substack.com
+            - name: Personal
+              url: /personal/
+            - name: Speeches
+              url: /speeches/
+            - name: Miscellaneous
+              url: /miscellaneous/
     socialIcons:
         - name: CV
           url: /cv.pdf
         - name: Email
-          url: mailto:pascal.michaillat@gmail.com
+          url: mailto:kosal.nith@cdri.org.kh
         - name: Location
           url: /location/
         - name: Office Hours
@@ -79,9 +96,9 @@ params:
         - name: Google Scholar
           url: https://scholar.google.com/citations?user=cL23w-4AAAAJ
         - name: YouTube
-          url: https://www.youtube.com/@pmichaillat
+          url: https://www.youtube.com/@kosalnith
         - name: GitHub
-          url: https://github.com/pmichaillat?tab=repositories
+          url: https://github.com/kosalnith
 
     assets:
         disableHLJS: true
@@ -90,7 +107,7 @@ params:
         hiddenInList: true
         hiddenInSingle: true
     label:
-      text: "Pascal Michaillat"
+      text: "Kosal Nith"
       icon: /favicon.ico
       iconHeight: 18
 
