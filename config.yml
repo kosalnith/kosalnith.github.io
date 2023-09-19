@@ -65,7 +65,7 @@ params:
           enabled: true
           title: Kosal Nith
           subtitle: "I am a Data Support Officer at Cambodia Development Resource Institute. I try to understand why economic slack—especially unemployment—exists and why it fluctuates over the business cycle. I also study how macroeconomic policies—including monetary policy, government spending, unemployment insurance, and immigration—should respond to such cyclical fluctuations."
-          imageUrl: "/picture.jpeg"
+          imageUrl: "/img/kosal.jpg"
           imageWidth: 160
           imageHeight: 160
           imageTitle: Kosal Nith

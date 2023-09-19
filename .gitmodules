@@ -1,3 +1,6 @@
 [submodule "themes/PaperMod"]
     path = themes/PaperMod
     url = "https://github.com/adityatelange/hugo-PaperMod.git"git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+[submodule "kosalnith.github.io"]
+	path = kosalnith.github.io
+	url = https://github.com/kosalnith/kosalnith.github.io.git
