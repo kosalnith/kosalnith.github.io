@@ -7985,7 +7985,7 @@ h4.field-content > a:hover {
  .su-news-external .su-news-list__item a:after {
   margin-right: 0.3em;
   margin-left: 0.4em;
-  background-color: #006cb8;
+  background-color: #b1040e;
   -webkit-transition: -webkit-transform 0.2s ease-in-out,
    -webkit-mask-image 0.2s ease-in-out;
   transition: -webkit-transform 0.2s ease-in-out,
@@ -9038,7 +9038,7 @@ div.tree-child-horizontal {
  .ds-entity--stanford-page .su-card .su-card__contents a:after {
   margin-right: 0.3em;
   margin-left: 0.4em;
-  background-color: #006cb8;
+  background-color: #b1040e;
   -webkit-transition: -webkit-transform 0.2s ease-in-out,
    -webkit-mask-image 0.2s ease-in-out;
   transition: -webkit-transform 0.2s ease-in-out,
@@ -10077,7 +10077,7 @@ div.tree-child-horizontal {
   a:after {
   margin-right: 0.3em;
   margin-left: 0.4em;
-  background-color: #006cb8;
+  background-color: #b1040e;
   -webkit-transition: -webkit-transform 0.2s ease-in-out,
    -webkit-mask-image 0.2s ease-in-out;
   transition: -webkit-transform 0.2s ease-in-out,
@@ -11818,8 +11818,8 @@ div.tree-child-horizontal {
   width: 10px;
   display: inline-block;
   content: "";
-  -webkit-mask: url(../images/arrow-up-right_2.svg) no-repeat 0 0;
-  mask: url(../images/arrow-up-right_2.svg) no-repeat 0 0;
+  -webkit-mask: url(static/img/icon/arrow-up-right_2.svg) no-repeat 0 0;
+  mask: url(static/img/icon/arrow-up-right_2.svg) no-repeat 0 0;
   -webkit-mask-size: contain;
   mask-size: contain;
  }
@@ -11830,7 +11830,7 @@ div.tree-child-horizontal {
  .su-news-external .su-news-list__item a:after {
   margin-right: 0.3em;
   margin-left: 0.4em;
-  background-color: #006cb8;
+  background-color: #b1040e;
   -webkit-transition: -webkit-transform 0.2s ease-in-out,
    -webkit-mask-image 0.2s ease-in-out;
   transition: -webkit-transform 0.2s ease-in-out,
@@ -12381,8 +12381,8 @@ div.tree-child-horizontal {
   width: 0.65em;
   display: inline-block;
   content: "";
-  -webkit-mask: url(../images/caret-right_1.svg) no-repeat 0 0;
-  mask: url(../images/caret-right_1.svg) no-repeat 0 0;
+  -webkit-mask: url(static/img/icon/caret-right_1.svg) no-repeat 0 0;
+  mask: url(static/img/icon/caret-right_1.svg) no-repeat 0 0;
   -webkit-mask-size: contain;
   mask-size: contain;
  }
@@ -12405,7 +12405,7 @@ div.tree-child-horizontal {
  .su-wysiwyg-text h6 a:after {
   margin-right: 0.3em;
   margin-left: 0.4em;
-  background-color: #006cb8;
+  background-color: #b1040e;
   -webkit-transition: -webkit-transform 0.2s ease-in-out,
    -webkit-mask-image 0.2s ease-in-out;
   transition: -webkit-transform 0.2s ease-in-out,
@@ -12446,8 +12446,8 @@ div.tree-child-horizontal {
   width: 0.65em;
   display: inline-block;
   content: "";
-  -webkit-mask: url(../images/arrow-up-right_1.svg) no-repeat 0 0;
-  mask: url(../images/arrow-up-right_1.svg) no-repeat 0 0;
+  -webkit-mask: url(static/img/icon/arrow-up-right_1.svg) no-repeat 0 0;
+  mask: url(static/img/icon/arrow-up-right_1.svg) no-repeat 0 0;
   -webkit-mask-size: contain;
   mask-size: contain;
  }
