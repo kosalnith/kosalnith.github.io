@@ -7985,7 +7985,7 @@ h4.field-content > a:hover {
  .su-news-external .su-news-list__item a:after {
   margin-right: 0.3em;
   margin-left: 0.4em;
-  background-color: #006cb8;
+  background-color: #b1040e;
   -webkit-transition: -webkit-transform 0.2s ease-in-out,
    -webkit-mask-image 0.2s ease-in-out;
   transition: -webkit-transform 0.2s ease-in-out,
@@ -9038,7 +9038,7 @@ div.tree-child-horizontal {
  .ds-entity--stanford-page .su-card .su-card__contents a:after {
   margin-right: 0.3em;
   margin-left: 0.4em;
-  background-color: #006cb8;
+  background-color: #b1040e;
   -webkit-transition: -webkit-transform 0.2s ease-in-out,
    -webkit-mask-image 0.2s ease-in-out;
   transition: -webkit-transform 0.2s ease-in-out,
@@ -10077,7 +10077,7 @@ div.tree-child-horizontal {
   a:after {
   margin-right: 0.3em;
   margin-left: 0.4em;
-  background-color: #006cb8;
+  background-color: #b1040e;
   -webkit-transition: -webkit-transform 0.2s ease-in-out,
    -webkit-mask-image 0.2s ease-in-out;
   transition: -webkit-transform 0.2s ease-in-out,
@@ -11830,7 +11830,7 @@ div.tree-child-horizontal {
  .su-news-external .su-news-list__item a:after {
   margin-right: 0.3em;
   margin-left: 0.4em;
-  background-color: #006cb8;
+  background-color: #b1040e;
   -webkit-transition: -webkit-transform 0.2s ease-in-out,
    -webkit-mask-image 0.2s ease-in-out;
   transition: -webkit-transform 0.2s ease-in-out,
@@ -41662,7 +41662,7 @@ body > footer {
 #footer__pre-footer .social a[title="GitHub"]:active,
 #footer__pre-footer .social a[title="GitHub"]:focus,
 #footer__pre-footer .social a[title="GitHub"]:hover {
- color: #000;
+ color: #020202;
 }
 
 #footer__pre-footer .social a .fa-google:active,
