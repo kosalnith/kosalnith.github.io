@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  25 DEC 2023 17:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  26 DEC 2023 11:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**KosalCV_CKS.tex
-(./KosalCV_CKS.tex
+**KosalCV_short.tex
+(./KosalCV_short.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-22>
 (/usr/local/texlive/2023/texmf-dist/tex/latex/base/article.cls
@@ -390,8 +390,8 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count290
 \l__pdf_internal_box=\box55
 )
-(./KosalCV_CKS.aux)
-\openout1 = `KosalCV_CKS.aux'.
+(./KosalCV_short.aux)
+\openout1 = `KosalCV_short.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
 LaTeX Font Info:    ... okay on input line 49.
@@ -478,9 +478,9 @@ e
 ))
 Package hyperref Info: Link coloring OFF on input line 49.
 
-(./KosalCV_CKS.out) (./KosalCV_CKS.out)
+(./KosalCV_short.out) (./KosalCV_short.out)
 \@outlinefile=\write3
-\openout3 = `KosalCV_CKS.out'.
+\openout3 = `KosalCV_short.out'.
 
 LaTeX Info: Redefining \microtypecontext on input line 49.
 Package microtype Info: Applying patch `item' on input line 49.
@@ -595,26 +595,36 @@ Overfull \hbox (2.21pt too wide) in paragraph at lines 312--321
 $[]$  $[]$ 
  []
 
-[2] [3] (./KosalCV_CKS.aux)
-Package rerunfilecheck Info: File `KosalCV_CKS.out' has not changed.
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 337--337
+
+ []
+
+
+Overfull \hbox (2.21pt too wide) in paragraph at lines 329--339
+[]$[]$  $[]$ 
+ []
+
+[3] (./KosalCV_short.aux)
+Package rerunfilecheck Info: File `KosalCV_short.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
  13504 strings out of 476025
- 211542 string characters out of 5790017
+ 211576 string characters out of 5790017
  1866388 words of memory out of 5000000
  33598 multiletter control sequences out of 15000+600000
  554134 words of font info for 187 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,76p,1008b,447s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,6n,76p,1010b,447s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 ></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/
 local/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/t
 exlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on KosalCV_CKS.pdf (3 pages, 74444 bytes).
+Output written on KosalCV_short.pdf (3 pages, 74696 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 75 PDF objects out of 1000 (max. 8388607)
+ 61 compressed objects within 1 object stream
  20 named destinations out of 1000 (max. 500000)
  56321 words of extra memory for PDF output out of 61914 (max. 10000000)
 
