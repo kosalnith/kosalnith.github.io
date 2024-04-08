@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  7 MAR 2024 13:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  22 MAR 2024 16:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**KosalCV.tex
-(./KosalCV.tex
+**Kosal_Nith_CV.tex
+(./Kosal_Nith_CV.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-22>
 (/usr/local/texlive/2023/texmf-dist/tex/latex/base/article.cls
@@ -389,8 +389,8 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count290
 \l__pdf_internal_box=\box55
 )
-(./KosalCV.aux)
-\openout1 = `KosalCV.aux'.
+(./Kosal_Nith_CV.aux)
+\openout1 = `Kosal_Nith_CV.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
 LaTeX Font Info:    ... okay on input line 53.
@@ -420,14 +420,14 @@ LaTeX Font Info:    ... okay on input line 53.
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
 * h-part:(L,W,R)=(56.9055pt, 483.69687pt, 56.9055pt)
-* v-part:(T,H,B)=(56.9055pt, 731.23584pt, 56.9055pt)
+* v-part:(T,H,B)=(46.94687pt, 751.1531pt, 46.94687pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
 * \textwidth=483.69687pt
-* \textheight=731.23584pt
+* \textheight=751.1531pt
 * \oddsidemargin=-15.36449pt
 * \evensidemargin=-15.36449pt
-* \topmargin=-52.36449pt
+* \topmargin=-62.32312pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -469,9 +469,9 @@ e
 ))
 Package hyperref Info: Link coloring OFF on input line 53.
 
-(./KosalCV.out) (./KosalCV.out)
+(./Kosal_Nith_CV.out) (./Kosal_Nith_CV.out)
 \@outlinefile=\write3
-\openout3 = `KosalCV.out'.
+\openout3 = `Kosal_Nith_CV.out'.
 
 LaTeX Info: Redefining \microtypecontext on input line 53.
 Package microtype Info: Applying patch `item' on input line 53.
@@ -493,11 +493,22 @@ Package microtype Info: No adjustment of character kerning.
 (/usr/local/texlive/2023/texmf-dist/tex/latex/microtype/mt-ptm.cfg
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 )
+! Missing } inserted.
+<inserted text> 
+                }
+l.62 \end{center}
+                 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 (/usr/local/texlive/2023/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 77.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 76.
 
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -506,7 +517,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/local/texlive/2023/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 77.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 76.
 
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -516,48 +527,47 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
-Package hyperref Warning: Suppressing link with empty target on input line 200.
+Package hyperref Warning: Suppressing link with empty target on input line 158.
+
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 183.
+
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 195.
 
 
 [1
 
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-
-Package hyperref Warning: Suppressing link with empty target on input line 229.
-
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 244.
-
-
-[2]
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 401--410
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 303--312
 $[]$  $[]$ 
  []
 
-[3] (./KosalCV.aux)
-Package rerunfilecheck Info: File `KosalCV.out' has not changed.
+[2] (./Kosal_Nith_CV.aux)
+Package rerunfilecheck Info: File `Kosal_Nith_CV.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13350 strings out of 476025
- 209517 string characters out of 5790017
- 1865388 words of memory out of 5000000
+ 13343 strings out of 476025
+ 209550 string characters out of 5790017
+ 1864388 words of memory out of 5000000
  33520 multiletter control sequences out of 15000+600000
- 540052 words of font info for 118 fonts, out of 8000000 for 9000
+ 539827 words of font info for 116 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,76p,1004b,447s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,5n,76p,1010b,445s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb>
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></
 usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></us
 r/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/te
 xlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023
 /texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on KosalCV.pdf (3 pages, 82088 bytes).
+Output written on Kosal_Nith_CV.pdf (2 pages, 79171 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
- 23 named destinations out of 1000 (max. 500000)
+ 89 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
+ 19 named destinations out of 1000 (max. 500000)
  27649 words of extra memory for PDF output out of 29859 (max. 10000000)
 
