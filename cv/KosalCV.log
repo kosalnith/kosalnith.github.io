@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  7 MAR 2024 13:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  14 APR 2024 16:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -516,7 +516,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
-Package hyperref Warning: Suppressing link with empty target on input line 200.
+Package hyperref Warning: Suppressing link with empty target on input line 204.
 
 
 [1
@@ -524,40 +524,49 @@ Package hyperref Warning: Suppressing link with empty target on input line 200.
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}]
 
-Package hyperref Warning: Suppressing link with empty target on input line 229.
+Package hyperref Warning: Suppressing link with empty target on input line 237.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 244.
+Package hyperref Warning: Suppressing link with empty target on input line 248.
 
 
 [2]
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 401--410
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 422--431
 $[]$  $[]$ 
  []
 
-[3] (./KosalCV.aux)
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 447--447
+
+ []
+
+
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 439--449
+[]$[]$  $[]$ 
+ []
+
+[4] (./KosalCV.aux)
 Package rerunfilecheck Info: File `KosalCV.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13350 strings out of 476025
- 209517 string characters out of 5790017
+ 13352 strings out of 476025
+ 209534 string characters out of 5790017
  1865388 words of memory out of 5000000
  33520 multiletter control sequences out of 15000+600000
  540052 words of font info for 118 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,6n,76p,1004b,447s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb>
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></
-usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></us
-r/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/te
-xlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023
-/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on KosalCV.pdf (3 pages, 82088 bytes).
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></
+usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/
+texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/20
+23/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on KosalCV.pdf (4 pages, 75388 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
- 23 named destinations out of 1000 (max. 500000)
+ 100 PDF objects out of 1000 (max. 8388607)
+ 83 compressed objects within 1 object stream
+ 25 named destinations out of 1000 (max. 500000)
  27649 words of extra memory for PDF output out of 29859 (max. 10000000)
 
