@@ -978,20 +978,19 @@ button.filters-cta:hover span {
     grid-row: span 1;
   }
 }
-**/
 
-@keyframes move-down{
 
-  0%{
-      top:10%;
-  }
-  50%{
-      top:35%;
-  }
-  100%{
-      top:50%;
-  }
+/** Gallary World**/
+.container-world{
+  display:grid;
+  grid-template-columns: repeat(6,1fr);
+  grid-auto-rows:300px 300px;
+  row-gap: 70px;
+  column-gap: 30px;
+  grid-auto-flow: dense;
+  text-align: center;
 }
+
 
 /** Gallery Box for Friends **/
 .gallery-box {
