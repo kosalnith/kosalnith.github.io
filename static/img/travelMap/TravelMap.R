@@ -10,14 +10,18 @@ library(rnaturalearth)
 library(rnaturalearthdata)
 library(sf)
 library(dplyr)
+library(tidyverse)
+library(giscoR)
 
 # Load Natural Earth world data (land only)
 world <- ne_countries(scale = "medium", returnclass = "sf")
 
 # Create a dataset with country names and the 'x' variable (1 = red, 0 = off-white)
 data <- data.frame(
-  name = c("Denmark", "Austria", "Switzerland", "Spain", "China", "United Kingdom", "France", "Germany", "Cambodia", "Thailand", "Vietnam", "Malaysia", "Indonesia", "Laos"),
-  x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)  # Example: 1 for red, 0 for off-white
+  name = c("Cambodia", "Thailand", "Laos", "Denmark", "Germany", "Switzerland", "Spain", "France",
+           "Vietnam", "Indonesia", "China", "United Kingdom", "Malaysia", "Austria", "Netherlands",
+           "Czechia"),
+  x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1)  # Example: 1 for red, 0 for off-white
 )
 
 # Merge the dataset with the world spatial data using the country name
@@ -43,7 +47,8 @@ map <- ggplot(data = world_data) +
   )+
   geom_sf_interactive(
     fill = NA, 
-    aes(tooltip = glue::glue('{name}'))
+    aes(
+      tooltip = glue::glue('{name}'))
   )+
   labs(title = "My Travel Stamp Collection",
        subtitle = "This map shows the countries I’ve visited for both work and vacations.")+
