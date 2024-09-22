@@ -18,9 +18,9 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 
 # Create a dataset with country names and the 'x' variable (1 = red, 0 = off-white)
 data <- data.frame(
-  name = c("Cambodia", "Thailand", "Laos", "Denmark", "Germany", "Switzerland", "Spain", "France",
-           "Vietnam", "Indonesia", "China", "United Kingdom", "Malaysia", "Austria", "Netherlands",
-           "Czechia"),
+  name = c("Cambodia", "Thailand", "Laos", "Finland", Denmark", "Germany", "Switzerland", 
+          "Spain", "France", "Vietnam", "Indonesia", "China", "United Kingdom", "Malaysia", 
+          "Austria", "Netherlands", "Czechia"),
   x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1)  # Example: 1 for red, 0 for off-white
 )
 
@@ -44,17 +44,17 @@ map <- ggplot(data = world_data) +
     legend.position = "none",  # Hide legend for a clean look
     plot.title = element_text(size = 11, face = "bold", hjust = 0.5, color = "gray30"),  # Stylish title
     plot.subtitle = element_text(size = 9, hjust = 0.5, color = "gray20")  # Subtitle with complementary color
-  )+
+  ) +
   geom_sf_interactive(
     fill = NA, 
-    aes(
-      tooltip = glue::glue('{name}'))
-  )+
+    aes(tooltip = glue::glue('{name}'))
+  ) +
   labs(title = "My Travel Stamp Collection",
        subtitle = "This map shows the countries I’ve visited for both work and vacations.")+
   coord_sf(crs = "+proj=merc", ylim = c(-8000000,NA), expand = FALSE) # Mercator projection with limited latitude
 
 girafe(ggobj = map)
+
 
 
 ggsave("/Users/knith/Downloads/plot_example.png", plot = map, width = 19, height = 12, dpi = 300)
