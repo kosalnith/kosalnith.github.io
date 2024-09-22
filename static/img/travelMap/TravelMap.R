@@ -1,122 +1,3 @@
-library(tidyverse)
-library(giscoR)
-
-world_shape<-st_read("/Users/knith/Mirror/05_Website/kosalnith.github.io/static/img/travelMap/ne_10m_admin_0_countries/ne_10m_admin_0_countries.shp")
-
-## Important
-world_shape %>%
-  st_transform(crs=3857) %>% 
-  ggplot(aes(geometry = geometry)) +
-  geom_sf()+
-  coord_sf(ylim = c(-7000000,NA))
-
-
-world_shape %>%
-  st_transform(crs=3857) %>% 
-  ggplot(aes(geometry = geometry)) +
-  geom_sf(
-    data = world_shape,
-    aes(fill = NAME),
-    color = 'black',
-    linewidth = 0.5
-  ) +
-  geom_sf()+
-  coord_sf(ylim = c(-7000000,NA))
-
-  
-  
-
-## We don’t actually see the colors
-world_shape %>%
-  st_transform(crs=3857) %>%  
-  ggplot(aes(geometry = geometry)) +
-  geom_sf(
-    data = world_shape,
-    aes(fill = NAME),
-    color = 'black',
-    linewidth = 0.5
-  ) +
-  geom_sf(
-    fill = NA,
-    color = 'black',
-    linewidth = 0.1
-  )+
-  coord_sf(ylim = c(-7000000,NA))
-
-  
-library(ggiraph)
-gg_plt <- world_shape %>%
-  st_transform(crs=3857) %>%  
-  ggplot(aes(geometry = geometry)) +
-  geom_sf(
-    data = world_shape,
-    aes(fill = NAME),
-    color = 'black',
-    linewidth = 0.5
-  )+
-  coord_sf(ylim = c(-7000000,NA))+
-  geom_sf_interactive(
-    fill = NA, 
-    aes(
-      data_id = ISO_A3,
-      tooltip = glue::glue('{NAME}')
-    ),
-    linewidth = 0.1
-  )
-
-girafe(ggobj = gg_plt)
-  
-  
-  
-## Let’s get rid of the unnecessary legend and grid first though
-library(ggiraph)
-gg_plt <- world_shape %>%
-  st_transform(crs=3857) %>%  
-  ggplot(aes(geometry = geometry)) +
-  geom_sf(
-    data = world_shape,
-    aes(fill = NAME),
-    color = 'black',
-    linewidth = 0.07
-  ) +
-  geom_sf_interactive(
-    fill = NA, 
-    aes(
-      data_id = ISO_A3,
-      tooltip = glue::glue('{NAME}')
-    ),
-    linewidth = 0.1
-  ) +
-  theme_void() +
-  theme(
-    legend.position = 'none'
-  )+
-  coord_sf(ylim = c(-7000000,NA))
-
-girafe(ggobj = gg_plt)
-
-
-
-
-
-
-
-# Install and load necessary libraries
-install.packages("ggplot2")
-install.packages("rnaturalearth")
-install.packages("rnaturalearthdata")
-install.packages("sf")
-install.packages("dplyr")  # For data manipulation
-
-library(ggplot2)
-library(rnaturalearth)
-library(rnaturalearthdata)
-library(sf)
-library(dplyr)
-
-
-
-
 # Install and load necessary libraries
 install.packages("ggplot2")
 install.packages("rnaturalearth")
@@ -164,10 +45,9 @@ map <- ggplot(data = world_data) +
     fill = NA, 
     aes(tooltip = glue::glue('{name}'))
   )+
-  labs(title = "My Travel Stamp Collection",
-       subtitle = "This map shows the countries I’ve visited for both work and vacations. Some I’ve been to once, others twice, and a few I’ve returned to many times.") +
   coord_sf(crs = "+proj=merc", ylim = c(-8000000,NA), expand = FALSE) # Mercator projection with limited latitude
 
 girafe(ggobj = map)
 
 
+ggsave("/Users/knith/Downloads/plot_example.png", plot = map, width = 19, height = 12, dpi = 300)
