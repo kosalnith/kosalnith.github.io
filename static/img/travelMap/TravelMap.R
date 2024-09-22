@@ -38,13 +38,15 @@ map <- ggplot(data = world_data) +
     axis.text = element_blank(),
     axis.ticks = element_blank(),
     legend.position = "none",  # Hide legend for a clean look
-    plot.title = element_text(size = 14, face = "bold", hjust = 0.5, color = "gray30"),  # Stylish title
-    plot.subtitle = element_text(size = 10, hjust = 0.5, color = "gray20")  # Subtitle with complementary color
+    plot.title = element_text(size = 11, face = "bold", hjust = 0.5, color = "gray30"),  # Stylish title
+    plot.subtitle = element_text(size = 9, hjust = 0.5, color = "gray20")  # Subtitle with complementary color
   )+
   geom_sf_interactive(
     fill = NA, 
     aes(tooltip = glue::glue('{name}'))
   )+
+  labs(title = "My Travel Stamp Collection",
+       subtitle = "This map shows the countries I’ve visited for both work and vacations.")+
   coord_sf(crs = "+proj=merc", ylim = c(-8000000,NA), expand = FALSE) # Mercator projection with limited latitude
 
 girafe(ggobj = map)
