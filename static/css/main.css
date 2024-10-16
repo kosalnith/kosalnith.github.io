@@ -32968,18 +32968,3 @@ button.filters-cta:hover span {
   }
 }
 
-
-.views-element-container{
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-}
-
-.views-element-container views-element{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
