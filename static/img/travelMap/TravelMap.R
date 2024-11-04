@@ -6,6 +6,7 @@ install.packages("sf")
 install.packages("dplyr")  # For data manipulation
 
 library(ggplot2)
+library(ggiraph)
 library(rnaturalearth)
 library(rnaturalearthdata)
 library(sf)
@@ -20,7 +21,7 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 data <- data.frame(
   name = c("Cambodia", "Thailand", "Laos", "Finland", "Denmark", "Germany", "Switzerland", 
           "Spain", "France", "Vietnam", "Indonesia", "China", "United Kingdom", "Malaysia", 
-          "Austria", "Netherlands", "Czechia"),
+          "Austria", "Netherlands", "Fiji"),
   x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)  # Example: 1 for red, 0 for off-white
 )
 
@@ -50,11 +51,10 @@ map <- ggplot(data = world_data) +
     aes(tooltip = glue::glue('{name}'))
   ) +
   labs(title = "My Travel Stamp Collection",
-       subtitle = "This map shows the countries I’ve visited for both work and vacations.")+
+       subtitle = "This map illustrates the countries I’ve visited for both work and vacations.")+
   coord_sf(crs = "+proj=merc", ylim = c(-8000000,NA), expand = FALSE) # Mercator projection with limited latitude
 
 girafe(ggobj = map)
-
 
 
 ggsave("/Users/knith/Downloads/plot_example.png", plot = map, width = 19, height = 12, dpi = 300)
