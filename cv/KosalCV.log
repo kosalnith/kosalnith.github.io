@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  5 SEP 2024 07:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  11 NOV 2024 22:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -530,18 +530,24 @@ Package hyperref Warning: Suppressing link with empty target on input line 243.
 Package hyperref Warning: Suppressing link with empty target on input line 254.
 
 
-[2] [3]
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 443--452
+[2]
+Overfull \hbox (5.25864pt too wide) in paragraph at lines 416--416
+[][]\T1/ptm/b/n/12 (-20) Participation in Sum-mer Schools, Con-fer-ences, and S
+em-i-nars ($[]$scheduled, $[]$virtual, and $[]$cancelled) 
+ []
+
+[3]
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 458--467
 $[]$  $[]$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 468--468
+Underfull \hbox (badness 10000) in paragraph at lines 483--483
 
  []
 
 
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 460--470
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 475--485
 []$[]$  $[]$ 
  []
 
@@ -550,19 +556,19 @@ Package rerunfilecheck Info: File `KosalCV.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13356 strings out of 476025
- 209572 string characters out of 5790017
- 1866388 words of memory out of 5000000
+ 13357 strings out of 476025
+ 209581 string characters out of 5790017
+ 1867388 words of memory out of 5000000
  33520 multiletter control sequences out of 15000+600000
- 540182 words of font info for 120 fonts, out of 8000000 for 9000
+ 540245 words of font info for 121 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,76p,1004b,534s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,6n,76p,1004b,445s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></
 usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/
 texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/20
 23/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on KosalCV.pdf (4 pages, 76023 bytes).
+Output written on KosalCV.pdf (4 pages, 76054 bytes).
 PDF statistics:
  101 PDF objects out of 1000 (max. 8388607)
  84 compressed objects within 1 object stream
