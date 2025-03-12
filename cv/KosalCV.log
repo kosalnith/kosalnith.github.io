@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  16 NOV 2024 21:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  13 MAR 2025 00:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -531,23 +531,18 @@ Package hyperref Warning: Suppressing link with empty target on input line 255.
 
 
 [2]
-Overfull \hbox (5.25864pt too wide) in paragraph at lines 419--419
+Overfull \hbox (5.25864pt too wide) in paragraph at lines 421--421
 [][]\T1/ptm/b/n/12 (-20) Participation in Sum-mer Schools, Con-fer-ences, and S
 em-i-nars ($[]$scheduled, $[]$virtual, and $[]$cancelled) 
  []
 
 [3]
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 461--470
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 463--472
 $[]$  $[]$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 486--486
-
- []
-
-
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 478--488
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 481--491
 []$[]$  $[]$ 
  []
 
@@ -568,7 +563,7 @@ Here is how much of TeX's memory you used:
 usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/
 texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/20
 23/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on KosalCV.pdf (4 pages, 76194 bytes).
+Output written on KosalCV.pdf (4 pages, 76692 bytes).
 PDF statistics:
  101 PDF objects out of 1000 (max. 8388607)
  84 compressed objects within 1 object stream
