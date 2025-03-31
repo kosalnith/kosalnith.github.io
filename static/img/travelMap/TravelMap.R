@@ -21,8 +21,8 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 data <- data.frame(
   name = c("Cambodia", "Thailand", "Laos", "Finland", "Denmark", "Germany", "Switzerland", 
           "Spain", "France", "Vietnam", "Indonesia", "China", "United Kingdom", "Malaysia", 
-          "Austria", "Netherlands", "Fiji", "Singapore"),
-  x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)  # Example: 1 for red, 0 for off-white
+          "Austria", "Netherlands", "Fiji", "Singapore", "Sweden"),
+  x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)  # Example: 1 for red, 0 for off-white
 )
 
 # Merge the dataset with the world spatial data using the country name
@@ -57,4 +57,4 @@ map <- ggplot(data = world_data) +
 girafe(ggobj = map)
 
 
-ggsave("/Users/knith/Downloads/plot_example.png", plot = map, width = 19, height = 12, dpi = 300)
+ggsave("/Users/knith/Dropbox/06_Web/kosalnith.github.io/static/img/travelMap/TravelMap.pdf", plot = map, width = 19, height = 12, dpi = 300)
