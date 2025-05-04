@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  28 APR 2024 11:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  5 MAY 2025 01:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -495,25 +495,25 @@ File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 ) [1
 
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
-al/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}] (./KosalCV_Failures.au
-x)
+al/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}] [2] (./KosalCV_Failure
+s.aux)
 Package rerunfilecheck Info: File `KosalCV_Failures.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13090 strings out of 476025
- 205105 string characters out of 5790017
+ 13092 strings out of 476025
+ 205121 string characters out of 5790017
  1865388 words of memory out of 5000000
  33343 multiletter control sequences out of 15000+600000
  526470 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,5n,76p,1041b,442s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,5n,76p,1041b,531s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/lo
 cal/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on KosalCV_Failures.pdf (1 page, 35425 bytes).
+Output written on KosalCV_Failures.pdf (2 pages, 36916 bytes).
 PDF statistics:
- 35 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
- 9 named destinations out of 1000 (max. 500000)
+ 40 PDF objects out of 1000 (max. 8388607)
+ 31 compressed objects within 1 object stream
+ 11 named destinations out of 1000 (max. 500000)
  16385 words of extra memory for PDF output out of 17280 (max. 10000000)
 
