@@ -32967,12 +32967,13 @@ button.filters-cta:hover span {
       display: none;
   }
 }
-
+/* Default sidebar for desktop */
 .sidebar {
   position: fixed;
-  top: 250px; /* Adjust based on your header height */
+  top: 250px;
   right: 50px;
-  width: 255px;
+  width: 252px;
+  height: 240px; 
   background-color: #f9f9f9;
   padding: 15px;
   border-radius: 8px;
@@ -32982,7 +32983,7 @@ button.filters-cta:hover span {
 .sidebar a {
   display: block;
   color: #333;
-  padding: 8px 0;
+  padding: 5px 0;
   text-decoration: none;
   font-weight: bold;
 }
@@ -32991,6 +32992,82 @@ button.filters-cta:hover span {
   color: #b1040e;
 }
 
+/* Adjust sidebar for tablets (iPads) */
+@media screen and (max-width: 1024px) {
+  .sidebar {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .sidebar a {
+    padding: 10px;
+    text-align: center;
+    flex: 1;
+  }
+}
+
+/* Hide sidebar or make it collapsible on smaller phones */
+@media screen and (max-width: 600px) {
+  .sidebar {
+    flex-direction: column;
+    height: auto;
+    padding: 5px;
+  }
+
+  .sidebar a {
+    font-size: 14px;
+  }
+}
+
+.abstract-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color: #b1040e;
+}
+
+.abstract-tooltip .abstract-text {
+  visibility: hidden;
+  opacity: 0;
+  width: 960px;
+  background: white;
+  color: #333;
+  text-align: left;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 130%;
+  left: 478px;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 100;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.abstract-tooltip:hover .abstract-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Optional: better touch-friendly spacing on small screens */
+@media screen and (max-width: 600px) {
+  .abstract-tooltip .abstract-text {
+    font-size: 13px;
+    padding: 12px;
+    width: 550px;
+  }
+}
 
 <<<<<<< HEAD
 =======
