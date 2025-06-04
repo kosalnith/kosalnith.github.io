@@ -32967,11 +32967,12 @@ button.filters-cta:hover span {
       display: none;
   }
 }
+
 /* Default sidebar for desktop */
 .sidebar {
   position: fixed;
   top: 250px;
-  right: 50px;
+  right: 40px;
   width: 252px;
   height: 240px; 
   background-color: #f9f9f9;
@@ -33035,10 +33036,17 @@ button.filters-cta:hover span {
   color: #b1040e;
 }
 
+.abstract-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color: #b1040e;
+}
+
 .abstract-tooltip .abstract-text {
   visibility: hidden;
   opacity: 0;
-  width: 960px;
+  width: 945px;
   background: white;
   color: #333;
   text-align: left;
@@ -33047,12 +33055,12 @@ button.filters-cta:hover span {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   position: absolute;
   top: 130%;
-  left: 478px;
+  left: 473px;
   transform: translateX(-50%);
   transition: opacity 0.3s ease, visibility 0.3s ease;
   z-index: 100;
   line-height: 1.5;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .abstract-tooltip:hover .abstract-text {
@@ -33060,16 +33068,83 @@ button.filters-cta:hover span {
   opacity: 1;
 }
 
-/* Optional: better touch-friendly spacing on small screens */
-@media screen and (max-width: 600px) {
+
+/* Mobile optimization */
+@media screen and (max-width: 768px) {
   .abstract-tooltip .abstract-text {
-    font-size: 13px;
+    width: auto; /* Allows natural width based on content */
+    max-width: 90vw; /* Prevents tooltip from touching screen edges */
+    left: 50%;
     padding: 12px;
-    width: 550px;
+    font-size: 14px;
+    position: fixed; /* Makes it easier to view on mobile */
+    top: 50%;
+    transform: translate(-50%, -50%); /* Centers the tooltip */
+    max-height: 80vh; /* Prevents tooltip from being too tall */
+    overflow-y: auto; /* Adds scroll if content is too long */
+  }
+  
+  /* Optional: change interaction for touch devices */
+  .abstract-tooltip.active .abstract-text {
+    visibility: visible;
+    opacity: 1;
   }
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 541c83000f3a1abbc5890d6eaba3f532b2c9ec4a
+
+/* Responsive video container */
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Adjustments for small screens */
+@media screen and (max-width: 600px) {
+  .video-container {
+    padding-bottom: 75%; /* More portrait-friendly ratio on phones */
+    margin-bottom: 15px;
+  }
+  
+  /* Optional: Add some side padding on very small screens */
+  @media screen and (max-width: 400px) {
+    .video-container {
+      margin-left: 10px;
+      margin-right: 10px;
+      width: calc(100% - 20px);
+    }
+  }
+}
+
+
+.updates-list {
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 20px auto;
+  padding-left: 0px;
+}
+
+.updates-list li {
+  margin-bottom: 12px;
+}
+
+.updates-list em {
+  font-style: italic;
+  color: #b1040e;
+}
+
+.updates-list b {
+  color: #b1040e;
+}
