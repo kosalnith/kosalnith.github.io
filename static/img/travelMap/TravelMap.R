@@ -21,8 +21,8 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 data <- data.frame(
   name = c("Cambodia", "Thailand", "Laos", "Finland", "Denmark", "Germany", "Switzerland", 
           "Spain", "France", "Vietnam", "Indonesia", "China", "United Kingdom", "Malaysia", 
-          "Austria", "Netherlands", "Fiji", "Singapore", "Sweden"),
-  x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)  # Example: 1 for red, 0 for off-white
+          "Austria", "Netherlands", "Fiji", "Singapore", "Sweden", "Zambia", "Japan", "India"),
+  x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)  # Example: 1 for red, 0 for off-white
 )
 
 # Merge the dataset with the world spatial data using the country name
@@ -50,11 +50,13 @@ map <- ggplot(data = world_data) +
     fill = NA, 
     aes(tooltip = glue::glue('{name}'))
   ) +
-  labs(title = "My Travel Stamp Collection",
-       subtitle = "This map illustrates the countries I’ve visited for both work and vacations.")+
+  labs(title = "My travel stamp collection",
+       subtitle = "This map illustrates the countries I have visited for both work and vacations.")+
   coord_sf(crs = "+proj=merc", ylim = c(-8000000,NA), expand = FALSE) # Mercator projection with limited latitude
 
 girafe(ggobj = map)
 
 
 ggsave("/Users/knith/Dropbox/06_Web/kosalnith.github.io/static/img/travelMap/TravelMap.pdf", plot = map, width = 19, height = 12, dpi = 300)
+
+ggsave("/Users/Lenovo/Dropbox/06_Web/kosalnith.github.io/static/img/travelMap/TravelMap.pdf", plot = map, width = 19, height = 12, dpi = 300)
