@@ -32968,13 +32968,13 @@ button.filters-cta:hover span {
   }
 }
 
-/* Default sidebar for desktop */
+/* Research site: Default sidebar for desktop */
 .sidebar {
   position: fixed;
   top: 250px;
   right: 40px;
   width: 252px;
-  height: 240px; 
+  height: 284px; 
   background-color: #f9f9f9;
   padding: 15px;
   border-radius: 8px;
