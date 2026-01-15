@@ -33648,6 +33648,69 @@ tr:hover {
 
 
 
+/* Table of contents in Miscellaneous */
+.sidebar-mis {
+  position: fixed;
+  top: 220px;
+  right: 40px;
+  width: 170px;
+  height: 455px; 
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-mis a {
+  display: block;
+  color: #333;
+  padding: 1px 0;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.sidebar-mis a:hover {
+  color: #b1040e;
+}
+
+/* Adjust sidebar for tablets (iPads) */
+@media screen and (max-width: 1024px) {
+  .sidebar-mis {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .sidebar-mis a {
+    padding: 10px;
+    text-align: center;
+    flex: 1;
+  }
+}
+
+/* Hide sidebar or make it collapsible on smaller phones */
+@media screen and (max-width: 600px) {
+  .sidebar-mis {
+    flex-direction: column;
+    height: auto;
+    padding: 5px;
+  }
+
+  .sidebar-mis a {
+    font-size: 14px;
+  }
+}
+
+
 
 
 
