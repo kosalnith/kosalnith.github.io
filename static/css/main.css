@@ -33648,69 +33648,276 @@ tr:hover {
 
 
 
-/* Table of contents in Miscellaneous */
+/* Table of contents in Miscellaneous - PC Version - VERY CLOSE TO EDGE */
 .sidebar-mis {
   position: fixed;
-  top: 220px;
-  right: 40px;
-  width: 170px;
-  height: 432px; 
+  top: 210px;
+  right: 2px; /* Almost off-screen - just 2px from edge */
+  width: 140px; /* Narrow width to fit in tight space */
+  max-height: 70vh;
+  overflow-y: auto;
   background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px 8px; /* Reduced padding */
+  border-radius: 4px 0 0 4px; /* Rounded on left side only */
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1); /* Shadow on left side */
+  z-index: 999;
+  border: 1px solid #e0e0e0;
+  border-right: none; /* No border on right edge */
+  transition: all 0.3s ease;
+}
+
+/* Expand slightly on hover to reveal more content */
+.sidebar-mis:hover {
+  right: 0;
+  width: 160px;
+  box-shadow: -3px 0 15px rgba(0, 0, 0, 0.15);
+  border-right: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.sidebar-mis h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #b1040e;
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.1;
+  text-align: center;
 }
 
 .sidebar-mis a {
   display: block;
-  color: #333;
-  padding: 1px 0;
+  color: #555;
+  padding: 5px 0;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: normal;
+  line-height: 1.2;
+  border-left: 1px solid transparent;
+  padding-left: 5px;
+  margin-left: -5px;
+  transition: all 0.2s ease;
+  word-wrap: break-word;
 }
 
-.sidebar-mis a:hover {
+.sidebar-mis a:hover,
+.sidebar-mis a:focus {
   color: #b1040e;
+  border-left: 1px solid #b1040e;
+  background-color: rgba(177, 4, 14, 0.05);
+  transform: translateX(1px);
 }
 
-/* Adjust sidebar for tablets (iPads) */
+.sidebar-mis a:active {
+  background-color: rgba(177, 4, 14, 0.1);
+}
+
+/* Custom scrollbar - very thin */
+.sidebar-mis::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-mis::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.sidebar-mis::-webkit-scrollbar-thumb {
+  background: #b1040e;
+  border-radius: 2px;
+}
+
+.sidebar-mis::-webkit-scrollbar-thumb:hover {
+  background: #8c030b;
+}
+
+/* Alternative: Even closer - partially off-screen */
+.sidebar-mis.off-screen-right {
+  right: -120px; /* Most of it is off-screen */
+  width: 150px;
+  padding: 10px 5px 10px 15px; /* More padding on left */
+  border-radius: 4px 0 0 4px;
+  border-left: 2px solid #b1040e;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-mis.off-screen-right:hover {
+  right: 0;
+  box-shadow: -3px 0 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Minimalist version - just a thin strip */
+.sidebar-mis.minimalist {
+  right: 0;
+  width: 30px;
+  padding: 10px 5px;
+  background-color: rgba(249, 249, 249, 0.9);
+  border-radius: 0;
+  border: 1px solid #e0e0e0;
+  border-right: none;
+}
+
+.sidebar-mis.minimalist h4 {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  height: 100%;
+  margin: 0;
+  padding: 10px 0;
+  font-size: 12px;
+  border-bottom: none;
+  border-right: 1px solid #b1040e;
+}
+
+.sidebar-mis.minimalist:hover {
+  width: 150px;
+}
+
+.sidebar-mis.minimalist:hover h4 {
+  writing-mode: horizontal-tb;
+  border-right: none;
+  border-bottom: 1px solid #b1040e;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+
+/* Tablet (768px - 1024px) */
 @media screen and (max-width: 1024px) {
   .sidebar-mis {
+    position: fixed;
     top: auto;
     bottom: 0;
-    right: 0;
     left: 0;
+    right: 0;
     width: 100%;
-    padding: 10px;
-    border-radius: 0;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    display: flex;
-    justify-content: space-around;
+    max-height: 50vh;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
   }
-
-  .sidebar-mis a {
-    padding: 10px;
+  
+  .sidebar-mis:hover {
+    width: 100%;
+    right: 0;
+  }
+  
+  .sidebar-mis h4 {
     text-align: center;
-    flex: 1;
+    margin-bottom: 10px;
+    font-size: 16px;
   }
-}
-
-/* Hide sidebar or make it collapsible on smaller phones */
-@media screen and (max-width: 600px) {
-  .sidebar-mis {
-    flex-direction: column;
-    height: auto;
-    padding: 5px;
-  }
-
+  
   .sidebar-mis a {
+    padding: 8px 15px;
     font-size: 14px;
+    border-left: none;
+    border-bottom: 1px solid #eee;
+    margin-left: 0;
+  }
+  
+  .sidebar-mis a:hover,
+  .sidebar-mis a:focus {
+    border-left: none;
+    border-bottom: 1px solid #b1040e;
+    transform: none;
   }
 }
 
+/* Large phones (600px - 767px) */
+@media screen and (max-width: 767px) {
+  .sidebar-mis {
+    max-height: 60vh;
+    padding: 12px 15px;
+  }
+  
+  .sidebar-mis h4 {
+    font-size: 15px;
+  }
+  
+  .sidebar-mis a {
+    padding: 10px 15px;
+    font-size: 13px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
 
+/* Small phones (up to 599px) */
+@media screen and (max-width: 599px) {
+  .sidebar-mis {
+    max-height: 70vh;
+    padding: 10px 15px;
+  }
+  
+  .sidebar-mis h4 {
+    font-size: 14px;
+    position: sticky;
+    top: 0;
+    background-color: #f9f9f9;
+    z-index: 1;
+    padding-top: 5px;
+  }
+  
+  .sidebar-mis a {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}
+
+/* For normal desktop screens */
+@media screen and (min-width: 1025px) {
+  .sidebar-mis {
+    right: 2px; /* Keep it very close to edge */
+  }
+  
+  /* Adjust for different screen sizes */
+  @media (max-width: 1366px) {
+    .sidebar-mis {
+      width: 130px;
+    }
+  }
+  
+  @media (min-width: 1367px) and (max-width: 1599px) {
+    .sidebar-mis {
+      width: 140px;
+    }
+  }
+  
+  @media (min-width: 1600px) {
+    .sidebar-mis {
+      width: 150px;
+    }
+  }
+}
+
+/* Accessibility improvements */
+.sidebar-mis a:focus-visible {
+  outline: 1px solid #b1040e;
+  outline-offset: 1px;
+}
+
+/* Smooth scrolling */
+.sidebar-mis {
+  scroll-behavior: smooth;
+}
+
+/* Optional: Add a subtle indicator for the sidebar */
+.sidebar-mis::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 40px;
+  background-color: #b1040e;
+  border-radius: 0 2px 2px 0;
+  opacity: 0.6;
+}
 
 
 
