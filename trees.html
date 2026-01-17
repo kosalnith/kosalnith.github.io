@@ -499,4 +499,92 @@
 
       <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"383a8e13e9","applicationID":"1391244355","transactionName":"YFBSMkACDEoFBRUKCVkacQVGCg1XSyITFhZWWWwIXQcHZScJDxcUWFlcA0A\/LFYAAzcKA0B2XwhGEQ1VCAMTTlhBXFUR","queueTime":0,"applicationTime":2407,"atts":"TBdRRAgYH0Q=","errorBeacon":"bam.nr-data.net","agent":""}</script>
 
+       <!-- Back to Top Button JavaScript -->
+  <script>
+    // Back to Top Button Functionality
+    (function() {
+      'use strict';
+      
+      // Wait for DOM to be ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initBackToTop);
+      } else {
+        initBackToTop();
+      }
+      
+      function initBackToTop() {
+        var backToTopButton = document.getElementById('back-to-top');
+        
+        if (!backToTopButton) {
+          console.warn('Back to Top button not found');
+          return;
+        }
+        
+    
+        // Show/hide button on scroll
+        function toggleBackToTop() {
+          try {
+            if (window.pageYOffset > 300) {
+              backToTopButton.style.display = 'block';
+            } else {
+              backToTopButton.style.display = 'none';
+            }
+          } catch (e) {
+            console.error('Error toggling button:', e);
+          }
+        }
+        
+        // Scroll to top function
+        function scrollToTop(e) {
+          if (e) e.preventDefault();
+          
+          try {
+            // Try smooth scrolling first
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          } catch (err) {
+            // Fallback for older browsers
+            try {
+              window.scrollTo(0, 0);
+            } catch (err2) {
+              document.body.scrollTop = 0;
+              document.documentElement.scrollTop = 0;
+            }
+          }
+          
+          return false;
+        }
+        
+        // Add event listeners
+        try {
+          // Scroll event with throttling
+          var scrollTimeout;
+          window.addEventListener('scroll', function() {
+            if (scrollTimeout) {
+              clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(toggleBackToTop, 100);
+          }, { passive: true });
+          
+          // Click event - use both onclick and addEventListener for maximum compatibility
+          backToTopButton.onclick = scrollToTop;
+          backToTopButton.addEventListener('click', scrollToTop);
+          
+          // Initial check
+          toggleBackToTop();
+          
+          console.log('Back to Top button initialized successfully');
+        } catch (error) {
+          console.error('Failed to initialize Back to Top button:', error);
+          
+          // Fallback: simple onclick if everything else fails
+          backToTopButton.onclick = function() {
+            window.scrollTo(0, 0);
+          };
+        }
+      }
+    })();
+  </script>
 </body></html>

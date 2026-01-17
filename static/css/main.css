@@ -33646,8 +33646,6 @@ tr:hover {
 }
 
 
-
-
 /* Table of contents in Miscellaneous - PC Version - VERY CLOSE TO EDGE */
 .sidebar-mis {
   position: fixed;
@@ -33732,139 +33730,198 @@ tr:hover {
   background: #8c030b;
 }
 
-/* Alternative: Even closer - partially off-screen */
-.sidebar-mis.off-screen-right {
-  right: -120px; /* Most of it is off-screen */
-  width: 150px;
-  padding: 10px 5px 10px 15px; /* More padding on left */
-  border-radius: 4px 0 0 4px;
-  border-left: 2px solid #b1040e;
-  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-mis.off-screen-right:hover {
-  right: 0;
-  box-shadow: -3px 0 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Minimalist version - just a thin strip */
-.sidebar-mis.minimalist {
-  right: 0;
-  width: 30px;
-  padding: 10px 5px;
-  background-color: rgba(249, 249, 249, 0.9);
-  border-radius: 0;
-  border: 1px solid #e0e0e0;
-  border-right: none;
-}
-
-.sidebar-mis.minimalist h4 {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  height: 100%;
-  margin: 0;
-  padding: 10px 0;
-  font-size: 12px;
-  border-bottom: none;
-  border-right: 1px solid #b1040e;
-}
-
-.sidebar-mis.minimalist:hover {
-  width: 150px;
-}
-
-.sidebar-mis.minimalist:hover h4 {
-  writing-mode: horizontal-tb;
-  border-right: none;
-  border-bottom: 1px solid #b1040e;
-  padding-bottom: 6px;
-  margin-bottom: 10px;
-}
-
-/* Tablet (768px - 1024px) */
+/* ============== MOBILE/TABLET: HIDDEN SIDEBAR WITH TOUCH HANDLE ============== */
 @media screen and (max-width: 1024px) {
+  /* Default state: completely hidden off-screen */
   .sidebar-mis {
     position: fixed;
-    top: auto;
+    top: 0;
+    right: -280px; /* Hidden completely off-screen */
     bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-height: 50vh;
-    padding: 15px;
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.15);
+    width: 280px; /* Fixed width for mobile drawer */
+    max-width: 85vw; /* Maximum width for very small screens */
+    max-height: 100vh !important;
+    height: 100vh;
+    padding: 20px 15px !important;
+    border-radius: 0 !important;
+    border-right: 1px solid #e0e0e0 !important;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15) !important;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
     overflow-y: auto;
-    border: 1px solid #e0e0e0;
-    border-right: 1px solid #e0e0e0;
   }
   
-  .sidebar-mis:hover {
-    width: 100%;
+  /* Active state when opened */
+  .sidebar-mis.mobile-active {
+    right: 0 !important;
+  }
+  
+  /* Touch handle to open sidebar */
+  .sidebar-touch-handle {
+    position: fixed;
+    top: 50%;
     right: 0;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 80px;
+    background-color: #b1040e;
+    border-radius: 10px 0 0 10px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: -2px 0 10px rgba(177, 4, 14, 0.3);
+    transition: all 0.3s ease;
   }
   
+  .sidebar-touch-handle::before {
+    content: '☰';
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .sidebar-touch-handle:hover {
+    width: 45px;
+    background-color: #8c030b;
+  }
+  
+  /* Close button inside sidebar */
+  .sidebar-close-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+    border: none;
+  }
+  
+  .sidebar-close-btn:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Adjust sidebar content for mobile */
   .sidebar-mis h4 {
+    margin-top: 40px; /* Space for close button */
     text-align: center;
-    margin-bottom: 10px;
-    font-size: 16px;
+    margin-bottom: 20px;
+    font-size: 18px;
   }
   
   .sidebar-mis a {
-    padding: 8px 15px;
-    font-size: 14px;
-    border-left: none;
-    border-bottom: 1px solid #eee;
+    padding: 12px 15px !important;
+    font-size: 15px;
+    border-left: 3px solid transparent;
     margin-left: 0;
+    margin-bottom: 5px;
+    border-bottom: none;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
   
   .sidebar-mis a:hover,
   .sidebar-mis a:focus {
-    border-left: none;
-    border-bottom: 1px solid #b1040e;
+    border-left: 3px solid #b1040e;
+    border-bottom: none;
     transform: none;
+    background-color: rgba(177, 4, 14, 0.05);
+  }
+  
+  /* Overlay when sidebar is open */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Larger scrollbar for touch devices */
+  .sidebar-mis::-webkit-scrollbar {
+    width: 6px;
+  }
+}
+
+/* Tablet specific (768px - 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .sidebar-mis {
+    width: 320px;
+    right: -320px;
+  }
+  
+  .sidebar-touch-handle {
+    width: 45px;
+    height: 90px;
+  }
+  
+  .sidebar-touch-handle::before {
+    font-size: 22px;
   }
 }
 
 /* Large phones (600px - 767px) */
 @media screen and (max-width: 767px) {
   .sidebar-mis {
-    max-height: 60vh;
-    padding: 12px 15px;
+    width: 260px;
+    right: -260px;
   }
   
   .sidebar-mis h4 {
-    font-size: 15px;
+    font-size: 17px;
   }
   
   .sidebar-mis a {
-    padding: 10px 15px;
-    font-size: 13px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
+    font-size: 14px;
+    padding: 10px 12px !important;
   }
 }
 
 /* Small phones (up to 599px) */
 @media screen and (max-width: 599px) {
   .sidebar-mis {
-    max-height: 70vh;
-    padding: 10px 15px;
+    width: 240px;
+    right: -240px;
+    max-width: 90vw;
+  }
+  
+  .sidebar-touch-handle {
+    width: 35px;
+    height: 70px;
+  }
+  
+  .sidebar-touch-handle::before {
+    font-size: 18px;
   }
   
   .sidebar-mis h4 {
-    font-size: 14px;
-    position: sticky;
-    top: 0;
-    background-color: #f9f9f9;
-    z-index: 1;
-    padding-top: 5px;
+    font-size: 16px;
+    margin-top: 35px;
   }
   
   .sidebar-mis a {
-    font-size: 12px;
-    padding: 8px 10px;
+    font-size: 13px;
+    padding: 10px 10px !important;
   }
 }
 
@@ -33872,6 +33929,12 @@ tr:hover {
 @media screen and (min-width: 1025px) {
   .sidebar-mis {
     right: 2px; /* Keep it very close to edge */
+  }
+  
+  .sidebar-touch-handle,
+  .sidebar-overlay,
+  .sidebar-close-btn {
+    display: none !important;
   }
   
   /* Adjust for different screen sizes */
@@ -33919,8 +33982,9 @@ tr:hover {
   opacity: 0.6;
 }
 
-
-
-
-
-
+/* Add smooth transitions */
+.sidebar-mis,
+.sidebar-touch-handle,
+.sidebar-overlay {
+  transition: all 0.3s ease;
+}

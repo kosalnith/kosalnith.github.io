@@ -541,5 +541,112 @@
       }
     })();
   </script>
+
+  <script>// Add this JavaScript to enable touch functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Create touch handle element
+  const touchHandle = document.createElement('div');
+  touchHandle.className = 'sidebar-touch-handle';
+  touchHandle.setAttribute('aria-label', 'Open table of contents');
+  
+  // Create overlay element
+  const overlay = document.createElement('div');
+  overlay.className = 'sidebar-overlay';
+  
+  // Get the sidebar
+  const sidebar = document.querySelector('.sidebar-mis');
+  
+  if (sidebar) {
+    // Add close button to sidebar
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'sidebar-close-btn';
+    closeBtn.innerHTML = '×';
+    closeBtn.setAttribute('aria-label', 'Close sidebar');
+    sidebar.insertBefore(closeBtn, sidebar.firstChild);
+    
+    // Add elements to DOM
+    document.body.appendChild(touchHandle);
+    document.body.appendChild(overlay);
+    
+    // Open sidebar when touch handle is clicked
+    touchHandle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      sidebar.classList.add('mobile-active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    });
+    
+    // Close sidebar when close button is clicked
+    closeBtn.addEventListener('click', function() {
+      sidebar.classList.remove('mobile-active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = ''; // Re-enable scrolling
+    });
+    
+    // Close sidebar when overlay is clicked
+    overlay.addEventListener('click', function() {
+      sidebar.classList.remove('mobile-active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 1024 && 
+          sidebar.classList.contains('mobile-active') &&
+          !sidebar.contains(e.target) && 
+          e.target !== touchHandle) {
+        sidebar.classList.remove('mobile-active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Close sidebar with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && sidebar.classList.contains('mobile-active')) {
+        sidebar.classList.remove('mobile-active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Add swipe to close functionality for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    sidebar.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    sidebar.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      const swipeDistance = touchEndX - touchStartX;
+      
+      // If swiping right (closing the sidebar)
+      if (swipeDistance > 50 && sidebar.classList.contains('mobile-active')) {
+        sidebar.classList.remove('mobile-active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+  
+  // Hide touch handle on desktop (just in case)
+  function checkWindowSize() {
+    if (window.innerWidth > 1024) {
+      touchHandle.style.display = 'none';
+      overlay.style.display = 'none';
+    } else {
+      touchHandle.style.display = 'flex';
+      overlay.style.display = 'block';
+    }
+  }
+  
+  // Check on load and resize
+  checkWindowSize();
+  window.addEventListener('resize', checkWindowSize);
+});
+  </script>
 </body>
 </html>
