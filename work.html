@@ -520,88 +520,346 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <title>Dropbox Auto Gallery</title>
-  <style>
-    #gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    #gallery img {
-      width: 200px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-  </style>
+    <title>My Dropbox Gallery</title>
+    <style>
+      
+       
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 10px;
+        }
+        
+        .gallery-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-info {
+            padding: 12px 15px;
+            background: white;
+        }
+        
+        .image-name {
+            font-size: 14px;
+            color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .loading, .error, .no-images {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            grid-column: 1 / -1;
+        }
+        
+        .loading {
+            color: #666;
+        }
+        
+        .error {
+            color: #dc3545;
+            background: #ffe6e8;
+            border-radius: 8px;
+        }
+        
+        .no-images {
+            color: #666;
+            background: #f0f0f0;
+            border-radius: 8px;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            cursor: pointer;
+        }
+        
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .modal-close:hover {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>📸 My Dropbox Gallery</h1>
+        <div id="gallery" class="gallery">
+            <div class="loading">Loading images from Dropbox...</div>
+        </div>
+    </div>
+    
+    <!-- Modal for full-size images -->
+    <div id="modal" class="modal" onclick="this.classList.remove('active')">
+        <span class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">&times;</span>
+        <img id="modal-image" src="" alt="Full size image">
+    </div>
 
-<h2>My Dropbox Gallery</h2>
-<div id="gallery"></div>
+    <!-- Include Dropbox SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/dropbox@10.34.0/dist/Dropbox-sdk.min.js"></script>
+    
+    <script>
+        // Configuration
+        const CONFIG = {
+            ACCESS_TOKEN: 'sl.u.AGT0mqF_0y4kG9SgaozLbrRJc6nyFKdHuXGW8FKaUrivL4eWcpo0k0ekIXJhQXgCvifiE7OWBow7v9hssETfY8YqNEZ_39HFDlnvB2cjUD8WGl5Z8p4QInQOwSzCnKIDdA6Nvh1ViG0yqrcwizamPCsEl_A5KnTay3XQbmJUHy6Sd6gBHrNfpRtQquKnTkAzydd8ykbDye07VlQ9nqAauqFg8oj753CWYbqqp1-MIcg0xqC5Dcl3nDBkKIr1-vDhJOK1GYlg-q6aqkIhb_lj7U-2IcvWf2mDAG3CWq7Sd2oRLes4ruU3XuTR6ZcaYqmAogA43CNEYM-foX4uZSiBwj4-ahyWQNHbaeRkbUg55z5dbyjlBbRaWWcHBEy_sQYG9LgZF-L55D1mjW8MDofuZnEReJdJKVkqmDsYWlRbk-t4WbshevlBlwK8kf6PerhZXeDDMf345K37nD8o-oe3HD4wDrKwMuZbBAI_pXtvCfXs_1IS_0DbTc7koGWhGxMnAGenr-ydttXAaR8vDaz_RBevuJr3w1F__7jMeZb4bdvmVCh9ko8anoe0I620D8LDQ8v193KUT1wHKWT4xPbCRlUrEOE2CI6k1vA1Wqkv9MUBUszDjhV01Lkmg1W2x2IvrQBW-Reud33dwARc6TkVrS2RcJHmY0IbIGZInj02T42c8buhEJXYUe-yyWucDZiU0utO6II4U4afixvbu_nbYEgO9B63kPj705ewUivr3sxHf_t-Sb9pakOKI0zMgnkTARvqPOCJbBMslWw-0vMYeKUYdH1RwnFpI-l1TjY5fIXRE0NZwWh5cOAq8Tq9oIQ4K2qvLU02URW2dZMB3fnwsIXWiZLFePePCz8P1GUcJ720acOEvXcZK4KPOKfvGsv6Ro49R9kxzZH3yAUPwIVTqtk6OeZf9SpADM-8--I8InWJFDtjr2gKo9_am4gzqGEPSg0_3h2irkhc2f9MR9LSDb_ql4HdSoTNHjBcCcxrq_5mBF91uqDdJkaqYLbpmzDI3ceXPd7bI-HbluAN00Bh-2XPy8Qay8H69855LnB4HL2j9tbIjnYM_TqKmxRo1yL8F4MrrpUII-zTaMqCAGIIwrioJRRfdlEvC3grX24do5V1OHmR4B6Mx9Q9KZTvyPWlfx5gzTL9Zl6FQmMsz1xpKR4ap4MUmy52Bs0mW6AX-PAXqOhrwqbDinP8zjfAj0KVSNl08b2rmp0lRkkCY0pj5ByBju5zRpBpvYvm27_unHLEYIUMg4-jXtpCy-yOCavewE9b4LmPjRVZw7Yg-AIEmKTxUXqRs5Gowm8QQDsqYjC1Cg', // Replace with your token
+            FOLDER_PATH: '', // Empty for root, or specify like '/MyPhotos'
+            IMAGE_EXTENSIONS: ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp']
+        };
 
-<script>
-const ACCESS_TOKEN = "sl.u.AGQqJgYGtAE8DgbT0Ja8gLLnw79KoPYgmWqRx1GN8k780SswTwJblRKlB4rKf2NB7h1AiOnwijAlrwCWuRqF2WtVjaYW3ZpUY3WAfZELg459ZAjsjwJC1J3JqY-rsdJhkjRyQxEs2SV3IsBLh-xWSb40OGngMBMEbriEDLMZlC2A25QO0RlBxrZ_UFnpEGgaiWENy9R3WHFbZlyVhgD5_xCFYx3mUk_Z9mnP6Yx9HTFb9KMB-4vh59DbCO8HXp9Ki4lIlzB_lOxg4-XzId8FfvNrVsN62h9B1-XLulcu20xjsDJHU2TiIoY0-LmtCL9A8WMQ2FVGiz-BO0tuEl9bGZzsWHRgCqG_nYc2PCIHtuFMkDNZ1TB_6EjsMEVDjjV-7oOXQNmTH7N8SWAXdWzDDI0ug1Hr41e5JM71k4NZ0u7eQKPMp3DAJWOyyaVfXghet-_AqgRzZSLXodatl7FsMCkwygO5jcgWvICBNaUnDUEt9HB6yTPF5yotzO0l0zrRAYHtNB3efAMIedUnpz85mLuBSSdmscvTAAeN9zReKhfDsVq2ATZW1DpHxxEwWyPZHxzy9NpGujl6YnRrUiYOlWeJYr5hf0W2Wqx41e0QQDLY_PX8DNpi7duM-EZbC5yMikhVMe_b_mxYb9V2uhiUg9euBf4usovEsKNBgbCw0IeG8X_ZFfE_Pk21Y6oaMT37Tzqz3LyXv0ak79ve5-YzcPe8vHNC0LvCspKu6raeYNnzyo-nPT1KdijFfwjInzhVlH5AWC3qs8mAQceBUe_sB4oH4Nlu3rns5R-Mfju97ljDQW6czjdMtK0Kng-NClHmktHPGMTEDjFZs-QL09EGtDVEyyEwqolCF5fBngRXW6yQ87RNQPkqXFbSJtPPVqqK6rMRxBnM6mCHg0LoJT0x7T2AvDv6of2HkDXwDcAgw9OcE2kKWb0k0vfotKh9AeiynsTOlZAZJWRjNOMD9p-x9ncKrTCYFd37tT4V0tpr3YC9-UDlcUPwhPN4CuaELlcOEQSvSYZKlzTolL0cxsj8IeOmr0yXqARfTlhjE7n5xGM0bPma_FBB0MScrjrLQeJ_-UuZBJ71vQiqRx0qchIp_lwoKz6-hLaIHBDlIVWaLDYNZhJ9IVi1ONc7dRSqxCjlK57Xm2lDGW7RsrdN2nSf_SvQzUqniOW_78IWcgxNLL__WEe2pZdZUZ-hM1tRGyn-svkWB6V_6wfbIAU1xG2hGdbZZqDackiomk8L-PRCKlV7p7h-1W0KKJpQFyhTCL65vsVenZEaMsBcApNhIDiuLqWTEDcXNSTx-8vb_r5pCcgYOA";
+        class DropboxGallery {
+            constructor(accessToken, folderPath = '') {
+                this.dbx = new Dropbox.Dropbox({ 
+                    accessToken: accessToken,
+                    fetch: fetch // Use browser's fetch
+                });
+                this.folderPath = folderPath;
+                this.galleryElement = document.getElementById('gallery');
+                this.modal = document.getElementById('modal');
+                this.modalImage = document.getElementById('modal-image');
+            }
 
-const FOLDER_PATH = "/conference"; // root of app folder
+            // Check if file is an image based on extension
+            isImageFile(filename) {
+                const extension = filename.substring(filename.lastIndexOf('.')).toLowerCase();
+                return CONFIG.IMAGE_EXTENSIONS.includes(extension);
+            }
 
-async function loadImages() {
-  const response = await fetch(
-    "https://api.dropboxapi.com/2/files/list_folder",
-    {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + ACCESS_TOKEN,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ path: FOLDER_PATH })
-    }
-  );
+            // Format file size
+            formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
 
-  const data = await response.json();
-  const gallery = document.getElementById("gallery");
+            // Load images from Dropbox
+            async loadImages() {
+                try {
+                    console.log('Loading images from Dropbox folder:', this.folderPath || 'root');
+                    
+                    // List files in the folder
+                    const response = await this.dbx.filesListFolder({
+                        path: this.folderPath,
+                        recursive: false,
+                        include_media_info: true
+                    });
 
-  for (const file of data.entries) {
-    if (file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+                    console.log('Dropbox response:', response);
 
-      const downloadRes = await fetch(
-        "https://content.dropboxapi.com/2/files/get_temporary_link",
-        {
-          method: "POST",
-          headers: {
-            "Authorization": "Bearer " + ACCESS_TOKEN,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ path: file.path_lower })
+                    // Filter for image files
+                    const imageFiles = response.result.entries.filter(entry => {
+                        return entry['.tag'] === 'file' && this.isImageFile(entry.name);
+                    });
+
+                    console.log(`Found ${imageFiles.length} images`);
+
+                    if (imageFiles.length === 0) {
+                        this.showMessage('No images found in the folder', 'no-images');
+                        return;
+                    }
+
+                    // Get temporary links for each image
+                    this.showLoading('Getting image links...');
+                    
+                    const imagesWithLinks = await Promise.all(
+                        imageFiles.map(async (file) => {
+                            try {
+                                const tempLink = await this.dbx.filesGetTemporaryLink({
+                                    path: file.path_lower
+                                });
+                                return {
+                                    ...file,
+                                    link: tempLink.result.link,
+                                    formattedSize: this.formatFileSize(file.size)
+                                };
+                            } catch (linkError) {
+                                console.error(`Failed to get link for ${file.name}:`, linkError);
+                                return null;
+                            }
+                        })
+                    );
+
+                    // Filter out any failed links
+                    const validImages = imagesWithLinks.filter(img => img !== null);
+                    
+                    if (validImages.length === 0) {
+                        this.showMessage('Could not generate links for images', 'error');
+                        return;
+                    }
+
+                    this.displayGallery(validImages);
+
+                } catch (error) {
+                    console.error('Error loading images:', error);
+                    
+                    // Handle specific error cases
+                    if (error.status === 401) {
+                        this.showMessage('Authentication failed. Please check your access token.', 'error');
+                    } else if (error.status === 404) {
+                        this.showMessage('Folder not found. Please check your folder path.', 'error');
+                    } else {
+                        this.showMessage('Failed to load images from Dropbox. Check console for details.', 'error');
+                    }
+                }
+            }
+
+            // Display images in gallery
+            displayGallery(images) {
+                const galleryHTML = images.map(image => `
+                    <div class="gallery-item" onclick="gallery.openImage('${image.link}')">
+                        <img 
+                            src="${image.link}" 
+                            alt="${image.name}"
+                            loading="lazy"
+                            onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 100 100\\'%3E%3Crect width=\\'100\\' height=\\'100\\' fill=\\'%23f0f0f0\\'/%3E%3Ctext x=\\'50\\' y=\\'50\\' font-family=\\'Arial\\' font-size=\\'14\\' fill=\\'%23999\\' text-anchor=\\'middle\\' dominant-baseline=\\'middle\\'%3EImage Error%3C/text%3E%3C/svg%3E';"
+                        >
+                        <div class="image-info">
+                            <div class="image-name">${image.name}</div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                this.galleryElement.innerHTML = galleryHTML;
+            }
+
+            // Open image in modal
+            openImage(imageUrl) {
+                this.modalImage.src = imageUrl;
+                this.modal.classList.add('active');
+            }
+
+            // Show loading message
+            showLoading(message = 'Loading...') {
+                this.galleryElement.innerHTML = `<div class="loading">${message}</div>`;
+            }
+
+            // Show error or info message
+            showMessage(message, type = 'error') {
+                this.galleryElement.innerHTML = `<div class="${type}">${message}</div>`;
+            }
         }
-      );
 
-      const downloadData = await downloadRes.json();
+        // Initialize the gallery when page loads
+        let gallery;
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            // Validate that access token is set
+            if (CONFIG.ACCESS_TOKEN === 'YOUR_ACCESS_TOKEN_HERE') {
+                document.getElementById('gallery').innerHTML = 
+                    '<div class="error">Please set your Dropbox access token in the CONFIG object.</div>';
+                return;
+            }
+            
+            // Create gallery instance and load images
+            gallery = new DropboxGallery(CONFIG.ACCESS_TOKEN, CONFIG.FOLDER_PATH);
+            
+            // Make gallery accessible globally for the onclick handler
+            window.gallery = gallery;
+            
+            // Load images
+            gallery.loadImages();
+        });
 
-      const img = document.createElement("img");
-      img.src = downloadData.link;
-      gallery.appendChild(img);
-    }
-  }
-}
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
 
-loadImages();
-</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
