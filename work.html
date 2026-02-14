@@ -497,6 +497,7 @@
 
 
 
+
       
       </div>
 
@@ -514,6 +515,95 @@
     </div>
   
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <title>Dropbox Auto Gallery</title>
+  <style>
+    #gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    #gallery img {
+      width: 200px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+<h2>My Dropbox Gallery</h2>
+<div id="gallery"></div>
+
+<script>
+const ACCESS_TOKEN = "sl.u.AGQCC6cNz_0-_1hPa7FYnRifsuS2QAAwRjT_38Xp1mWuFzcd8u8pekuxLtK6mQhh1-meVcE4lz-BPALJKteUeyjFk6sg6q_6UDm8ZgyaQ1zhpVU60Yje34Ze6TvWBxnimgv5xNwwktFNfacsDXU_ODs15gBGbMQ1xBA2uobkcOTtlShkuYUYYJpIQ-GrcTtjOf2YKNl1f0SG2U0NFqR598k-Z_1SWUc_X7yui-LflbzjVWXdbMzicIGxPuNmH3qoaDqU-hQE0Zc9RyV6B2T_RHiSn1IG7HuZ2i06B4tKZi2Him2chw5yXxxcouJG3S9zOS2KEMsKBPY_aJlUc9qyJXECpmaVBPeZAgCTBQdA0Mb8m6oj2sZTH792jdDC2jyzV8AC-G3r1qwiUip3KXgfB47dv1Sfh5f0swLlgV0j-E25L0NP6efynpiqFX0-xYeLroMvXH0c9jjlWsM5zd52wIkCboEyoDZgl7lIaa-nhG-7w-wcuaPjWPaY2ccmp_ygdHRScB2VcdWCWynOAk-6Xc4nNqNEIJBn5u0mCzDqCWA8QTmHblILRUSPFIDqLw85wGjVPSR7O1bEL__fJqFZEiM3TuObvpH1VKtNtLLun1H8gOThqXMLSKjcJAvQyFKv7a3R-MfqvaFoNOi1JsRuz_Mfy4BJwQRzDlv9wwQCvy3rfqc4LOg2gzI1HozI4pZQoA4KQkg_1iaMcYpvrTed67lTldQOb7IiC8ZIkUiaWqxQH0vjRB9tLbUA1kUVNnrpab43K6LtimdObKf-CXSFNytSGGRKhmZDRO79ZnqFoRlMo7mtp_jgQ1h0pJ2_9b1ujFJJdf35ASMg7VUHcHcNQ1gN37ebuGVmgu4E0DTA0EfG_muR-CPs_Gxi57i2fqDCF834PaDw0UI_hPti55zFxUg7mq7JTs5JAXjPNBG071XqgF-cBImkYerDP9IS13IiS5H5WuVVU84eeUjjhf3fUVqlFNoaSVCJiAEokCJ0UlI1gKtjJ56LYoMfqALju3JeoxsztEBJdOR36YsmT3yytHX8NZayXudFshfnhnWc3nP6z7V3smF9mx4GOgbZpe7GCFwqYGOd3D41eBHpPain9jUPtfywmkGyeUUR2y-qSu_w9r0-s9apFbWU_mgoJ_AL4GU3qIGYeLkOJRa6dNXVmCLPtmQXWOzDhtk-6hbNAj7-g1JK3RgHoC30UYbI0xdeIw6WpEUwkFc5xoEtbb9281UCyGcD7cL8OyKBK5ZF6FqpkKw522N-kGmQf1shG9cCG6oDuSipyRTSaP9GB7dKIgJCXpgOB96fJ5qVUDhLruGSdQ";
+const FOLDER_PATH = "/conference"; // root of app folder
+
+async function loadImages() {
+  const response = await fetch(
+    "https://api.dropboxapi.com/2/files/list_folder",
+    {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + ACCESS_TOKEN,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ path: FOLDER_PATH })
+    }
+  );
+
+  const data = await response.json();
+  const gallery = document.getElementById("gallery");
+
+  for (const file of data.entries) {
+    if (file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+
+      const downloadRes = await fetch(
+        "https://content.dropboxapi.com/2/files/get_temporary_link",
+        {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer " + ACCESS_TOKEN,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ path: file.path_lower })
+        }
+      );
+
+      const downloadData = await downloadRes.json();
+
+      const img = document.createElement("img");
+      img.src = downloadData.link;
+      gallery.appendChild(img);
+    }
+  }
+}
+
+loadImages();
+</script>
+
+
+
 <div class="node_view"></div>
   </div><!-- /.content --></section><!-- /.node as page -->
 

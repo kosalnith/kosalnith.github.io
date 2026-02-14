@@ -1,6 +1,5 @@
 
 {
-  "name": "Nexus Research AI",
-  "description": "An advanced AI-powered research engine using Gemini 3 with real-time Google Search grounding, deep analysis, and source verification.",
-  "requestFramePermissions": []
+  "name": "Kosal Nith AI Search",
+  "description": "An AI-powered search assistant specialized in finding and summarizing information from Kosal Nith's professional website."
 }
