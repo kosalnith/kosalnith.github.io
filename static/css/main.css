@@ -33989,3 +33989,353 @@ tr:hover {
   transition: all 0.3s ease;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 6 photos in explore*/
+
+    /* horizontal row with wrap for responsiveness */
+    .horizontal-row {
+        display: flex;
+        position: relative;
+        flex-wrap: nowrap;       /* allow wrapping on smaller screens */
+        gap: 1.4rem;
+        max-width: 100%;
+        justify-content: center;
+        padding: 0.5rem 0.25rem;
+    }
+
+    .card {
+        background-color: transparent;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 270px;       /* flexible width: min 270px, grow if space */
+        max-width: 275px;      /* prevent cards from getting too large */
+        border: none;
+        box-shadow: none;
+        transition: transform 0.2s ease;
+        text-align: center;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+    }
+
+    .photo-container {
+        aspect-ratio: 4 / 6;
+        object-fit: cover; 
+        width: 100%;
+        background-color: #f0f0f0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        border-radius: 3px;
+        transition: filter 0.25s ease, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .photo-container:hover {
+        filter: brightness(0.97) contrast(1.02);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-content {
+        padding: 0.9rem 0 0 0;
+        background: transparent;
+        border: none;
+    }
+
+  
+
+
+    .double-cat { color: #8f2d2d; }
+
+
+
+     /* --- Lightbox overlay (same robust functionality) --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(250, 250, 250, 0.97);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            cursor: pointer;
+            padding: 1.5rem;
+        }
+
+        .lightbox:target {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: min(90vw, 1000px);
+            max-height: 90vh;
+            aspect-ratio: 10 / 16 ;
+            object-fit: cover; 
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            width: 100%;
+            height: auto;
+            cursor: default;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            font-size: 3.2rem;
+            font-weight: 300;
+            color: #222;
+            text-decoration: none;
+            line-height: 1;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 2010;
+        }
+        .lightbox-close:hover {
+            color: #8f2d2d;
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #333;
+            background: transparent;
+            pointer-events: none;
+            padding: 0 1rem;
+        }
+
+        body:has(.lightbox:target) {
+            overflow: hidden;
+        }
+
+        /* optional footer note – responsive margin */
+        .footer-note {
+            margin-top: 2.5rem;
+            color: #aaa;
+            text-align: center;
+            background: transparent;
+            width: 100%;
+        }
+
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+        .card { flex: 1 1 45%; }  /* 2 cards per row on tablets */
+    }
+
+    @media (max-width: 768px) {
+        .card { flex: 1 1 100%; } /* 1 card per row on phones */
+        body { padding: 1rem; }
+    }
+
+
+
+
+
+
+
+/* ===== GRID LAYOUT ===== */
+
+.two-photo-row {
+  display: flex;
+  position: relative;
+  flex-wrap: nowrap;       /* allow wrapping on smaller screens */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    max-width: 1790px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 3rem;
+}
+
+/* ===== PHOTO CARD ===== */
+
+.photo-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 7 / 9;
+    border-radius: 8px;
+    box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* Important: Prevent image distortion */
+.photo-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: cover;     /* keeps correct proportions */
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.5s ease;
+    z-index: 1;
+}
+
+/* LEFT IMAGE */
+.img-left::before {
+    background-image: url('https://picsum.photos/900/1200?random=1');
+}
+
+/* RIGHT IMAGE */
+.img-right::before {
+    background-image: url('https://picsum.photos/900/1200?random=2');
+}
+
+.photo-card:hover {
+    transform: scale(1.02) translateY(-6px);
+}
+
+.photo-card:hover::before {
+    transform: scale(1.08);
+}
+
+/* ===== GRADIENT OVERLAY ===== */
+
+.photo-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 45%;
+    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+    z-index: 2;
+}
+
+/* ===== TEXT ===== */
+
+.text-bottom {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+    padding: 1.8rem 1.2rem 2rem;
+    color: white;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+}
+
+.line-1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.line-2 {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+}
+
+.line-3 {
+    font-size: 1rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+/* ===== LIGHTBOX ===== */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 2rem;
+}
+
+.lightbox:target {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain; /* VERY IMPORTANT — no stretching */
+    border-radius: 6px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 900px) {
+    .two-photo-row {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .two-photo-row {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+    }
+}
+
+
+/* BIO SITE STYLE */
+
+  .cv-b { margin: 2rem 0 0; font-size: inherit; line-height: inherit; color: inherit; }
+  .cv-updated { color: #999; font-style: italic; margin-bottom: 1.5rem; font-size: inherit; }
+  .cv-b h2 {
+    font-size: inherit; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: #333;
+    border-bottom: 1px solid #ddd; padding-bottom: 0.3rem;
+    margin: 2rem 0 0.7rem;
+  }
+
+  .cv-b .cv-row { display: flex; gap: 0.75rem; margin-bottom: 0.55rem; align-items: flex-start; }
+  .cv-b .cv-row::before { content: ''; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #8c1515; flex-shrink: 0; margin-top: 0.55em; }
+
+
+  .cv-b .cv-inner { display: flex; flex-direction: column; }
+  .cv-b .cv-desc { font-size: inherit; line-height: inherit; color: inherit; }
+  .cv-b .cv-year { font-size: 0.88em; color: #888; margin-top: 0.05rem; line-height: 1.3; }
+  .cv-b p { font-size: inherit; margin: 0.4rem 0 0.4rem 1.45rem; }
+

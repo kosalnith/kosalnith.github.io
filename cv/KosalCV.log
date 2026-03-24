@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.20)  21 JAN 2026 17:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.20)  23 FEB 2026 16:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -510,7 +510,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Trying to load font information for T1+pcr on input line 21
-1.
+3.
 
 (c:/texlive/2024/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
@@ -524,29 +524,19 @@ Package microtype Info: Loading generic protrusion settings for font family
 {c:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2024/
 texmf-dist/fonts/enc/dvips/base/8r.enc}]
 
-Package hyperref Warning: Suppressing link with empty target on input line 235.
+Package hyperref Warning: Suppressing link with empty target on input line 237.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 290.
+Package hyperref Warning: Suppressing link with empty target on input line 292.
 
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 320--321
+Underfull \hbox (badness 10000) in paragraph at lines 322--323
 
  []
 
-[2] [3] [4]
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 597--606
-$[]$  $[]$ 
- []
-
-
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 615--625
-[]$[]$  $[]$ 
- []
-
-[5] (./KosalCV.aux)
+[2] [3] [4] [5] (./KosalCV.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -567,10 +557,10 @@ ive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2024/t
 exmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2024/texmf-dist/fonts/
 type1/urw/times/utmb8a.pfb><c:/texlive/2024/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb><c:/texlive/2024/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on KosalCV.pdf (5 pages, 91715 bytes).
+Output written on KosalCV.pdf (5 pages, 91492 bytes).
 PDF statistics:
- 123 PDF objects out of 1000 (max. 8388607)
- 102 compressed objects within 2 object streams
+ 118 PDF objects out of 1000 (max. 8388607)
+ 98 compressed objects within 1 object stream
  28 named destinations out of 1000 (max. 500000)
  28161 words of extra memory for PDF output out of 29859 (max. 10000000)
 

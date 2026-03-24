@@ -281,7 +281,7 @@
 </div>
 
 
-     <div class="center node stanford-page title string label-hidden"><h1>CV</h1>
+     <div class="center node stanford-page title string label-hidden"><h1>Press</h1>
   
 
 <div class="jumpstart-ui--one-column centered-container">
@@ -326,9 +326,138 @@
 
 
 
+<style>
+  .cv-b .cv-row { display: flex; gap: 0.75rem; margin-bottom: 0.55rem; align-items: baseline; }
+  .cv-b .cv-row::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #8c1515; flex-shrink: 0; margin-top: 0.45em; }
+  .cv-b .cv-row.cv-hidden { display: none; }
+  .cv-b h2.cv-section-hidden { display: none; }
+  mark.cv-highlight { background: #fff3b0; color: inherit; padding: 0; border-radius: 2px; }
 
+  #cv-search-wrap { margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+  #cv-search { width: 100%; padding: 0.45rem 0.75rem; font-size: 0.95em; border: 1px solid #ccc; border-radius: 4px; outline: none; }
+  #cv-search:focus { border-color: #8c1515; box-shadow: 0 0 0 2px rgba(140,21,21,0.12); }
+  #cv-search-clear { background: none; border: none; cursor: pointer; color: #999; font-size: 1.1em; padding: 0 0.25rem; display: none; }
+  #cv-search-clear:hover { color: #8c1515; }
+  #cv-search-count { font-size: 0.85em; color: #888; white-space: nowrap; }
+</style>
 
+<script>
+(function () {
+  var input = document.getElementById('cv-search');
+  var clearBtn = document.getElementById('cv-search-clear');
+  var countEl = document.getElementById('cv-search-count');
+
+  function getRows() {
+    return document.querySelectorAll('.cv-b .cv-row');
+  }
+  function getSections() {
+    return document.querySelectorAll('.cv-b h2');
+  }
+
+  function escapeRe(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlight(node, re) {
+    // Only text nodes
+    var children = Array.from(node.childNodes);
+    children.forEach(function (child) {
+      if (child.nodeType === 3) {
+        var text = child.textContent;
+        if (re.test(text)) {
+          var frag = document.createDocumentFragment();
+          var last = 0;
+          re.lastIndex = 0;
+          var m;
+          while ((m = re.exec(text)) !== null) {
+            frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+            var mark = document.createElement('mark');
+            mark.className = 'cv-highlight';
+            mark.textContent = m[0];
+            frag.appendChild(mark);
+            last = m.index + m[0].length;
+          }
+          frag.appendChild(document.createTextNode(text.slice(last)));
+          node.parentNode.replaceChild(frag, child);
+        }
+      } else if (child.nodeType === 1 && child.tagName !== 'MARK') {
+        highlight(child, re);
+      }
+    });
+  }
+
+  function clearHighlights(node) {
+    var marks = node.querySelectorAll('mark.cv-highlight');
+    marks.forEach(function (mark) {
+      var parent = mark.parentNode;
+      parent.replaceChild(document.createTextNode(mark.textContent), mark);
+      parent.normalize();
+    });
+  }
+
+  function doSearch() {
+    var q = input.value.trim();
+    clearBtn.style.display = q ? 'inline' : 'none';
+
+    var rows = getRows();
+    var sections = getSections();
+
+    // Clear all previous highlights
+    rows.forEach(function (r) { clearHighlights(r); });
+
+    if (!q) {
+      rows.forEach(function (r) { r.classList.remove('cv-hidden'); });
+      sections.forEach(function (s) { s.classList.remove('cv-section-hidden'); });
+      countEl.textContent = '';
+      return;
+    }
+
+    var re = new RegExp(escapeRe(q), 'gi');
+    var matched = 0;
+
+    rows.forEach(function (r) {
+      if (re.test(r.textContent)) {
+        r.classList.remove('cv-hidden');
+        re.lastIndex = 0;
+        highlight(r, new RegExp(escapeRe(q), 'gi'));
+        matched++;
+      } else {
+        r.classList.add('cv-hidden');
+      }
+      re.lastIndex = 0;
+    });
+
+    // Hide section headings that have no visible rows
+    sections.forEach(function (h2) {
+      var next = h2.nextElementSibling;
+      var hasVisible = false;
+      while (next && next.tagName !== 'H2') {
+        if (next.classList.contains('cv-row') && !next.classList.contains('cv-hidden')) {
+          hasVisible = true;
+          break;
+        }
+        next = next.nextElementSibling;
+      }
+      h2.classList.toggle('cv-section-hidden', !hasVisible);
+    });
+
+    countEl.textContent = matched === 0 ? 'No results' : matched + ' result' + (matched > 1 ? 's' : '');
+  }
+
+  input.addEventListener('input', doSearch);
+  clearBtn.addEventListener('click', function () {
+    input.value = '';
+    doSearch();
+    input.focus();
+  });
+})();
+</script>
 <div class="cv-b">
+  <div id="cv-search-wrap">
+    <input id="cv-search" type="search" placeholder="Search CV…" autocomplete="off" />
+    <button id="cv-search-clear" title="Clear">✕</button>
+    <span id="cv-search-count"></span>
+  </div>
   <p class="cv-updated">Last Updated: February 23, 2026</p>
   
 
@@ -379,13 +508,13 @@
   <div class="cv-row">Best Paper Award, National Bank of Cambodia, with Singhong Ly, $1,250, December 2018</div>
   <div class="cv-row">Ba Phnom Outstanding Student in Literature, Ministry of Education, Youth and Sports, March 2015</div>
   <h2>Invited Seminars</h2>
-  <div class="cv-row">2025: Cambodia Development Resource Institute</div>
-  <div class="cv-row">2024: National University of Management</div>
-  <div class="cv-row">2023: Voice of America; Politico 360; Glocator Research and Consulting</div>
-  <div class="cv-row">2021: Youth Resource Development Program; IR’s Talk; Social Breaking News; Sethakech</div>
-  <div class="cv-row">2020: Future Forum; Markets and Markets Research Private Ltd†; Politikoffee†; Youth Resource Development Program</div>
-  <div class="cv-row">2019: Cambodia Development Center; Future Forum; VOD; Royal University of Law and Economics</div>
-  <div class="cv-row">2018: Youth Resource Development Program</div>
+  <div class="cv-row">Cambodia Development Resource Institute, 2025</div>
+  <div class="cv-row">National University of Management, 2024</div>
+  <div class="cv-row">Voice of America; Politico 360; Glocator Research and Consulting, 2023</div>
+  <div class="cv-row">Youth Resource Development Program; IR’s Talk; Social Breaking News; Sethakech, 2021</div>
+  <div class="cv-row">Future Forum; Markets and Markets Research Private Ltd†; Politikoffee†; Youth Resource Development Program, 2020</div>
+  <div class="cv-row">Cambodia Development Center; Future Forum; VOD; Royal University of Law and Economics, 2019</div>
+  <div class="cv-row">Youth Resource Development Program, 2018</div>
   <h2>Invited Keynote Presentations</h2>
   <div class="cv-row">The Extractive Industry Sustainability Workshop, Youth Resource Development Program, Phnom Penh, February 2023</div>
   <div class="cv-row">YRDP Extractive Industry Campaign, Youth Resource Development Program, Phnom Penh, 2021, 2022</div>
@@ -441,7 +570,6 @@
   <div class="cv-row">Computing: Stata, R, MATLAB, LaTeX, HTML, CSS, Photoshop, Lightroom, Final Cut</div>
   <div class="cv-row">Languages: Khmer (native), English (proficient), French (advanced low)</div>
   <div class="cv-row">Citizenship: Cambodian, Born December 1996</div>
-  
   <p style="color:#aaa;font-style:italic;margin-top:2rem;font-size:inherit;">* Scheduled &nbsp;&nbsp; † Virtual</p>
 </div>
 
@@ -568,5 +696,6 @@
 <script src="static/js/js_JBbJf6RwtYhWtZ0OWen2_GCykwMhsYkgnDCUtmawjXI.js"></script>
 
       <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"383a8e13e9","applicationID":"1391244355","transactionName":"YFBSMkACDEoFBRUKCVkacQVGCg1XSyITFhZWWWwIXQcHZScJDxcUWFlcA0A\/LFYAAzcKA0B2XwhGEQ1VCAMTTlhBXFUR","queueTime":0,"applicationTime":2407,"atts":"TBdRRAgYH0Q=","errorBeacon":"bam.nr-data.net","agent":""}</script>
+
 <script src="static/js/search.js"></script>
 </body></html>
