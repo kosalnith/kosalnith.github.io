@@ -17,7 +17,8 @@
 /* ══════════════════════════════════════
    PIXEL-PERFECT VBN AAU CLONE
 ══════════════════════════════════════ */
-#vbn { font-family: "Arial", sans-serif !important; font-size: 14px !important; color: #333 !important; line-height: 1.5 !important; background: #fff !important; }
+#vbn { font-size: inherit !important; color: inherit !important; line-height: inherit !important; background: #fff !important; }
+#vbn .centered-container, #vbn .jumpstart-ui--one-column { max-width: 100% !important; padding: 0 !important; }
 
 /* ── Top profile tab bar ── */
 #vbn-tabs { background: #fff !important; border-bottom: 2px solid #1f3a6e !important; display: flex !important; padding: 0 !important; margin: 0 !important; overflow-x: auto !important; }
@@ -31,78 +32,79 @@
 
 /* ── Research output header ── */
 #vbn-ro-header { padding: 24px 0 16px !important; border-bottom: 1px solid #ddd !important; }
-#vbn-ro-title { display: flex !important; align-items: center !important; gap: 12px !important; font-size: 22px !important; font-weight: 400 !important; color: #222 !important; margin: 0 0 14px !important; padding-top: 20px !important; }
+#vbn-ro-title { display: flex !important; align-items: center !important; gap: 12px !important; font-size: 1.4em !important; font-weight: 400 !important; color: #222 !important; margin: 0 0 14px !important; padding-top: 20px !important; }
 #vbn-ro-title svg { color: #555 !important; }
 #vbn-type-counts { display: flex !important; gap: 0 !important; }
 .vbn-tc { display: flex !important; flex-direction: column !important; align-items: center !important; padding: 0 24px !important; cursor: pointer !important; text-decoration: none !important; transition: background .1s !important; }
 .vbn-tc:first-child { padding-left: 0 !important; }
 .vbn-tc:hover { background: #f9f9f9 !important; }
-.vbn-tc.active .vbn-tc-n { font-weight: 700 !important; color: #1f3a6e !important; }
-.vbn-tc-n { font-size: 28px !important; font-weight: 300 !important; color: #1f3a6e !important; line-height: 1.1 !important; }
-.vbn-tc-l { font-size: 12px !important; color: #666 !important; margin-top: 2px !important; white-space: nowrap !important; }
+.vbn-tc:hover .vbn-tc-n { border-color: #c0c8d8 !important; }
+.vbn-tc.active .vbn-tc-n { font-weight: 700 !important; color: #1f3a6e !important; text-decoration: underline !important; border-color: #1f3a6e !important; }
+.vbn-tc-n { font-size: 28px !important; font-weight: 300 !important; color: #1f3a6e !important; line-height: 1.1 !important; display: inline-block !important; padding: 4px 8px !important; border-radius: 50% !important; border: 2px solid transparent !important; transition: border-color .15s !important; }
+.vbn-tc-l { font-size: inherit !important; color: #666 !important; margin-top: 2px !important; white-space: nowrap !important; }
 
 /* ── Main layout ── */
 #vbn-main { display: flex !important; gap: 0 !important; padding: 0 !important; }
 
 /* ── Sidebar ── */
-#vbn-sidebar { width: 220px !important; flex-shrink: 0 !important; padding: 20px 24px 20px 0 !important; border-right: 1px solid #eee !important; }
-.vbn-sb-back { font-size: 13px !important; color: #1f3a6e !important; display: flex !important; align-items: center !important; gap: 4px !important; margin-bottom: 16px !important; cursor: pointer !important; text-decoration: none !important; }
+#vbn-sidebar { width: 280px !important; flex-shrink: 0 !important; padding: 20px 24px 20px 16px !important; border-right: 1px solid #eee !important; overflow: visible !important; }
+.vbn-sb-back { font-size: inherit !important; color: #1f3a6e !important; display: flex !important; align-items: center !important; gap: 4px !important; margin-bottom: 16px !important; cursor: pointer !important; text-decoration: none !important; }
 .vbn-sb-back:hover { text-decoration: underline !important; }
-.vbn-filter-heading { font-size: 13px !important; font-weight: 700 !important; color: #333 !important; margin: 14px 0 4px !important; padding: 0 !important; }
+.vbn-filter-heading { font-size: inherit !important; font-weight: 700 !important; color: #333 !important; margin: 16px 0 6px !important; padding: 0 !important; }
 .vbn-filter-heading:first-of-type { margin-top: 0 !important; }
-.vbn-cb-row { display: flex !important; align-items: center !important; gap: 6px !important; padding: 2px 0 !important; font-size: 13px !important; color: #333 !important; cursor: pointer !important; line-height: 1.35 !important; margin: 0 !important; }
-.vbn-cb-row input[type=checkbox] { width: 14px !important; height: 14px !important; margin: 0 !important; flex-shrink: 0 !important; accent-color: #1f3a6e !important; cursor: pointer !important; border-radius: 2px !important; }
-.vbn-cb-row label { cursor: pointer !important; font-size: 13px !important; flex: 1 !important; margin: 0 !important; line-height: 1.35 !important; }
-.vbn-show-more { font-size: 13px !important; color: #1f3a6e !important; cursor: pointer !important; background: none !important; border: none !important; padding: 4px 0 !important; font-family: inherit !important; display: block !important; }
+
+
+
+.vbn-show-more { font-size: inherit !important; color: #1f3a6e !important; cursor: pointer !important; background: none !important; border: none !important; padding: 5px 0 !important; font-family: inherit !important; display: block !important; }
 .vbn-show-more:hover { text-decoration: underline !important; }
-.vbn-cb-n { color: #888 !important; font-size: 12px !important; margin-left: auto !important; white-space: nowrap !important; }
+
 #vbn-sidebar hr { border: none !important; border-top: 1px solid #e8e8e8 !important; margin: 14px 0 !important; }
 
 /* ── Content area ── */
-#vbn-content { flex: 1 !important; padding: 0 0 0 28px !important; min-width: 0 !important; }
+#vbn-content { flex: 1 !important; padding: 0 0 0 32px !important; min-width: 0 !important; }
 
 /* ── Sort bar ── */
-#vbn-sort-bar { display: flex !important; align-items: center !important; gap: 16px !important; padding: 14px 0 12px !important; font-size: 13px !important; color: #555 !important; border-bottom: 1px solid #eee !important; margin-bottom: 8px !important; }
-#vbn-count { font-size: 13px !important; color: #333 !important; }
-.vbn-sort-link { color: #1f3a6e !important; text-decoration: none !important; display: flex !important; align-items: center !important; gap: 4px !important; cursor: pointer !important; }
+#vbn-sort-bar { display: flex !important; align-items: center !important; gap: 16px !important; padding: 14px 0 12px !important; font-size: inherit !important; color: #555 !important; border-bottom: 1px solid #eee !important; margin-bottom: 8px !important; }
+#vbn-count { font-size: inherit !important; color: #333 !important; }
+.vbn-sort-link { color: #1f3a6e !important; text-decoration: none !important; display: flex !important; align-items: center !important; gap: 4px !important; cursor: pointer !important; font-size: inherit !important; }
 .vbn-sort-link:hover { text-decoration: underline !important; }
 .vbn-rss { color: #c0392b !important; font-size: 15px !important; cursor: pointer !important; }
 
 /* ── Year header ── */
-.vbn-year { font-size: 16px !important; font-weight: 700 !important; color: #222 !important; padding: 18px 0 6px !important; margin: 0 !important; border-bottom: 1px solid #ddd !important; margin-bottom: 0 !important; }
+.vbn-year { font-size: 1.1em !important; font-weight: 700 !important; color: #222 !important; padding: 18px 0 6px !important; margin: 0 !important; border-bottom: 1px solid #ddd !important; margin-bottom: 0 !important; }
 .vbn-year:first-of-type { padding-top: 8px !important; }
 
 /* ── Publication entry ── */
-.vbn-pub { padding: 20px 0 18px !important; border-bottom: 1px solid #eee !important; display: flex !important; gap: 0 !important; }
-.vbn-pub-body { flex: 1 !important; min-width: 0 !important; padding-right: 20px !important; }
+.vbn-pub { padding: 20px 0 18px !important; border-bottom: none !important; display: flex !important; gap: 0 !important; }
+.vbn-pub-body { flex: 1 !important; min-width: 0 !important; padding-right: 12px !important; }
 .vbn-pub-right { width: 60px !important; flex-shrink: 0 !important; display: flex !important; flex-direction: column !important; gap: 10px !important; align-items: center !important; justify-content: flex-start !important; padding-top: 4px !important; }
 
 /* Title */
-.vbn-pub-title { font-size: 17px !important; font-weight: 400 !important; line-height: 1.4 !important; margin: 0 0 5px !important; }
+.vbn-pub-title { font-size: 1.05em !important; font-weight: 400 !important; line-height: 1.4 !important; margin: 0 0 5px !important; }
 .vbn-pub-title a { color: #1f3a6e !important; text-decoration: none !important; }
 .vbn-pub-title a:hover { text-decoration: underline !important; }
 .vbn-pub-title span { color: #222 !important; }
 
 /* Authors / meta */
-.vbn-pub-meta { font-size: 13.5px !important; color: #444 !important; line-height: 1.55 !important; margin-bottom: 4px !important; }
+.vbn-pub-meta { font-size: inherit !important; color: #444 !important; line-height: 1.55 !important; margin-bottom: 4px !important; }
 .vbn-pub-meta .vbn-author-main { color: #1f3a6e !important; font-weight: 500 !important; text-decoration: underline !important; cursor: pointer !important; }
 .vbn-pub-meta em { font-style: italic !important; }
 
 /* Breadcrumb */
-.vbn-pub-breadcrumb { font-size: 12.5px !important; color: #888 !important; font-style: italic !important; margin-bottom: 7px !important; }
+.vbn-pub-breadcrumb { font-size: inherit !important; color: #888 !important; font-style: italic !important; margin-bottom: 7px !important; }
 
 /* OA + File row */
 .vbn-pub-badges { display: flex !important; align-items: center !important; gap: 14px !important; margin-bottom: 9px !important; font-size: 13px !important; }
-.vbn-oa { color: #e67e00 !important; display: inline-flex !important; align-items: center !important; gap: 5px !important; border: 1px solid #e67e00 !important; border-radius: 20px !important; padding: 2px 10px !important; font-size: 13px !important; }
+.vbn-oa { color: #e67e00 !important; display: inline-flex !important; align-items: center !important; gap: 5px !important; border: 1px solid #e67e00 !important; border-radius: 20px !important; padding: 2px 10px !important; font-size: inherit !important; }
 .vbn-oa svg { width: 13px !important; height: 13px !important; }
-.vbn-file { color: #555 !important; display: inline-flex !important; align-items: center !important; gap: 5px !important; border: 1px solid #bbb !important; border-radius: 20px !important; padding: 2px 10px !important; font-size: 13px !important; }
+.vbn-file { color: #555 !important; display: inline-flex !important; align-items: center !important; gap: 5px !important; border: 1px solid #bbb !important; border-radius: 20px !important; padding: 2px 10px !important; font-size: inherit !important; }
 .vbn-forthcoming { background: #e8f5e9 !important; color: #2e7d32 !important; font-size: 11px !important; font-weight: 700 !important; padding: 2px 7px !important; border-radius: 3px !important; text-transform: uppercase !important; }
 .vbn-submitted { background: #fff3e0 !important; color: #e65100 !important; font-size: 11px !important; font-weight: 700 !important; padding: 2px 7px !important; border-radius: 3px !important; text-transform: uppercase !important; }
 .vbn-award { color: #9e6c00 !important; font-size: 12.5px !important; display: flex !important; align-items: center !important; gap: 4px !important; }
 
 /* Links */
 .vbn-pub-links { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; margin-top: 8px !important; }
-.vbn-lnk { font-size: 12.5px !important; padding: 3px 10px !important; border-radius: 3px !important; text-decoration: none !important; border: 1px solid !important; cursor: pointer !important; background: none !important; font-family: inherit !important; transition: background .1s !important; }
+.vbn-lnk { font-size: inherit !important; padding: 3px 10px !important; border-radius: 3px !important; text-decoration: none !important; border: 1px solid !important; cursor: pointer !important; background: none !important; font-family: inherit !important; transition: background .1s !important; }
 .vbn-lnk-abs { color: #555 !important; border-color: #ccc !important; }
 .vbn-lnk-abs:hover { background: #f0f0f0 !important; }
 .vbn-lnk-paper { color: #1f3a6e !important; border-color: #aac4e0 !important; background: #f0f5fb !important; }
@@ -114,12 +116,12 @@
 .vbn-lnk-media { color: #8c1515 !important; border-color: #e0b0b0 !important; background: #fdf5f5 !important; }
 
 /* Abstract drawer */
-.vbn-abstract { display: none !important; margin-top: 10px !important; padding: 12px 14px !important; background: #f9f9f9 !important; border-left: 3px solid #1f3a6e !important; font-size: 13.5px !important; line-height: 1.7 !important; color: #444 !important; border-radius: 0 3px 3px 0 !important; }
+.vbn-abstract { display: none !important; margin-top: 10px !important; padding: 12px 14px !important; background: #f9f9f9 !important; border-left: 3px solid #1f3a6e !important; font-size: inherit !important; line-height: 1.7 !important; color: #444 !important; border-radius: 0 3px 3px 0 !important; }
 .vbn-abstract.open { display: block !important; }
 
 /* Keywords */
 .vbn-keywords { display: flex !important; flex-wrap: wrap !important; gap: 5px !important; margin-top: 9px !important; }
-.vbn-kw { display: inline-flex !important; align-items: center !important; gap: 6px !important; font-size: 13px !important; color: #333 !important; border: 1px solid #c8d5e5 !important; border-radius: 20px !important; padding: 3px 11px 3px 7px !important; background: #fff !important; white-space: nowrap !important; }
+.vbn-kw { display: inline-flex !important; align-items: center !important; gap: 6px !important; font-size: inherit !important; color: #333 !important; border: 1px solid #c8d5e5 !important; border-radius: 20px !important; padding: 3px 11px 3px 7px !important; background: #fff !important; white-space: nowrap !important; }
 /* Circle indicator: filled = strong, half = medium, outline = weak */
 .kw-c { width: 12px !important; height: 12px !important; border-radius: 50% !important; border: 2px solid #1f3a6e !important; flex-shrink: 0 !important; display: inline-block !important; }
 .kw-c.full { background: #1f3a6e !important; }
@@ -128,8 +130,8 @@
 
 /* Right stats column */
 .vbn-stat { text-align: center !important; min-width: 55px !important; }
-.vbn-stat-n { font-size: 26px !important; font-weight: 300 !important; color: #1f3a6e !important; line-height: 1 !important; display: block !important; }
-.vbn-stat-l { font-size: 11px !important; color: #888 !important; line-height: 1.3 !important; display: block !important; }
+.vbn-stat-n { font-size: 1.6em !important; font-weight: 300 !important; color: #1f3a6e !important; line-height: 1 !important; display: block !important; }
+.vbn-stat-l { font-size: 0.75em !important; color: #888 !important; line-height: 1.3 !important; display: block !important; }
 
 
 /* ── Altmetric star ── */
@@ -137,10 +139,10 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 44px !important; height: 44px !important;
+  width: 38px !important; height: 38px !important;
   flex-shrink: 0 !important;
 }
-.vbn-altmetric svg { width: 44px !important; height: 44px !important; }
+.vbn-altmetric svg { width: 38px !important; height: 38px !important; }
 /* Hidden */
 .vbn-pub.vhide, .vbn-year.vhide { display: none !important; }
 
@@ -173,7 +175,7 @@
 #vbn-more-drop.open { display: block !important; }
 .vbn-more-row {
   padding: 10px 16px !important;
-  font-size: 14px !important;
+  font-size: inherit !important;
   color: #333 !important;
   border-bottom: 1px solid #f0f0f0 !important;
   cursor: pointer !important;
@@ -184,8 +186,31 @@
 }
 .vbn-more-row:last-child { border-bottom: none !important; }
 .vbn-more-row:hover { background: #f5f8fc !important; }
-.vbn-more-row strong { color: #1f3a6e !important; font-size: 15px !important; font-weight: 700 !important; min-width: 20px !important; }
+.vbn-more-row strong { color: #1f3a6e !important; font-size: 1.05em !important; font-weight: 700 !important; min-width: 20px !important; }
 #vbn-ro-header { padding: 16px 0 !important; border-bottom: 1px solid #ddd !important; }
+
+/* ── Custom checkbox (overrides site CSS) ── */
+.vbn-cb-row { display: flex !important; align-items: center !important; gap: 10px !important; padding: 5px 0 !important; font-size: inherit !important; color: #333 !important; cursor: pointer !important; line-height: 1.5 !important; margin: 0 !important; width: 100% !important; box-sizing: border-box !important; user-select: none !important; }
+.vbn-cb-row input[type=checkbox] { position: absolute !important; opacity: 0 !important; width: 0 !important; height: 0 !important; pointer-events: none !important; }
+.vbn-cb-box { display: inline-block !important; width: 16px !important; height: 16px !important; min-width: 16px !important; border: 2px solid #999 !important; border-radius: 2px !important; background: #fff !important; flex-shrink: 0 !important; position: relative !important; box-sizing: border-box !important; }
+.vbn-cb-row input[type=checkbox]:checked + .vbn-cb-box { background: #1f3a6e !important; border-color: #1f3a6e !important; }
+.vbn-cb-row input[type=checkbox]:checked + .vbn-cb-box::after { content: "" !important; position: absolute !important; left: 3px !important; top: 0px !important; width: 5px !important; height: 9px !important; border: 2px solid #fff !important; border-top: none !important; border-left: none !important; transform: rotate(45deg) !important; }
+.vbn-cb-row:hover .vbn-cb-box { border-color: #1f3a6e !important; }
+.vbn-cb-row span.vbn-cb-text { cursor: pointer !important; font-size: inherit !important; flex: 1 !important; margin: 0 !important; line-height: inherit !important; color: #333 !important; }
+.vbn-cb-n { color: #888 !important; font-size: inherit !important; margin-left: auto !important; white-space: nowrap !important; }
+
+/* Full width override */
+.jumpstart-ui--two-column.flex-container.centered-container,
+.jumpstart-ui--one-column.centered-container,
+.flex-12-of-12.main-region,
+.layout.layout--layout-paragraphs-one-column,
+.layout__region.layout__region--main,
+.ptype-stanford-wysiwyg,
+.su-wysiwyg-text {
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 </style>
 </head>
 <body class="page-research section-research not-front role--anonymous">
@@ -223,14 +248,29 @@
 
 <main class="page-content" id="page-content">
 <div id="vbn">
-<div style="max-width:1160px;margin:0 auto;padding:0 24px">
+<div style="max-width:100%;margin:0;padding:0 64px">
 
 
 
 <!-- ── Research output header ── -->
 <div id="vbn-ro-header">
   <div id="vbn-ro-title">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:#888"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left cover -->
+  <path d="M20 10 C16 8 10 7 4 8 L4 32 C10 31 16 32 20 34 Z" fill="#9e9e9e"/>
+  <!-- Right cover -->
+  <path d="M20 10 C24 8 30 7 36 8 L36 32 C30 31 24 32 20 34 Z" fill="#757575"/>
+  <!-- Left page lines -->
+  <line x1="8" y1="14" x2="18" y2="13" stroke="#fff" stroke-width="1.2" opacity="0.6"/>
+  <line x1="8" y1="18" x2="18" y2="17" stroke="#fff" stroke-width="1.2" opacity="0.6"/>
+  <line x1="8" y1="22" x2="18" y2="21" stroke="#fff" stroke-width="1.2" opacity="0.6"/>
+  <!-- Right page lines -->
+  <line x1="32" y1="14" x2="22" y2="13" stroke="#fff" stroke-width="1.2" opacity="0.6"/>
+  <line x1="32" y1="18" x2="22" y2="17" stroke="#fff" stroke-width="1.2" opacity="0.6"/>
+  <line x1="32" y1="22" x2="22" y2="21" stroke="#fff" stroke-width="1.2" opacity="0.6"/>
+  <!-- Spine -->
+  <rect x="18.5" y="9" width="3" height="25" fill="#555" rx="1"/>
+</svg>
     Research output
   </div>
   <div id="vbn-type-counts">
@@ -247,7 +287,7 @@
       <span class="vbn-tc-n">6</span><span class="vbn-tc-l">Other publication</span>
     </a>
     <div class="vbn-tc vbn-more-wrap" id="vbn-more-btn" onclick="toggleMore(event)">
-      <span class="vbn-tc-n" style="text-decoration:underline;cursor:pointer">7</span>
+      <span class="vbn-tc-n" style="cursor:pointer">7</span>
       <span class="vbn-tc-l" style="cursor:pointer">More</span>
       <div id="vbn-more-drop">
         <div class="vbn-more-row" data-f="policy" onclick="tcFilter(event,'policy')"><strong>2</strong> Policy brief</div>
@@ -268,33 +308,33 @@
       Search in all content
     </a>
 
-    <p style="font-size:13px;font-weight:700;color:#333;margin:0 0 8px">Filters for Publications</p>
+    <p style="font-size:1.05em;font-weight:700;color:#333;margin:0 0 10px">Filters for Publications</p>
 
     <div class="vbn-filter-heading">Type</div>
-    <label class="vbn-cb-row"><input type="checkbox" data-type="articles" onchange="sbFilter()"> <label>Journal article</label> <span class="vbn-cb-n">(1)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-type="chapters" onchange="sbFilter()"> <label>Book chapter</label> <span class="vbn-cb-n">(2)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-type="working" onchange="sbFilter()"> <label>Working paper</label> <span class="vbn-cb-n">(4)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-type="other" onchange="sbFilter()"> <label>Other publication</label> <span class="vbn-cb-n">(6)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-type="policy" onchange="sbFilter()"> <label>Policy brief</label> <span class="vbn-cb-n">(2)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-type="opeds" onchange="sbFilter()"> <label>Op-Ed / Commentary</label> <span class="vbn-cb-n">(9)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-type="progress" onchange="sbFilter()"> <label>Work in progress</label> <span class="vbn-cb-n">(3)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-type="articles" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">Journal article</span> <span class="vbn-cb-n">(1)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-type="chapters" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">Book chapter</span> <span class="vbn-cb-n">(2)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-type="working" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">Working paper</span> <span class="vbn-cb-n">(4)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-type="other" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">Other publication</span> <span class="vbn-cb-n">(6)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-type="policy" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">Policy brief</span> <span class="vbn-cb-n">(2)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-type="opeds" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">Op-Ed / Commentary</span> <span class="vbn-cb-n">(9)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-type="progress" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">Work in progress</span> <span class="vbn-cb-n">(3)</span></label>
     <button class="vbn-show-more" onclick="showTypeModal()">Show more ›</button>
 
     <hr>
 
     <div class="vbn-filter-heading">Open Access</div>
-    <label class="vbn-cb-row"><input type="checkbox" data-oa="1" onchange="sbFilter()"> <label>Show OA content</label> <span style="color:#888;font-size:12px">(8)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-oa="1" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">Show OA content</span> <span class="vbn-cb-n">(8)</span></label>
 
     <hr>
 
     <div class="vbn-filter-heading">Publication Year</div>
-    <label class="vbn-cb-row"><input type="checkbox" data-year="2026" onchange="sbFilter()"> <label>2026</label> <span style="color:#888;font-size:12px">(3)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-year="2025" onchange="sbFilter()"> <label>2025</label> <span style="color:#888;font-size:12px">(8)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-year="2024" onchange="sbFilter()"> <label>2024</label> <span style="color:#888;font-size:12px">(2)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-year="2023" onchange="sbFilter()"> <label>2023</label> <span style="color:#888;font-size:12px">(2)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-year="2022" onchange="sbFilter()"> <label>2022</label> <span style="color:#888;font-size:12px">(3)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-year="2021" onchange="sbFilter()"> <label>2021</label> <span style="color:#888;font-size:12px">(4)</span></label>
-    <label class="vbn-cb-row"><input type="checkbox" data-year="older" onchange="sbFilter()"> <label>2020 &amp; earlier</label> <span style="color:#888;font-size:12px">(5)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-year="2026" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">2026</span> <span class="vbn-cb-n">(3)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-year="2025" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">2025</span> <span class="vbn-cb-n">(8)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-year="2024" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">2024</span> <span class="vbn-cb-n">(2)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-year="2023" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">2023</span> <span class="vbn-cb-n">(2)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-year="2022" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">2022</span> <span class="vbn-cb-n">(3)</span></label>
+    <label class="vbn-cb-row"><input type="checkbox" data-year="2021" onchange="sbFilter()"> <span class="vbn-cb-box"></span> <span class="vbn-cb-text">2021</span> <span class="vbn-cb-n">(4)</span></label>
+
 
     <hr>
 
@@ -1065,9 +1105,9 @@
     </div>
 
     <!-- ════ 2020 & Earlier ════ -->
-    <h2 class="vbn-year" data-year="older">2020 &amp; Earlier</h2>
+    <h2 class="vbn-year" data-year="2020">2020</h2>
 
-    <div class="vbn-pub" data-type="policy" data-year="older">
+    <div class="vbn-pub" data-type="policy" data-year="2020">
       <div class="vbn-pub-body">
         <div class="vbn-pub-title"><a href="https://www.cd-center.org/essay-contest-2019-first-place-winner/" target="_blank">How Should Cambodia Prepare for the Fourth Industrial Revolution?</a></div>
         <div class="vbn-pub-meta"><span class="vbn-author-main">Nith, K.</span>, May 2020, Cambodia Development Center. (Essay Contest 2019)</div>
@@ -1103,7 +1143,10 @@
       </div></div>
     </div>
 
-    <div class="vbn-pub" data-type="other" data-year="older" data-dl="7">
+    
+    <h2 class="vbn-year" data-year="2018">2018</h2>
+
+    <div class="vbn-pub" data-type="other" data-year="2018" data-dl="7">
       <div class="vbn-pub-body">
         <div class="vbn-pub-title"><span>Reinvigorating Cambodian Agriculture: Transforming from Extensive to Intensive Agriculture</span></div>
         <div class="vbn-pub-meta"><span class="vbn-author-main">Nith, K.</span> &amp; Ly, S., Dec 2018, National Bank of Cambodia.</div>
@@ -1142,7 +1185,10 @@
       </div></div>
     </div>
 
-    <div class="vbn-pub" data-type="other" data-year="older">
+    
+    <h2 class="vbn-year" data-year="2019">2019</h2>
+
+    <div class="vbn-pub" data-type="other" data-year="2019">
       <div class="vbn-pub-body">
         <div class="vbn-pub-title"><a href="https://www.researchgate.net/publication/330936932" target="_blank">Rapport de Stage : Assistant de Programme de l'Engagement des Jeunes pour l'Action Sociale</a></div>
         <div class="vbn-pub-meta"><span class="vbn-author-main">Nith, K.</span>, Jan 2019, Royal University of Law and Economics.</div>
@@ -1169,7 +1215,7 @@
       </div></div>
     </div>
 
-    <div class="vbn-pub" data-type="other" data-year="older">
+    <div class="vbn-pub" data-type="other" data-year="2021">
       <div class="vbn-pub-body">
         <div class="vbn-pub-title"><a href="https://kosalnith.github.io/research/policies/COVID-19-HHSavingsDebt.pdf" target="_blank">Household Saving and Debt</a></div>
         <div class="vbn-pub-meta"><span class="vbn-author-main">Nith, K.</span> &amp; Thomas, S., Jun 2021, In: <em>Revisiting the Pandemic</em>. The Asia Foundation, p. 50–54.</div>
@@ -1285,51 +1331,63 @@
 
 <!-- ── Type modal (Show more) ── -->
 <div id="vbn-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.35)">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:28px 32px;max-width:960px;width:96%;border-radius:3px;max-height:85vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.18)">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
-      <strong style="font-size:14px;color:#333">Type</strong>
-      <button onclick="document.getElementById('vbn-modal').style.display='none'" style="background:none;border:none;font-size:13px;cursor:pointer;color:#555;font-weight:600;letter-spacing:.05em;padding:0">CLOSE</button>
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:18px 24px 22px;max-width:980px;width:96%;border-radius:3px;max-height:90vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.18)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid #eee;padding-bottom:8px">
+      <strong style="font-size:13px;color:#333">Type</strong>
+      <button onclick="document.getElementById('vbn-modal').style.display='none'" style="background:none;border:none;font-size:12px;cursor:pointer;color:#555;font-weight:600;letter-spacing:.08em;padding:0">CLOSE</button>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px 28px;font-size:13px;color:#333">
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox" data-type="articles" onchange="sbFilter()"> Journal article (1)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox" data-type="working" onchange="sbFilter()"> Working paper (4)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Preprint (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Computer programme (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox" data-type="chapters" onchange="sbFilter()"> Book chapter (2)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Conference article in Journal (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Encyclopedia chapter (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Comment (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox" data-type="other" onchange="sbFilter()"> Other publication (6)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Anthology (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Report chapter (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Memorandum contribution (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox" data-type="policy" onchange="sbFilter()"> Policy brief (2)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Editorial (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Preface/Introduction/postscript (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Interactive production (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox" data-type="opeds" onchange="sbFilter()"> Op-Ed / Commentary (9)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Literature review (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Letter (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Question &amp; Answer/hearing (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox" data-type="progress" onchange="sbFilter()"> Work in progress (3)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Comment/debate (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Sound/Visual production (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Compendium/lecture notes (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Net publication (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Contribution to newspaper - Review (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Patent (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Article (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Contribution to newspaper - Feature (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Contribution to newspaper (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Memorandum (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Doctoral Thesis (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Contribution to newspaper - Newspaper (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Contribution to newspaper - Comment (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Doctoral thesis (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Dataset (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Compendium/lecture notes chapter (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Case Report (0)</label>
-      <label style="display:flex;gap:6px;align-items:baseline;cursor:pointer"><input type="checkbox"> Master's Thesis (0)</label>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0 16px">
+<div style="display:flex;flex-direction:column;gap:2px"><label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:.2px 0"><input type="checkbox" data-type="articles" onchange="sbFilter()" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Journal article (1)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Article in proceeding (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" data-type="chapters" onchange="sbFilter()" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Book chapter (2)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Book (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Report (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Conference abstract for conference (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Conference abstract in proceeding (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>PhD thesis (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Conference abstract in journal (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Paper without publisher/journal (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Poster (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Review article (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" data-type="other" onchange="sbFilter()" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Other publication (6)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" data-type="policy" onchange="sbFilter()" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Policy brief (2)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" data-type="opeds" onchange="sbFilter()" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Op-Ed / Commentary (9)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" data-type="progress" onchange="sbFilter()" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Work in progress (3)</span></label></div>
+<div style="display:flex;flex-direction:column;gap:2px"><label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" data-type="working" onchange="sbFilter()" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Working paper (4)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Conference article in Journal (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Anthology (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Editorial (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Literature review (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Comment/debate (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Net publication - Internet publication (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Other contribution (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Contribution to newspaper - Review (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Contribution to newspaper - Feature article (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Contribution to newspaper - Newspaper article (0)</span></label></div>
+<div style="display:flex;flex-direction:column;gap:2px"><label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Preprint (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Encyclopedia chapter (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Report chapter (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Preface/Introduction/postscript (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Letter (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Sound/Visual production (digital) (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Patent (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Contribution to newspaper - Comment/debate (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Compendium/lecture notes (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Memorandum (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Doctoral thesis (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Case Report (0)</span></label></div>
+<div style="display:flex;flex-direction:column;gap:2px"><label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Computer programme (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Comment (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Memorandum contribution (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>2D/3D (Physical product) (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Interactive production (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Question &amp; Answer/hearing (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Compendium/lecture notes chapter (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Question &amp; Answer/hearing contribution (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Article (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Doctoral Thesis (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Dataset (0)</span></label>
+<label style="display:flex;gap:6px;align-items:flex-start;cursor:pointer;font-size:12px;line-height:1.3;padding:1px 0"><input type="checkbox" style="position:absolute;opacity:0;width:0;height:0"> <span class="vbn-cb-box" style="margin-top:1px;flex-shrink:0"></span><span>Master's Thesis (0)</span></label></div>
     </div>
   </div>
 </div>
@@ -1361,6 +1419,33 @@ function toggleAbs(btn) {
   var open = ab.classList.toggle('open');
   btn.textContent = open ? 'Hide Abstract' : 'Abstract';
 }
+
+
+// Fix custom checkboxes for deployed site
+document.addEventListener('click', function(e) {
+  var box = e.target.closest('.vbn-cb-box');
+  if (!box) return;
+  var lbl = box.closest('label');
+  if (!lbl) return;
+  var inp = lbl.querySelector('input[type=checkbox]');
+  if (!inp) return;
+  e.preventDefault();
+  inp.checked = !inp.checked;
+  box.style.background = inp.checked ? '#1f3a6e' : '#fff';
+  box.style.borderColor = inp.checked ? '#1f3a6e' : '';
+  if (inp.checked) {
+    if (!box.querySelector('.vbn-check-mark')) {
+      var tick = document.createElement('span');
+      tick.className = 'vbn-check-mark';
+      tick.style.cssText = 'position:absolute;left:2px;top:-1px;width:9px;height:12px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg);display:block';
+      box.appendChild(tick);
+    }
+  } else {
+    var tick = box.querySelector('.vbn-check-mark');
+    if (tick) tick.remove();
+  }
+  if (typeof sbFilter === 'function') sbFilter();
+});
 
 function showTypeModal() { document.getElementById('vbn-modal').style.display = 'block'; }
 document.getElementById('vbn-modal').addEventListener('click', function(e){ if(e.target===this) this.style.display='none'; });

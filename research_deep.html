@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Kosal Nith · Research output</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      color: #1e2a3e;
+      line-height: 1.5;
+      font-size: 16px;
+    }
+
+    .research-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 2rem 3rem 2rem;
+    }
+
+    /* header */
+    .research-header {
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .research-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.9rem;
+      font-weight: 500;
+      color: #0f2b4d;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+    /* type pills */
+    .type-pills {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+    .type-pill {
+      background: transparent;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 0.5rem 0.75rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.1s ease;
+      min-width: 70px;
+    }
+    .type-pill .pill-number {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #1f4a7c;
+      line-height: 1;
+    }
+    .type-pill .pill-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #4b5e77;
+      text-align: center;
+    }
+    .type-pill:hover {
+      background: #f0f4fa;
+    }
+    .type-pill.active {
+      background: #e9edf4;
+    }
+    .type-pill.active .pill-number {
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      color: #0b355c;
+    }
+    .more-wrapper {
+      position: relative;
+    }
+    .more-dropdown {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+      border: 1px solid #e2edf2;
+      min-width: 220px;
+      z-index: 50;
+      overflow: hidden;
+    }
+    .more-dropdown.open { display: block; }
+    .more-item {
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1e3a5f;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      border-bottom: 1px solid #f0f2f5;
+    }
+    .more-item:last-child { border-bottom: none; }
+    .more-item:hover { background: #f8fafc; }
+    .more-item strong { font-weight: 700; color: #1f4a7c; margin-right: 12px; }
+
+    /* two‑column layout */
+    .two-columns {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+    .sidebar {
+      width: 340px;
+      flex-shrink: 0;
+      border-right: 1px solid #eef2f6;
+      padding-right: 1.8rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: #1f4a7c;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    .back-link i { font-size: 0.75rem; }
+    .back-link:hover { text-decoration: underline; }
+
+    .filter-heading {
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      color: #2c3e50;
+      margin: 1.25rem 0 0.75rem 0;
+    }
+    .filter-heading:first-of-type { margin-top: 0; }
+
+    .custom-check {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: #2d3e5f;
+      gap: 8px;
+    }
+    .custom-check-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .check-box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #bdc4d0;
+      border-radius: 4px;
+      background: white;
+      display: inline-block;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .custom-check input { display: none; }
+    .custom-check input:checked + .check-box {
+      background: #1f4a7c;
+      border-color: #1f4a7c;
+    }
+    .custom-check input:checked + .check-box::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 1px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .count-badge {
+      color: #6c7a8e;
+      font-size: 0.75rem;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+    hr { margin: 1rem 0; border: none; border-top: 1px solid #eef2f8; }
+    .show-more-btn {
+      background: none;
+      border: none;
+      font-size: 0.8rem;
+      color: #1f4a7c;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 6px;
+      padding: 0;
+    }
+    .journals-list, .profile-links a {
+      font-size: 0.85rem;
+      color: #3a546d;
+      line-height: 1.5;
+    }
+    .profile-links a { display: block; color: #1f4a7c; text-decoration: none; margin: 6px 0; }
+
+    /* main content */
+    .main-content { flex: 1; min-width: 0; }
+
+    .search-section {
+      background: #f9fbfd;
+      border: 1px solid #e2edf2;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .search-heading {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #152c42;
+      margin-bottom: 0.75rem;
+    }
+    .search-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .search-input-wrapper {
+      flex: 2;
+      min-width: 200px;
+      display: flex;
+      align-items: center;
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 40px;
+      padding: 0.5rem 1rem;
+    }
+    .search-input-wrapper i {
+      color: #9aaebf;
+      margin-right: 8px;
+    }
+    .search-input-wrapper input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 0.9rem;
+      background: transparent;
+    }
+    .search-options {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: #4a627a;
+      flex-wrap: wrap;
+    }
+    .search-options span {
+      background: #f0f4fa;
+      padding: 4px 10px;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .advanced-link {
+      font-size: 0.85rem;
+      color: #1f4a7c;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .sort-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eef2f6;
+      margin-bottom: 1.25rem;
+      color: #3b4e6b;
+      flex-wrap: wrap;
+    }
+    .result-count { font-weight: 600; color: #0f2b3f; }
+    .sort-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #1f4a7c;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .export-link {
+      margin-left: auto;
+      font-size: 0.85rem;
+      color: #1f4a7c;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .year-header {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #152c42;
+      margin: 1.8rem 0 0.9rem 0;
+      padding-top: 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .publication {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.2rem 0;
+      border-bottom: none;
+    }
+    .pub-details { flex: 1; }
+    .pub-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1f4a7c;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .pub-title a { color: #1f4a7c; text-decoration: none; }
+    .pub-title a:hover { text-decoration: underline; }
+    .pub-meta {
+      font-size: 0.9rem;
+      color: #4b5e77;
+      margin-bottom: 8px;
+    }
+    .pub-meta strong { color: #1f4a7c; font-weight: 600; }
+    .pub-breadcrumb {
+      font-size: 0.8rem;
+      color: #7e8c9e;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 8px 0;
+    }
+    .oa-badge {
+      font-size: 0.75rem;
+      border: 1px solid #e5982e;
+      color: #b45f06;
+      background: #fff6e8;
+      border-radius: 30px;
+      padding: 2px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .forthcoming, .under-review {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 30px;
+    }
+    .forthcoming { background: #e6f7ec; color: #2c6e2c; }
+    .under-review { background: #fff0db; color: #b45f06; }
+    .award-badge {
+      color: #bc7a2e;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .pub-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 6px;
+    }
+    .link-btn {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 24px;
+      border: 1px solid #cddae9;
+      background: #fff;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #2c3e66;
+    }
+    .link-btn:hover { background: #f0f5fe; }
+    .abstract-text {
+      display: none;
+      background: #fafcfd;
+      padding: 12px 14px;
+      margin: 10px 0 6px;
+      border-left: 3px solid #1f4a7c;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: #2c3f55;
+      border-radius: 0 8px 8px 0;
+    }
+    .abstract-text.open { display: block; }
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .keyword {
+      font-size: 0.8rem;
+      background: #f1f5f9;
+      padding: 3px 10px;
+      border-radius: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #2c4766;
+    }
+    .kw-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      background: #1f4a7c;
+      display: inline-block;
+    }
+    .kw-dot.half { background: linear-gradient(90deg, #1f4a7c 50%, #b9c9e0 50%); }
+    .kw-dot.none { background: #e2e8f0; border: 1px solid #b9c9e0; }
+    .right-stats {
+      width: 65px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .altmetric-donut svg { width: 48px; height: 48px; }
+    .download-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid #cbdae9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+    }
+    .dl-num { font-size: 1rem; font-weight: 600; color: #1f4a7c; line-height: 1; }
+    .dl-label { font-size: 0.6rem; color: #7989a3; }
+
+    .sdg-hidden { display: none; }
+    .toggle-sdg {
+      font-size: 0.8rem;
+      color: #1f4a7c;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-top: 6px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .pagination {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+    }
+    .pagination a, .pagination span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      padding: 0 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #2c3e66;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      transition: 0.1s;
+      cursor: pointer;
+    }
+    .pagination a:hover {
+      background: #f0f4fa;
+      border-color: #cbd5e1;
+    }
+    .pagination .active-page {
+      background: #1f4a7c;
+      border-color: #1f4a7c;
+      color: white;
+      font-weight: 600;
+    }
+    .pagination .disabled {
+      color: #a0aec0;
+      cursor: not-allowed;
+      background: #f8fafc;
+    }
+    .pagination .ellipsis {
+      border: none;
+      background: none;
+      cursor: default;
+    }
+
+    @media (max-width: 860px) {
+      .two-columns { flex-direction: column; }
+      .sidebar { width: 100%; border-right: none; padding-right: 0; }
+      .research-container { padding: 1rem; }
+      .type-pills { gap: 0.8rem; }
+      .type-pill .pill-number { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="research-container">
+  <div class="research-header">
+    <div class="research-title">
+      <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+        <path d="M20 10 C16 8 10 7 4 8 L4 32 C10 31 16 32 20 34 Z" fill="#9aaec0"/>
+        <path d="M20 10 C24 8 30 7 36 8 L36 32 C30 31 24 32 20 34 Z" fill="#6c86a3"/>
+        <line x1="8" y1="14" x2="18" y2="13" stroke="white" stroke-width="1.2"/>
+        <line x1="8" y1="18" x2="18" y2="17" stroke="white" stroke-width="1.2"/>
+        <line x1="32" y1="14" x2="22" y2="13" stroke="white" stroke-width="1.2"/>
+        <rect x="18.5" y="9" width="3" height="25" fill="#3f5e83" rx="1"/>
+      </svg>
+      Research output
+    </div>
+    <div class="type-pills">
+      <button class="type-pill" data-filter-type="articles"><span class="pill-number">1</span><span class="pill-label">Journal article</span></button>
+      <button class="type-pill" data-filter-type="working"><span class="pill-number">4</span><span class="pill-label">Working paper</span></button>
+      <button class="type-pill" data-filter-type="chapters"><span class="pill-number">2</span><span class="pill-label">Book chapter</span></button>
+      <button class="type-pill" data-filter-type="other"><span class="pill-number">6</span><span class="pill-label">Other publication</span></button>
+      <div class="more-wrapper">
+        <button class="type-pill" id="moreButton"><span class="pill-number">7</span><span class="pill-label">More</span></button>
+        <div id="moreDropdown" class="more-dropdown">
+          <div class="more-item" data-more-type="policy"><strong>2</strong> Policy brief</div>
+          <div class="more-item" data-more-type="opeds"><strong>9</strong> Op-Ed / Commentary</div>
+          <div class="more-item" data-more-type="progress"><strong>3</strong> Work in progress</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-columns">
+    <aside class="sidebar">
+      <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Search in all content</a>
+      <div class="filter-heading">Filters for Publications</div>
+      <div class="filter-heading" style="margin-top: 0.5rem;">Type</div>
+      <div class="filter-group" id="typeFilterGroup">
+        <!-- Full list of publication types (all from screenshot) -->
+        <div id="fullTypeList"></div>
+        <button class="show-more-btn" id="showMoreTypesBtn">Show more ›</button>
+      </div>
+      <hr>
+      <div class="filter-heading">Open Access</div>
+      <label class="custom-check"><input type="checkbox" id="oaFilterCheckbox"> <span class="check-box"></span><span class="custom-check-left"><span>Show OA content</span><span class="count-badge">(8)</span></span></label>
+      <hr>
+      <div class="filter-heading">Publication Year</div>
+      <div id="yearFilters">
+        <label class="custom-check"><input type="checkbox" data-year="2026"> <span class="check-box"></span><span class="custom-check-left"><span>2026</span><span class="count-badge">(3)</span></span></label>
+        <label class="custom-check"><input type="checkbox" data-year="2025"> <span class="check-box"></span><span class="custom-check-left"><span>2025</span><span class="count-badge">(8)</span></span></label>
+        <label class="custom-check"><input type="checkbox" data-year="2024"> <span class="check-box"></span><span class="custom-check-left"><span>2024</span><span class="count-badge">(2)</span></span></label>
+        <label class="custom-check"><input type="checkbox" data-year="2023"> <span class="check-box"></span><span class="custom-check-left"><span>2023</span><span class="count-badge">(2)</span></span></label>
+        <label class="custom-check"><input type="checkbox" data-year="2022"> <span class="check-box"></span><span class="custom-check-left"><span>2022</span><span class="count-badge">(3)</span></span></label>
+        <label class="custom-check"><input type="checkbox" data-year="2021"> <span class="check-box"></span><span class="custom-check-left"><span>2021</span><span class="count-badge">(4)</span></span></label>
+        <label class="custom-check"><input type="checkbox" data-year="2020"> <span class="check-box"></span><span class="custom-check-left"><span>2020</span><span class="count-badge">(1)</span></span></label>
+        <label class="custom-check"><input type="checkbox" data-year="2019"> <span class="check-box"></span><span class="custom-check-left"><span>2019</span><span class="count-badge">(1)</span></span></label>
+        <label class="custom-check"><input type="checkbox" data-year="2018"> <span class="check-box"></span><span class="custom-check-left"><span>2018</span><span class="count-badge">(1)</span></span></label>
+      </div>
+
+      <hr>
+      <div class="filter-heading">Sustainable Development Goals</div>
+      <div id="sdgContainer"><div id="sdgList"></div><button id="toggleSdgBtn" class="toggle-sdg">Show more ›</button></div>
+
+      <hr>
+      <div class="filter-heading">Language</div>
+      <div id="langContainer">
+        <div id="langList">
+          <label class="custom-check"><input type="checkbox" data-lang="en"> <span class="check-box"></span><span class="custom-check-left"><span>English</span><span class="count-badge">(154455)</span></span></label>
+          <label class="custom-check"><input type="checkbox" data-lang="fr"> <span class="check-box"></span><span class="custom-check-left"><span>French</span><span class="count-badge">(2345)</span></span></label>
+          <label class="custom-check"><input type="checkbox" data-lang="km"> <span class="check-box"></span><span class="custom-check-left"><span>Khmer</span><span class="count-badge">(876)</span></span></label>
+        </div>
+      </div>
+
+      <hr>
+      <div class="filter-heading">Journals &amp; Outlets</div>
+      <div class="journals-list">Journal of Int'l Development Studies<br>South East Asia Research<br>East Asia Forum<br>The Diplomat<br>Cambodianess</div>
+      <hr>
+      <div class="filter-heading">Profiles</div>
+      <div class="profile-links">
+        <a href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ" target="_blank">Google Scholar</a>
+        <a href="https://orcid.org/0000-0002-6976-4733" target="_blank">ORCID</a>
+        <a href="https://ideas.repec.org/f/pni504.html" target="_blank">IDEAS/RePec</a>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <div class="search-section">
+        <div class="search-heading">Find Publications</div>
+        <div class="search-row">
+          <div class="search-input-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search by title, author, keyword...">
+          </div>
+          <div class="search-options">
+            <span><i class="fas fa-lightbulb"></i> concept 🔍</span>
+            <span><i class="fas fa-align-left"></i> matching text 🔍</span>
+            <i class="fas fa-search-plus" style="color:#9aaebf"></i>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <a href="#" class="advanced-link">Advanced search <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="sort-bar">
+        <span class="result-count" id="resultCount">27 results</span>
+        <span>|</span>
+        <a class="sort-link" href="#">Publication Year, Title <i class="fas fa-chevron-down"></i></a>
+        <a class="export-link" href="#"><i class="fas fa-download"></i> Export search results</a>
+      </div>
+      <div id="publicationsContainer"></div>
+      <div id="paginationContainer" class="pagination"></div>
+    </div>
+  </div>
+</div>
+
+<div id="typeModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.3); z-index:999; align-items:center; justify-content:center;">
+  <div style="background:white; max-width:800px; width:90%; border-radius:14px; padding:20px; max-height:80vh; overflow:auto;">
+    <div style="display:flex; justify-content:space-between; margin-bottom:12px;"><strong>Publication type</strong><button id="closeModalBtn" style="border:none; background:none; font-size:20px;">&times;</button></div>
+    <div id="modalTypeList" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:6px;"></div>
+  </div>
+</div>
+
+<script>
+  // ----- Publication type definitions (full list from screenshot) -----
+  const allPublicationTypes = [
+    { key: "journal_article", label: "Journal article", count: 1, dataFilter: "articles" },
+    { key: "article_in_proceeding", label: "Article in proceeding", count: 0, dataFilter: null },
+    { key: "book_chapter", label: "Book chapter", count: 2, dataFilter: "chapters" },
+    { key: "book", label: "Book", count: 0, dataFilter: null },
+    { key: "report", label: "Report", count: 0, dataFilter: null },
+    { key: "conf_abstract_conf", label: "Conference abstract for conference", count: 0, dataFilter: null },
+    { key: "conf_abstract_proc", label: "Conference abstract in proceeding", count: 0, dataFilter: null },
+    { key: "phd_thesis", label: "PhD thesis", count: 0, dataFilter: null },
+    { key: "conf_abstract_journal", label: "Conference abstract in journal", count: 0, dataFilter: null },
+    { key: "paper_no_publisher", label: "Paper without publisher/journal", count: 0, dataFilter: null },
+    { key: "poster", label: "Poster", count: 0, dataFilter: null },
+    { key: "review_article", label: "Review article", count: 0, dataFilter: null },
+    { key: "working_paper", label: "Working paper", count: 4, dataFilter: "working" },
+    { key: "conf_article_journal", label: "Conference article in journal", count: 0, dataFilter: null },
+    { key: "anthology", label: "Anthology", count: 0, dataFilter: null },
+    { key: "editorial", label: "Editorial", count: 0, dataFilter: null },
+    { key: "literature_review", label: "Literature review", count: 0, dataFilter: null },
+    { key: "comment_debate", label: "Comment/debate", count: 0, dataFilter: null },
+    { key: "net_publication", label: "Net publication - Internet publication", count: 0, dataFilter: null },
+    { key: "other_contribution", label: "Other contribution", count: 0, dataFilter: null },
+    { key: "contribution_newspaper_review", label: "Contribution to newspaper - Review", count: 0, dataFilter: null },
+    { key: "contribution_newspaper_feature", label: "Contribution to newspaper - Feature article", count: 0, dataFilter: null },
+    { key: "contribution_newspaper_article", label: "Contribution to newspaper - Newspaper article", count: 0, dataFilter: null },
+    { key: "preprint", label: "Preprint", count: 0, dataFilter: null },
+    { key: "encyclopedia_chapter", label: "Encyclopedia chapter", count: 0, dataFilter: null },
+    { key: "report_chapter", label: "Report chapter", count: 0, dataFilter: null },
+    { key: "preface_intro", label: "Preface/Introduction/postscript", count: 0, dataFilter: null },
+    { key: "letter", label: "Letter", count: 0, dataFilter: null },
+    { key: "sound_visual", label: "Sound/Visual production (digital)", count: 0, dataFilter: null },
+    { key: "patent", label: "Patent", count: 0, dataFilter: null },
+    { key: "contribution_newspaper_comment", label: "Contribution to newspaper - Comment/debate", count: 0, dataFilter: null },
+    { key: "compendium_notes", label: "Compendium/lecture notes", count: 0, dataFilter: null },
+    { key: "memorandum", label: "Memorandum", count: 0, dataFilter: null },
+    { key: "doctoral_thesis", label: "Doctoral thesis", count: 0, dataFilter: null },
+    { key: "case_report", label: "Case Report", count: 0, dataFilter: null },
+    { key: "computer_programme", label: "Computer programme", count: 0, dataFilter: null },
+    { key: "comment", label: "Comment", count: 0, dataFilter: null },
+    { key: "memorandum_contribution", label: "Memorandum contribution", count: 0, dataFilter: null },
+    { key: "2d_3d", label: "2D/3D (Physical product)", count: 0, dataFilter: null },
+    { key: "interactive_production", label: "Interactive production", count: 0, dataFilter: null },
+    { key: "qanda_hearing", label: "Question & Answer/hearing", count: 0, dataFilter: null },
+    { key: "compendium_chapter", label: "Compendium/lecture notes chapter", count: 0, dataFilter: null },
+    { key: "qanda_contribution", label: "Question & Answer/hearing contribution", count: 0, dataFilter: null },
+    { key: "article", label: "Article", count: 0, dataFilter: null },
+    { key: "doctoral_thesis_dup", label: "Doctoral Thesis", count: 0, dataFilter: null },
+    { key: "dataset", label: "Dataset", count: 0, dataFilter: null },
+    { key: "masters_thesis", label: "Master's Thesis", count: 0, dataFilter: null }
+  ];
+
+  // Also include Op-Ed and Policy brief which are in data but not in the standard list above
+  allPublicationTypes.push({ key: "op_ed", label: "Op-Ed / Commentary", count: 9, dataFilter: "opeds" });
+  allPublicationTypes.push({ key: "policy_brief", label: "Policy brief", count: 2, dataFilter: "policy" });
+  allPublicationTypes.push({ key: "work_in_progress", label: "Work in progress", count: 3, dataFilter: "progress" });
+  allPublicationTypes.push({ key: "other_publication", label: "Other publication", count: 6, dataFilter: "other" });
+
+  // Remove duplicates if any (in case of duplicate labels)
+  const uniqueTypes = [];
+  const seenLabels = new Set();
+  for (let t of allPublicationTypes) {
+    if (!seenLabels.has(t.label)) {
+      seenLabels.add(t.label);
+      uniqueTypes.push(t);
+    }
+  }
+
+  // SDG data (ordered 1..17)
+  const sdgItems = [
+    { label: "SDG 1 - No Poverty", count: 83 }, { label: "SDG 2 - Zero Hunger", count: 79 },
+    { label: "SDG 3 - Good Health and Well-being", count: 920 }, { label: "SDG 4 - Quality Education", count: 854 },
+    { label: "SDG 5 - Gender Equality", count: 288 }, { label: "SDG 6 - Clean Water and Sanitation", count: 187 },
+    { label: "SDG 7 - Affordable and Clean Energy", count: 969 }, { label: "SDG 8 - Decent Work and Economic Growth", count: 465 },
+    { label: "SDG 9 - Industry, Innovation, and Infrastructure", count: 960 }, { label: "SDG 10 - Reduced Inequalities", count: 639 },
+    { label: "SDG 11 - Sustainable Cities and Communities", count: 1208 }, { label: "SDG 12 - Responsible Consumption and Production", count: 876 },
+    { label: "SDG 13 - Climate Action", count: 832 }, { label: "SDG 14 - Life Below Water", count: 229 },
+    { label: "SDG 15 - Life on Land", count: 178 }, { label: "SDG 16 - Peace, Justice and Strong Institutions", count: 581 },
+    { label: "SDG 17 - Partnerships for the Goals", count: 575 }
+  ];
+
+  function renderSdgList() {
+    const container = document.getElementById('sdgList');
+    if (!container) return;
+    let html = '';
+    sdgItems.forEach((item, idx) => {
+      const hiddenClass = idx >= 6 ? 'sdg-hidden' : '';
+      html += `<label class="custom-check ${hiddenClass}"><input type="checkbox" class="sdg-checkbox" data-sdg="${item.label}"><span class="check-box"></span><span class="custom-check-left"><span>${item.label}</span><span class="count-badge">(${item.count})</span></span></label>`;
+    });
+    container.innerHTML = html;
+    let expanded = false;
+    const toggleBtn = document.getElementById('toggleSdgBtn');
+    toggleBtn.innerText = 'Show more ›';
+    toggleBtn.onclick = () => {
+      expanded = !expanded;
+      const allItems = document.querySelectorAll('#sdgList .custom-check');
+      if (expanded) { allItems.forEach(item => item.classList.remove('sdg-hidden')); toggleBtn.innerText = 'Show less'; }
+      else { allItems.forEach((item, idx) => { if (idx >= 6) item.classList.add('sdg-hidden'); else item.classList.remove('sdg-hidden'); }); toggleBtn.innerText = 'Show more ›'; }
+    };
+  }
+
+  // Render full type list in sidebar
+  function renderTypeList() {
+    const container = document.getElementById('fullTypeList');
+    if (!container) return;
+    let html = '';
+    uniqueTypes.forEach((type, idx) => {
+      const hiddenClass = idx >= 5 ? 'type-hidden' : '';
+      html += `<label class="custom-check ${hiddenClass}" data-type-key="${type.key}">
+        <input type="checkbox" data-filter="${type.dataFilter || type.key}" data-type-label="${type.label}">
+        <span class="check-box"></span>
+        <span class="custom-check-left">
+          <span>${type.label}</span>
+          <span class="count-badge">(${type.count})</span>
+        </span>
+      </label>`;
+    });
+    container.innerHTML = html;
+
+    // Show more toggle for type list
+    let typeExpanded = false;
+    const showMoreBtn = document.getElementById('showMoreTypesBtn');
+    showMoreBtn.innerText = 'Show more ›';
+    showMoreBtn.onclick = () => {
+      typeExpanded = !typeExpanded;
+      const allItems = document.querySelectorAll('#fullTypeList .custom-check');
+      allItems.forEach((item, idx) => {
+        if (typeExpanded) item.classList.remove('type-hidden');
+        else if (idx >= 5) item.classList.add('type-hidden');
+        else item.classList.remove('type-hidden');
+      });
+      showMoreBtn.innerText = typeExpanded ? 'Show less' : 'Show more ›';
+    };
+  }
+
+  // Publication data (same as before)
+  const publicationsData = [
+    { title: "Capital Gains Tax Is a Smart Way to Build Infrastructure", authors: "Nith, K.", date: "22 Mar 2026", outlet: "Cambodianess", type: "opeds", year: "2026", oa: false, breadcrumb: "Op-Ed / Commentary › Op-Ed", keywords: ["Taxation","Cambodia","Infrastructure","Fiscal Policy"], kwStrength: ["full","full","half","none"], link: "https://cambodianess.com/article/capital-gains-tax-is-a-smart-way-to-build-infrastructure" },
+    { title: "Transforming the Tax System with Personal Income Tax", authors: "Nith, K.", date: "4 Jan 2026", outlet: "Cambodianess", type: "opeds", year: "2026", oa: false, breadcrumb: "Op-Ed / Commentary › Op-Ed", keywords: ["Personal Income Tax","Tax Reform","Cambodia"], kwStrength: ["full","full","half"], link: "https://cambodianess.com/article/transforming-the-tax-system-with-personal-income-tax" },
+    { title: "Cambodian Cassava and COVID-19: An Analysis of Production, Productivity and Gender Impacts", authors: "Nith, K. & Kanayama, Y.", date: "Nov 2025", outlet: "Springer (Navigating Through Crisis)", type: "chapters", year: "2026", oa: true, breadcrumb: "Book chapter › Research › peer-review", abstract: "Using data from 301 cassava-farming households, pandemic impact on production, labor productivity. Costs rose 9.3%, income declined 8.5%.", keywords: ["Cassava","COVID-19","Agricultural Productivity","Gender","Cambodia"], kwStrength: ["full","full","full","half","none"], link: "https://link.springer.com/chapter/10.1007/978-981-95-1637-7_3" },
+    { title: "Determinants of Informal Borrowing: Evidence from Households in 11 Rural Villages in Cambodia", authors: "Nith, K. & Samreth, S.", date: "2025 (E-pub)", outlet: "Journal of International Development Studies", type: "articles", year: "2025", oa: false, forthcoming: true, abstract: "Financial literacy reduces reliance on informal loans.", keywords: ["Informal Borrowing","Financial Literacy","Social Capital","Rural Households","Cambodia"], kwStrength: ["full","full","full","half","none"] },
+    { title: "Assessing MSME Market Dynamics and Resilience in Phnom Penh: Challenges and Opportunities", authors: "Nith, K., Chhorn, D., An, I.Y. et al.", date: "Nov 2025", outlet: "CDRI Research Report", type: "other", year: "2025", oa: true, abstract: "Data from 14,820 establishments. 1,790 openings vs 825 closures.", keywords: ["MSMEs","Phnom Penh","Urban Economy","Resilience"], kwStrength: ["full","full","half","none"], downloads: 12 },
+    { title: "Government Ownership of Banks: Diversifying of Potential Products and Factors to Subsidize Agriculture", authors: "Nith, K.", date: "Dec 2025", outlet: "Future Forum", type: "other", year: "2025", oa: false, abstract: "Two-step GMM estimator on national-level data.", keywords: ["Public Banks","Agriculture","Subsidies","Cambodia"], kwStrength: ["full","full","half","none"] },
+    { title: "Does Social Capital Strengthen the Stability of Household Income? Evidence from Cambodia", authors: "Nith, K., Samreth, S. & Chhorn, D.", date: "Aug 2025", outlet: "Working paper", type: "working", year: "2025", oa: false, keywords: ["Social Capital","Household Income","Cambodia"], kwStrength: ["full","full","none"] },
+    { title: "Measuring SEZ Spillovers in Data-Scarce Regions: Evidence from Cambodia's Open Building Data", authors: "Nith, K., Yonto, D., Angorro, Y. & Khiev, V.", date: "Jul 2025", outlet: "South East Asia Research (Submitted)", type: "working", year: "2025", oa: false, underReview: true, abstract: "Geospatial method using Google Open Buildings 2.5D. SEZ spillovers extend beyond 1-2 km.", keywords: ["Special Economic Zones","Spillovers","Geospatial","Cambodia"], kwStrength: ["full","full","half","none"] },
+    { title: "Cambodia Needs Progressive Taxation to Invest in Its Future", authors: "Nith, K.", date: "17 Oct 2025", outlet: "Camboja News", type: "opeds", year: "2025", oa: false, link: "https://cambojanews.com/op-ed-cambodia-needs-progressive-taxation-to-invest-in-its-future/" },
+    { title: "Connecting Communities to Support Cambodia's Vulnerable", authors: "Nith, K.", date: "13 Aug 2025", outlet: "East Asia Forum", type: "opeds", year: "2025", oa: false, link: "https://eastasiaforum.org/2025/08/13/connecting-communities-to-support-cambodias-vulnerable/" },
+    { title: "20 Years of FDI in Cambodia: Towards Upper Middle-Income Status and Beyond", authors: "Nith, K., Iammarino, S. & Muth, S.", date: "Apr 2024", outlet: "CDRI Working Paper 149", type: "working", year: "2024", oa: true, abstract: "Greenfield FDI 2003–2022, real estate, financial services.", keywords: ["Foreign Direct Investment","Economic Development","Global Value Chains","Cambodia"], kwStrength: ["full","full","half","none"], downloads: 43 },
+    { title: "Ascending the Development Ladder in Cambodia: Progressing Towards Higher Income Status", authors: "Nith, K., Samreth, S. & Song, S.", date: "7 Dec 2023", outlet: "Cambodia Outlook Conference", type: "opeds", year: "2024", oa: false, link: "https://coc2023.cdri.org.kh/ascending-the-development-ladder-in-cambodia-progressing-towards-higher-income-status/" },
+    { title: "Mapping Study: Youth and Civil Society in Urban Cambodia", authors: "Nith, K.", date: "Sep 2022", outlet: "Future Forum", type: "other", year: "2023", oa: false, abstract: "65.3% of population under 30.", keywords: ["Youth","Civil Society","Cambodia"], kwStrength: ["full","full","none"] },
+    { title: "Explainer: How Cambodia's Central Bank Addressed Economic Challenges During the Pandemic", authors: "Nith, K.", date: "7 Jul 2023", outlet: "The Camboja News", type: "opeds", year: "2023", link: "https://cambojanews.com/explainer-how-cambodias-central-bank-addressed-economic-challenges-during-the-pandemic/" },
+    { title: "Monetary Policy and Household Income Distribution: An Empirical Analysis from Cambodia", authors: "Nith, K.", date: "Apr 2022", outlet: "Future Forum", type: "working", year: "2022", oa: false, abstract: "Structural VAR, earning heterogeneity.", keywords: ["Monetary Policy","Income Distribution","Structural VAR","Cambodia"], kwStrength: ["full","full","half","none"], downloads: 28 },
+    { title: "Monetary Policy: How Does It Become a Tool to Support Poor Households Afford to Purchase an Affordable House?", authors: "Nith, K.", date: "Nov 2022", outlet: "Policy brief", type: "policy", year: "2022", oa: false, abstract: "High dollarization limits autonomy.", keywords: ["Monetary Policy","Affordable Housing","Dollarization"], kwStrength: ["full","full","half"] },
+    { title: "Food Science in Cambodia", authors: "Nith, K.", date: "2021", outlet: "Micro-Policy Intervention", type: "chapters", year: "2021", oa: true, abstract: "R&D impact on agriculture.", keywords: ["Food Science","Agriculture","Cambodia"], kwStrength: ["full","full","none"], link: "https://www.futureforum.asia/policy-briefs-and-snapshots/food-science-in-cambodia" },
+    { title: "Household Saving and Debt", authors: "Nith, K. & Thomas, S.", date: "Jun 2021", outlet: "Revisiting the Pandemic", type: "other", year: "2021", oa: false },
+    { title: "Will Cambodia Commit to Protecting Its Forests?", authors: "Nith, K.", date: "13 Nov 2021", outlet: "The Diplomat", type: "opeds", year: "2021", link: "https://thediplomat.com/2021/11/will-cambodia-commit-to-protecting-its-forests/" },
+    { title: "Pandemic Offers Chance to Consider Higher Taxes, not Donations, From Rich", authors: "Nith, K.", date: "13 Aug 2021", outlet: "VOD", type: "opeds", year: "2021", link: "https://vodenglish.news/opinion-pandemic-offers-chance-to-consider-higher-taxes-not-donations-from-rich/" },
+    { title: "How Cambodia's Agricultural Lending Can Get a Bigger Bang for Its Buck", authors: "Nith, K.", date: "29 May 2021", outlet: "East Asia Forum", type: "opeds", year: "2021", link: "https://www.eastasiaforum.org/2021/05/29/how-cambodias-agricultural-lending-can-get-a-bigger-bang-for-its-buck/" },
+    { title: "How Should Cambodia Prepare for the Fourth Industrial Revolution?", authors: "Nith, K.", date: "May 2020", outlet: "Cambodia Development Center", type: "policy", year: "2020", oa: false, award: true, keywords: ["Industry 4.0","Cambodia"], kwStrength: ["full","half"], link: "https://www.cd-center.org/wp-content/uploads/2020/05/P126_20200508_EC19W1.pdf" },
+    { title: "Rapport de Stage : Assistant de Programme de l'Engagement des Jeunes pour l'Action Sociale", authors: "Nith, K.", date: "Jan 2019", outlet: "Royal University of Law and Economics", type: "other", year: "2019", oa: false },
+    { title: "Reinvigorating Cambodian Agriculture: Transforming from Extensive to Intensive Agriculture", authors: "Nith, K. & Ly, S.", date: "Dec 2018", outlet: "National Bank of Cambodia", type: "other", year: "2018", oa: false, award: true, abstract: "Comparison 1996–2018.", keywords: ["Agriculture","Intensive Farming","Cambodia"], kwStrength: ["full","full","none"], downloads: 7 },
+    { title: "Dollarization and Monetary Policy in Cambodia: Challenges, International Lessons, and Policy Implications", authors: "Nith, K., Samreth, S. & Hour, H.P.", type: "progress", year: "progress", oa: false, breadcrumb: "Work in progress" },
+    { title: "International Trade and Globalization in Cambodia: The Role of International Cooperation", authors: "Nith, K. & Ruran, R.A.", type: "progress", year: "progress", oa: false, breadcrumb: "Work in progress" },
+    { title: "The Survey on Skills Demand in Cambodia", authors: "Nith, K., Chhorn, D., Houy, S. & Kean, M.N.", type: "progress", year: "progress", oa: false, breadcrumb: "Work in progress" }
+  ];
+
+  const ITEMS_PER_PAGE = 50;
+  let currentPage = 1;
+  let currentSearchTerm = '';
+
+  // Map publication type to filter key (used in getFilteredPublications)
+  function getFilterKeyFromTypeLabel(label) {
+    const mapping = {
+      "Journal article": "articles",
+      "Book chapter": "chapters",
+      "Working paper": "working",
+      "Other publication": "other",
+      "Op-Ed / Commentary": "opeds",
+      "Policy brief": "policy",
+      "Work in progress": "progress"
+    };
+    return mapping[label] || null;
+  }
+
+  function getFilteredPublications() {
+    // Get selected type checkboxes from full type list
+    const selectedTypeLabels = Array.from(document.querySelectorAll('#fullTypeList input:checked')).map(cb => cb.getAttribute('data-type-label'));
+    const types = selectedTypeLabels.map(label => getFilterKeyFromTypeLabel(label)).filter(k => k !== null);
+    const years = Array.from(document.querySelectorAll('#yearFilters input:checked')).map(cb => cb.getAttribute('data-year'));
+    const oaOnly = document.getElementById('oaFilterCheckbox').checked;
+    let filtered = publicationsData.filter(p => {
+      if (types.length && !types.includes(p.type)) return false;
+      if (years.length && !years.includes(p.year)) return false;
+      if (oaOnly && !p.oa) return false;
+      return true;
+    });
+    if (currentSearchTerm.trim() !== '') {
+      const term = currentSearchTerm.trim().toLowerCase();
+      filtered = filtered.filter(p => {
+        return p.title.toLowerCase().includes(term) ||
+               p.authors.toLowerCase().includes(term) ||
+               p.outlet.toLowerCase().includes(term) ||
+               (p.abstract && p.abstract.toLowerCase().includes(term)) ||
+               (p.keywords && p.keywords.some(k => k.toLowerCase().includes(term)));
+      });
+    }
+    return filtered;
+  }
+
+  function renderPublicationsWithPagination() {
+    const filtered = getFilteredPublications();
+    const totalItems = filtered.length;
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    if (totalPages === 0) currentPage = 1;
+    else if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+
+    const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+    const pageItems = filtered.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+
+    const grouped = {};
+    pageItems.forEach(p => { if (!grouped[p.year]) grouped[p.year] = []; grouped[p.year].push(p); });
+    const yearOrder = ['2026','2025','2024','2023','2022','2021','2020','2019','2018','progress'];
+    let html = '';
+    for (let y of yearOrder) {
+      if (!grouped[y]) continue;
+      const yearLabel = y === 'progress' ? 'Work in Progress' : y;
+      html += `<div class="year-header">${yearLabel}</div>`;
+      for (let pub of grouped[y]) {
+        html += `<div class="publication">
+          <div class="pub-details">
+            <div class="pub-title">${pub.link ? `<a href="${pub.link}" target="_blank">${pub.title}</a>` : `<span>${pub.title}</span>`}</div>
+            <div class="pub-meta"><strong>${pub.authors}</strong>, ${pub.date}, ${pub.outlet}</div>
+            <div class="pub-breadcrumb">${pub.breadcrumb || 'Research output'}</div>
+            <div class="badge-row">${pub.oa ? '<span class="oa-badge"><i class="fas fa-lock-open"></i> Open Access</span>' : ''}${pub.forthcoming ? '<span class="forthcoming">Forthcoming</span>' : ''}${pub.underReview ? '<span class="under-review">Under Review</span>' : ''}${pub.award ? '<span class="award-badge"><i class="fas fa-trophy"></i> Award Winner</span>' : ''}</div>
+            <div class="pub-links">${pub.abstract ? `<button class="link-btn abstract-toggle">📄 Abstract</button>` : ''}${pub.link ? `<a class="link-btn" href="${pub.link}" target="_blank">🔗 Open</a>` : ''}</div>
+            <div class="abstract-text">${pub.abstract || ''}</div>
+            <div class="keywords">${pub.keywords ? pub.keywords.map((k,idx) => `<span class="keyword"><span class="kw-dot ${pub.kwStrength[idx]}"></span> ${k}</span>`).join('') : ''}</div>
+          </div>
+          <div class="right-stats"><div class="altmetric-donut"><svg viewBox="0 0 100 100" width="48" height="48"><circle cx="50" cy="50" r="8" fill="#7b3fa0"/><circle cx="50" cy="18" r="7" fill="#e8821a"/><circle cx="76" cy="30" r="6" fill="#7b3fa0"/><circle cx="82" cy="60" r="6" fill="#7b3fa0"/><circle cx="62" cy="82" r="6" fill="#7b3fa0"/><circle cx="36" cy="80" r="5" fill="#7b3fa0"/><circle cx="20" cy="60" r="5" fill="#c0c0c0"/><circle cx="26" cy="30" r="5" fill="#7b3fa0"/><line x1="50" y1="50" x2="50" y2="18" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="76" y2="30" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="82" y2="60" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="62" y2="82" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="36" y2="80" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="20" y2="60" stroke="#c0c0c0" stroke-width="2.5"/><line x1="50" y1="50" x2="26" y2="30" stroke="#7b3fa0" stroke-width="2.5"/></svg></div>${pub.downloads ? `<div class="download-circle"><div class="dl-num">${pub.downloads}</div><div class="dl-label">Downloads</div></div>` : ''}</div>
+        </div>`;
+      }
+    }
+    document.getElementById('publicationsContainer').innerHTML = html || '<div style="padding: 2rem; text-align: center; color: #6c7a8e;">No publications match the selected filters and search term.</div>';
+    const start = totalItems === 0 ? 0 : startIdx + 1;
+    const end = Math.min(startIdx + pageItems.length, totalItems);
+    document.getElementById('resultCount').innerText = totalItems === 0 ? '0 results' : `${start} - ${end} out of ${totalItems} results`;
+    document.querySelectorAll('.abstract-toggle').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const absDiv = btn.closest('.pub-details').querySelector('.abstract-text');
+        absDiv.classList.toggle('open');
+        btn.innerText = absDiv.classList.contains('open') ? 'Hide Abstract' : '📄 Abstract';
+      });
+    });
+    renderPaginationControls(totalPages);
+  }
+
+  function renderPaginationControls(totalPages) {
+    const container = document.getElementById('paginationContainer');
+    if (!container) return;
+    if (totalPages <= 1) { container.innerHTML = ''; return; }
+    let html = '';
+    if (currentPage > 1) html += `<a data-page="${currentPage-1}"><i class="fas fa-chevron-left"></i> Previous</a>`;
+    else html += `<span class="disabled"><i class="fas fa-chevron-left"></i> Previous</span>`;
+    let startPage = Math.max(1, currentPage - 3);
+    let endPage = Math.min(totalPages, startPage + 6);
+    if (endPage - startPage < 6 && startPage > 1) startPage = Math.max(1, endPage - 6);
+    if (startPage > 1) html += `<a data-page="1">1</a>`;
+    if (startPage > 2) html += `<span class="ellipsis">...</span>`;
+    for (let i = startPage; i <= endPage; i++) {
+      if (i === currentPage) html += `<span class="active-page">${i}</span>`;
+      else html += `<a data-page="${i}">${i}</a>`;
+    }
+    if (endPage < totalPages - 1) html += `<span class="ellipsis">...</span>`;
+    if (endPage < totalPages) html += `<a data-page="${totalPages}">${totalPages}</a>`;
+    if (currentPage < totalPages) html += `<a data-page="${currentPage+1}">Next <i class="fas fa-chevron-right"></i></a>`;
+    else html += `<span class="disabled">Next <i class="fas fa-chevron-right"></i></span>`;
+    container.innerHTML = html;
+    container.querySelectorAll('a[data-page]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const newPage = parseInt(link.getAttribute('data-page'), 10);
+        if (!isNaN(newPage) && newPage !== currentPage) {
+          currentPage = newPage;
+          renderPublicationsWithPagination();
+        }
+      });
+    });
+  }
+
+  function updateFiltersAndResetPage() {
+    currentPage = 1;
+    renderPublicationsWithPagination();
+  }
+
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    currentSearchTerm = e.target.value;
+    currentPage = 1;
+    renderPublicationsWithPagination();
+  });
+
+  // Listen to changes on the full type list checkboxes
+  document.getElementById('fullTypeList').addEventListener('change', updateFiltersAndResetPage);
+  document.querySelectorAll('#yearFilters input, #oaFilterCheckbox').forEach(el => el.addEventListener('change', updateFiltersAndResetPage));
+
+  // Top pill buttons
+  document.querySelectorAll('.type-pill[data-filter-type]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filterVal = btn.getAttribute('data-filter-type');
+      // Uncheck all type checkboxes
+      document.querySelectorAll('#fullTypeList input').forEach(cb => cb.checked = false);
+      if (filterVal !== 'all') {
+        // Find the checkbox with data-filter matching filterVal
+        const targetCb = document.querySelector(`#fullTypeList input[data-filter="${filterVal}"]`);
+        if (targetCb) targetCb.checked = true;
+      }
+      document.getElementById('oaFilterCheckbox').checked = false;
+      document.querySelectorAll('#yearFilters input').forEach(cb => cb.checked = false);
+      updateFiltersAndResetPage();
+    });
+  });
+
+  // More dropdown items
+  document.querySelectorAll('.more-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const type = item.getAttribute('data-more-type');
+      document.querySelectorAll('#fullTypeList input').forEach(cb => cb.checked = false);
+      const targetCb = document.querySelector(`#fullTypeList input[data-filter="${type}"]`);
+      if (targetCb) targetCb.checked = true;
+      document.getElementById('oaFilterCheckbox').checked = false;
+      document.querySelectorAll('#yearFilters input').forEach(cb => cb.checked = false);
+      updateFiltersAndResetPage();
+      document.getElementById('moreDropdown').classList.remove('open');
+    });
+  });
+  document.getElementById('moreButton').addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.getElementById('moreDropdown').classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.more-wrapper')) document.getElementById('moreDropdown').classList.remove('open');
+  });
+
+  // Modal for "Show more types" (the one triggered by the button in the sidebar? Already handled)
+  const modal = document.getElementById('typeModal');
+  // The "Show more" button in sidebar now expands the list, not a modal; but we keep modal for consistency if needed.
+  // However, the original "Show more" button that opens the modal is still present? The button with id "showMoreTypesBtn" is now used for expanding list. 
+  // We'll repurpose the modal for a possible "more types" modal if desired, but not needed.
+
+  renderSdgList();
+  renderTypeList();
+  renderPublicationsWithPagination();
+</script>
+</body>
+</html>
