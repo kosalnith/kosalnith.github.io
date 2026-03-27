@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" prefix="og: https://ogp.me/ns#" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="canonical" href="https://kosalnith.github.io/research">
+    <meta property="og:site_name" content="Kosal Nith">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kosalnith.github.io/research">
+    <meta property="og:title" content="Research">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Research">
+    <meta name="Generator" content="Drupal 9">
+    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <link rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="apple-touch-icon" sizes="60x60" href="static/img/icon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="static/img/icon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="static/img/icon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="static/img/icon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="static/img/icon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="static/img/icon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="static/img/icon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/img/icon/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="static/img/icon/favicon-196x196.png" sizes="196x196">
+    <link rel="icon" type="image/png" href="static/img/icon/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="static/img/icon/favicon-128.png" sizes="128x128">
+    <link rel="icon" type="image/png" href="static/img/icon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="static/img/icon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="static/img/icon/favicon-16x16.png" sizes="16x16">
+    <link rel="mask-icon" href="static/img/icon/safari-pinned-tab.svg" color="#ffffff">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <title>Research | Kosal Nith — Publications & Output</title>
+    
+    <!-- Original site CSS (foundation styles) -->
+    <link rel="stylesheet" media="all" href="static/css/mainFop.css">
+    <link rel="stylesheet" media="all" href="static/css/main.css">
+    <link rel="stylesheet" media="all" href="static/css/mainshims.css">
+    <link rel="stylesheet" media="all" href="static/css/maincontent.css">
+    <link rel="stylesheet" media="all" href="static/css/mainformat.css">
+    <link rel="stylesheet" media="print" href="static/css/main4L.css">
+    
+    <!-- Font Awesome 6 (same as original) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FXRBQVKK80"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FXRBQVKK80');
+    </script>
+    <script src="/static/js/modernizr.min.js"></script>
+    <script src="/static/js/modernizr-additional-tests.js"></script>
+    
+    <style>
+        /* ===== publication system custom styles (compatible with site theme) ===== */
+        .pub-research-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem 3rem 2rem;
+        }
+        .pub-header-area {
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .pub-title-icon {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.9rem;
+            font-weight: 500;
+            color: #0f2b4d;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+        .type-pills {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .type-pill {
+            background: transparent;
+            border: none;
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            gap: 8px;
+            padding: 0.5rem 0.75rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .type-pill .pill-number { font-size: 1.2rem; font-weight: 600; color: #1f4a7c; line-height: 1; }
+        .type-pill .pill-label { font-size: 0.9rem; font-weight: 500; color: #4b5e77; }
+        .type-pill:hover { background: #f0f4fa; }
+        .type-pill.active { background: #e9edf4; }
+        .type-pill.active .pill-number { text-decoration: underline; text-underline-offset: 6px; color: #0b355c; }
+        
+        .more-wrapper { position: relative; }
+        .more-dropdown {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+            border: 1px solid #e2edf2;
+            min-width: 220px;
+            z-index: 50;
+            overflow: hidden;
+        }
+        .more-dropdown.open { display: block; }
+        .more-item {
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1e3a5f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f2f5;
+        }
+        .more-item:hover { background: #f8fafc; }
+        
+        /* two‑column layout */
+        .pub-two-columns {
+            display: flex;
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+        .pub-sidebar {
+            width: 340px;
+            flex-shrink: 0;
+            border-right: 1px solid #eef2f6;
+            padding-right: 1.8rem;
+        }
+        .filter-heading {
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: #2c3e50;
+            margin: 1.25rem 0 0.75rem 0;
+        }
+        .filter-heading:first-of-type { margin-top: 0; }
+        .custom-check {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 0;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #2d3e5f;
+            gap: 8px;
+        }
+        .custom-check-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+        .check-box {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #bdc4d0;
+            border-radius: 4px;
+            background: white;
+            display: inline-block;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .custom-check input { display: none; }
+        .custom-check input:checked + .check-box { background: #1f4a7c; border-color: #1f4a7c; }
+        .custom-check input:checked + .check-box::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .count-badge { color: #6c7a8e; font-size: 0.75rem; margin-left: auto; white-space: nowrap; }
+        hr { margin: 1rem 0; border: none; border-top: 1px solid #eef2f8; }
+        .show-more-btn {
+            background: none;
+            border: none;
+            font-size: 0.8rem;
+            color: #1f4a7c;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 6px;
+            padding: 0;
+        }
+        .journals-list, .profile-links a { font-size: 0.85rem; color: #3a546d; line-height: 1.5; }
+        .profile-links a { display: block; color: #1f4a7c; text-decoration: none; margin: 6px 0; }
+        
+        .pub-main-content { flex: 1; min-width: 0; }
+        .search-section {
+            background: #f9fbfd;
+            border: 1px solid #e2edf2;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .search-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .search-input-wrapper {
+            flex: 2;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 40px;
+            padding: 0.5rem 1rem;
+        }
+        .search-input-wrapper input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+            background: transparent;
+        }
+        .sort-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eef2f6;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+        .result-count { font-weight: 600; color: #0f2b3f; }
+        .export-link { margin-left: auto; font-size: 0.85rem; color: #1f4a7c; text-decoration: none; }
+        .year-header {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #152c42;
+            margin: 1.8rem 0 0.9rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .publication {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .pub-details { flex: 1; }
+        .pub-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; }
+        .pub-title a { color: #1f4a7c; text-decoration: none; }
+        .pub-title a:hover { text-decoration: underline; }
+        .pub-meta { font-size: 0.9rem; color: #4b5e77; margin-bottom: 8px; }
+        .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0; }
+        .oa-badge { font-size: 0.75rem; border: 1px solid #e5982e; color: #b45f06; background: #fff6e8; border-radius: 30px; padding: 2px 8px; display: inline-flex; align-items: center; gap: 4px; }
+        .forthcoming { background: #e6f7ec; color: #2c6e2c; font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 30px; }
+        .under-review { background: #fff0db; color: #b45f06; font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 30px; }
+        .award-badge { color: #bc7a2e; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 5px; }
+        .link-btn {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 24px;
+            border: 1px solid #cddae9;
+            background: #fff;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #2c3e66;
+        }
+        .abstract-text { display: none; background: #fafcfd; padding: 12px 14px; margin: 10px 0 6px; border-left: 3px solid #1f4a7c; font-size: 0.85rem; border-radius: 0 8px 8px 0; }
+        .abstract-text.open { display: block; }
+        .keywords { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .keyword { font-size: 0.8rem; background: #f1f5f9; padding: 3px 10px; border-radius: 40px; display: inline-flex; align-items: center; gap: 5px; }
+        .kw-dot { width: 10px; height: 10px; border-radius: 10px; background: #1f4a7c; display: inline-block; }
+        .kw-dot.half { background: linear-gradient(90deg, #1f4a7c 50%, #b9c9e0 50%); }
+        .right-stats { width: 65px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .pagination {
+            margin-top: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .pagination a, .pagination span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #2c3e66;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+        }
+        .pagination .active-page { background: #1f4a7c; border-color: #1f4a7c; color: white; font-weight: 600; }
+        
+        /* year range slider */
+        .year-range-wrap { padding: 4px 0 8px; }
+        .year-range-track-wrap { position: relative; height: 6px; margin: 18px 0 10px; }
+        .year-range-track { position: absolute; top: 0; left: 0; right: 0; height: 6px; background: #dde4ee; border-radius: 4px; }
+        .year-range-fill { position: absolute; top: 0; height: 6px; background: #1f4a7c; border-radius: 4px; pointer-events: none; }
+        .year-range-wrap input[type=range] {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 100%; height: 6px; background: transparent; pointer-events: none; -webkit-appearance: none;
+        }
+        .year-range-wrap input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+            background: white; border: 2px solid #1f4a7c; pointer-events: all; cursor: pointer;
+        }
+        .year-range-values { display: flex; justify-content: space-between; margin-bottom: 2px; }
+        .year-range-val { font-size: 0.88rem; font-weight: 600; color: #1f4a7c; background: #eef3fb; border-radius: 5px; padding: 2px 8px; }
+        
+        /* detail view styles (full) */
+        .detail-container { max-width: 1200px; margin: 0 auto; padding: 1rem 0 3rem; }
+        .detail-back-btn { display: inline-flex; align-items: center; gap: 7px; font-size: 0.88rem; font-weight: 500; color: #1f4a7c; background: #eef3fb; border: none; border-radius: 8px; padding: 7px 14px; cursor: pointer; margin-bottom: 1.5rem; }
+        .detail-nav-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.8rem; gap: 1rem; }
+        .detail-nav-btn { display: inline-flex; align-items: center; gap: 7px; font-size: 0.83rem; background: #f4f7fc; border: 1px solid #dce6f0; border-radius: 8px; padding: 6px 14px; cursor: pointer; max-width: 46%; }
+        .detail-layout { display: flex; gap: 2rem; align-items: flex-start; }
+        .detail-main { flex: 1; }
+        .detail-sidebar { width: 300px; flex-shrink: 0; }
+        .detail-title { font-size: 1.85rem; font-weight: 700; color: #0f2b4d; margin-bottom: 0.75rem; }
+        .detail-abstract { background: #fafcfd; border-left: 3px solid #1f4a7c; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
+        .detail-meta-table { width: 100%; border-collapse: collapse; border: 1px solid #e8edf5; border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem; }
+        .detail-meta-table td { padding: 9px 14px; border-bottom: 1px solid #f0f4f8; }
+        .detail-card { background: #f8fafd; border: 1px solid #dce6f0; border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1.2rem; }
+        .detail-badge-oa { display: inline-flex; align-items: center; gap: 5px; font-size: 0.75rem; border: 1px solid #e5982e; color: #b45f06; background: #fff6e8; border-radius: 30px; padding: 3px 10px; }
+        .detail-share-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 0.78rem; font-weight: 500; padding: 5px 10px; border-radius: 6px; border: 1px solid #dce6f0; background: white; color: #2c3f55; cursor: pointer; text-decoration: none; }
+        .detail-cite-tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 1rem; }
+        .detail-cite-tab { font-size: 0.78rem; font-weight: 500; color: #4b5e77; background: #f0f4fa; border: 1px solid #dce6f0; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+        .detail-cite-tab.active { background: #1f4a7c; color: white; border-color: #1f4a7c; }
+        .detail-cite-box { background: #f8fafd; border: 1px solid #dce6f0; border-radius: 8px; padding: 1rem 1.2rem; font-size: 0.84rem; line-height: 1.7; position: relative; padding-right: 70px; }
+        .detail-copy-btn { position: absolute; top: 10px; right: 10px; font-size: 0.75rem; background: white; border: 1px solid #dce6f0; border-radius: 6px; padding: 4px 10px; cursor: pointer; color: #1f4a7c; }
+        .detail-keyword { font-size: 0.82rem; background: #f1f5f9; border: 1px solid #dce6f0; padding: 4px 12px; border-radius: 40px; color: #2c4766; display: inline-block; margin-right: 6px; margin-bottom: 6px; }
+        .detail-tab-bar { display: flex; gap: 0; border-bottom: 2px solid #e2e8f0; margin-bottom: 2rem; }
+        .detail-tab { font-size: 0.9rem; font-weight: 600; color: #4b5e77; padding: 0.6rem 1.2rem; border-bottom: 3px solid transparent; margin-bottom: -2px; cursor: pointer; }
+        .detail-tab.active { color: #1f4a7c; border-bottom-color: #1f4a7c; }
+        .detail-section-title { font-size: 1.05rem; font-weight: 700; color: #152c42; margin: 1.8rem 0 0.75rem; }
+        .sdg-hidden, .type-hidden { display: none; }
+        .toggle-sdg { font-size: 0.8rem; color: #1f4a7c; background: none; border: none; cursor: pointer; margin-top: 6px; font-weight: 500; }
+        @media (max-width: 860px) { .pub-two-columns { flex-direction: column; } .pub-sidebar { width: 100%; border-right: none; } .detail-layout { flex-direction: column; } .detail-sidebar { width: 100%; } }
+    </style>
+</head>
+<body class="page-research section-research not-front role--anonymous">
+<div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    <!-- HEADER (from original research.html) -->
+    <header class="su-masthead su-masthead--right">
+        <a href="#main-content" class="visually-hidden focusable su-skipnav su-skipnav--content">Skip to main content</a>
+        <div class="su-brand-bar su-brand-bar--default">
+            <div class="su-brand-bar__container">
+                <a class="su-brand-bar__logo" href="https://kosalnith.github.io"><span class="su-brand-bar__link--a11y"></span></a>
+            </div>
+        </div>
+        <section>
+            <div id="block-stanford-basic-branding" class="su-lockup su-lockup--option-a">
+                <a href="https://kosalnith.github.io">
+                    <div class="su-lockup__cell1"><div class="su-lockup__wordmark-wrapper"><span class="su-lockup__wordmark">Kosal</span></div></div>
+                    <div class="su-lockup__cell2"><span class="su-lockup__line1">Nith.</span></div>
+                </a>
+            </div>
+            <div id="block-stanford-basic-main-navigation" class="system-menu-block main">
+                <nav class="su-multi-menu su-multi-menu--buttons su-multi-menu--right no-js" aria-label="main menu">
+                    <button class="su-multi-menu__nav-toggle su-multi-menu__nav-toggle--right" aria-expanded="false">Menu</button>
+                    <ul class="su-multi-menu__menu su-multi-menu__menu-lv1">
+                        <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="index.html"><span class="su-multi-menu__link-text-wrapper">Home</span></a></li>
+                        <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="bio.html"><span class="su-multi-menu__link-text-wrapper">Bio</span></a></li>
+                        <li class="su-multi-menu__item su-multi-menu__item--active-trail su-multi-menu__item--current"><a aria-current="true" class="su-multi-menu__link" href="/research.html"><span class="su-multi-menu__link-text-wrapper">Research</span></a></li>
+                        <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="press.html"><span class="su-multi-menu__link-text-wrapper">Press</span></a></li>
+                        <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="teaching.html"><span class="su-multi-menu__link-text-wrapper">Teaching</span></a></li>
+                        <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="miscellaneous.html"><span class="su-multi-menu__link-text-wrapper">Miscellaneous</span></a></li>
+                        <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="https://kosalnith.substack.com"><span class="su-multi-menu__link-text-wrapper">Blog</span></a></li>
+                        <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="personal.html"><span class="su-multi-menu__link-text-wrapper">Personal</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+    </header>
+
+    <main class="page-content" id="page-content">
+        <div data-drupal-messages-fallback class="hidden"></div>
+        <div id="main-content" tabindex="-1" class="visually-hidden focusable">Main content start</div>
+        
+        <!-- PUBLICATION SYSTEM (full version from research_deep) -->
+        <div id="pubListView">
+            <div class="pub-research-wrapper">
+                <div class="pub-header-area">
+                    <div class="pub-title-icon">
+                        <svg width="34" height="34" viewBox="0 0 40 40" fill="none"><path d="M20 10 C16 8 10 7 4 8 L4 32 C10 31 16 32 20 34 Z" fill="#9aaec0"/><path d="M20 10 C24 8 30 7 36 8 L36 32 C30 31 24 32 20 34 Z" fill="#6c86a3"/><rect x="18.5" y="9" width="3" height="25" fill="#3f5e83" rx="1"/></svg>
+                        Research output
+                    </div>
+                    <div class="type-pills">
+                        <button class="type-pill" data-filter-type="articles"><span class="pill-number">1</span><span class="pill-label">Journal article</span></button>
+                        <button class="type-pill" data-filter-type="working"><span class="pill-number">4</span><span class="pill-label">Working paper</span></button>
+                        <button class="type-pill" data-filter-type="chapters"><span class="pill-number">2</span><span class="pill-label">Book chapter</span></button>
+                        <button class="type-pill" data-filter-type="other"><span class="pill-number">6</span><span class="pill-label">Other publication</span></button>
+                        <div class="more-wrapper"><button class="type-pill" id="moreButton"><span class="pill-number">7</span><span class="pill-label">More</span></button>
+                            <div id="moreDropdown" class="more-dropdown"><div class="more-item" data-more-type="policy"><strong>2</strong> Policy brief</div><div class="more-item" data-more-type="opeds"><strong>9</strong> Op-Ed / Commentary</div><div class="more-item" data-more-type="progress"><strong>3</strong> Work in progress</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pub-two-columns">
+                    <aside class="pub-sidebar">
+                        <div class="filter-heading">Filters for Publications</div>
+                        <div class="filter-heading" style="margin-top:0.5rem;">Type</div>
+                        <div class="filter-group"><div id="fullTypeList"></div><button class="show-more-btn" id="showMoreTypesBtn">Show more ›</button></div>
+                        <hr>
+                        <div class="filter-heading">Open Access</div>
+                        <label class="custom-check"><input type="checkbox" id="oaFilterCheckbox"> <span class="check-box"></span><span class="custom-check-left"><span>Show OA content</span><span class="count-badge">(8)</span></span></label>
+                        <hr>
+                        <div class="filter-heading">Publication Year</div>
+                        <div><div class="year-range-wrap"><div class="year-range-values"><span class="year-range-val" id="yearMinDisplay">2018</span><span class="year-range-val" id="yearMaxDisplay">2026</span></div><div class="year-range-track-wrap"><div class="year-range-track"></div><div class="year-range-fill" id="yearRangeFill"></div><input type="range" id="yearSliderMin" min="2018" max="2026" value="2018" step="1"><input type="range" id="yearSliderMax" min="2018" max="2026" value="2026" step="1"></div><div class="year-range-labels"><span>2018</span><span>2026</span></div></div></div>
+                        <hr>
+                        <div class="filter-heading">Sustainable Development Goals</div>
+                        <div><div id="sdgList"></div><button id="toggleSdgBtn" class="toggle-sdg">Show more ›</button></div>
+                        <hr>
+                        <div class="filter-heading">Language</div>
+                        <div><label class="custom-check"><input type="checkbox" data-lang="en"> <span class="check-box"></span><span class="custom-check-left"><span>English</span><span class="count-badge">(154455)</span></span></label></div>
+                        <hr>
+                        <div class="filter-heading">Journals &amp; Outlets</div>
+                        <div class="journals-list">Journal of Int'l Development Studies<br>South East Asia Research<br>East Asia Forum<br>The Diplomat<br>Cambodianess</div>
+                        <hr>
+                        <div class="filter-heading">Profiles</div>
+                        <div class="profile-links"><a href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ" target="_blank">Google Scholar</a><a href="https://orcid.org/0000-0002-6976-4733" target="_blank">ORCID</a><a href="https://ideas.repec.org/f/pni504.html" target="_blank">IDEAS/RePec</a></div>
+                    </aside>
+                    <div class="pub-main-content">
+                        <div class="search-section"><div class="search-row"><div class="search-input-wrapper"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Search by title, author, keyword..."></div></div></div>
+                        <div class="sort-bar"><span class="result-count" id="resultCount">27 results</span><a class="export-link" href="#"><i class="fas fa-download"></i> Export search results</a></div>
+                        <div id="publicationsContainer"></div>
+                        <div id="paginationContainer" class="pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Detail view container (hidden initially) -->
+        <div id="pubDetailView" style="display:none;"><div class="detail-container" id="detailContainer"></div></div>
+    </main>
+
+    <!-- FOOTER (from original research.html) -->
+    <section id="footer__pre-footer" data-ga-action="Pre-footer"><div class="social"><ul data-ga-action="Social media"><li><a title="Google Scholar" href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ&hl=en"><span class="fa fa-google" aria-hidden="true"></span><span class="sr-only-text">Google Scholar</span></a></li><li><a title="GitHub" href="https://github.com/kosalnith"><span class="fa fa-github" aria-hidden="true"></span><span class="sr-only-text">GitHub</span></a></li><li><a title="Twitter" href="https://twitter.com/kosalnith"><span class="fa-brands fa-x-twitter" aria-hidden="true"></span><span class="sr-only-text">X</span></a></li><li><a title="Instagram" href="https://www.instagram.com/kosalnith"><span class="fa fa-instagram" aria-hidden="true"></span><span class="sr-only-text">Instagram</span></a></li><li><a title="Facebook" href="https://www.facebook.com/kosalnith26"><span class="fa fa-facebook-square" aria-hidden="true"></span><span class="sr-only-text">Facebook</span></a></li><li><a title="LinkedIn" href="https://www.linkedin.com/in/kosalnith"><span class="fa fa-linkedin" aria-hidden="true"></span><span class="sr-only-text">LinkedIn</span></a></li><li><a title="YouTube" href="https://www.youtube.com/kosalnith"><span class="fa fa-youtube-play" aria-hidden="true"></span><span class="sr-only-text">YouTube</span></a></li></ul></div></section>
+    <footer id="footer"><div class="su-global-footer"><div class="su-global-footer__container"><div class="su-global-footer__brand"><a id="su-logo" class="su-logo" aria-hidden="true" tabindex="-1" href=""><br><span class="su-global-footer__link-a11y"></span></a></div><div class="su-global-footer__content"><nav aria-label="global footer menu"><ul class="su-global-footer__menu su-global-footer__menu--global"><li><a href="https://kosalnith.github.io/index.html">Home</a></li><li><a href="https://kosalnith.github.io/bio.html">Bio</a></li><li><a href="https://kosalnith.github.io/research.html">Research</a></li><li><a href="https://kosalnith.github.io/press.html">Press</a></li><li><a href="https://kosalnith.github.io/miscellaneous.html">Miscellaneous</a></li><li><a href="https://kosalnith.github.io/personal.html">Personal</a></li></ul><ul class="su-global-footer__menu su-global-footer__menu--policy"><li>Center for Development Economics and Trade, Cambodia Development Resource Institute</li><li>No. 56, Street 315, Sangkat Boeng Kak II, Khan Tuol Touk, 120508, Phnom Penh, Cambodia</li></ul></nav><div class="su-global-footer__copyright"><span>© 2018 – 2026 Kosal Nith. </span><span>All Rights Reserved.</span></div></div></div></div></footer>
+    <button id="back-to-top"><span class="fas fa-chevron-up"></span> Back to Top</button>
+</div>
+
+<script src="static/js/js_JBbJf6RwtYhWtZ0OWen2_GCykwMhsYkgnDCUtmawjXI.js"></script>
+<script>
+    // ==================== PUBLICATION DATA ====================
+    const publicationsData = [
+        { title: "Capital Gains Tax Is a Smart Way to Build Infrastructure", authors: "Nith, K.", date: "22 Mar 2026", outlet: "Cambodianess", type: "opeds", year: "2026", oa: false, breadcrumb: "Op-Ed / Commentary › Op-Ed", keywords: ["Taxation","Cambodia","Infrastructure","Fiscal Policy"], kwStrength: ["full","full","half","none"], link: "https://cambodianess.com/article/capital-gains-tax-is-a-smart-way-to-build-infrastructure" },
+        { title: "Transforming the Tax System with Personal Income Tax", authors: "Nith, K.", date: "4 Jan 2026", outlet: "Cambodianess", type: "opeds", year: "2026", oa: false, breadcrumb: "Op-Ed / Commentary › Op-Ed", keywords: ["Personal Income Tax","Tax Reform","Cambodia"], kwStrength: ["full","full","half"], link: "https://cambodianess.com/article/transforming-the-tax-system-with-personal-income-tax" },
+        { title: "Cambodian Cassava and COVID-19: An Analysis of Production, Productivity and Gender Impacts", authors: "Nith, K. & Kanayama, Y.", date: "Nov 2025", outlet: "Springer (Navigating Through Crisis)", type: "chapters", year: "2026", oa: true, breadcrumb: "Book chapter › Research › peer-review", abstract: "Using data from 301 cassava-farming households, pandemic impact on production, labor productivity. Costs rose 9.3%, income declined 8.5%.", keywords: ["Cassava","COVID-19","Agricultural Productivity","Gender","Cambodia"], kwStrength: ["full","full","full","half","none"], link: "https://link.springer.com/chapter/10.1007/978-981-95-1637-7_3" },
+        { title: "Determinants of Informal Borrowing: Evidence from Households in 11 Rural Villages in Cambodia", authors: "Nith, K. & Samreth, S.", date: "2025 (E-pub)", outlet: "Journal of International Development Studies", type: "articles", year: "2025", oa: false, forthcoming: true, abstract: "Financial literacy reduces reliance on informal loans.", keywords: ["Informal Borrowing","Financial Literacy","Social Capital","Rural Households","Cambodia"], kwStrength: ["full","full","full","half","none"] },
+        { title: "Assessing MSME Market Dynamics and Resilience in Phnom Penh: Challenges and Opportunities", authors: "Nith, K., Chhorn, D., An, I.Y. et al.", date: "Nov 2025", outlet: "CDRI Research Report", type: "other", year: "2025", oa: true, abstract: "Data from 14,820 establishments. 1,790 openings vs 825 closures.", keywords: ["MSMEs","Phnom Penh","Urban Economy","Resilience"], kwStrength: ["full","full","half","none"], downloads: 12 },
+        { title: "Government Ownership of Banks: Diversifying of Potential Products and Factors to Subsidize Agriculture", authors: "Nith, K.", date: "Dec 2025", outlet: "Future Forum", type: "other", year: "2025", oa: false, abstract: "Two-step GMM estimator on national-level data.", keywords: ["Public Banks","Agriculture","Subsidies","Cambodia"], kwStrength: ["full","full","half","none"] },
+        { title: "Does Social Capital Strengthen the Stability of Household Income? Evidence from Cambodia", authors: "Nith, K., Samreth, S. & Chhorn, D.", date: "Aug 2025", outlet: "Working paper", type: "working", year: "2025", oa: false, keywords: ["Social Capital","Household Income","Cambodia"], kwStrength: ["full","full","none"] },
+        { title: "Measuring SEZ Spillovers in Data-Scarce Regions: Evidence from Cambodia's Open Building Data", authors: "Nith, K., Yonto, D., Angorro, Y. & Khiev, V.", date: "Jul 2025", outlet: "South East Asia Research (Submitted)", type: "working", year: "2025", oa: false, underReview: true, abstract: "Geospatial method using Google Open Buildings 2.5D. SEZ spillovers extend beyond 1-2 km.", keywords: ["Special Economic Zones","Spillovers","Geospatial","Cambodia"], kwStrength: ["full","full","half","none"] },
+        { title: "Cambodia Needs Progressive Taxation to Invest in Its Future", authors: "Nith, K.", date: "17 Oct 2025", outlet: "Camboja News", type: "opeds", year: "2025", oa: false, link: "https://cambojanews.com/op-ed-cambodia-needs-progressive-taxation-to-invest-in-its-future/" },
+        { title: "Connecting Communities to Support Cambodia's Vulnerable", authors: "Nith, K.", date: "13 Aug 2025", outlet: "East Asia Forum", type: "opeds", year: "2025", oa: false, link: "https://eastasiaforum.org/2025/08/13/connecting-communities-to-support-cambodias-vulnerable/" },
+        { title: "20 Years of FDI in Cambodia: Towards Upper Middle-Income Status and Beyond", authors: "Nith, K., Iammarino, S. & Muth, S.", date: "Apr 2024", outlet: "CDRI Working Paper 149", type: "working", year: "2024", oa: true, abstract: "Greenfield FDI 2003–2022, real estate, financial services.", keywords: ["Foreign Direct Investment","Economic Development","Global Value Chains","Cambodia"], kwStrength: ["full","full","half","none"], downloads: 43 },
+        { title: "Ascending the Development Ladder in Cambodia: Progressing Towards Higher Income Status", authors: "Nith, K., Samreth, S. & Song, S.", date: "7 Dec 2023", outlet: "Cambodia Outlook Conference", type: "opeds", year: "2024", oa: false, link: "https://coc2023.cdri.org.kh/ascending-the-development-ladder-in-cambodia-progressing-towards-higher-income-status/" },
+        { title: "Mapping Study: Youth and Civil Society in Urban Cambodia", authors: "Nith, K.", date: "Sep 2022", outlet: "Future Forum", type: "other", year: "2023", oa: false, abstract: "65.3% of population under 30.", keywords: ["Youth","Civil Society","Cambodia"], kwStrength: ["full","full","none"] },
+        { title: "Explainer: How Cambodia's Central Bank Addressed Economic Challenges During the Pandemic", authors: "Nith, K.", date: "7 Jul 2023", outlet: "The Camboja News", type: "opeds", year: "2023", link: "https://cambojanews.com/explainer-how-cambodias-central-bank-addressed-economic-challenges-during-the-pandemic/" },
+        { title: "Monetary Policy and Household Income Distribution: An Empirical Analysis from Cambodia", authors: "Nith, K.", date: "Apr 2022", outlet: "Future Forum", type: "working", year: "2022", oa: false, abstract: "Structural VAR, earning heterogeneity.", keywords: ["Monetary Policy","Income Distribution","Structural VAR","Cambodia"], kwStrength: ["full","full","half","none"], downloads: 28 },
+        { title: "Monetary Policy: How Does It Become a Tool to Support Poor Households Afford to Purchase an Affordable House?", authors: "Nith, K.", date: "Nov 2022", outlet: "Policy brief", type: "policy", year: "2022", oa: false, abstract: "High dollarization limits autonomy.", keywords: ["Monetary Policy","Affordable Housing","Dollarization"], kwStrength: ["full","full","half"] },
+        { title: "Food Science in Cambodia", authors: "Nith, K.", date: "2021", outlet: "Micro-Policy Intervention", type: "chapters", year: "2021", oa: true, abstract: "R&D impact on agriculture.", keywords: ["Food Science","Agriculture","Cambodia"], kwStrength: ["full","full","none"], link: "https://www.futureforum.asia/policy-briefs-and-snapshots/food-science-in-cambodia" },
+        { title: "Household Saving and Debt", authors: "Nith, K. & Thomas, S.", date: "Jun 2021", outlet: "Revisiting the Pandemic", type: "other", year: "2021", oa: false },
+        { title: "Will Cambodia Commit to Protecting Its Forests?", authors: "Nith, K.", date: "13 Nov 2021", outlet: "The Diplomat", type: "opeds", year: "2021", link: "https://thediplomat.com/2021/11/will-cambodia-commit-to-protecting-its-forests/" },
+        { title: "Pandemic Offers Chance to Consider Higher Taxes, not Donations, From Rich", authors: "Nith, K.", date: "13 Aug 2021", outlet: "VOD", type: "opeds", year: "2021", link: "https://vodenglish.news/opinion-pandemic-offers-chance-to-consider-higher-taxes-not-donations-from-rich/" },
+        { title: "How Cambodia's Agricultural Lending Can Get a Bigger Bang for Its Buck", authors: "Nith, K.", date: "29 May 2021", outlet: "East Asia Forum", type: "opeds", year: "2021", link: "https://www.eastasiaforum.org/2021/05/29/how-cambodias-agricultural-lending-can-get-a-bigger-bang-for-its-buck/" },
+        { title: "How Should Cambodia Prepare for the Fourth Industrial Revolution?", authors: "Nith, K.", date: "May 2020", outlet: "Cambodia Development Center", type: "policy", year: "2020", oa: false, award: true, keywords: ["Industry 4.0","Cambodia"], kwStrength: ["full","half"], link: "https://www.cd-center.org/wp-content/uploads/2020/05/P126_20200508_EC19W1.pdf" },
+        { title: "Rapport de Stage : Assistant de Programme de l'Engagement des Jeunes pour l'Action Sociale", authors: "Nith, K.", date: "Jan 2019", outlet: "Royal University of Law and Economics", type: "other", year: "2019", oa: false },
+        { title: "Reinvigorating Cambodian Agriculture: Transforming from Extensive to Intensive Agriculture", authors: "Nith, K. & Ly, S.", date: "Dec 2018", outlet: "National Bank of Cambodia", type: "other", year: "2018", oa: false, award: true, abstract: "Comparison 1996–2018.", keywords: ["Agriculture","Intensive Farming","Cambodia"], kwStrength: ["full","full","none"], downloads: 7 },
+        { title: "Dollarization and Monetary Policy in Cambodia: Challenges, International Lessons, and Policy Implications", authors: "Nith, K., Samreth, S. & Hour, H.P.", type: "progress", year: "progress", oa: false, breadcrumb: "Work in progress" },
+        { title: "International Trade and Globalization in Cambodia: The Role of International Cooperation", authors: "Nith, K. & Ruran, R.A.", type: "progress", year: "progress", oa: false, breadcrumb: "Work in progress" },
+        { title: "The Survey on Skills Demand in Cambodia", authors: "Nith, K., Chhorn, D., Houy, S. & Kean, M.N.", type: "progress", year: "progress", oa: false, breadcrumb: "Work in progress" }
+    ];
+
+    const uniqueTypes = [
+        { label: "Journal article", count: 1, dataFilter: "articles" },
+        { label: "Book chapter", count: 2, dataFilter: "chapters" },
+        { label: "Working paper", count: 4, dataFilter: "working" },
+        { label: "Other publication", count: 6, dataFilter: "other" },
+        { label: "Op-Ed / Commentary", count: 9, dataFilter: "opeds" },
+        { label: "Policy brief", count: 2, dataFilter: "policy" },
+        { label: "Work in progress", count: 3, dataFilter: "progress" }
+    ];
+
+    const sdgItems = [
+        { label: "SDG 1 - No Poverty", count: 83 }, { label: "SDG 2 - Zero Hunger", count: 79 }, { label: "SDG 3 - Good Health", count: 920 }, { label: "SDG 4 - Quality Education", count: 854 }, { label: "SDG 5 - Gender Equality", count: 288 }, { label: "SDG 8 - Decent Work", count: 465 }, { label: "SDG 9 - Industry & Innovation", count: 960 }, { label: "SDG 11 - Sustainable Cities", count: 1208 }
+    ];
+
+    function renderSdgList() {
+        const container = document.getElementById('sdgList');
+        if (!container) return;
+        let html = '';
+        sdgItems.forEach((item, idx) => {
+            const hiddenClass = idx >= 6 ? 'sdg-hidden' : '';
+            html += `<label class="custom-check ${hiddenClass}"><input type="checkbox" class="sdg-checkbox" data-sdg="${item.label}"><span class="check-box"></span><span class="custom-check-left"><span>${item.label}</span><span class="count-badge">(${item.count})</span></span></label>`;
+        });
+        container.innerHTML = html;
+        let expanded = false;
+        const toggleBtn = document.getElementById('toggleSdgBtn');
+        toggleBtn.innerText = 'Show more ›';
+        toggleBtn.onclick = () => {
+            expanded = !expanded;
+            const allItems = document.querySelectorAll('#sdgList .custom-check');
+            if (expanded) { allItems.forEach(item => item.classList.remove('sdg-hidden')); toggleBtn.innerText = 'Show less'; }
+            else { allItems.forEach((item, idx) => { if (idx >= 6) item.classList.add('sdg-hidden'); else item.classList.remove('sdg-hidden'); }); toggleBtn.innerText = 'Show more ›'; }
+        };
+    }
+
+    function renderTypeList() {
+        const container = document.getElementById('fullTypeList');
+        if (!container) return;
+        let html = '';
+        const INITIAL_VISIBLE = 5;
+        uniqueTypes.forEach((type, idx) => {
+            const hiddenClass = idx >= INITIAL_VISIBLE ? 'type-hidden' : '';
+            html += `<label class="custom-check ${hiddenClass}"><input type="checkbox" data-filter="${type.dataFilter}" data-type-label="${type.label}"><span class="check-box"></span><span class="custom-check-left"><span>${type.label}</span><span class="count-badge">(${type.count})</span></span></label>`;
+        });
+        container.innerHTML = html;
+        let typeExpanded = false;
+        const showMoreBtn = document.getElementById('showMoreTypesBtn');
+        showMoreBtn.innerText = 'Show more ›';
+        showMoreBtn.onclick = () => {
+            typeExpanded = !typeExpanded;
+            const allItems = document.querySelectorAll('#fullTypeList .custom-check');
+            allItems.forEach((item, idx) => {
+                if (typeExpanded) item.classList.remove('type-hidden');
+                else if (idx >= INITIAL_VISIBLE) item.classList.add('type-hidden');
+                else item.classList.remove('type-hidden');
+            });
+            showMoreBtn.innerText = typeExpanded ? 'Show less' : 'Show more ›';
+        };
+    }
+
+    const YEAR_MIN_BOUND = 2018, YEAR_MAX_BOUND = 2026;
+    let yearRangeMin = YEAR_MIN_BOUND, yearRangeMax = YEAR_MAX_BOUND;
+    function updateYearSliderUI() {
+        const minVal = parseInt(document.getElementById('yearSliderMin').value);
+        const maxVal = parseInt(document.getElementById('yearSliderMax').value);
+        document.getElementById('yearMinDisplay').textContent = minVal;
+        document.getElementById('yearMaxDisplay').textContent = maxVal;
+        const pctMin = (minVal - YEAR_MIN_BOUND) / (YEAR_MAX_BOUND - YEAR_MIN_BOUND) * 100;
+        const pctMax = (maxVal - YEAR_MIN_BOUND) / (YEAR_MAX_BOUND - YEAR_MIN_BOUND) * 100;
+        document.getElementById('yearRangeFill').style.left = pctMin + '%';
+        document.getElementById('yearRangeFill').style.width = (pctMax - pctMin) + '%';
+        yearRangeMin = minVal; yearRangeMax = maxVal;
+    }
+    function initYearSlider() {
+        const sliderMin = document.getElementById('yearSliderMin');
+        const sliderMax = document.getElementById('yearSliderMax');
+        sliderMin.addEventListener('input', () => { if (parseInt(sliderMin.value) > parseInt(sliderMax.value)) sliderMin.value = sliderMax.value; updateYearSliderUI(); updateFiltersAndResetPage(); });
+        sliderMax.addEventListener('input', () => { if (parseInt(sliderMax.value) < parseInt(sliderMin.value)) sliderMax.value = sliderMin.value; updateYearSliderUI(); updateFiltersAndResetPage(); });
+        updateYearSliderUI();
+    }
+
+    let currentPage = 1, currentSearchTerm = '';
+    const ITEMS_PER_PAGE = 50;
+    function getFilteredPublications() {
+        const selectedTypeLabels = Array.from(document.querySelectorAll('#fullTypeList input:checked')).map(cb => cb.getAttribute('data-type-label'));
+        const types = selectedTypeLabels.map(label => uniqueTypes.find(t => t.label === label)?.dataFilter).filter(k => k);
+        const oaOnly = document.getElementById('oaFilterCheckbox').checked;
+        let filtered = publicationsData.filter(p => {
+            if (types.length && !types.includes(p.type)) return false;
+            const yearNum = parseInt(p.year);
+            if (!isNaN(yearNum) && (yearNum < yearRangeMin || yearNum > yearRangeMax)) return false;
+            if (oaOnly && !p.oa) return false;
+            return true;
+        });
+        if (currentSearchTerm.trim()) {
+            const term = currentSearchTerm.trim().toLowerCase();
+            filtered = filtered.filter(p => p.title.toLowerCase().includes(term) || p.authors.toLowerCase().includes(term) || (p.abstract && p.abstract.toLowerCase().includes(term)) || (p.keywords && p.keywords.some(k => k.toLowerCase().includes(term))));
+        }
+        return filtered;
+    }
+    function renderPublicationsWithPagination() {
+        const filtered = getFilteredPublications();
+        const totalItems = filtered.length;
+        const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+        if (totalPages === 0) currentPage = 1; else if (currentPage > totalPages) currentPage = totalPages;
+        if (currentPage < 1) currentPage = 1;
+        const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+        const pageItems = filtered.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+        const grouped = {};
+        pageItems.forEach(p => { if (!grouped[p.year]) grouped[p.year] = []; grouped[p.year].push(p); });
+        const yearOrder = ['2026','2025','2024','2023','2022','2021','2020','2019','2018','progress'];
+        let html = '';
+        for (let y of yearOrder) {
+            if (!grouped[y]) continue;
+            const yearLabel = y === 'progress' ? 'Work in Progress' : y;
+            html += `<div class="year-header">${yearLabel}</div>`;
+            for (let pub of grouped[y]) {
+                html += `<div class="publication"><div class="pub-details"><div class="pub-title"><a href="#" class="pub-detail-link" data-pub-idx="${publicationsData.indexOf(pub)}">${pub.title}</a></div><div class="pub-meta"><strong>${pub.authors}</strong>, ${pub.date || ''}, ${pub.outlet || ''}</div><div class="pub-breadcrumb">${pub.breadcrumb || 'Research output'}</div><div class="badge-row">${pub.oa ? '<span class="oa-badge"><i class="fas fa-lock-open"></i> Open Access</span>' : ''}${pub.forthcoming ? '<span class="forthcoming">Forthcoming</span>' : ''}${pub.underReview ? '<span class="under-review">Under Review</span>' : ''}${pub.award ? '<span class="award-badge"><i class="fas fa-trophy"></i> Award Winner</span>' : ''}</div><div class="pub-links">${pub.abstract ? `<button class="link-btn abstract-toggle">📄 Abstract</button>` : ''}${pub.link ? `<a class="link-btn" href="${pub.link}" target="_blank">🔗 Open</a>` : ''}</div><div class="abstract-text">${pub.abstract || ''}</div><div class="keywords">${pub.keywords ? pub.keywords.map((k,idx) => `<span class="keyword"><span class="kw-dot ${pub.kwStrength[idx]}"></span> ${k}</span>`).join('') : ''}</div></div><div class="right-stats"><div class="altmetric-donut"><svg viewBox="0 0 100 100" width="48" height="48"><circle cx="50" cy="50" r="8" fill="#7b3fa0"/><circle cx="50" cy="18" r="7" fill="#e8821a"/><circle cx="76" cy="30" r="6" fill="#7b3fa0"/><circle cx="82" cy="60" r="6" fill="#7b3fa0"/><circle cx="62" cy="82" r="6" fill="#7b3fa0"/><circle cx="36" cy="80" r="5" fill="#7b3fa0"/><circle cx="20" cy="60" r="5" fill="#c0c0c0"/><circle cx="26" cy="30" r="5" fill="#7b3fa0"/><line x1="50" y1="50" x2="50" y2="18" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="76" y2="30" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="82" y2="60" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="62" y2="82" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="36" y2="80" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="20" y2="60" stroke="#c0c0c0" stroke-width="2.5"/><line x1="50" y1="50" x2="26" y2="30" stroke="#7b3fa0" stroke-width="2.5"/></svg></div>${pub.downloads ? `<div class="download-circle"><div class="dl-num">${pub.downloads}</div><div class="dl-label">Downloads</div></div>` : ''}</div></div>`;
+            }
+        }
+        document.getElementById('publicationsContainer').innerHTML = html || '<div style="padding:2rem;text-align:center;">No publications match filters.</div>';
+        const start = totalItems === 0 ? 0 : startIdx + 1;
+        const end = Math.min(startIdx + pageItems.length, totalItems);
+        document.getElementById('resultCount').innerText = totalItems === 0 ? '0 results' : `${start} - ${end} out of ${totalItems} results`;
+        document.querySelectorAll('.abstract-toggle').forEach(btn => {
+            btn.addEventListener('click', (e) => { const absDiv = btn.closest('.pub-details').querySelector('.abstract-text'); absDiv.classList.toggle('open'); btn.innerText = absDiv.classList.contains('open') ? 'Hide Abstract' : '📄 Abstract'; });
+        });
+        renderPaginationControls(totalPages);
+    }
+    function renderPaginationControls(totalPages) {
+        const container = document.getElementById('paginationContainer');
+        if (!container) return;
+        if (totalPages <= 1) { container.innerHTML = ''; return; }
+        let html = '';
+        if (currentPage > 1) html += `<a data-page="${currentPage-1}"><i class="fas fa-chevron-left"></i> Previous</a>`;
+        else html += `<span class="disabled"><i class="fas fa-chevron-left"></i> Previous</span>`;
+        let startPage = Math.max(1, currentPage - 3), endPage = Math.min(totalPages, startPage + 6);
+        if (endPage - startPage < 6 && startPage > 1) startPage = Math.max(1, endPage - 6);
+        if (startPage > 1) html += `<a data-page="1">1</a>`;
+        if (startPage > 2) html += `<span class="ellipsis">...</span>`;
+        for (let i = startPage; i <= endPage; i++) { if (i === currentPage) html += `<span class="active-page">${i}</span>`; else html += `<a data-page="${i}">${i}</a>`; }
+        if (endPage < totalPages - 1) html += `<span class="ellipsis">...</span>`;
+        if (endPage < totalPages) html += `<a data-page="${totalPages}">${totalPages}</a>`;
+        if (currentPage < totalPages) html += `<a data-page="${currentPage+1}">Next <i class="fas fa-chevron-right"></i></a>`;
+        else html += `<span class="disabled">Next <i class="fas fa-chevron-right"></i></span>`;
+        container.innerHTML = html;
+        container.querySelectorAll('a[data-page]').forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); const newPage = parseInt(link.getAttribute('data-page'),10); if (!isNaN(newPage) && newPage !== currentPage) { currentPage = newPage; renderPublicationsWithPagination(); } }));
+    }
+    function updateFiltersAndResetPage() { currentPage = 1; renderPublicationsWithPagination(); }
+    document.getElementById('searchInput').addEventListener('input', (e) => { currentSearchTerm = e.target.value; currentPage = 1; renderPublicationsWithPagination(); });
+    document.getElementById('fullTypeList').addEventListener('change', updateFiltersAndResetPage);
+    document.getElementById('oaFilterCheckbox').addEventListener('change', updateFiltersAndResetPage);
+    document.querySelectorAll('.type-pill[data-filter-type]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filterVal = btn.getAttribute('data-filter-type');
+            document.querySelectorAll('#fullTypeList input').forEach(cb => cb.checked = false);
+            if (filterVal !== 'all') { const targetCb = document.querySelector(`#fullTypeList input[data-filter="${filterVal}"]`); if (targetCb) targetCb.checked = true; }
+            document.getElementById('oaFilterCheckbox').checked = false;
+            document.getElementById('yearSliderMin').value = 2018; document.getElementById('yearSliderMax').value = 2026;
+            updateYearSliderUI(); updateFiltersAndResetPage();
+        });
+    });
+    document.querySelectorAll('.more-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const type = item.getAttribute('data-more-type');
+            document.querySelectorAll('#fullTypeList input').forEach(cb => cb.checked = false);
+            const targetCb = document.querySelector(`#fullTypeList input[data-filter="${type}"]`);
+            if (targetCb) targetCb.checked = true;
+            document.getElementById('oaFilterCheckbox').checked = false;
+            document.getElementById('yearSliderMin').value = 2018; document.getElementById('yearSliderMax').value = 2026;
+            updateYearSliderUI(); updateFiltersAndResetPage();
+            document.getElementById('moreDropdown').classList.remove('open');
+        });
+    });
+    document.getElementById('moreButton').addEventListener('click', (e) => { e.stopPropagation(); document.getElementById('moreDropdown').classList.toggle('open'); });
+    document.addEventListener('click', (e) => { if (!e.target.closest('.more-wrapper')) document.getElementById('moreDropdown').classList.remove('open'); });
+    renderSdgList(); initYearSlider(); renderTypeList(); renderPublicationsWithPagination();
+
+    // Detail view functions (full)
+    let currentDetailIdx = -1;
+    document.getElementById('publicationsContainer').addEventListener('click', (e) => {
+        const link = e.target.closest('.pub-detail-link');
+        if (link) { e.preventDefault(); const idx = parseInt(link.getAttribute('data-pub-idx')); showDetail(idx); }
+    });
+    function showList() { document.getElementById('pubDetailView').style.display = 'none'; document.getElementById('pubListView').style.display = 'block'; window.scrollTo(0,0); document.title = 'Kosal Nith · Research output'; }
+    function showDetail(idx) {
+        const pub = publicationsData[idx]; currentDetailIdx = idx;
+        document.getElementById('pubListView').style.display = 'none'; document.getElementById('pubDetailView').style.display = 'block'; window.scrollTo(0,0); document.title = pub.title + ' · Kosal Nith';
+        const prevPub = publicationsData[idx-1], nextPub = publicationsData[idx+1];
+        document.getElementById('detailContainer').innerHTML = `
+            <div class="detail-nav-row">
+                <button class="detail-nav-btn ${!prevPub ? 'disabled' : ''}" onclick="${prevPub ? `showDetail(${idx-1})` : ''}"><i class="fas fa-chevron-left"></i><span><span class="nav-label">Previous</span> ${prevPub ? prevPub.title.substring(0,55) + (prevPub.title.length>55?'…':'') : '—'}</span></button>
+                <button class="detail-back-btn" onclick="showList()"><i class="fas fa-th-list"></i> All publications</button>
+                <button class="detail-nav-btn ${!nextPub ? 'disabled' : ''}" onclick="${nextPub ? `showDetail(${idx+1})` : ''}" style="flex-direction:row-reverse;"><i class="fas fa-chevron-right"></i><span><span class="nav-label">Next</span> ${nextPub ? nextPub.title.substring(0,55) + (nextPub.title.length>55?'…':'') : '—'}</span></button>
+            </div>
+            <div class="detail-breadcrumb"><a href="#" onclick="showList();return false;"><i class="fas fa-home"></i> Research output</a> <span class="sep">›</span> <span>${pub.breadcrumb || 'Research output'}</span> <span class="sep">›</span> <span style="color:#2c3f55;">${pub.title.substring(0,60)}${pub.title.length>60?'…':''}</span></div>
+            <div class="detail-layout"><div class="detail-main"><div class="detail-type-tag">${pub.breadcrumb || 'Research output'}</div><h1 class="detail-title">${pub.title}</h1><div class="detail-authors">${pub.authors}</div><div class="detail-affil">Cambodia Development Resource Institute (CDRI) · Phnom Penh, Cambodia</div><div class="detail-output-tag">Research output: ${pub.breadcrumb || 'Research output'} ${pub.oa ? ' <span class="detail-badge-oa"><i class="fas fa-lock-open"></i> Open Access</span>' : ''} ${pub.award ? ' <span style="color:#bc7a2e;"><i class="fas fa-trophy"></i> Award Winner</span>' : ''}</div>
+            <div class="detail-tab-bar"><div class="detail-tab active" onclick="switchDetailTab(this,'overview')">Overview</div><div class="detail-tab" onclick="switchDetailTab(this,'fingerprint')">Fingerprint</div><div class="detail-tab" onclick="switchDetailTab(this,'cite')">Cite</div></div>
+            <div id="detailTabOverview">${pub.abstract ? `<div class="detail-section-title">Abstract</div><div class="detail-abstract">${pub.abstract}</div>` : '<div style="padding:1.2rem;background:#f9fbfd;border-radius:10px;margin-bottom:1.5rem;"><i class="fas fa-info-circle"></i> No abstract available.</div>'}
+            <div class="detail-section-title">Publication details</div><table class="detail-meta-table"><tr><td>Authors</td><td>${pub.authors}</td></tr><tr><td>Year</td><td>${pub.year !== 'progress' ? pub.year : '<em>Work in progress</em>'}</td></tr><tr><td>Date</td><td>${pub.date || '—'}</td></tr><tr><td>Outlet / Journal</td><td>${pub.outlet || '—'}</td></tr><tr><td>Publication type</td><td>${pub.breadcrumb || 'Research output'}</td></tr><tr><td>Open Access</td><td>${pub.oa ? '<span class="detail-badge-oa"><i class="fas fa-lock-open"></i> Open Access</span>' : 'Restricted'}</td></tr>${pub.link ? `<tr><td>External link</td><td><a href="${pub.link}" target="_blank">${pub.link}</a></td></tr>` : ''}</table>
+            ${pub.keywords ? `<div class="detail-section-title">Keywords</div><div class="detail-keywords">${pub.keywords.map(k => `<span class="detail-keyword">${k}</span>`).join('')}</div>` : ''}
+            </div>
+            <div id="detailTabFingerprint" style="display:none;"><p style="font-size:0.88rem;color:#4b5e77;">Dive into the research topics.</p></div>
+            <div id="detailTabCite" style="display:none;"><div class="detail-section-title">Cite this publication</div><div class="detail-cite-tabs"><div class="detail-cite-tab active" onclick="switchCiteTab(this,'apa')">APA</div><div class="detail-cite-tab" onclick="switchCiteTab(this,'harvard')">Harvard</div><div class="detail-cite-tab" onclick="switchCiteTab(this,'bibtex')">BibTeX</div><div class="detail-cite-tab" onclick="switchCiteTab(this,'ris')">RIS</div></div>
+            <div class="detail-cite-box" id="citeBoxApa"><button class="detail-copy-btn" onclick="copyText('citeBoxApa')">Copy</button>${pub.authors} (${pub.year !== 'progress' ? pub.year : 'n.d.'}). ${pub.title}. <em>${pub.outlet || ''}</em>.${pub.link ? ` <a href="${pub.link}" target="_blank">${pub.link}</a>` : ''}</div>
+            <div class="detail-cite-box" id="citeBoxHarvard" style="display:none;"><button class="detail-copy-btn" onclick="copyText('citeBoxHarvard')">Copy</button>${pub.authors.split(',')[0]} et al. (${pub.year !== 'progress' ? pub.year : 'n.d.'}) '${pub.title}', <em>${pub.outlet || ''}</em>.</div>
+            <div class="detail-cite-box" id="citeBoxBibtex" style="display:none;font-family:monospace;"><button class="detail-copy-btn" onclick="copyText('citeBoxBibtex')">Copy</button>@article{nith${pub.year !== 'progress' ? pub.year : 'nd'},\n  title={${pub.title}},\n  author={${pub.authors}},\n  year={${pub.year !== 'progress' ? pub.year : 'n.d.'}},\n  journal={${pub.outlet || ''}}${pub.link ? `,\n  url={${pub.link}}` : ''}\n}</div>
+            <div class="detail-cite-box" id="citeBoxRis" style="display:none;font-family:monospace;"><button class="detail-copy-btn" onclick="copyText('citeBoxRis')">Copy</button>TY  - JOUR\nT1  - ${pub.title}\nAU  - ${pub.authors}\nPY  - ${pub.year !== 'progress' ? pub.year : 'n.d.'}\nJO  - ${pub.outlet || ''}${pub.link ? `\nUR  - ${pub.link}` : ''}\nER  -</div>
+            </div></div><div class="detail-sidebar"><div class="detail-card"><div class="detail-card-title"><i class="fas fa-user-circle"></i> Author profile</div><div style="display:flex;align-items:center;gap:10px;"><div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#1f4a7c,#4a7fb5);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">K</div><div><div style="font-weight:700;">Kosal Nith</div><div style="font-size:0.75rem;">Economist & Researcher</div></div></div><div style="margin-top:8px;"><i class="fas fa-map-marker-alt"></i> CDRI, Phnom Penh</div><div class="detail-share-row" style="margin-top:12px;"><a href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ" target="_blank" class="detail-share-btn"><i class="fas fa-graduation-cap"></i> Scholar</a><a href="https://orcid.org/0000-0002-6976-4733" target="_blank" class="detail-share-btn"><i class="fas fa-id-badge"></i> ORCID</a></div></div></div></div>`;
+        window.switchDetailTab = function(el, tab) {
+            document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active')); el.classList.add('active');
+            document.getElementById('detailTabOverview').style.display = tab === 'overview' ? 'block' : 'none';
+            document.getElementById('detailTabFingerprint').style.display = tab === 'fingerprint' ? 'block' : 'none';
+            document.getElementById('detailTabCite').style.display = tab === 'cite' ? 'block' : 'none';
+        };
+        window.switchCiteTab = function(el, fmt) {
+            document.querySelectorAll('.detail-cite-tab').forEach(t => t.classList.remove('active')); el.classList.add('active');
+            ['apa','harvard','bibtex','ris'].forEach(id => { const box = document.getElementById('citeBox'+id.charAt(0).toUpperCase()+id.slice(1)); if(box) box.style.display = id === fmt ? 'block' : 'none'; });
+        };
+        window.copyText = function(boxId) {
+            const box = document.getElementById(boxId); const text = box.innerText.replace(/^[\s\S]*?Copy\n?/,'').trim();
+            navigator.clipboard.writeText(text).then(() => { const btn = box.querySelector('.detail-copy-btn'); const orig = btn.innerHTML; btn.innerHTML = '<i class="fas fa-check"></i> Copied!'; setTimeout(() => btn.innerHTML = orig, 1800); });
+        };
+    }
+</script>
+</body>
+</html>
