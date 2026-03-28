@@ -105,8 +105,9 @@
         <button class="su-multi-menu__nav-toggle su-multi-menu__nav-toggle--right" aria-expanded="false">Menu</button>
         <ul class="su-multi-menu__menu su-multi-menu__menu-lv1">
           <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="index.html"><span class="su-multi-menu__link-text-wrapper">Home</span></a></li>
-          <li class="su-multi-menu__item su-multi-menu__item--active-trail su-multi-menu__item--current"><a aria-current="true" class="su-multi-menu__link" href="bio.html"><span class="su-multi-menu__link-text-wrapper">Bio</span></a></li>
+          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="bio.html"><span class="su-multi-menu__link-text-wrapper">Bio</span></a></li>
           <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="research.html"><span class="su-multi-menu__link-text-wrapper">Research</span></a></li>
+          <li class="su-multi-menu__item su-multi-menu__item--active-trail su-multi-menu__item--current"><a aria-current="true" class="su-multi-menu__link" href="activity.html"><span class="su-multi-menu__link-text-wrapper">Activity</span></a></li>              
           <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="press.html"><span class="su-multi-menu__link-text-wrapper">Press</span></a></li>
           <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="teaching.html"><span class="su-multi-menu__link-text-wrapper">Teaching</span></a></li>
           <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="miscellaneous.html"><span class="su-multi-menu__link-text-wrapper">Miscellaneous</span></a></li>
@@ -204,12 +205,12 @@
                                   <div class="filter-group">
                                     <div class="filter-heading">Year</div>
                                     <div class="year-slider-wrap">
-                                      <div class="year-range-display">
-                                        <span class="year-range-val" id="yearMinLabel">–</span>
-                                        <div class="year-range-dash"></div>
-                                        <span class="year-range-val" id="yearMaxLabel">–</span>
-                                      </div>
                                       <div class="year-track-outer">
+                                        <!-- Floating labels above thumbs -->
+                                        <div class="year-floating-labels">
+                                          <span class="year-float-label" id="yearMinLabel">–</span>
+                                          <span class="year-float-label" id="yearMaxLabel">–</span>
+                                        </div>
                                         <div class="year-track">
                                           <div class="year-fill" id="yearFill"></div>
                                           <input type="range" id="yearRangeMin">
@@ -257,16 +258,13 @@
                                         <span class="search-mode-btn"><i class="fas fa-align-left"></i> matching text</span>
                                       </div>
                                     </div>
-                                    <div class="search-footer">
-                                      <a href="#" class="advanced-link">Advanced search <i class="fas fa-arrow-right"></i></a>
-                                    </div>
                                   </div>
 
                                   <div class="sort-bar">
                                     <span class="result-count" id="resultCount">0 results</span>
-                                    <span>|</span>
-                                    <a class="sort-link" href="#">Start date (descending) <i class="fas fa-chevron-down"></i></a>
-                                    <a class="export-link" href="#"><i class="fas fa-download"></i> Export search results</a>
+                                    <span class="sort-divider">|</span>
+                                    <button id="sortBtn" class="sort-btn">Start date (descending) <i class="fas fa-arrow-down"></i></button>
+                                    <button id="exportBtn" class="export-btn"><i class="fas fa-download"></i> Export results</button>
                                   </div>
 
                                   <div id="activitiesContainer"></div>
