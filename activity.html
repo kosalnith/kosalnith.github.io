@@ -1,753 +1,359 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr" prefix="og: https://ogp.me/ns#" class="no-js">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Kosal Nith · Research Activities</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      background: #ffffff;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-      color: #1e2a3e;
-      line-height: 1.5;
-      font-size: 16px;
-    }
-    .research-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 2rem 2rem 3rem 2rem;
-    }
-    .research-header {
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-    .research-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.9rem;
-      font-weight: 500;
-      color: #0f2b4d;
-      margin-bottom: 1.5rem;
-    }
-    .type-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-    .type-pill {
-      background: transparent;
-      border: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      padding: 0.5rem 0.75rem;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.1s ease;
-      min-width: 70px;
-    }
-    .type-pill .pill-number {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #1f4a7c;
-      line-height: 1;
-    }
-    .type-pill .pill-label {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: #4b5e77;
-      text-align: center;
-    }
-    .type-pill:hover { background: #f0f4fa; }
-    .type-pill.active { background: #e9edf4; }
-    .type-pill.active .pill-number { text-decoration: underline; text-underline-offset: 6px; color: #0b355c; }
-    .more-wrapper { position: relative; }
-    .more-dropdown {
-      display: none;
-      position: absolute;
-      top: 110%;
-      left: 0;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.1);
-      border: 1px solid #e2edf2;
-      min-width: 220px;
-      z-index: 50;
-    }
-    .more-dropdown.open { display: block; }
-    .more-item {
-      padding: 10px 16px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #1e3a5f;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      border-bottom: 1px solid #f0f2f5;
-    }
-    .more-item:last-child { border-bottom: none; }
-    .more-item:hover { background: #f8fafc; }
-    .two-columns {
-      display: flex;
-      gap: 2.5rem;
-      align-items: flex-start;
-    }
-    .sidebar {
-      width: 340px;
-      flex-shrink: 0;
-      border-right: 1px solid #eef2f6;
-      padding-right: 1.8rem;
-    }
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.9rem;
-      color: #1f4a7c;
-      text-decoration: none;
-      margin-bottom: 1.5rem;
-      font-weight: 500;
-    }
-    .filter-heading {
-      font-weight: 700;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      color: #2c3e50;
-      margin: 1.25rem 0 0.75rem 0;
-    }
-    .custom-check {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 6px 0;
-      cursor: pointer;
-      font-size: 0.85rem;
-      color: #2d3e5f;
-      gap: 8px;
-    }
-    .custom-check-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex: 1;
-    }
-    .check-box {
-      width: 18px;
-      height: 18px;
-      border: 2px solid #bdc4d0;
-      border-radius: 4px;
-      background: white;
-      display: inline-block;
-      position: relative;
-      flex-shrink: 0;
-    }
-    .custom-check input { display: none; }
-    .custom-check input:checked + .check-box {
-      background: #1f4a7c;
-      border-color: #1f4a7c;
-    }
-    .custom-check input:checked + .check-box::after {
-      content: '';
-      position: absolute;
-      left: 5px;
-      top: 1px;
-      width: 5px;
-      height: 10px;
-      border: solid white;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-    }
-    .count-badge {
-      color: #6c7a8e;
-      font-size: 0.75rem;
-      margin-left: auto;
-    }
-    hr { margin: 1rem 0; border: none; border-top: 1px solid #eef2f8; }
-    .show-more-btn, .toggle-sdg, .toggle-type {
-      background: none;
-      border: none;
-      font-size: 0.75rem;
-      color: #1f4a7c;
-      font-weight: 500;
-      cursor: pointer;
-      margin-top: 6px;
-      padding: 0;
-      display: inline-block;
-    }
-    .sdg-hidden, .type-hidden { display: none; }
-    .main-content { flex: 1; min-width: 0; }
-    .search-section {
-      background: #f9fbfd;
-      border: 1px solid #e2edf2;
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .search-heading {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #152c42;
-      margin-bottom: 0.75rem;
-    }
-    .search-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
-    }
-    .search-input-wrapper {
-      flex: 2;
-      min-width: 200px;
-      display: flex;
-      align-items: center;
-      background: white;
-      border: 1px solid #cbd5e1;
-      border-radius: 40px;
-      padding: 0.5rem 1rem;
-    }
-    .search-input-wrapper i {
-      color: #9aaebf;
-      margin-right: 8px;
-    }
-    .search-input-wrapper input {
-      border: none;
-      outline: none;
-      width: 100%;
-      font-size: 0.9rem;
-      background: transparent;
-    }
-    .search-options {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.85rem;
-      color: #4a627a;
-    }
-    .search-options span {
-      background: #f0f4fa;
-      padding: 4px 10px;
-      border-radius: 30px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .advanced-link {
-      font-size: 0.85rem;
-      color: #1f4a7c;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .sort-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.9rem;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #eef2f6;
-      margin-bottom: 1.25rem;
-      flex-wrap: wrap;
-    }
-    .result-count { font-weight: 600; color: #0f2b3f; }
-    .export-link {
-      margin-left: auto;
-      font-size: 0.85rem;
-      color: #1f4a7c;
-      text-decoration: none;
-    }
-    .year-header {
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: #152c42;
-      margin: 1.8rem 0 0.9rem 0;
-      padding-top: 0.5rem;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .activity {
-      padding: 1.2rem 0;
-      border-bottom: none;
-    }
-    .activity-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #1f4a7c;
-      margin-bottom: 6px;
-      line-height: 1.4;
-    }
-    .activity-person {
-      font-size: 0.9rem;
-      color: #4b5e77;
-      margin-bottom: 4px;
-    }
-    .activity-person strong {
-      font-weight: 600;
-      color: #1f4a7c;
-    }
-    .activity-date {
-      font-size: 0.9rem;
-      color: #4b5e77;
-      margin-bottom: 4px;
-    }
-    .activity-type-line {
-      font-size: 0.85rem;
-      color: #7e8c9e;
-      font-style: italic;
-      margin-bottom: 8px;
-    }
-    .activity-description {
-      font-size: 0.85rem;
-      color: #2c3f55;
-      margin: 8px 0;
-    }
-    .activity-keywords {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-    .keyword {
-      font-size: 0.75rem;
-      background: #f1f5f9;
-      padding: 3px 10px;
-      border-radius: 40px;
-      color: #2c4766;
-    }
-    .right-stats {
-      float: right;
-      width: 65px;
-      text-align: center;
-      margin-left: 1rem;
-    }
-    .altmetric-donut svg { width: 48px; height: 48px; }
-    .pagination {
-      margin-top: 2.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .pagination a, .pagination span {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 36px;
-      height: 36px;
-      padding: 0 10px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: #2c3e66;
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      cursor: pointer;
-    }
-    .pagination a:hover { background: #f0f4fa; }
-    .pagination .active-page {
-      background: #1f4a7c;
-      border-color: #1f4a7c;
-      color: white;
-    }
-    .pagination .disabled {
-      color: #a0aec0;
-      cursor: not-allowed;
-      background: #f8fafc;
-    }
-    @media (max-width: 860px) {
-      .two-columns { flex-direction: column; }
-      .sidebar { width: 100%; border-right: none; padding-right: 0; }
-      .research-container { padding: 1rem; }
-      .right-stats { float: none; margin-left: 0; }
-    }
-  </style>
+  <meta charset="utf-8">
+  <link rel="canonical" href="https://kosalnith.github.io/bio">
+  <meta property="og:site_name" content="Kosal Nith">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kosalnith.github.io/bio">
+  <meta property="og:title" content="Research">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Research">
+  <meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+  <meta name="MobileOptimized" content="width">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+
+  <link rel="apple-touch-icon" sizes="60x60"   href="static/img/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"   href="static/img/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"   href="static/img/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="static/img/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="static/img/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="static/img/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="static/img/icon/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="static/img/icon/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="static/img/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="static/img/icon/favicon-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="static/img/icon/favicon-128.png"     sizes="128x128">
+  <link rel="icon" type="image/png" href="static/img/icon/favicon-96x96.png"   sizes="96x96">
+  <link rel="icon" type="image/png" href="static/img/icon/favicon-32x32.png"   sizes="32x32">
+  <link rel="icon" type="image/png" href="static/img/icon/favicon-16x16.png"   sizes="16x16">
+  <link rel="mask-icon" href="static/img/icon/safari-pinned-tab.svg" color="#ffffff">
+
+  <meta name="application-name"                  content="Kosal Nith">
+  <meta name="msapplication-TileColor"           content="#FFFFFF">
+  <meta name="msapplication-TileImage"           content="https://www-media.stanford.edu/assets/favicon/mstile-144x144.png">
+  <meta name="msapplication-square70x70logo"     content="https://www-media.stanford.edu/assets/favicon/mstile-70x70.png">
+  <meta name="msapplication-square150x150logo"   content="https://www-media.stanford.edu/assets/favicon/mstile-150x150.png">
+  <meta name="msapplication-square310x310logo"   content="https://www-media.stanford.edu/assets/favicon/mstile-310x310.png">
+
+  <title>Research Activities | Kosal Nith</title>
+
+  <!-- Site CSS (header, nav, footer styling) -->
+  <link rel="stylesheet" media="all"   href="static/css/mainFop.css">
+  <link rel="stylesheet" media="all"   href="static/css/main.css">
+  <link rel="stylesheet" media="all"   href="static/css/mainshims.css">
+  <link rel="stylesheet" media="all"   href="static/css/maincontent.css">
+  <link rel="stylesheet" media="all"   href="static/css/mainformat.css">
+  <link rel="stylesheet" media="print" href="static/css/main4L.css">
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- ✦ Research Activities widget styles -->
+  <link rel="stylesheet" href="static/css/activity-widget.css">
+
+  <script src="/static/js/modernizr.min.js"></script>
+  <script src="/static/js/modernizr-additional-tests.js"></script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FXRBQVKK80"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FXRBQVKK80');
+  </script>
 </head>
-<body>
-<div class="research-container">
-  <div class="research-header">
-    <div class="research-title">
-      <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
-        <path d="M20 10 C16 8 10 7 4 8 L4 32 C10 31 16 32 20 34 Z" fill="#9aaec0"/>
-        <path d="M20 10 C24 8 30 7 36 8 L36 32 C30 31 24 32 20 34 Z" fill="#6c86a3"/>
-        <line x1="8" y1="14" x2="18" y2="13" stroke="white" stroke-width="1.2"/>
-        <line x1="8" y1="18" x2="18" y2="17" stroke="white" stroke-width="1.2"/>
-        <line x1="32" y1="14" x2="22" y2="13" stroke="white" stroke-width="1.2"/>
-        <rect x="18.5" y="9" width="3" height="25" fill="#3f5e83" rx="1"/>
-      </svg>
-      Research Activities
-    </div>
-    <div class="type-pills">
-      <button class="type-pill" data-filter-type="all"><span class="pill-number" id="totalActivitiesCount">0</span><span class="pill-label">All</span></button>
-      <button class="type-pill" data-filter-type="Conference presentation"><span class="pill-number" id="confCount">0</span><span class="pill-label">Conference presentation</span></button>
-      <button class="type-pill" data-filter-type="Seminar"><span class="pill-number" id="seminarCount">0</span><span class="pill-label">Seminar</span></button>
-      <button class="type-pill" data-filter-type="Workshop"><span class="pill-number" id="workshopCount">0</span><span class="pill-label">Workshop</span></button>
-      <button class="type-pill" data-filter-type="Organisation"><span class="pill-number" id="orgCount">0</span><span class="pill-label">Organisation</span></button>
+<body class="page-research section-research not-front role--anonymous">
+
+<div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+
+<!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+<header class="su-masthead su-masthead--right">
+  <a href="#main-content" class="visually-hidden focusable su-skipnav su-skipnav--content">Skip to main content</a>
+  <a href="#secondary-navigation" class="visually-hidden focusable su-skipnav su-skipnav--secondary">Skip to secondary navigation</a>
+
+  <div class="su-brand-bar su-brand-bar--default">
+    <div class="su-brand-bar__container">
+      <a class="su-brand-bar__logo" href="https://kosalnith.github.io">
+        <span class="su-brand-bar__link--a11y"> (link is external)</span>
+      </a>
     </div>
   </div>
 
-  <div class="two-columns">
-    <aside class="sidebar">
-      <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Search in all content</a>
-      <div class="filter-heading">Filters for Activities</div>
-
-      <!-- Sustainable Development Goals (order 1-17) -->
-      <div class="filter-heading">Sustainable Development Goals</div>
-      <div id="sdgContainer">
-        <div id="sdgList"></div>
-        <button id="toggleSdgBtn" class="toggle-sdg">Show more ›</button>
-      </div>
-      <hr>
-
-      <!-- Year filter -->
-      <div class="filter-heading">Year</div>
-      <div id="yearFilters"></div>
-      <hr>
-
-      <!-- Activity type filter (full list from screenshot) -->
-      <div class="filter-heading">Type</div>
-      <div id="typeDetailContainer">
-        <div id="typeDetailList"></div>
-        <button id="toggleTypeBtn" class="toggle-type">Show more ›</button>
-      </div>
-      <hr>
-      <div class="filter-heading">Profiles</div>
-      <div class="profile-links">
-        <a href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ" target="_blank">Google Scholar</a>
-        <a href="https://orcid.org/0000-0002-6976-4733" target="_blank">ORCID</a>
-        <a href="https://ideas.repec.org/f/pni504.html" target="_blank">IDEAS/RePec</a>
-      </div>
-    </aside>
-
-    <div class="main-content">
-      <div class="search-section">
-        <div class="search-heading">Find research Activities</div>
-        <div class="search-row">
-          <div class="search-input-wrapper">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Search by title, description...">
-          </div>
-          <div class="search-options">
-            <span><i class="fas fa-lightbulb"></i> concept 🔍</span>
-            <span><i class="fas fa-align-left"></i> matching text 🔍</span>
+  <section>
+    <div id="block-stanford-basic-branding" class="su-lockup su-lockup--option-a">
+      <a href="https://kosalnith.github.io">
+        <div class="su-lockup__cell1">
+          <div class="su-lockup__wordmark-wrapper">
+            <span class="su-lockup__wordmark">Kosal</span>
           </div>
         </div>
-        <div style="text-align: right;"><a href="#" class="advanced-link">Advanced search <i class="fas fa-arrow-right"></i></a></div>
+        <div class="su-lockup__cell2">
+          <span class="su-lockup__line1">Nith.</span>
+        </div>
+        <div class="su-lockup__line5"></div>
+      </a>
+    </div>
+
+    <div id="block-stanford-basic-main-navigation" class="system-menu-block main">
+      <nav class="su-multi-menu su-multi-menu--buttons su-multi-menu--right no-js" aria-label="main menu">
+        <button class="su-multi-menu__nav-toggle su-multi-menu__nav-toggle--right" aria-expanded="false">Menu</button>
+        <ul class="su-multi-menu__menu su-multi-menu__menu-lv1">
+          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="index.html"><span class="su-multi-menu__link-text-wrapper">Home</span></a></li>
+          <li class="su-multi-menu__item su-multi-menu__item--active-trail su-multi-menu__item--current"><a aria-current="true" class="su-multi-menu__link" href="bio.html"><span class="su-multi-menu__link-text-wrapper">Bio</span></a></li>
+          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="research.html"><span class="su-multi-menu__link-text-wrapper">Research</span></a></li>
+          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="press.html"><span class="su-multi-menu__link-text-wrapper">Press</span></a></li>
+          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="teaching.html"><span class="su-multi-menu__link-text-wrapper">Teaching</span></a></li>
+          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="miscellaneous.html"><span class="su-multi-menu__link-text-wrapper">Miscellaneous</span></a></li>
+          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="https://kosalnith.substack.com"><span class="su-multi-menu__link-text-wrapper">Blog</span></a></li>
+          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="personal.html"><span class="su-multi-menu__link-text-wrapper">Personal</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+</header>
+
+<!-- ═══════════════════════════════ MAIN ═══════════════════════════════ -->
+<main class="page-content" id="page-content">
+  <div data-drupal-messages-fallback="" class="hidden"></div>
+  <div id="block-stanford-basic-content" class="system-main-block block-system block-stanford-basic-content">
+    <section class="node basic-page node--layout-full">
+      <div class="content">
+        <div class="jumpstart-ui--one-column">
+          <div class="main-region"></div>
+        </div>
+
+        <div class="jumpstart-ui--two-column flex-container centered-container">
+          <!-- Left sidebar (empty, hidden by site CSS) -->
+          <div class="left-region flex-lg-3-of-12">
+            <div class="menu-block main block block-menu navigation menu--main">
+              <h2 aria-hidden="true" class="visually-hidden" id="menu-blockmain-menu">Main navigation</h2>
+              <br><br>
+            </div>
+          </div>
+
+          <!-- Main region -->
+          <div class="flex-lg-9-of-12 main-region">
+            <div class="jumpstart-ui-skipnav-main-anchor block-jumpstart-ui">
+              <div id="main-content" tabindex="-1" class="visually-hidden focusable">Main content start</div>
+            </div>
+            <div class="field-block node-stanford-page-su-page-components block-layout-builder">
+              <div class="node stanford-page su-page-components entity-reference-revisions label-hidden">
+                <div class="paragraph-item ptype-stanford-layout">
+                  <div class="ptype-stanford-layout paragraph paragraph--type--stanford-layout paragraph--view-mode--default">
+                    <div class="layout layout--layout-paragraphs-one-column">
+                      <div class="layout__region layout__region--main">
+                        <div class="ptype-stanford-wysiwyg paragraph paragraph--type--stanford-wysiwyg paragraph--view-mode--default">
+                          <div class="su-wysiwyg-text paragraph stanford-wysiwyg text-long label-hidden">
+
+                            <!-- ✦ RESEARCH ACTIVITIES WIDGET ✦ -->
+                            <div class="research-container">
+
+                              <!-- Header: title + type pills -->
+                              <div class="research-header">
+                                <div class="research-title">Research Activities</div>
+                                <div class="type-pills">
+                                  <button class="type-pill" data-filter-type="all">
+                                    <span class="pill-number" id="totalActivitiesCount">0</span>
+                                    <span class="pill-label">All</span>
+                                  </button>
+                                  <button class="type-pill" data-filter-type="Conference presentation">
+                                    <span class="pill-number" id="confCount">0</span>
+                                    <span class="pill-label">Conference presentation</span>
+                                  </button>
+                                  <button class="type-pill" data-filter-type="Seminar">
+                                    <span class="pill-number" id="seminarCount">0</span>
+                                    <span class="pill-label">Seminar</span>
+                                  </button>
+                                  <button class="type-pill" data-filter-type="Workshop">
+                                    <span class="pill-number" id="workshopCount">0</span>
+                                    <span class="pill-label">Workshop</span>
+                                  </button>
+                                  <button class="type-pill" data-filter-type="Organisation">
+                                    <span class="pill-number" id="orgCount">0</span>
+                                    <span class="pill-label">Organisation</span>
+                                  </button>
+                                </div>
+                              </div>
+
+                              <!-- Two-column: sidebar + main content -->
+                              <div class="two-columns">
+
+                                <!-- Sidebar filters -->
+                                <aside class="research-sidebar">
+                                  <a href="index.html" class="back-link">
+                                    <i class="fas fa-arrow-left"></i> Search in all content
+                                  </a>
+                                  <div class="filter-section-label">Filters for Activities</div>
+
+                                  <!-- SDG filter -->
+                                  <div class="filter-group">
+                                    <div class="filter-heading">Sustainable Development Goals</div>
+                                    <div id="sdgContainer">
+                                      <div id="sdgList"></div>
+                                      <button id="toggleSdgBtn" class="toggle-sdg">Show more ›</button>
+                                    </div>
+                                  </div>
+
+                                  <!-- Year range slider -->
+                                  <div class="filter-group">
+                                    <div class="filter-heading">Year</div>
+                                    <div class="year-slider-wrap">
+                                      <div class="year-range-display">
+                                        <span class="year-range-val" id="yearMinLabel">–</span>
+                                        <div class="year-range-dash"></div>
+                                        <span class="year-range-val" id="yearMaxLabel">–</span>
+                                      </div>
+                                      <div class="year-track-outer">
+                                        <div class="year-track">
+                                          <div class="year-fill" id="yearFill"></div>
+                                          <input type="range" id="yearRangeMin">
+                                          <input type="range" id="yearRangeMax">
+                                        </div>
+                                      </div>
+                                      <div class="year-minmax">
+                                        <span id="yearAbsMin"></span>
+                                        <span id="yearAbsMax"></span>
+                                      </div>
+                                    </div>
+                                    <div id="yearFilters" style="display:none"></div>
+                                  </div>
+
+                                  <!-- Type filter -->
+                                  <div class="filter-group">
+                                    <div class="filter-heading">Type</div>
+                                    <div id="typeDetailContainer">
+                                      <div id="typeDetailList"></div>
+                                      <button id="toggleTypeBtn" class="toggle-type">Show more ›</button>
+                                    </div>
+                                  </div>
+
+                                  <!-- Profile links -->
+                                  <div class="filter-group">
+                                    <div class="filter-heading">Profiles</div>
+                                    <div class="profile-links">
+                                      <a href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ" target="_blank">Google Scholar</a>
+                                      <a href="https://orcid.org/0000-0002-6976-4733" target="_blank">ORCID</a>
+                                      <a href="https://ideas.repec.org/f/pni504.html" target="_blank">IDEAS/RePec</a>
+                                    </div>
+                                  </div>
+                                </aside>
+
+                                <!-- Main content: search + results -->
+                                <div class="main-content">
+                                  <div class="search-section">
+                                    <div class="search-heading">Find Research Activities</div>
+                                    <div class="search-input-wrapper">
+                                      <i class="fas fa-search"></i>
+                                      <input type="text" id="searchInput" placeholder="Search by title, description...">
+                                      <div class="search-divider"></div>
+                                      <div class="search-modes">
+                                        <span class="search-mode-btn active"><i class="fas fa-lightbulb"></i> concept</span>
+                                        <span class="search-mode-btn"><i class="fas fa-align-left"></i> matching text</span>
+                                      </div>
+                                    </div>
+                                    <div class="search-footer">
+                                      <a href="#" class="advanced-link">Advanced search <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                  </div>
+
+                                  <div class="sort-bar">
+                                    <span class="result-count" id="resultCount">0 results</span>
+                                    <span>|</span>
+                                    <a class="sort-link" href="#">Start date (descending) <i class="fas fa-chevron-down"></i></a>
+                                    <a class="export-link" href="#"><i class="fas fa-download"></i> Export search results</a>
+                                  </div>
+
+                                  <div id="activitiesContainer"></div>
+                                  <div id="paginationContainer" class="pagination"></div>
+                                </div>
+
+                              </div><!-- end .two-columns -->
+                            </div><!-- end .research-container -->
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="node_view"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="sort-bar">
-        <span class="result-count" id="resultCount">0 results</span>
-        <span>|</span>
-        <a class="sort-link" href="#">Start date (descending) <i class="fas fa-chevron-down"></i></a>
-        <a class="export-link" href="#"><i class="fas fa-download"></i> Export search results</a>
+    </section>
+  </div>
+</main>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<section id="footer__pre-footer" data-ga-action="Pre-footer">
+  <div class="social">
+    <ul data-ga-action="Social media">
+      <li><a title="Google Scholar" class="xsu-link" data-ga-label="Google Scholar" href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ&hl=en"><span class="fa fa-google" aria-hidden="true"></span><span class="sr-only-text">Google Scholar</span></a></li>
+      <li><a title="GitHub"         class="xsu-link" data-ga-label="GitHub"         href="https://github.com/kosalnith"><span class="fa fa-github" aria-hidden="true"></span><span class="sr-only-text">GitHub</span></a></li>
+      <li><a title="Twitter"        class="xsu-link" data-ga-label="Twitter"        href="https://twitter.com/kosalnith"><span class="fa-brands fa-x-twitter" aria-hidden="true"></span><span class="sr-only-text">X</span></a></li>
+      <li><a title="Instagram"      class="xsu-link" data-ga-label="Instagram"      href="https://www.instagram.com/kosalnith"><span class="fa fa-instagram" aria-hidden="true"></span><span class="sr-only-text">Instagram</span></a></li>
+      <li><a title="Facebook"       class="xsu-link" data-ga-label="Facebook"       href="https://www.facebook.com/kosalnith26"><span class="fa fa-facebook-square" aria-hidden="true"></span><span class="sr-only-text">Facebook</span></a></li>
+      <li><a title="LinkedIn"       class="xsu-link" data-ga-label="LinkedIn"       href="https://www.linkedin.com/in/kosalnith"><span class="fa fa-linkedin" aria-hidden="true"></span><span class="sr-only-text">LinkedIn</span></a></li>
+      <li><a title="YouTube"        class="xsu-link" data-ga-label="YouTube"        href="https://www.youtube.com/kosalnith"><span class="fa fa-youtube-play" aria-hidden="true"></span><span class="sr-only-text">YouTube</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="su-global-footer">
+    <div class="su-global-footer__container">
+      <div class="su-global-footer__brand">
+        <a id="su-logo" class="su-logo" aria-hidden="true" tabindex="-1" href=""><br>
+          <span class="su-global-footer__link-a11y"> (link is external)</span>
+        </a>
       </div>
-      <div id="activitiesContainer"></div>
-      <div id="paginationContainer" class="pagination"></div>
+      <div class="su-global-footer__content">
+        <nav aria-label="global footer menu">
+          <ul class="su-global-footer__menu su-global-footer__menu--global">
+            <li><a href="https://kosalnith.github.io/index.html"         rel="nofollow">Home<span class="su-global-footer__link-a11y"> (link is external)</span></a></li>
+            <li><a href="https://kosalnith.github.io/bio.html"           rel="nofollow">Bio<span class="su-global-footer__link-a11y"> (link is external)</span></a></li>
+            <li><a href="https://kosalnith.github.io/research.html"      rel="nofollow">Research<span class="su-global-footer__link-a11y"> (link is external)</span></a></li>
+            <li><a href="https://kosalnith.github.io/press.html"         rel="nofollow">Press<span class="su-global-footer__link-a11y"> (link is external)</span></a></li>
+            <li><a href="https://kosalnith.github.io/miscellaneous.html" rel="nofollow">Miscellaneous<span class="su-global-footer__link-a11y"> (link is external)</span></a></li>
+            <li><a href="https://kosalnith.github.io/personal.html"      rel="nofollow">Personal<span class="su-global-footer__link-a11y"> (link is external)</span></a></li>
+          </ul>
+          <ul class="su-global-footer__menu su-global-footer__menu--policy">
+            <li><a href="" rel="nofollow" title="">Center for Development Economics and Trade, Cambodia Development Resource Institute<span class="su-global-footer__link-a11y"> (link is external)</span></a></li>
+            <br>
+            <li><a href="" rel="nofollow" title="">No. 56, Street 315, Sangkat Boeng Kak II, Khan Tuol Touk, 120508, Phnom Penh, Cambodia<span class="su-global-footer__link-a11y"> (link is external)</span></a></li>
+          </ul>
+        </nav>
+        <div class="su-global-footer__copyright">
+          <span>© 2018 – 2026 Kosal Nith.</span>
+          <span>All Rights Reserved.</span>
+        </div>
+      </div>
     </div>
   </div>
+</footer>
+
+<button id="back-to-top">
+  <span class="fas fa-chevron-up"></span>
+  Back to Top
+</button>
 </div>
 
-<script>
-  // ----- ACTIVITY DATA (with roles, full details) -----
-  const activities = [
-    // From CV: Conference presentations
-    { title: "3rd Southeast Asia Economic Research and Development Conference", person: "Kosal Nith", role: "Presenter", date: "October 2025", location: "Siem Reap, Cambodia", type: "Conference presentation", typeCategory: "Conference presentations", description: "Presented research on economic development in Southeast Asia.", keywords: ["Economic development", "Southeast Asia"], sdg: ["SDG 8 - Decent Work and Economic Growth"] },
-    { title: "PHC Conference on Monetary Innovations", person: "Kosal Nith", role: "Presenter", date: "October 2025", location: "Phnom Penh, Cambodia", type: "Conference presentation", typeCategory: "Conference presentations", description: "Presented on monetary innovations in support of Riel promotion, financial inclusion, and green financing.", keywords: ["Monetary policy", "Financial inclusion", "Green finance"], sdg: ["SDG 8", "SDG 13"] },
-    { title: "3rd Ponlok Chomnes National Policy Forum", person: "Kosal Nith", role: "Presenter", date: "September 2025", location: "Phnom Penh, Cambodia", type: "Conference presentation", typeCategory: "Conference presentations", description: "Presented policy-relevant research on Cambodia's development.", keywords: ["Policy", "Cambodia"], sdg: ["SDG 16"] },
-    { title: "6th Nordic Post-Keynesian Conference", person: "Kosal Nith", role: "Presenter", date: "April 2025", location: "Aalborg, Denmark", type: "Conference presentation", typeCategory: "Conference presentations", description: "Presented on post-Keynesian economics and macroeconomic policy.", keywords: ["Post-Keynesian", "Macroeconomics"], sdg: ["SDG 8"] },
-    { title: "28th Forum for Macroeconomics and Macroeconomic Policies Conference", person: "Kosal Nith", role: "Presenter", date: "October 2024", location: "Berlin, Germany", type: "Conference presentation", typeCategory: "Conference presentations", description: "Presented on macroeconomic policy challenges.", keywords: ["Macroeconomics", "Policy"], sdg: ["SDG 8"] },
-    { title: "China-Southeast Asia Sustainable Development Workshop", person: "Kosal Nith", role: "Presenter", date: "October 2024", location: "Suzhou, China", type: "Conference presentation", typeCategory: "Conference presentations", description: "Presented on sustainable development and China-Southeast Asia relations.", keywords: ["Sustainable development", "China", "Southeast Asia"], sdg: ["SDG 17"] },
-    { title: "1st Southeast Asia Economic Research and Development Conference", person: "Kosal Nith", role: "Presenter", date: "December 2023", location: "Phnom Penh, Cambodia", type: "Conference presentation", typeCategory: "Conference presentations", description: "Presented on economic research and development in the region.", keywords: ["Economic research"], sdg: ["SDG 8"] },
-    { title: "5th Nordic Post-Keynesian Conference", person: "Kosal Nith", role: "Presenter", date: "April 2022", location: "Aalborg, Denmark", type: "Conference presentation", typeCategory: "Conference presentations", description: "Presented on post-Keynesian economics.", keywords: ["Post-Keynesian"], sdg: ["SDG 8"] },
-    // Seminars
-    { title: "Invited Seminar at Cambodia Development Resource Institute", person: "Kosal Nith", role: "Speaker", date: "2025", location: "Phnom Penh, Cambodia", type: "Seminar", typeCategory: "Talks and presentations in private or public companies", description: "Invited to present research on economic development.", keywords: ["Economic development", "Cambodia"], sdg: ["SDG 8"] },
-    { title: "Invited Seminar at National University of Management", person: "Kosal Nith", role: "Speaker", date: "2024", location: "Phnom Penh, Cambodia", type: "Seminar", typeCategory: "Talks and presentations in private or public companies", description: "Invited to speak on macroeconomic policy.", keywords: ["Macroeconomics", "Policy"], sdg: ["SDG 8"] },
-    { title: "Invited Seminar at Voice of America", person: "Kosal Nith", role: "Speaker", date: "2023", location: "Phnom Penh, Cambodia", type: "Seminar", typeCategory: "Talks and presentations in private or public companies", description: "Discussion on economic issues in Cambodia.", keywords: ["Media", "Economics"], sdg: ["SDG 16"] },
-    // Keynotes (mapped to Conference presentations)
-    { title: "The Extractive Industry Sustainability Workshop", person: "Kosal Nith", role: "Keynote Speaker", date: "February 2023", location: "Phnom Penh, Cambodia", type: "Keynote", typeCategory: "Conference presentations", description: "Keynote presentation on extractive industry sustainability.", keywords: ["Extractive industry", "Sustainability"], sdg: ["SDG 12"] },
-    { title: "YRDP Extractive Industry Campaign", person: "Kosal Nith", role: "Keynote Speaker", date: "2021-2022", location: "Phnom Penh, Cambodia", type: "Keynote", typeCategory: "Conference presentations", description: "Keynote at extractive industry campaign.", keywords: ["Extractive industry"], sdg: ["SDG 12"] },
-    { title: "5th NBC Annual Macroeconomic Conference", person: "Kosal Nith", role: "Keynote Speaker", date: "December 2018", location: "Phnom Penh, Cambodia", type: "Keynote", typeCategory: "Conference presentations", description: "Keynote presentation on macroeconomic issues.", keywords: ["Macroeconomics"], sdg: ["SDG 8"] },
-    // Participation
-    { title: "International Conference on Climate Change and Its Impacts on the Economy, Business, and Society", person: "Kosal Nith", role: "Participant", date: "July 2026 (scheduled)", location: "Pondicherry, India", type: "Participation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar", description: "Participating in conference on climate change impacts.", keywords: ["Climate change", "Economy"], sdg: ["SDG 13"] },
-    { title: "Blueprints for a New Economy Fellowship Program Convening", person: "Kosal Nith", role: "Fellow", date: "August-September 2025", location: "Lusaka, Zambia", type: "Participation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar", description: "Fellowship program convening on new economic models.", keywords: ["New economy", "Fellowship"], sdg: ["SDG 8"] },
-    { title: "Global Development Conference 2024", person: "Kosal Nith", role: "Participant", date: "November 2024", location: "Suva, Fiji", type: "Participation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar", description: "Attended Global Development Network conference.", keywords: ["Global development"], sdg: ["SDG 17"] },
-    { title: "Summer School in Advanced Methods for Economics and Political Economy", person: "Kosal Nith", role: "Participant", date: "June 2024", location: "University of Leeds, UK", type: "Participation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar", description: "Attended summer school on advanced methods.", keywords: ["Advanced methods", "Economics"], sdg: ["SDG 4"] },
-    { title: "Workshop on Gender in Labor Market and Mobility", person: "Kosal Nith", role: "Participant", date: "November 2023", location: "Bangkok, Thailand", type: "Participation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar", description: "Participated in workshop on gender and labor.", keywords: ["Gender", "Labor market"], sdg: ["SDG 5", "SDG 8"] },
-    // Organisation / Consulting
-    { title: "Consultant for Food and Agriculture Organization of the United Nations", person: "Kosal Nith", role: "Consultant", date: "December 2025 – present", location: "Remote", type: "Consultancy", typeCategory: "Consultancy", description: "Providing consulting services on agricultural economics.", keywords: ["Agriculture", "FAO"], sdg: ["SDG 2"] },
-    { title: "Co-organizer, Webinar Series on Rethinking Capitalism and Economic Order", person: "Kosal Nith", role: "Co-organizer", date: "September 2025 – present", type: "Organisation", typeCategory: "Conference organisation or participation", description: "Co-organizing webinar series.", keywords: ["Capitalism", "Economic order"], sdg: ["SDG 8"] },
-    { title: "Co-organizer, International Conference on Climate Change and Its Impacts", person: "Kosal Nith", role: "Co-organizer", date: "July 2026", type: "Organisation", typeCategory: "Conference organisation or participation", description: "Co-organizing conference on climate change.", keywords: ["Climate change"], sdg: ["SDG 13"] },
-    { title: "Lead organizer, Southeast Asia Economic Research and Development Conference", person: "Kosal Nith", role: "Lead Organizer", date: "2023-2025", type: "Organisation", typeCategory: "Conference organisation or participation", description: "Lead organizer of annual conference series.", keywords: ["Conference", "Southeast Asia"], sdg: ["SDG 8"] },
-    // New example activities with roles like the screenshot
-    { title: "Nordic Energy Informatics Academy Conference 2026 (Event)", person: "Schaffer, M.", role: "Member", date: "2 Sept 2026 → 4 Sept 2026", type: "Membership", typeCategory: "Membership of review committee", description: "Served as member of review committee.", keywords: ["Energy informatics", "Review committee"], sdg: ["SDG 7"] },
-    { title: "European Academy of Nursing Science", person: "Rokkedejjer, S. I.", role: "Participant", date: "9 Jul 2026", type: "Participation", typeCategory: "Conference organisation or participation", description: "Participated in the European Academy of Nursing Science event.", keywords: ["Nursing", "Health"], sdg: ["SDG 3"] },
-    { title: "Symposium 'Studying language, mind and society: methodological journeys unfolded' (chair)", person: "Demuth, C.", role: "Moderator", date: "8 Jul 2026 → 10 Jul 2026", type: "Conference presentation", typeCategory: "Conference presentations", description: "Chaired sessions at the symposium.", keywords: ["Language", "Mind", "Society"], sdg: ["SDG 4"] },
-    { title: "From talk to multimodal and sensorial interaction: methodological approaches...", person: "Demuth, C.", role: "Speaker", date: "8 Jul 2026 → 10 Jul 2026", type: "Conference presentation", typeCategory: "Conference presentations", description: "Presented on methodological approaches to studying language, mind and society.", keywords: ["Multimodal interaction", "Methodology"], sdg: ["SDG 4"] },
-    { title: "European Academy of Nursing Science", person: "Rokkedejjer, S. I.", role: "Participant", date: "29 Jun 2026 → 10 Jul 2026", type: "Participation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar", description: "Participated in extended workshop series.", keywords: ["Nursing", "Workshop"], sdg: ["SDG 3"] },
-    { title: "FORSA Nordic Conference: 2026", person: "Uggerhøj, L.", role: "Organizer", date: "15 Jun 2026 → 17 Jun 2026", type: "Organisation", typeCategory: "Conference organisation or participation", description: "Organized the FORSA Nordic Conference.", keywords: ["Social work", "Nordic"], sdg: ["SDG 10"] }
-  ];
+<!-- Site JS -->
+<script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/41","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"data":{"extlink":{"extTarget":false,"extTargetNoOverride":false,"extNofollow":false,"extNoreferrer":false,"extFollowNoOverride":false,"extClass":"su-link su-link--external","extLabel":" (link is external)","extImgClass":false,"extSubdomains":false,"extExclude":"","extInclude":"","extCssExclude":".localist-widget, #lclst_widget_footer","extCssExplicit":"#page-content, .su-local-footer","extAlert":false,"extAlertText":"This link will take you to an external web site. We are not responsible for their content.","mailtoClass":"mailto","mailtoLabel":" (link sends email)","extUseFontAwesome":false,"extIconPlacement":"append","extFaLinkClasses":"fa fa-external-link","extFaMailtoClasses":"fa fa-envelope-o","whitelistedDomains":[]}},"stanford_basic":{"nav_dropdown_enabled":false},"user":{"uid":0,"permissionsHash":"2b69b4d16617a86ec6c3f9c44cbc073c36c3de568d53b54ce9f2aa55cc3d8e96"}}</script>
+<script src="static/js/js_JBbJf6RwtYhWtZ0OWen2_GCykwMhsYkgnDCUtmawjXI.js"></script>
+<script src="static/js/search.js"></script>
 
-  // Add year field
-  activities.forEach(a => {
-    let match = a.date.match(/\d{4}/);
-    a.year = match ? match[0] : "2026";
-  });
+<!-- ✦ Research Activities widget scripts (data first, then logic) -->
+<script src="static/js/activity-data.js"></script>
+<script src="static/js/activity-widget.js"></script>
 
-  // ----- SDG options ordered 1-17 -----
-  const sdgOptions = [
-    "SDG 1 - No Poverty", "SDG 2 - Zero Hunger", "SDG 3 - Good Health and Well-being",
-    "SDG 4 - Quality Education", "SDG 5 - Gender Equality", "SDG 6 - Clean Water and Sanitation",
-    "SDG 7 - Affordable and Clean Energy", "SDG 8 - Decent Work and Economic Growth",
-    "SDG 9 - Industry, Innovation and Infrastructure", "SDG 10 - Reduced Inequalities",
-    "SDG 11 - Sustainable Cities and Communities", "SDG 12 - Responsible Consumption and Production",
-    "SDG 13 - Climate Action", "SDG 14 - Life Below Water", "SDG 15 - Life on Land",
-    "SDG 16 - Peace, Justice and Strong Institutions", "SDG 17 - Partnerships for the Goals"
-  ];
-
-  function getSdgCounts() {
-    let counts = {};
-    sdgOptions.forEach(s => counts[s] = 0);
-    activities.forEach(a => {
-      if (a.sdg) {
-        a.sdg.forEach(s => {
-          let matched = sdgOptions.find(opt => opt.startsWith(s.split(' ')[0]));
-          if (matched) counts[matched]++;
-          else if (s.includes("SDG 8")) counts["SDG 8 - Decent Work and Economic Growth"]++;
-          else if (s.includes("SDG 13")) counts["SDG 13 - Climate Action"]++;
-          else if (s.includes("SDG 1")) counts["SDG 1 - No Poverty"]++;
-          else if (s.includes("SDG 2")) counts["SDG 2 - Zero Hunger"]++;
-          else if (s.includes("SDG 5")) counts["SDG 5 - Gender Equality"]++;
-          else if (s.includes("SDG 16")) counts["SDG 16 - Peace, Justice and Strong Institutions"]++;
-          else counts["SDG 8 - Decent Work and Economic Growth"]++;
-        });
-      } else {
-        counts["SDG 8 - Decent Work and Economic Growth"]++;
-      }
-    });
-    return counts;
-  }
-
-  function renderSdgList() {
-    const container = document.getElementById('sdgList');
-    const counts = getSdgCounts();
-    let html = '';
-    sdgOptions.forEach((label, idx) => {
-      const cnt = counts[label] || 0;
-      const hiddenClass = idx >= 5 ? 'sdg-hidden' : '';
-      html += `<label class="custom-check ${hiddenClass}"><input type="checkbox" data-sdg="${label}"> <span class="check-box"></span><span class="custom-check-left"><span>${label}</span><span class="count-badge">(${cnt})</span></span></label>`;
-    });
-    container.innerHTML = html;
-    let expanded = false;
-    document.getElementById('toggleSdgBtn').onclick = () => {
-      expanded = !expanded;
-      const all = document.querySelectorAll('#sdgList .custom-check');
-      all.forEach((c, i) => { if (expanded) c.classList.remove('sdg-hidden'); else if (i >= 5) c.classList.add('sdg-hidden'); });
-      document.getElementById('toggleSdgBtn').innerText = expanded ? 'Show less' : 'Show more ›';
-    };
-  }
-
-  // Year filter
-  function renderYearFilters() {
-    const years = [...new Set(activities.map(a => a.year))].sort((a,b)=>b-a);
-    const container = document.getElementById('yearFilters');
-    container.innerHTML = years.map(y => `<label class="custom-check"><input type="checkbox" data-year="${y}"> <span class="check-box"></span><span class="custom-check-left"><span>${y}</span><span class="count-badge">(${activities.filter(a=>a.year===y).length})</span></span></label>`).join('');
-  }
-
-  // Full activity type list (as per screenshot)
-  const allActivityTypes = [
-    "Talks and presentations in private or public companies",
-    "Conference organisation or participation",
-    "Conference presentations",
-    "Organisation or participation in workshops, courses, seminars, exhibitions or similar",
-    "Peer review of manuscripts",
-    "Membership of committees, commissions, boards, councils, associations, organisations, or similar",
-    "Membership of review committee",
-    "Other",
-    "Membership of research networks or expert groups",
-    "External examination",
-    "Guest lecturers",
-    "External teaching and course activities at other universities",
-    "Journal editor",
-    "Board duties in companies, associations, or public organisations",
-    "Visiting another research institution",
-    "Consultancy",
-    "Internal examination",
-    "Hosting a guest lecturer",
-    "Series editor",
-    "Public Sector Consultancy",
-    "Editor of unfinished research anthology/collection",
-    "External PhD Supervision",
-    "Internal PhD Supervision",
-    "Employment with any other public or private company including your own company",
-    "Starting your own company"
-  ];
-
-  function getTypeCounts() {
-    let counts = {};
-    allActivityTypes.forEach(t => counts[t] = 0);
-    activities.forEach(a => {
-      let matched = allActivityTypes.find(tt => tt === a.typeCategory);
-      if (matched) counts[matched]++;
-      else counts["Other"]++;
-    });
-    return counts;
-  }
-
-  function renderTypeDetail() {
-    const container = document.getElementById('typeDetailList');
-    const counts = getTypeCounts();
-    let html = '';
-    allActivityTypes.forEach((type, idx) => {
-      const cnt = counts[type] || 0;
-      const hiddenClass = idx >= 5 ? 'type-hidden' : '';
-      html += `<label class="custom-check ${hiddenClass}"><input type="checkbox" data-activity-type="${type}"> <span class="check-box"></span><span class="custom-check-left"><span>${type}</span><span class="count-badge">(${cnt})</span></span></label>`;
-    });
-    container.innerHTML = html;
-    let expanded = false;
-    document.getElementById('toggleTypeBtn').onclick = () => {
-      expanded = !expanded;
-      const all = document.querySelectorAll('#typeDetailList .custom-check');
-      all.forEach((c, i) => { if (expanded) c.classList.remove('type-hidden'); else if (i >= 5) c.classList.add('type-hidden'); });
-      document.getElementById('toggleTypeBtn').innerText = expanded ? 'Show less' : 'Show more ›';
-    };
-  }
-
-  // Update top pills
-  function updateTypePills() {
-    document.getElementById('totalActivitiesCount').innerText = activities.length;
-    document.getElementById('confCount').innerText = activities.filter(a=>a.type==='Conference presentation' || a.type==='Keynote').length;
-    document.getElementById('seminarCount').innerText = activities.filter(a=>a.type==='Seminar').length;
-    document.getElementById('workshopCount').innerText = activities.filter(a=>a.type==='Workshop'||a.type==='Participation'||a.type==='Keynote').length;
-    document.getElementById('orgCount').innerText = activities.filter(a=>a.type==='Organisation'||a.type==='Consultancy').length;
-  }
-
-  // Filtering and pagination
-  let currentPage = 1;
-  const ITEMS_PER_PAGE = 50;
-  let currentSearch = '';
-
-  function getFilteredActivities() {
-    let filtered = [...activities];
-    if (currentSearch.trim()) {
-      const term = currentSearch.trim().toLowerCase();
-      filtered = filtered.filter(a => a.title.toLowerCase().includes(term) || (a.description && a.description.toLowerCase().includes(term)));
-    }
-    const selectedSdg = Array.from(document.querySelectorAll('#sdgList input:checked')).map(cb => cb.getAttribute('data-sdg'));
-    if (selectedSdg.length) {
-      filtered = filtered.filter(a => a.sdg && a.sdg.some(s => selectedSdg.some(sel => sel.startsWith(s.split(' ')[0]) || s.startsWith(sel.split(' ')[0]))));
-    }
-    const selectedYears = Array.from(document.querySelectorAll('#yearFilters input:checked')).map(cb => cb.getAttribute('data-year'));
-    if (selectedYears.length) filtered = filtered.filter(a => selectedYears.includes(a.year));
-    const selectedTypes = Array.from(document.querySelectorAll('#typeDetailList input:checked')).map(cb => cb.getAttribute('data-activity-type'));
-    if (selectedTypes.length) {
-      filtered = filtered.filter(a => selectedTypes.includes(a.typeCategory));
-    }
-    return filtered;
-  }
-
-  function renderActivities() {
-    const filtered = getFilteredActivities();
-    const total = filtered.length;
-    const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
-    if (currentPage > totalPages) currentPage = totalPages || 1;
-    const start = (currentPage-1)*ITEMS_PER_PAGE;
-    const pageItems = filtered.slice(start, start+ITEMS_PER_PAGE);
-    const grouped = {};
-    pageItems.forEach(a => { if (!grouped[a.year]) grouped[a.year] = []; grouped[a.year].push(a); });
-    const yearsSorted = Object.keys(grouped).sort((a,b)=>b-a);
-    let html = '';
-    for (let y of yearsSorted) {
-      html += `<div class="year-header">${y}</div>`;
-      for (let a of grouped[y]) {
-        html += `<div class="activity">
-          <div class="right-stats"><div class="altmetric-donut"><svg viewBox="0 0 100 100" width="48"><circle cx="50" cy="50" r="8" fill="#7b3fa0"/><circle cx="50" cy="18" r="7" fill="#e8821a"/><circle cx="76" cy="30" r="6" fill="#7b3fa0"/><circle cx="82" cy="60" r="6" fill="#7b3fa0"/><circle cx="62" cy="82" r="6" fill="#7b3fa0"/><circle cx="36" cy="80" r="5" fill="#7b3fa0"/><circle cx="20" cy="60" r="5" fill="#c0c0c0"/><circle cx="26" cy="30" r="5" fill="#7b3fa0"/><line x1="50" y1="50" x2="50" y2="18" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="76" y2="30" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="82" y2="60" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="62" y2="82" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="36" y2="80" stroke="#7b3fa0" stroke-width="2.5"/><line x1="50" y1="50" x2="20" y2="60" stroke="#c0c0c0" stroke-width="2.5"/><line x1="50" y1="50" x2="26" y2="30" stroke="#7b3fa0" stroke-width="2.5"/></svg></div></div>
-          <div class="activity-details">
-            <div class="activity-title">${a.title}</div>
-            <div class="activity-person">${a.person} <strong>(${a.role})</strong></div>
-            <div class="activity-date">${a.date}</div>
-            <div class="activity-type-line">Activity: ${a.typeCategory} > ${a.type}</div>
-            <div class="activity-description">${a.description || ''}</div>
-            <div class="activity-keywords">${a.keywords.map(k => `<span class="keyword">${k}</span>`).join('')}</div>
-          </div>
-        </div>`;
-      }
-    }
-    if (html === '') html = '<div style="padding: 2rem; text-align: center;">No activities match the selected filters.</div>';
-    document.getElementById('activitiesContainer').innerHTML = html;
-    document.getElementById('resultCount').innerHTML = total === 0 ? '0 results' : `${start+1} - ${Math.min(start+pageItems.length, total)} out of ${total} results`;
-    renderPagination(totalPages);
-  }
-
-  function renderPagination(totalPages) {
-    const container = document.getElementById('paginationContainer');
-    if (totalPages <= 1) { container.innerHTML = ''; return; }
-    let html = '';
-    if (currentPage > 1) html += `<a data-page="${currentPage-1}"><i class="fas fa-chevron-left"></i> Previous</a>`;
-    else html += `<span class="disabled"><i class="fas fa-chevron-left"></i> Previous</span>`;
-    let startPage = Math.max(1, currentPage-3);
-    let endPage = Math.min(totalPages, startPage+6);
-    if (endPage - startPage < 6 && startPage > 1) startPage = Math.max(1, endPage-6);
-    if (startPage > 1) html += `<a data-page="1">1</a>`;
-    if (startPage > 2) html += `<span class="ellipsis">...</span>`;
-    for (let i=startPage; i<=endPage; i++) {
-      if (i===currentPage) html += `<span class="active-page">${i}</span>`;
-      else html += `<a data-page="${i}">${i}</a>`;
-    }
-    if (endPage < totalPages-1) html += `<span class="ellipsis">...</span>`;
-    if (endPage < totalPages) html += `<a data-page="${totalPages}">${totalPages}</a>`;
-    if (currentPage < totalPages) html += `<a data-page="${currentPage+1}">Next <i class="fas fa-chevron-right"></i></a>`;
-    else html += `<span class="disabled">Next <i class="fas fa-chevron-right"></i></span>`;
-    container.innerHTML = html;
-    container.querySelectorAll('a[data-page]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        currentPage = parseInt(link.getAttribute('data-page'),10);
-        renderActivities();
-      });
-    });
-  }
-
-  function resetAndRender() {
-    currentPage = 1;
-    renderActivities();
-  }
-
-  // Event listeners
-  document.getElementById('searchInput').addEventListener('input', (e) => { currentSearch = e.target.value; resetAndRender(); });
-  document.querySelectorAll('#sdgList, #yearFilters, #typeDetailList').forEach(container => {
-    container.addEventListener('change', resetAndRender);
-  });
-  document.querySelectorAll('.type-pill[data-filter-type]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const type = btn.getAttribute('data-filter-type');
-      document.querySelectorAll('#typeDetailList input').forEach(cb => cb.checked = false);
-      if (type !== 'all') {
-        let targetLabel = "";
-        if (type === "Conference presentation") targetLabel = "Conference presentations";
-        else if (type === "Seminar") targetLabel = "Talks and presentations in private or public companies";
-        else if (type === "Workshop") targetLabel = "Organisation or participation in workshops, courses, seminars, exhibitions or similar";
-        else if (type === "Organisation") targetLabel = "Conference organisation or participation";
-        const targetCb = document.querySelector(`#typeDetailList input[data-activity-type="${targetLabel}"]`);
-        if (targetCb) targetCb.checked = true;
-      }
-      resetAndRender();
-    });
-  });
-
-  // Initialization
-  renderSdgList();
-  renderYearFilters();
-  renderTypeDetail();
-  updateTypePills();
-  renderActivities();
-</script>
 </body>
 </html>
