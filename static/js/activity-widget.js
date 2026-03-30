@@ -211,7 +211,7 @@ function updateTypePills() {
 
 /* ── Filter + render ── */
 let currentPage  = 1;
-const ITEMS_PER_PAGE = 50;
+const ITEMS_PER_PAGE = 30;
 let currentSearch = '';
 let sortOrder = 'desc'; // 'desc' = newest first, 'asc' = oldest first
 
