@@ -20,9 +20,10 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 # Create a dataset with country names and the 'x' variable (1 = red, 0 = off-white)
 data <- data.frame(
   name = c("Cambodia", "Thailand", "Laos", "Finland", "Denmark", "Germany", "Switzerland", 
-          "Spain", "France", "Vietnam", "Indonesia", "China", "United Kingdom", "Malaysia", 
+          "Spain", "France", "Vietnam", "Indonesia", "China", "United Kingdom", "Malaysia",
+          "Rwanda",
           "Austria", "Netherlands", "Fiji", "Singapore", "Sweden", "Zambia", "Japan", "India"),
-  x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)  # Example: 1 for red, 0 for off-white
+  x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)  # Example: 1 for red, 0 for off-white
 )
 
 # Merge the dataset with the world spatial data using the country name
