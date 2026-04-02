@@ -172,6 +172,10 @@ const tmCountries = [
     cities:[
       {name:"Bangkok", lat:13.7367, lng:100.5231, type:"sightseeing", desc:"Temple of the Emerald Buddha, floating markets and tuk-tuks.", imgs:["bangkok_1","bangkok_2","bangkok_3","bangkok_4"]},
     ]},
+   { name:"Uganda", lat:1.4, lng:32.3, flag:"ug", desc:"Source of the Nile, home to gorillas, forests, and savannahs.",
+    cities:[
+      {name:"Dubai",     lat:25.2048, lng:55.2708, type:"culture", desc:"Burj Khalifa, gold souks, and desert safaris meet the future.", imgs:["dubai_1","dubai_2","dubai_3","dubai_4"]},
+    ]},
   { name:"United Arab Emirates", lat:24.0, lng:54.5, flag:"ae", desc:"Desert dunes, ultramodern towers, souk culture, and luxury at every turn.",
     cities:[
       {name:"Dubai",     lat:25.2048, lng:55.2708, type:"culture", desc:"Burj Khalifa, gold souks, and desert safaris meet the future.", imgs:["dubai_1","dubai_2","dubai_3","dubai_4"]},
