@@ -22,19 +22,16 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <!-- ③ Flag Icons — cross-platform SVG flags (replaces emoji) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
-
-  <!-- ④ Google Fonts used by the travel map widget -->
+  <!-- ③ Google Fonts used by the travel map widget -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- ⑤ Leaflet CSS -->
+  <!-- ④ Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
-  <!-- ⑥ Leaflet JS -->
+  <!-- ⑤ Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- ⑦ Travel Map Widget Styles -->
+  <!-- ⑥ Travel Map Widget Styles -->
   <link rel="stylesheet" href="static/css/travel_map.css">
 
 </head>
@@ -157,28 +154,9 @@
         </div>
       </div>
 
-      <!-- Pin type legend — mirrors the Destinations panel structure -->
+      <!-- Pin type legend — populated dynamically by travel_map.js -->
       <div class="tm-legend" id="tm-legend">
-        <!-- Toggle tab — click to show/hide, mirrors tm-panel-toggle -->
-        <button class="tm-legend-toggle" id="tm-legend-toggle" aria-label="Toggle pin types panel">
-          <i class="fa-solid fa-chevron-up" id="tm-legend-chevron"></i>
-        </button>
-        <div class="tm-legend-inner" id="tm-legend-inner">
-          <div class="tm-legend-header">
-            <div class="tm-legend-label">Pin Types</div>
-            <div class="tm-legend-title-row">
-              <div class="tm-legend-title">Filter<br>by Type</div>
-              <div class="tm-types-badge" id="tm-types-badge">0 active</div>
-            </div>
-          </div>
-          <div class="tm-legend-list" id="tm-legend-list"></div>
-          <div class="tm-legend-footer">
-            <button class="tm-legend-reset-btn" id="tm-legend-reset-btn">
-              <i class="fa-solid fa-layer-group"></i>
-              <span>Show All Types</span>
-            </button>
-          </div>
-        </div>
+        <div class="tm-legend-title">Pin Types</div>
       </div>
 
       <!-- Hint bar -->

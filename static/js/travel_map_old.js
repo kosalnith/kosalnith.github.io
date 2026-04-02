@@ -56,20 +56,20 @@ const tmPinTypes = {
 
   /* ── EDUCATION & WORK ── */
   university:  { color:'#1a5276', icon:'fa-solid fa-graduation-cap',      label:'University'       },
-  research:    { color:'#42657b', icon:'fa-solid fa-microscope',          label:'Research'         },
+  research:    { color:'#154360', icon:'fa-solid fa-microscope',          label:'Research'         },
 
   /* ── FALLBACK ── */
   default:     { color:'#7f8c8d', icon:'fa-solid fa-location-dot',        label:'Spot'             },
 };
 
 const tmCountries = [
-  { name:"Austria", lat:47.8, lng:13.0, flag:"at", desc:"Alpine majesty, classical music, imperial palaces, and charming villages.",
+  { name:"Austria", lat:47.8, lng:13.0, flag:"🇦🇹", desc:"Alpine majesty, classical music, imperial palaces, and charming villages.",
     cities:[
       {name:"Vienna",    lat:48.2082, lng:16.3738, type:"sightseeing",  desc:"Imperial capital of art, music, and coffeehouse culture.", imgs:["Ethiopia25","vienna_2","vienna_3","vienna_4"]},
       {name:"Salzburg",  lat:47.8095, lng:13.0550, type:"culture", desc:"Birthplace of Mozart, baroque architecture and Alpine setting.", imgs:["salzburg_1","salzburg_2","salzburg_3","salzburg_4"]},
       {name:"Innsbruck", lat:47.2682, lng:11.3923, type:"park",   desc:"Mountain city nestled in the Alps, gateway to ski resorts.", imgs:["innsbruck_1","innsbruck_2","innsbruck_3","innsbruck_4"]},
     ]},
-  { name:"Cambodia", lat:12.0, lng:104.5, flag:"kh", desc:"Home to Angkor Wat, ancient temples, and lush landscapes of Khmer heritage.",
+  { name:"Cambodia", lat:12.0, lng:104.5, flag:"🇰🇭", desc:"Home to Angkor Wat, ancient temples, and lush landscapes of Khmer heritage.",
     cities:[
       {name:"Siem Reap",  lat:13.3671, lng:103.8448, type:"culture", desc:"Gateway to the majestic Angkor temple complex.", imgs:["siem_reap_1","siem_reap_2","siem_reap_3","siem_reap_4"]},
       {name:"Phnom Penh", lat:11.5564, lng:104.9282, type:"sightseeing",  desc:"Vibrant capital on the Mekong with rich royal heritage.", imgs:["phnom_penh_1","phnom_penh_2","phnom_penh_3","phnom_penh_4"]},
@@ -77,118 +77,118 @@ const tmCountries = [
       {name:"Koh Rong",   lat:10.7226, lng:103.2440, type:"beach",    desc:"Tropical island known for white beaches and clear waters.", imgs:["koh_rong_1","koh_rong_2","koh_rong_3","koh_rong_4"]},
       {name:"Phnom Preah",lat:12.1738, lng:102.9069, type:"hike",   desc:"Forested mountain rising above plains, offering peaceful nature and scenic views.", imgs:["PhnomPreah202301","PhnomPreah","WaterFell2021","koh_rong_4"]},
     ]},
-  { name:"China", lat:35.0, lng:105.0, flag:"cn", desc:"Ancient wonders, futuristic cities, and the Great Wall stretching to the horizon.",
+  { name:"China", lat:35.0, lng:105.0, flag:"🇨🇳", desc:"Ancient wonders, futuristic cities, and the Great Wall stretching to the horizon.",
     cities:[
       {name:"Beijing",  lat:39.9042, lng:116.4074, type:"airport",  desc:"Imperial capital, home to the Forbidden City and Great Wall.", imgs:["beijing_1","beijing_2","beijing_3","beijing_4"]},
       {name:"Shanghai", lat:31.2304, lng:121.4737, type:"culture", desc:"Futuristic skyline meets colonial Bund architecture.", imgs:["shanghai_1","shanghai_2","shanghai_3","shanghai_4"]},
       {name:"Xi'an",    lat:34.3416, lng:108.9398, type:"photospot", desc:"Ancient capital, home of the Terracotta Army.", imgs:["xian_1","xian_2","xian_3","xian_4"]},
     ]},
-  { name:"Denmark", lat:56.0, lng:10.0, flag:"dk", desc:"Hygge lifestyle, Viking history, and modern Scandinavian design.",
+  { name:"Denmark", lat:56.0, lng:10.0, flag:"🇩🇰", desc:"Hygge lifestyle, Viking history, and modern Scandinavian design.",
     cities:[
       {name:"Copenhagen", lat:55.6761, lng:12.5683, type:"sightseeing",  desc:"Colorful Nyhavn, cycling culture, and world-class cuisine.", imgs:["copenhagen_1","copenhagen_2","copenhagen_3","copenhagen_4"]},
       {name:"Aarhus",     lat:56.1629, lng:10.2039, type:"culture", desc:"Denmark's second city, vibrant arts scene and Latin Quarter.", imgs:["aarhus_1","aarhus_2","aarhus_3","aarhus_4"]},
     ]},
-  { name:"Ethiopia", lat:9.5, lng:39.5, flag:"et", desc:"Ancient rock churches, coffee origins, and breathtaking highland landscapes.",
+  { name:"Ethiopia", lat:9.5, lng:39.5, flag:"🇪🇹", desc:"Ancient rock churches, coffee origins, and breathtaking highland landscapes.",
     cities:[
       {name:"Addis Ababa", lat:9.0320, lng:38.7469, type:"airport", desc:"Africa's diplomatic capital, high-altitude city with rich culture.", imgs:["addis_ababa_1","addis_ababa_2","addis_ababa_3","addis_ababa_4"]},
     ]},
-  { name:"Fiji", lat:-17.5, lng:178.0, flag:"fj", desc:"Coral reefs, turquoise waters, and the warm tropical Bula spirit.",
+  { name:"Fiji", lat:-17.5, lng:178.0, flag:"🇫🇯", desc:"Coral reefs, turquoise waters, and the warm tropical Bula spirit.",
     cities:[
       {name:"Suva", lat:-18.1416, lng:178.4419, type:"sightseeing", desc:"Capital city on the Pacific, vibrant market and cultural hub.", imgs:["suva_1","suva_2","suva_3","suva_4"]},
       {name:"Nadi", lat:-17.7765, lng:177.4356, type:"beach",   desc:"Gateway city with lush gardens and Mamanuca Islands access.", imgs:["nadi_1","nadi_2","nadi_3","nadi_4"]},
     ]},
-  { name:"Finland", lat:62.0, lng:25.0, flag:"fi", desc:"A thousand lakes, Nordic saunas, and the magical Northern Lights.",
+  { name:"Finland", lat:62.0, lng:25.0, flag:"🇫🇮", desc:"A thousand lakes, Nordic saunas, and the magical Northern Lights.",
     cities:[
       {name:"Helsinki", lat:60.1699, lng:24.9384, type:"airport", desc:"Design capital on the Baltic, cathedral squares and saunas.", imgs:["helsinki_1","helsinki_2","helsinki_3","helsinki_4"]},
     ]},
-  { name:"France", lat:46.5, lng:2.5, flag:"fr", desc:"Art, romance, cuisine, and iconic landmarks from coast to countryside.",
+  { name:"France", lat:46.5, lng:2.5, flag:"🇫🇷", desc:"Art, romance, cuisine, and iconic landmarks from coast to countryside.",
     cities:[
       {name:"Paris", lat:48.8566, lng:2.3522, type:"sightseeing", desc:"City of Light — Eiffel Tower, Louvre, and café terraces.", imgs:["paris_1","paris_2","paris_3","paris_4"]},
     ]},
-  { name:"Germany", lat:51.0, lng:10.0, flag:"de", desc:"Castles, beer gardens, fairy-tale forests, and cutting-edge innovation.",
+  { name:"Germany", lat:51.0, lng:10.0, flag:"🇩🇪", desc:"Castles, beer gardens, fairy-tale forests, and cutting-edge innovation.",
     cities:[
       {name:"Berlin",  lat:52.5200, lng:13.4050, type:"sightseeing",  desc:"Reunified capital, cutting-edge art and tumultuous history.", imgs:["berlin_1","berlin_2","berlin_3","berlin_4"]},
       {name:"Munich",  lat:48.1351, lng:11.5820, type:"university", desc:"Beer gardens, Oktoberfest, and Baroque Marienplatz.", imgs:["munich_1","munich_2","munich_3","munich_4"]},
       {name:"Hamburg", lat:53.5753, lng:10.0153, type:"culture", desc:"Great port city, Speicherstadt warehouse district.", imgs:["hamburg_1","hamburg_2","hamburg_3","hamburg_4"]},
     ]},
-  { name:"India", lat:22.0, lng:79.0, flag:"in", desc:"A subcontinent of ancient temples, spice markets, and breathtaking diversity.",
+  { name:"India", lat:22.0, lng:79.0, flag:"🇮🇳", desc:"A subcontinent of ancient temples, spice markets, and breathtaking diversity.",
     cities:[
       {name:"New Delhi",  lat:28.6139, lng:77.2090, type:"sightseeing",  desc:"Mughal forts, colonial boulevards, and vibrant bazaars.", imgs:["new_delhi_1","new_delhi_2","new_delhi_3","new_delhi_4"]},
       {name:"Mumbai",     lat:19.0760, lng:72.8777, type:"culture", desc:"Bollywood, colonial architecture, and the bustling Gateway of India.", imgs:["mumbai_1","mumbai_2","mumbai_3","mumbai_4"]},
     ]},
-  { name:"Indonesia", lat:-3.0, lng:117.0, flag:"id", desc:"Thousands of islands, volcanoes, rainforests, and vibrant cultures.",
+  { name:"Indonesia", lat:-3.0, lng:117.0, flag:"🇮🇩", desc:"Thousands of islands, volcanoes, rainforests, and vibrant cultures.",
     cities:[
       {name:"Jakarta", lat:-6.2088, lng:106.8456, type:"sightseeing", desc:"Sprawling megacity, melting pot of cultures and cuisines.", imgs:["jakarta_1","jakarta_2","jakarta_3","jakarta_4"]},
     ]},
-  { name:"Laos", lat:18.5, lng:103.0, flag:"la", desc:"Serene mountains, Buddhist monasteries, and the mighty Mekong River.",
+  { name:"Laos", lat:18.5, lng:103.0, flag:"🇱🇦", desc:"Serene mountains, Buddhist monasteries, and the mighty Mekong River.",
     cities:[
       {name:"Luang Prabang", lat:19.8845, lng:102.1347, type:"culture", desc:"UNESCO World Heritage town, golden temples on the Mekong.", imgs:["luang_prabang_1","luang_prabang_2","luang_prabang_3","luang_prabang_4"]},
       {name:"Vang Vieng",    lat:18.9222, lng:102.4417, type:"hike",   desc:"Dramatic karst scenery, rivers and outdoor adventure.", imgs:["vang_vieng_1","vang_vieng_2","vang_vieng_3","vang_vieng_4"]},
     ]},
-  { name:"Malaysia", lat:4.0, lng:109.0, flag:"my", desc:"Rainforests, skyscrapers, diverse cultures, and incredible culinary fusion.",
+  { name:"Malaysia", lat:4.0, lng:109.0, flag:"🇲🇾", desc:"Rainforests, skyscrapers, diverse cultures, and incredible culinary fusion.",
     cities:[
       {name:"Kuala Lumpur", lat:3.1390, lng:101.6869, type:"sightseeing", desc:"Petronas Towers, street food haven and multicultural city.", imgs:["kuala_lumpur_1","kuala_lumpur_2","kuala_lumpur_3","kuala_lumpur_4"]},
     ]},
-  { name:"Netherlands", lat:52.5, lng:5.0, flag:"nl", desc:"Windmills, tulip fields, golden age canals, and vibrant cycling culture.",
+  { name:"Netherlands", lat:52.5, lng:5.0, flag:"🇳🇱", desc:"Windmills, tulip fields, golden age canals, and vibrant cycling culture.",
     cities:[
       {name:"Amsterdam", lat:52.3702, lng:4.8952, type:"airport", desc:"Canal rings, Rijksmuseum, Anne Frank House and bike lanes.", imgs:["amsterdam_1","amsterdam_2","amsterdam_3","amsterdam_4"]},
     ]},
-  { name:"Philippines", lat:12.5, lng:122.5, flag:"ph", desc:"Over 7,000 islands, pristine beaches, and legendary warm hospitality.",
+  { name:"Philippines", lat:12.5, lng:122.5, flag:"🇵🇭", desc:"Over 7,000 islands, pristine beaches, and legendary warm hospitality.",
     cities:[
       {name:"Manila",         lat:14.5995, lng:120.9842, type:"sightseeing",  desc:"Historic Intramuros, bustling bayside capital of the archipelago.", imgs:["manila_1","manila_2","manila_3","manila_4"]},
       {name:"Chocolate Hills", lat:9.8374, lng:124.1499, type:"park",   desc:"Famous limestone formations, turning brown in dry season, creating scenic landscapes.", imgs:["Phillipines25","IMG_5896","IMG_5909","IMG_5917"]},
     ]},
-  { name:"Qatar", lat:25.3, lng:51.2, flag:"qa", desc:"Futuristic skylines, desert dunes, and a crossroads of ancient trade routes.",
+  { name:"Qatar", lat:25.3, lng:51.2, flag:"🇶🇦", desc:"Futuristic skylines, desert dunes, and a crossroads of ancient trade routes.",
     cities:[
       {name:"Doha", lat:25.2854, lng:51.5310, type:"airport", desc:"Ultramodern capital with the Museum of Islamic Art and Souq Waqif.", imgs:["doha_1","doha_2","doha_3","doha_4"]},
     ]},
-  { name:"Rwanda", lat:-2.0, lng:30.0, flag:"rw", desc:"Land of a thousand hills, mountain gorillas, and remarkable resilience.",
+  { name:"Rwanda", lat:-2.0, lng:30.0, flag:"🇷🇼", desc:"Land of a thousand hills, mountain gorillas, and remarkable resilience.",
     cities:[
       {name:"Kigali",          lat:-1.9441, lng:30.0619, type:"sightseeing", desc:"Africa's cleanest capital, with powerful genocide memorials and growing innovation.", imgs:["kigali_1","kigali_2","kigali_3","kigali_4"]},
       {name:"Volcanoes N.P.",  lat:-1.4767, lng:29.5244, type:"wildlife",  desc:"Misty rainforests sheltering endangered mountain gorillas.", imgs:["volcanoes_1","volcanoes_2","volcanoes_3","volcanoes_4"]},
     ]},
-  { name:"Singapore", lat:1.3521, lng:103.8198, flag:"sg", desc:"Garden city, futuristic skyline, and multicultural melting pot.",
+  { name:"Singapore", lat:1.3521, lng:103.8198, flag:"🇸🇬", desc:"Garden city, futuristic skyline, and multicultural melting pot.",
     cities:[
       {name:"Marina Bay", lat:1.2834, lng:103.8607, type:"culture", desc:"Iconic Marina Bay Sands, Gardens by the Bay and skyline.", imgs:["marina_bay_1","marina_bay_2","marina_bay_3","marina_bay_4"]},
       {name:"Chinatown",  lat:1.2838, lng:103.8448, type:"restaurant",    desc:"Vibrant heritage district, temples, street markets and hawker stalls.", imgs:["chinatown_sg_1","chinatown_sg_2","chinatown_sg_3","chinatown_sg_4"]},
       {name:"Sentosa",    lat:1.2494, lng:103.8303, type:"beach",   desc:"Resort island with Universal Studios and cable car views.", imgs:["sentosa_1","sentosa_2","sentosa_3","sentosa_4"]},
     ]},
-  { name:"Spain", lat:40.0, lng:-3.5, flag:"es", desc:"Flamenco, siesta, tapas, and a mosaic of vibrant historic cities.",
+  { name:"Spain", lat:40.0, lng:-3.5, flag:"🇪🇸", desc:"Flamenco, siesta, tapas, and a mosaic of vibrant historic cities.",
     cities:[
       {name:"Madrid",    lat:40.4168, lng:-3.7038, type:"sightseeing",  desc:"Royal Palace, Prado Museum, and vibrant nightlife.", imgs:["madrid_1","madrid_2","madrid_3","madrid_4"]},
       {name:"Barcelona", lat:41.3851, lng:2.1734,  type:"culture", desc:"Gaudí's Sagrada Família, Gothic Quarter and La Rambla.", imgs:["barcelona_1","barcelona_2","barcelona_3","barcelona_4"]},
     ]},
-  { name:"Sweden", lat:62.0, lng:15.0, flag:"se", desc:"Archipelagos, minimalist design, and the magic of endless summer light.",
+  { name:"Sweden", lat:62.0, lng:15.0, flag:"🇸🇪", desc:"Archipelagos, minimalist design, and the magic of endless summer light.",
     cities:[
       {name:"Stockholm", lat:59.3293, lng:18.0686, type:"sightseeing", desc:"Venice of the North — islands, Viking history and design.", imgs:["stockholm_1","stockholm_2","stockholm_3","stockholm_4"]},
     ]},
-  { name:"Switzerland", lat:46.8, lng:8.0, flag:"ch", desc:"Alpine peaks, pristine lakes, chocolate, and precision watchmaking.",
+  { name:"Switzerland", lat:46.8, lng:8.0, flag:"🇨🇭", desc:"Alpine peaks, pristine lakes, chocolate, and precision watchmaking.",
     cities:[
       {name:"Zürich",     lat:47.3769, lng:8.5417, type:"culture", desc:"Financial hub with old town, Lake Zürich and vibrant culture.", imgs:["zurich_1","zurich_2","zurich_3","zurich_4"]},
       {name:"Geneva",     lat:46.2044, lng:6.1432, type:"culture", desc:"International city, Jet d'Eau on Lake Geneva.", imgs:["geneva_1","geneva_2","geneva_3","geneva_4"]},
       {name:"Interlaken", lat:46.6863, lng:7.8632, type:"park",   desc:"Adventure capital between two lakes, gateway to the Alps.", imgs:["interlaken_1","interlaken_2","interlaken_3","interlaken_4"]},
     ]},
-  { name:"Thailand", lat:15.0, lng:101.0, flag:"th", desc:"Land of smiles, golden temples, vibrant street food, and tropical beaches.",
+  { name:"Thailand", lat:15.0, lng:101.0, flag:"🇹🇭", desc:"Land of smiles, golden temples, vibrant street food, and tropical beaches.",
     cities:[
       {name:"Bangkok", lat:13.7367, lng:100.5231, type:"sightseeing", desc:"Temple of the Emerald Buddha, floating markets and tuk-tuks.", imgs:["bangkok_1","bangkok_2","bangkok_3","bangkok_4"]},
     ]},
-  { name:"United Arab Emirates", lat:24.0, lng:54.5, flag:"ae", desc:"Desert dunes, ultramodern towers, souk culture, and luxury at every turn.",
+  { name:"United Arab Emirates", lat:24.0, lng:54.5, flag:"🇦🇪", desc:"Desert dunes, ultramodern towers, souk culture, and luxury at every turn.",
     cities:[
       {name:"Dubai",     lat:25.2048, lng:55.2708, type:"culture", desc:"Burj Khalifa, gold souks, and desert safaris meet the future.", imgs:["dubai_1","dubai_2","dubai_3","dubai_4"]},
       {name:"Abu Dhabi", lat:24.4539, lng:54.3773, type:"airport",  desc:"Capital city of stunning mosques, museums, and Formula 1.", imgs:["abu_dhabi_1","abu_dhabi_2","abu_dhabi_3","abu_dhabi_4"]},
     ]},
-  { name:"United Kingdom", lat:54.0, lng:-2.5, flag:"gb", desc:"Royal heritage, literary legends, rolling countryside, and dynamic cities.",
+  { name:"United Kingdom", lat:54.0, lng:-2.5, flag:"🇬🇧", desc:"Royal heritage, literary legends, rolling countryside, and dynamic cities.",
     cities:[
       {name:"London",     lat:51.5074, lng:-0.1278, type:"sightseeing",  desc:"Big Ben, Tower Bridge, West End and multicultural energy.", imgs:["london_1","london_2","london_3","london_4"]},
       {name:"Leeds",  lat:55.9533, lng:-3.1883, type:"culture", desc:"Castle rock, Arthur's Seat, whisky trails and festivals.", imgs:["edinburgh_1","edinburgh_2","edinburgh_3","edinburgh_4"]},
       {name:"Manchester", lat:53.4808, lng:-2.2426, type:"culture", desc:"Music, football, Northern Quarter and Industrial heritage.", imgs:["manchester_1","manchester_2","manchester_3","manchester_4"]},
     ]},
-  { name:"Vietnam", lat:16.5, lng:107.0, flag:"vn", desc:"Dramatic karst landscapes, bustling cities, and aromatic street food.",
+  { name:"Vietnam", lat:16.5, lng:107.0, flag:"🇻🇳", desc:"Dramatic karst landscapes, bustling cities, and aromatic street food.",
     cities:[
       {name:"Hanoi",            lat:21.0285, lng:105.8542, type:"sightseeing", desc:"French colonial old quarter, Hoan Kiem Lake and pho.", imgs:["hanoi_1","hanoi_2","hanoi_3","hanoi_4"]},
       {name:"Ho Chi Minh City", lat:10.8231, lng:106.6297, type:"restaurant",    desc:"Saigon's energy, war history and street food culture.", imgs:["hcmc_1","hcmc_2","hcmc_3","hcmc_4"]},
     ]},
-  { name:"Zambia", lat:-14.5, lng:27.5, flag:"zm", desc:"Victoria Falls, wild safaris, and the mighty Zambezi River.",
+  { name:"Zambia", lat:-14.5, lng:27.5, flag:"🇿🇲", desc:"Victoria Falls, wild safaris, and the mighty Zambezi River.",
     cities:[
       {name:"Lusaka",      lat:-15.3875, lng:28.3228, type:"sightseeing", desc:"Rapidly growing capital with markets and modern development.", imgs:["lusaka_1","lusaka_2","lusaka_3","lusaka_4"]},
       {name:"Livingstone", lat:-17.8619, lng:25.8564, type:"waterfall",  desc:"Victoria Falls town, adventure capital of Africa.", imgs:["livingstone_1","livingstone_2","livingstone_3","livingstone_4"]},
@@ -231,10 +231,7 @@ window.tmRenderLb = tmRenderLb;
 
 /* ── IMAGE HELPERS ───────────────────────────────────────────── */
 /* Thumbnails and full images served from the site's own static folder */
-/* Thumbnails: small compressed copies in the thumbs/ subfolder (generated by
-   the batch script below). Full images: originals at full resolution.
-   The popup grid loads thumbs (fast); the lightbox loads originals (crisp). */
-const tmThumb = (name) => `static/img/explore/thumbs/${name}.jpg`;
+const tmThumb = (name) => `static/img/explore/${name}.jpg`;
 const tmFull  = (name) => `static/img/explore/${name}.jpg`;
 
 /* ── MAP ─────────────────────────────────────────────────────── */
@@ -266,7 +263,7 @@ function tmCityPopupHtml(country, city) {
   const photos = city.imgs.map((name, i) => `
     <div class="tm-ph" data-idx="${i}">
       <img src="${tmThumb(name)}" alt="" loading="lazy"
-           onerror="this.src='${tmFull(name)}';this.onerror=null;">
+           onerror="this.src='https://picsum.photos/400/280?random=${i}'">
       <div class="tm-zoom-hint"><i class="fa-solid fa-expand"></i> View</div>
     </div>`).join('');
   /* Use "location" label for countries with multiple pink pins (regions, not just cities) */
@@ -277,7 +274,7 @@ function tmCityPopupHtml(country, city) {
       <div class="tm-popup-photos">${photos}</div>
       <div class="tm-popup-text">
         <div class="tm-city-badge" style="color:${t.color};background:${t.color}14;border-color:${t.color}30">
-          <i class="${t.icon}"></i> <span class="fi fi-${country.flag}" title="${country.name}"></span> ${country.name}
+          <i class="${t.icon}"></i> ${country.flag} ${country.name}
           <span class="tm-type-tag">${t.label}</span>
         </div>
         <div class="tm-popup-title">${city.name}</div>
@@ -292,16 +289,19 @@ function tmCityPopupHtml(country, city) {
     </div>`;
 }
 
-let tmActiveItem   = null;
-const tmAllMarkers = [];        /* { marker, type } — populated in forEach below */
-const tmActiveFilters = new Set(); /* empty = show all */
+let tmActiveItem = null;
 
 tmCountries.forEach(c => {
-  /* Location pins — country globe pins removed; only typed location pins shown */
+  /* Country pin */
+  L.marker([c.lat, c.lng], { icon:tmCountryIcon(), riseOnHover:true, zIndexOffset:100 })
+    .bindTooltip(`${c.flag} ${c.name}`, { sticky:true, offset:[0,-18], direction:'top', className:'tm-tt' })
+    .on('click', () => tmMap.flyTo([c.lat, c.lng], 6, { duration:1.4, easeLinearity:0.2 }))
+    .addTo(tmMap);
+
+  /* Location pins */
   c.cities.forEach(city => {
     const fullSrcs = city.imgs.map(name => tmFull(name));
-    const pinType  = city.type || 'default';
-    const marker   = L.marker([city.lat, city.lng], { icon:tmCityIcon(pinType), riseOnHover:true })
+    L.marker([city.lat, city.lng], { icon:tmCityIcon(city.type), riseOnHover:true })
       .bindPopup(tmCityPopupHtml(c, city), { maxWidth:410, minWidth:350, className:'tm-popup', offset:[0,-8] })
       .bindTooltip(`📍 ${city.name}`, { sticky:true, offset:[0,-14], direction:'top', className:'tm-tt' })
       .on('popupopen', () => {
@@ -314,10 +314,8 @@ tmCountries.forEach(c => {
             });
           });
         }, 80);
-      });
-    marker.addTo(tmMap);
-    /* Store marker reference for filter toggling */
-    tmAllMarkers.push({ marker, type: pinType });
+      })
+      .addTo(tmMap);
   });
 });
 
@@ -335,7 +333,7 @@ function tmRenderList(filter) {
     el.className = 'tm-country-item';
     el.style.animationDelay = `${i * 0.032 + 0.4}s`;
     el.innerHTML = `
-      <div class="tm-c-flag"><span class="fi fi-${c.flag}"></span></div>
+      <div class="tm-c-flag">${c.flag}</div>
       <div class="tm-c-body">
         <div class="tm-c-name">${c.name}</div>
         <div class="tm-c-desc">${c.cities.length} ${locWord} · ${c.desc}</div>
@@ -383,85 +381,25 @@ document.getElementById('tm-s-c').textContent = new Set(tmCountries.map(c => tmC
   });
 })();
 
-/* ── LEGEND — panel-style: collapsible, scrollable, filterable ── */
+/* ── LEGEND — auto-built from tmPinTypes, only shows types actually used ── */
 (function tmBuildLegend() {
-  const legendEl  = document.getElementById('tm-legend');
-  const listEl    = document.getElementById('tm-legend-list');
-  const badgeEl   = document.getElementById('tm-types-badge');
-  const resetBtn  = document.getElementById('tm-legend-reset-btn');
-  const toggleBtn = document.getElementById('tm-legend-toggle');
-  if (!legendEl || !listEl) return;
-
-  /* Collect types actually used in the data */
+  const legendEl = document.getElementById('tm-legend');
+  if (!legendEl) return;
+  /* Collect which types are actually used in the data */
   const usedTypes = new Set();
   tmCountries.forEach(c => c.cities.forEach(city => usedTypes.add(city.type || 'default')));
-
-  /* Update the active-count badge */
-  function tmUpdateBadge() {
-    const n = tmActiveFilters.size;
-    badgeEl.textContent = n === 0 ? 'all shown' : `${n} active`;
-  }
-
-  /* Show / hide markers according to active filters */
-  function tmApplyFilter() {
-    tmAllMarkers.forEach(({ marker, type }) => {
-      if (tmActiveFilters.size === 0 || tmActiveFilters.has(type)) {
-        marker.addTo(tmMap);
-      } else {
-        marker.remove();
-      }
-    });
-    tmUpdateBadge();
-  }
-
-  /* Build one row per used type */
+  /* Render one row per used type (in registry order) */
   Object.entries(tmPinTypes).forEach(([key, t]) => {
     if (key === 'default' || !usedTypes.has(key)) return;
     const row = document.createElement('div');
     row.className = 'tm-legend-item';
-    row.dataset.type = key;
     row.innerHTML = `
       <div class="tm-legend-pill" style="background:${t.color}">
         <i class="${t.icon}"></i>
       </div>
       <span>${t.label}</span>`;
-
-    row.addEventListener('click', () => {
-      if (tmActiveFilters.has(key)) {
-        tmActiveFilters.delete(key);
-        row.classList.remove('tm-legend-active');
-      } else {
-        tmActiveFilters.add(key);
-        row.classList.add('tm-legend-active');
-      }
-      tmApplyFilter();
-    });
-
-    listEl.appendChild(row);
+    legendEl.appendChild(row);
   });
-
-  /* Reset button — clears all filters */
-  if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      tmActiveFilters.clear();
-      listEl.querySelectorAll('.tm-legend-item').forEach(r => r.classList.remove('tm-legend-active'));
-      tmApplyFilter();
-    });
-  }
-
-  /* Toggle collapse — mirrors panel toggle behaviour */
-  if (toggleBtn) {
-    /* Auto-collapse on mobile */
-    if (window.innerWidth <= 768) {
-      legendEl.classList.add('tm-legend--collapsed');
-    }
-    toggleBtn.addEventListener('click', () => {
-      legendEl.classList.toggle('tm-legend--collapsed');
-    });
-  }
-
-  /* Initialise badge */
-  tmUpdateBadge();
 })();
 
 /* ── MAP HEIGHT: fills gap between header and bottom of viewport ─ */
