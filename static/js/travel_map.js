@@ -462,6 +462,105 @@ document.getElementById('tm-s-c').textContent = new Set(tmCountries.map(c => tmC
 
   /* Initialise badge */
   tmUpdateBadge();
+
+  /* ── Mobile FAB + Bottom Sheet ─────────────────────────────── */
+  const fabEl       = document.getElementById('tm-filter-fab');
+  const sheetEl     = document.getElementById('tm-filter-sheet');
+  const sheetListEl = document.getElementById('tm-sheet-list');
+  const sheetBadge  = document.getElementById('tm-sheet-badge');
+  const fabBadge    = document.getElementById('tm-fab-badge');
+  const sheetClose  = document.getElementById('tm-sheet-close');
+  const sheetReset  = document.getElementById('tm-sheet-reset-btn');
+
+  function tmOpenSheet() {
+    sheetEl.classList.add('tm-sheet--open');
+    document.body.style.overflow = 'hidden'; /* prevent body scroll behind sheet */
+  }
+  function tmCloseSheet() {
+    sheetEl.classList.remove('tm-sheet--open');
+    document.body.style.overflow = '';
+  }
+
+  /* Sync badge text across desktop legend, sheet, and FAB badge */
+  function tmSyncBadges() {
+    const n = tmActiveFilters.size;
+    const txt = n === 0 ? 'all shown' : `${n} active`;
+    badgeEl.textContent = txt;
+    if (sheetBadge) sheetBadge.textContent = txt;
+    if (fabBadge) {
+      fabBadge.textContent = n;
+      fabBadge.classList.toggle('tm-fab-badge--on', n > 0);
+    }
+  }
+
+  if (fabEl && sheetEl && sheetListEl) {
+    /* Clone legend items into sheet list so both panels stay in sync */
+    Object.entries(tmPinTypes).forEach(([key, t]) => {
+      if (key === 'default' || !usedTypes.has(key)) return;
+      const row = document.createElement('div');
+      row.className = 'tm-legend-item';
+      row.dataset.type = key;
+      row.innerHTML = `
+        <div class="tm-legend-pill" style="background:${t.color}">
+          <i class="${t.icon}"></i>
+        </div>
+        <span>${t.label}</span>`;
+
+      /* Keep desktop + sheet rows visually in sync */
+      function tmSyncRowState(active) {
+        /* find matching row in desktop legend list */
+        const desktopRow = listEl.querySelector(`.tm-legend-item[data-type="${key}"]`);
+        [row, desktopRow].forEach(r => {
+          if (!r) return;
+          r.classList.toggle('tm-legend-active', active);
+        });
+      }
+
+      row.addEventListener('click', () => {
+        const nowActive = !tmActiveFilters.has(key);
+        if (nowActive) tmActiveFilters.add(key); else tmActiveFilters.delete(key);
+        tmSyncRowState(nowActive);
+        tmApplyFilter();
+        tmSyncBadges();
+      });
+      sheetListEl.appendChild(row);
+    });
+
+    /* FAB opens sheet */
+    fabEl.addEventListener('click', tmOpenSheet);
+
+    /* Close button + backdrop tap close sheet */
+    if (sheetClose) sheetClose.addEventListener('click', tmCloseSheet);
+    sheetEl.addEventListener('click', e => {
+      if (e.target === sheetEl) tmCloseSheet();
+    });
+
+    /* Sheet reset button */
+    if (sheetReset) {
+      sheetReset.addEventListener('click', () => {
+        tmActiveFilters.clear();
+        sheetListEl.querySelectorAll('.tm-legend-item').forEach(r => r.classList.remove('tm-legend-active'));
+        listEl.querySelectorAll('.tm-legend-item').forEach(r => r.classList.remove('tm-legend-active'));
+        tmApplyFilter();
+        tmSyncBadges();
+      });
+    }
+
+    /* Intercept desktop reset to also sync sheet rows */
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        sheetListEl.querySelectorAll('.tm-legend-item').forEach(r => r.classList.remove('tm-legend-active'));
+        tmSyncBadges();
+      });
+    }
+
+    /* Override tmUpdateBadge to also update sheet/fab */
+    const _origUpdate = tmUpdateBadge;
+    tmUpdateBadge = tmSyncBadges;
+
+    /* Initial badge state */
+    tmSyncBadges();
+  }
 })();
 
 /* ── MAP HEIGHT: fills gap between header and bottom of viewport ─ */
@@ -469,10 +568,17 @@ function tmFitHeight() {
   const header = document.querySelector('header.su-masthead');
   const shell  = document.getElementById('tm-shell');
   if (!header || !shell) return;
-  shell.style.height = Math.max(480, window.innerHeight - header.offsetHeight - 2) + 'px';
+  /* Use visualViewport height on mobile (accounts for browser chrome/address bar) */
+  const vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+  const minH = window.innerWidth <= 480 ? 380 : window.innerWidth <= 768 ? 420 : 480;
+  shell.style.height = Math.max(minH, vh - header.offsetHeight - 2) + 'px';
   tmMap.invalidateSize();
 }
 tmFitHeight();
 window.addEventListener('resize', tmFitHeight);
+/* Also refit when mobile browser chrome shows/hides (address bar scroll) */
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', tmFitHeight);
+}
 
 })(); /* end IIFE */

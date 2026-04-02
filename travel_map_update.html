@@ -181,6 +181,13 @@
         </div>
       </div>
 
+      <!-- Mobile: floating Filter button (FAB) — visible on phones/tablets only -->
+      <button class="tm-filter-fab" id="tm-filter-fab" aria-label="Filter pin types">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Pin Types</span>
+        <span class="tm-fab-badge" id="tm-fab-badge"></span>
+      </button>
+
       <!-- Hint bar -->
       <div class="tm-bottom-hint">
         <i class="fa-regular fa-hand-pointer"></i>
@@ -188,6 +195,25 @@
       </div>
 
     </div><!-- /.tm-shell -->
+
+    <!-- Mobile Pin Types bottom sheet — shown when FAB is tapped -->
+    <div class="tm-filter-sheet" id="tm-filter-sheet" role="dialog" aria-modal="true" aria-label="Filter pin types">
+      <div class="tm-filter-sheet-inner" id="tm-filter-sheet-inner">
+        <div class="tm-sheet-handle"></div>
+        <div class="tm-sheet-header">
+          <span class="tm-sheet-title">Pin Types</span>
+          <span class="tm-sheet-badge" id="tm-sheet-badge">all shown</span>
+          <button class="tm-sheet-close" id="tm-sheet-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="tm-sheet-list" id="tm-sheet-list"></div>
+        <div class="tm-sheet-footer">
+          <button class="tm-sheet-reset-btn" id="tm-sheet-reset-btn">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Show All Types</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- Whitespace between map and footer -->
     <div class="tm-page-spacer"></div>
