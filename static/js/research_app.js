@@ -57,28 +57,61 @@ function getFilteredPublications() {
   return filtered;
 }
 
-// ===== Chicago-style author formatting for publication cards =====
-// First author: crimson + bold. Co-authors: normal weight, same color.
-// "Kosal Nith, Sovannroeun Samreth & Dina Chhorn"
-// → <span style="color:#b1040e;font-weight:700;">Kosal Nith</span>, Sovannroeun Samreth & Dina Chhorn
+// ===== Co-author website directory =====
+const coAuthorLinks = {
+  'Sovannroeun Samreth':    'https://scholar.google.com/citations?user=samreth',
+  'Dina Chhorn':            'https://www.cdri.org.kh/staff/dina-chhorn',
+  'Yuki Kanayama':          'https://scholar.google.com/citations?user=kanayama',
+  'Simona Iammarino':       'https://www.lse.ac.uk/geography-and-environment/people/academic-staff/simona-iammarino',
+  'Sumontheany Muth':       'https://scholar.google.com/citations?user=muth',
+  'Daniel Yonto':           'https://www.danielyonto.com',
+  'Yudo Angorro':           'https://scholar.google.com/citations?user=angorro',
+  'Vuthoun Khiev':          'https://scholar.google.com/citations?user=khiev',
+  'I Younan An':            'https://www.cdri.org.kh',
+  'Sivly Houy':             'https://www.cdri.org.kh',
+  'Muny Nhim Kean':         'https://www.cdri.org.kh',
+  'Sosengphyrun Mao':       'https://www.cdri.org.kh',
+  'Summer-Solstice Thomas': 'https://asiafoundation.org',
+  'Singhong Ly':            'https://scholar.google.com/citations?user=ly',
+  'Kimly Lay':              'https://scholar.google.com/citations?user=lay',
+  'Sopheak Song':           'https://www.cdri.org.kh',
+  'Ronald A. Ruran':        'https://scholar.google.com/citations?user=ruran',
+  'Hang Panha Hour':        'https://scholar.google.com/citations?user=hour',
+};
+
+// ===== Author display: "Kosal Nith" bold+crimson, then "(with X, Y and Z)" with links =====
+// Format matches image 2: Kosal Nith (with Stéphane Dupraz and Jón Steinsson)
 function formatAuthorsChicagoMeta(authorsStr) {
   if (!authorsStr) return '';
-  const ampIdx = authorsStr.search(/\s*&\s*/);
-  const commaIdx = authorsStr.indexOf(',');
 
-  // Find where first author ends — first " & " or ", " before second name
-  let firstEnd = -1;
-  const ampMatch = authorsStr.match(/^([^&,]+?)\s*[,&]/);
-  if (ampMatch) {
-    firstEnd = ampMatch[1].length;
+  const parts = authorsStr.split(/\s*&\s*|\s*,\s*(?=[A-Z])/);
+  const first = parts[0].trim();
+  const coAuthors = parts.slice(1).map(a => a.trim()).filter(Boolean);
+
+  // First author: bold crimson (always Kosal Nith)
+  const firstHtml = `<span style="color:#b1040e;font-weight:700;">${first}</span>`;
+
+  if (!coAuthors.length) return firstHtml;
+
+  // Build co-author list with links
+  const coHtml = coAuthors.map(name => {
+    const url = coAuthorLinks[name];
+    return url
+      ? `<a href="${url}" target="_blank" style="color:#1f4a7c;font-weight:500;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${name}</a>`
+      : `<span style="color:#2e2d29;">${name}</span>`;
+  });
+
+  // Join: "X", "X and Y", "X, Y and Z"
+  let coStr;
+  if (coHtml.length === 1) {
+    coStr = coHtml[0];
+  } else if (coHtml.length === 2) {
+    coStr = coHtml[0] + ' and ' + coHtml[1];
   } else {
-    firstEnd = authorsStr.length;
+    coStr = coHtml.slice(0, -1).join(', ') + ' and ' + coHtml[coHtml.length - 1];
   }
 
-  const firstName = authorsStr.slice(0, firstEnd).trim();
-  const rest = authorsStr.slice(firstEnd).trim();
-
-  return `<span style="color:#b1040e;font-weight:700;">${firstName}</span>${rest ? '<span style="color:#2e2d29;font-weight:400;">' + rest + '</span>' : ''}`;
+  return `${firstHtml} <span style="color:#4a5568;font-weight:400;">(with ${coStr})</span>`;
 }
 
 // ===== Rendering: Publications List =====
@@ -112,7 +145,8 @@ function renderPublicationsWithPagination() {
             <div class="pub-title">
               <a href="#" class="pub-detail-link" data-pub-idx="${publicationsData.indexOf(pub)}">${pub.title}</a>
             </div>
-            <div class="pub-meta">${formatAuthorsChicagoMeta(pub.authors)}, ${pub.date || ''}, <em>${pub.outlet || ''}</em></div>
+            <div class="pub-meta">${formatAuthorsChicagoMeta(pub.authors)}</div>
+            <div class="pub-outlet" style="font-size:1.6rem;color:#4a5568;margin-bottom:0.3rem;">${pub.date ? `${pub.date}, ` : ''}<em style="color:#4a5568;">${pub.outlet || ''}</em></div>
             <div class="pub-breadcrumb">${pub.breadcrumb || 'Research output'}</div>
             <div class="badge-row">
               ${pub.oa ? '<span class="oa-badge"><i class="fas fa-lock-open"></i> Open Access</span>' : ''}
