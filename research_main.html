@@ -132,17 +132,7 @@
     <div id="pubListView">
       <div class="research-container">
         <div class="research-header">
-          <div class="research-title">
-            <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
-              <path d="M20 10 C16 8 10 7 4 8 L4 32 C10 31 16 32 20 34 Z" fill="#9aaec0"/>
-              <path d="M20 10 C24 8 30 7 36 8 L36 32 C30 31 24 32 20 34 Z" fill="#6c86a3"/>
-              <line x1="8" y1="14" x2="18" y2="13" stroke="white" stroke-width="1.2"/>
-              <line x1="8" y1="18" x2="18" y2="17" stroke="white" stroke-width="1.2"/>
-              <line x1="32" y1="14" x2="22" y2="13" stroke="white" stroke-width="1.2"/>
-              <rect x="18.5" y="9" width="3" height="25" fill="#3f5e83" rx="1"/>
-            </svg>
-            Research output
-          </div>
+          <div class="research-title">Research output</div>
           <div class="type-pills">
             <button class="type-pill" data-filter-type="articles">
               <span class="pill-number">1</span><span class="pill-label">Journal article</span>
@@ -158,11 +148,11 @@
             </button>
             <div class="more-wrapper">
               <button class="type-pill" id="moreButton">
-                <span class="pill-number">7</span><span class="pill-label">More</span>
+                <span class="pill-number">20</span><span class="pill-label">More</span>
               </button>
               <div id="moreDropdown" class="more-dropdown">
+                <div class="more-item" data-more-type="opeds"><strong>15</strong> Op-Ed / Commentary</div>
                 <div class="more-item" data-more-type="policy"><strong>2</strong> Policy brief</div>
-                <div class="more-item" data-more-type="opeds"><strong>9</strong> Op-Ed / Commentary</div>
                 <div class="more-item" data-more-type="progress"><strong>3</strong> Work in progress</div>
               </div>
             </div>
@@ -170,86 +160,104 @@
         </div>
 
         <div class="two-columns">
-          <aside class="sidebar">
+          <aside class="research-sidebar">
             <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Search in all content</a>
-            <div class="filter-heading">Filters for Publications</div>
-            <div class="filter-heading" style="margin-top: 0.5rem;">Type</div>
-            <div class="filter-group" id="typeFilterGroup">
+            <div class="filter-section-label">Filters for Publications</div>
+
+            <!-- Type filter -->
+            <div class="filter-group">
+              <div class="filter-heading">Type</div>
               <div id="fullTypeList"></div>
-              <button class="show-more-btn" id="showMoreTypesBtn">Show more ›</button>
+              <button class="show-more-btn toggle-type" id="showMoreTypesBtn">Show more ›</button>
             </div>
-            <hr>
-            <div class="filter-heading">Open Access</div>
-            <label class="custom-check">
-              <input type="checkbox" id="oaFilterCheckbox">
-              <span class="check-box"></span>
-              <span class="custom-check-left">
-                <span>Show OA content</span>
-                <span class="count-badge">(8)</span>
-              </span>
-            </label>
-            <hr>
-            <div class="filter-heading">Publication Year</div>
-            <div id="yearFilterGroup">
-              <div class="year-range-wrap">
-                <div class="year-range-values">
-                  <span class="year-range-val" id="yearMinDisplay">2018</span>
-                  <span class="year-range-val" id="yearMaxDisplay">2026</span>
+
+            <!-- Open Access filter -->
+            <div class="filter-group">
+              <div class="filter-heading">Open Access</div>
+              <label class="custom-check">
+                <input type="checkbox" id="oaFilterCheckbox">
+                <span class="check-box"></span>
+                <span class="custom-check-left">
+                  <span>Show OA content</span>
+                  <span class="count-badge">(4)</span>
+                </span>
+              </label>
+            </div>
+
+            <!-- Year range slider (activity-style floating labels) -->
+            <div class="filter-group">
+              <div class="filter-heading">Publication Year</div>
+              <div class="year-slider-wrap">
+                <div class="year-track-outer">
+                  <div class="year-floating-labels">
+                    <span class="year-float-label" id="yearMinLabel">–</span>
+                    <span class="year-float-label" id="yearMaxLabel">–</span>
+                  </div>
+                  <div class="year-track">
+                    <div class="year-fill" id="yearFill"></div>
+                    <input type="range" id="yearSliderMin" min="2018" max="2026" value="2018" step="1">
+                    <input type="range" id="yearSliderMax" min="2018" max="2026" value="2026" step="1">
+                  </div>
                 </div>
-                <div class="year-range-track-wrap">
-                  <div class="year-range-track"></div>
-                  <div class="year-range-fill" id="yearRangeFill"></div>
-                  <input type="range" id="yearSliderMin" min="2018" max="2026" value="2018" step="1">
-                  <input type="range" id="yearSliderMax" min="2018" max="2026" value="2026" step="1">
-                </div>
-                <div class="year-range-labels">
+                <div class="year-minmax">
                   <span>2018</span>
                   <span>2026</span>
                 </div>
               </div>
             </div>
-            <hr>
-            <div class="filter-heading">Sustainable Development Goals</div>
-            <div id="sdgContainer">
-              <div id="sdgList"></div>
-              <button id="toggleSdgBtn" class="toggle-sdg">Show more ›</button>
+
+            <!-- SDG filter -->
+            <div class="filter-group">
+              <div class="filter-heading">Sustainable Development Goals</div>
+              <div id="sdgContainer">
+                <div id="sdgList"></div>
+                <button id="toggleSdgBtn" class="toggle-sdg">Show more ›</button>
+              </div>
             </div>
-            <hr>
-            <div class="filter-heading">Language</div>
+
+            <!-- Language filter -->
+            <div class="filter-group">
+              <div class="filter-heading">Language</div>
             <div id="langContainer">
               <div id="langList">
                 <label class="custom-check">
                   <input type="checkbox" data-lang="en">
                   <span class="check-box"></span>
-                  <span class="custom-check-left"><span>English</span><span class="count-badge">(154455)</span></span>
+                  <span class="custom-check-left"><span>English</span><span class="count-badge">(32)</span></span>
                 </label>
                 <label class="custom-check">
                   <input type="checkbox" data-lang="fr">
                   <span class="check-box"></span>
-                  <span class="custom-check-left"><span>French</span><span class="count-badge">(2345)</span></span>
+                  <span class="custom-check-left"><span>French</span><span class="count-badge">(1)</span></span>
                 </label>
                 <label class="custom-check">
                   <input type="checkbox" data-lang="km">
                   <span class="check-box"></span>
-                  <span class="custom-check-left"><span>Khmer</span><span class="count-badge">(876)</span></span>
+                  <span class="custom-check-left"><span>Khmer</span><span class="count-badge">(0)</span></span>
                 </label>
               </div>
             </div>
-            <hr>
-            <div class="filter-heading">Journals &amp; Outlets</div>
+
+            <!-- Journals & Outlets -->
+            <div class="filter-group">
+              <div class="filter-heading">Journals &amp; Outlets</div>
             <div class="journals-list">
               Journal of Int'l Development Studies<br>
               South East Asia Research<br>
               East Asia Forum<br>
               The Diplomat<br>
               Cambodianess
+              </div>
             </div>
-            <hr>
-            <div class="filter-heading">Profiles</div>
+
+            <!-- Profiles -->
+            <div class="filter-group" style="border-bottom:none;">
+              <div class="filter-heading">Profiles</div>
             <div class="profile-links">
               <a href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ" target="_blank">Google Scholar</a>
               <a href="https://orcid.org/0000-0002-6976-4733" target="_blank">ORCID</a>
               <a href="https://ideas.repec.org/f/pni504.html" target="_blank">IDEAS/RePec</a>
+              </div>
             </div>
           </aside>
 
@@ -275,8 +283,8 @@
             <div class="sort-bar">
               <span class="result-count" id="resultCount">27 results</span>
               <span>|</span>
-              <a class="sort-link" href="#">Publication Year, Title <i class="fas fa-chevron-down"></i></a>
-              <a class="export-link" href="#"><i class="fas fa-download"></i> Export search results</a>
+              <a class="sort-link" id="sortBtn" href="#">Publication Year, Title <i class="fas fa-chevron-down" id="sortIcon"></i></a>
+              <a class="export-link" id="exportBtn" href="#"><i class="fas fa-download"></i> Export search results</a>
             </div>
 
             <div id="publicationsContainer"></div>

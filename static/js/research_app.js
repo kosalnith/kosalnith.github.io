@@ -8,6 +8,7 @@ let currentSearchTerm = '';
 let yearRangeMin = YEAR_MIN_BOUND;
 let yearRangeMax = YEAR_MAX_BOUND;
 let currentDetailIdx = -1;
+let sortOrder = 'desc'; // 'desc' = newest first, 'asc' = oldest first
 
 // ===== Filtering =====
 
@@ -30,11 +31,16 @@ function getFilteredPublications() {
   const types = selectedTypeLabels.map(label => getFilterKeyFromTypeLabel(label)).filter(k => k !== null);
   const oaOnly = document.getElementById('oaFilterCheckbox').checked;
 
+  // Language filter
+  const selectedLangs = Array.from(document.querySelectorAll('input[data-lang]:checked'))
+    .map(cb => cb.getAttribute('data-lang'));
+
   let filtered = publicationsData.filter(p => {
     if (types.length && !types.includes(p.type)) return false;
     const yearNum = parseInt(p.year);
     if (!isNaN(yearNum) && (yearNum < yearRangeMin || yearNum > yearRangeMax)) return false;
     if (oaOnly && !p.oa) return false;
+    if (selectedLangs.length && !selectedLangs.includes(p.lang || 'en')) return false;
     return true;
   });
 
@@ -49,6 +55,30 @@ function getFilteredPublications() {
     );
   }
   return filtered;
+}
+
+// ===== Chicago-style author formatting for publication cards =====
+// First author: crimson + bold. Co-authors: normal weight, same color.
+// "Kosal Nith, Sovannroeun Samreth & Dina Chhorn"
+// → <span style="color:#b1040e;font-weight:700;">Kosal Nith</span>, Sovannroeun Samreth & Dina Chhorn
+function formatAuthorsChicagoMeta(authorsStr) {
+  if (!authorsStr) return '';
+  const ampIdx = authorsStr.search(/\s*&\s*/);
+  const commaIdx = authorsStr.indexOf(',');
+
+  // Find where first author ends — first " & " or ", " before second name
+  let firstEnd = -1;
+  const ampMatch = authorsStr.match(/^([^&,]+?)\s*[,&]/);
+  if (ampMatch) {
+    firstEnd = ampMatch[1].length;
+  } else {
+    firstEnd = authorsStr.length;
+  }
+
+  const firstName = authorsStr.slice(0, firstEnd).trim();
+  const rest = authorsStr.slice(firstEnd).trim();
+
+  return `<span style="color:#b1040e;font-weight:700;">${firstName}</span>${rest ? '<span style="color:#2e2d29;font-weight:400;">' + rest + '</span>' : ''}`;
 }
 
 // ===== Rendering: Publications List =====
@@ -66,7 +96,9 @@ function renderPublicationsWithPagination() {
 
   const grouped = {};
   pageItems.forEach(p => { if (!grouped[p.year]) grouped[p.year] = []; grouped[p.year].push(p); });
-  const yearOrder = ['2026','2025','2024','2023','2022','2021','2020','2019','2018','progress'];
+  const yearOrder = sortOrder === 'desc'
+    ? ['progress','2026','2025','2024','2023','2022','2021','2020','2019','2018']
+    : ['2018','2019','2020','2021','2022','2023','2024','2025','2026','progress'];
 
   let html = '';
   for (let y of yearOrder) {
@@ -80,7 +112,7 @@ function renderPublicationsWithPagination() {
             <div class="pub-title">
               <a href="#" class="pub-detail-link" data-pub-idx="${publicationsData.indexOf(pub)}">${pub.title}</a>
             </div>
-            <div class="pub-meta"><strong>${pub.authors}</strong>, ${pub.date || ''}, ${pub.outlet || ''}</div>
+            <div class="pub-meta">${formatAuthorsChicagoMeta(pub.authors)}, ${pub.date || ''}, <em>${pub.outlet || ''}</em></div>
             <div class="pub-breadcrumb">${pub.breadcrumb || 'Research output'}</div>
             <div class="badge-row">
               ${pub.oa ? '<span class="oa-badge"><i class="fas fa-lock-open"></i> Open Access</span>' : ''}
@@ -262,12 +294,19 @@ function renderTypeList() {
 function updateYearSliderUI() {
   const minVal = parseInt(document.getElementById('yearSliderMin').value);
   const maxVal = parseInt(document.getElementById('yearSliderMax').value);
-  document.getElementById('yearMinDisplay').textContent = minVal;
-  document.getElementById('yearMaxDisplay').textContent = maxVal;
   const pctMin = (minVal - YEAR_MIN_BOUND) / (YEAR_MAX_BOUND - YEAR_MIN_BOUND) * 100;
   const pctMax = (maxVal - YEAR_MIN_BOUND) / (YEAR_MAX_BOUND - YEAR_MIN_BOUND) * 100;
-  document.getElementById('yearRangeFill').style.left = pctMin + '%';
-  document.getElementById('yearRangeFill').style.width = (pctMax - pctMin) + '%';
+
+  // Floating labels (activity-widget style)
+  const minLabel = document.getElementById('yearMinLabel');
+  const maxLabel = document.getElementById('yearMaxLabel');
+  if (minLabel) { minLabel.textContent = minVal; minLabel.style.left = pctMin + '%'; }
+  if (maxLabel) { maxLabel.textContent = maxVal; maxLabel.style.left = pctMax + '%'; }
+
+  // Fill bar
+  const fill = document.getElementById('yearFill');
+  if (fill) { fill.style.left = pctMin + '%'; fill.style.width = (pctMax - pctMin) + '%'; }
+
   yearRangeMin = minVal;
   yearRangeMax = maxVal;
 }
@@ -304,6 +343,11 @@ function initEventListeners() {
 
   document.getElementById('fullTypeList').addEventListener('change', updateFiltersAndResetPage);
   document.getElementById('oaFilterCheckbox').addEventListener('change', updateFiltersAndResetPage);
+
+  // Language filter checkboxes
+  document.querySelectorAll('input[data-lang]').forEach(cb => {
+    cb.addEventListener('change', updateFiltersAndResetPage);
+  });
 
   // Top pill buttons
   document.querySelectorAll('.type-pill[data-filter-type]').forEach(btn => {
@@ -346,7 +390,51 @@ function initEventListeners() {
     if (!e.target.closest('.more-wrapper')) document.getElementById('moreDropdown').classList.remove('open');
   });
 
-  // Publication list click — navigate to detail
+  // Sort button
+  const sortBtn = document.getElementById('sortBtn');
+  if (sortBtn) {
+    sortBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      sortOrder = sortOrder === 'desc' ? 'asc' : 'desc';
+      const label = sortOrder === 'desc' ? 'Publication Year, Title <i class="fas fa-chevron-down" id="sortIcon"></i>'
+                                         : 'Publication Year, Title <i class="fas fa-chevron-up" id="sortIcon"></i>';
+      sortBtn.innerHTML = label;
+      currentPage = 1;
+      renderPublicationsWithPagination();
+    });
+  }
+
+  // Export button — builds CSV from currently filtered results
+  const exportBtn = document.getElementById('exportBtn');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const filtered = getFilteredPublications();
+      if (!filtered.length) { alert('No results to export.'); return; }
+      const headers = ['Title','Authors','Year','Date','Outlet','Type','OA','Link','Abstract'];
+      const escape = v => `"${String(v || '').replace(/"/g, '""')}"`;
+      const rows = filtered.map(p => [
+        escape(p.title),
+        escape(p.authors),
+        escape(p.year),
+        escape(p.date),
+        escape(p.outlet),
+        escape(p.type),
+        escape(p.oa ? 'Yes' : 'No'),
+        escape(p.link),
+        escape(p.abstract)
+      ].join(','));
+      const csv = [headers.join(','), ...rows].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'kosalnith_research_output.csv';
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a); URL.revokeObjectURL(url);
+    });
+  }
+
+
   document.getElementById('publicationsContainer').addEventListener('click', (e) => {
     const link = e.target.closest('.pub-detail-link');
     if (link) {
@@ -383,25 +471,25 @@ function showDetail(idx) {
       <i class="fas fa-chevron-left"></i>
       <span>
         <span class="nav-label">Previous</span>
-        ${prevPub ? prevPub.title.substring(0, 55) + (prevPub.title.length > 55 ? '…' : '') : '—'}
+        ${prevPub ? prevPub.title.substring(0, 50) + (prevPub.title.length > 50 ? '…' : '') : '—'}
       </span>
     </button>
-    <button class="detail-back-btn" onclick="showList()" style="margin:0;">
-      <i class="fas fa-th-list"></i> All publications
+    <button class="detail-back-btn" onclick="showList()" style="margin:0;white-space:nowrap;">
+      <i class="fas fa-list"></i> All publications
     </button>
     <button class="detail-nav-btn ${!nextPub ? 'disabled' : ''}" onclick="${nextPub ? `showDetail(${idx + 1})` : ''}" style="flex-direction:row-reverse;text-align:right;">
-      <i class="fas fa-chevron-right"></i>
       <span>
         <span class="nav-label">Next</span>
-        ${nextPub ? nextPub.title.substring(0, 55) + (nextPub.title.length > 55 ? '…' : '') : '—'}
+        ${nextPub ? nextPub.title.substring(0, 50) + (nextPub.title.length > 50 ? '…' : '') : '—'}
       </span>
+      <i class="fas fa-chevron-right"></i>
     </button>
   `;
 
   // Breadcrumb
   const typeLabel = pub.breadcrumb || 'Research output';
   document.getElementById('detailBreadcrumb').innerHTML =
-    `<a href="#" onclick="showList();return false;"><i class="fas fa-home" style="font-size:0.75rem;margin-right:3px;"></i> Research output</a>
+    `<a href="#" onclick="showList();return false;"><i class="fas fa-home" style="font-size:1.5rem;margin-right:3px;"></i> Research output</a>
      <span class="sep">›</span>
      <span>${typeLabel}</span>
      <span class="sep">›</span>
@@ -418,22 +506,67 @@ function showDetail(idx) {
 
   // Citation formats
   const yearStr = pub.year && pub.year !== 'progress' ? pub.year : 'n.d.';
-  const apa = `${pub.authors} (${yearStr}). ${pub.title}. <em>${pub.outlet || ''}</em>.${pub.link ? ` <a href="${pub.link}" target="_blank">${pub.link}</a>` : ''}`;
-  const harvard = `${pub.authors.split(',')[0]} et al. (${yearStr}) '${pub.title}', <em>${pub.outlet || ''}</em>.`;
-  const bibtex = `@article{nith${yearStr},
-  title   = {${pub.title}},
-  author  = {${pub.authors}},
-  year    = {${yearStr}},
-  journal = {${pub.outlet || ''}},${pub.link ? `\n  url     = {${pub.link}},` : ''}
-  keywords = {${(pub.keywords || []).join(', ')}}
-}`;
-  const ris = `TY  - JOUR
-T1  - ${pub.title}
-AU  - ${pub.authors}
-PY  - ${yearStr}
-JO  - ${pub.outlet || ''}
-${pub.link ? `UR  - ${pub.link}\n` : ''}KW  - ${(pub.keywords || []).join('\nKW  - ')}
-ER  -`;
+
+  // Authors are already full names in data (e.g. "Kosal Nith & Yuki Kanayama")
+  // Helper: split on " & " or ", " between authors
+  function splitAuthors(raw) {
+    return raw.split(/\s*&\s*/).map(a => a.trim()).filter(Boolean);
+  }
+
+  // For APA/Harvard/Chicago: convert "First Last" → "Last, First"
+  function toLastFirst(name) {
+    const parts = name.trim().split(/\s+/);
+    if (parts.length === 1) return name;
+    const last = parts[parts.length - 1];
+    const first = parts.slice(0, -1).join(' ');
+    return `${last}, ${first}`;
+  }
+
+  // authorsExpanded = full name string for metadata table / BibTeX / RIS
+  const authorsExpanded = pub.authors;
+  const authorList = splitAuthors(pub.authors);
+
+  // APA: Last, First, & Last, First (year). Title. Outlet.
+  function buildAPA(p, yr) {
+    const formatted = authorList.map((a, i) => {
+      const lf = toLastFirst(a);
+      return i === authorList.length - 1 && authorList.length > 1 ? '&amp; ' + lf : lf;
+    }).join(', ');
+    return `${formatted} (${yr}). ${p.title}. <em>${p.outlet || ''}</em>.${p.link ? ` <a href="${p.link}" target="_blank" style="color:#b1040e;">${p.link}</a>` : ''}`;
+  }
+
+  // Harvard: Last, First and Last, First (year) 'Title', Outlet.
+  function buildHarvard(p, yr) {
+    const formatted = authorList.map((a, i) => {
+      const lf = toLastFirst(a);
+      return i === authorList.length - 1 && authorList.length > 1 ? 'and ' + lf : lf;
+    }).join(', ');
+    return `${formatted} (${yr}) '${p.title}', <em>${p.outlet || ''}</em>.`;
+  }
+
+  // Chicago 17th ed: Last, First, First Last, and First Last. YEAR. "Title." Outlet. URL.
+  // e.g. Rossi-Hansberg, Esteban, Pierre-Daniel Sarte, and Felipe Schwartzman. 2026.
+  //      "Cognitive Hubs and Spatial Redistribution." American Economic Journal: Macroeconomics 18 (2): 72–111.
+  function buildChicago(p, yr) {
+    const formatted = authorList.map((a, i) => {
+      if (i === 0) return toLastFirst(a);  // first: Last, First
+      return a;                             // subsequent: First Last
+    });
+    const authStr = formatted.length > 2
+      ? formatted.slice(0, -1).join(', ') + ', and ' + formatted[formatted.length - 1]
+      : formatted.length === 2
+        ? formatted[0] + ', and ' + formatted[1]
+        : formatted[0];
+    const outletStr = p.outlet ? `<em>${p.outlet}</em>` : '';
+    const linkStr = p.link ? ` <a href="${p.link}" target="_blank" style="color:#b1040e;">${p.link}</a>` : '';
+    return `${authStr}. ${yr !== 'n.d.' ? yr : 'n.d.'}. "${p.title}." ${outletStr}.${linkStr}`;
+  }
+
+  const apa      = buildAPA(pub, yearStr);
+  const harvard  = buildHarvard(pub, yearStr);
+  const chicago  = buildChicago(pub, yearStr);
+  const bibtex   = `@article{nith${yearStr},\n  title    = {${pub.title}},\n  author   = {${authorsExpanded}},\n  year     = {${yearStr}},\n  journal  = {${pub.outlet || ''}},${pub.link ? `\n  url      = {${pub.link}},` : ''}\n  keywords = {${(pub.keywords || []).join(', ')}}\n}`;
+  const ris      = `TY  - JOUR\nT1  - ${pub.title}\nAU  - ${authorsExpanded}\nPY  - ${yearStr}\nJO  - ${pub.outlet || ''}\n${pub.link ? `UR  - ${pub.link}\n` : ''}KW  - ${(pub.keywords || []).join('\nKW  - ')}\nER  -`;
 
   // Related publications
   const related = publicationsData
@@ -444,9 +577,9 @@ ER  -`;
   document.getElementById('detailMain').innerHTML = `
     <div class="detail-type-tag">${typeLabel}</div>
     <h1 class="detail-title">${pub.title}</h1>
-    <div class="detail-authors">${pub.authors}</div>
+    <div class="detail-authors">${formatAuthorsChicagoMeta(pub.authors)}</div>
     <div class="detail-affil">
-      <i class="fas fa-university" style="color:#9aaebf;margin-right:6px;font-size:0.8rem;"></i>
+      <i class="fas fa-university" style="color:#9aaebf;margin-right:6px;font-size:1.5rem;"></i>
       Cambodia Development Resource Institute (CDRI) &nbsp;·&nbsp; Phnom Penh, Cambodia
     </div>
     <div class="detail-output-tag">
@@ -466,22 +599,22 @@ ER  -`;
       ${pub.abstract ? `
       <div class="detail-section-title">Abstract</div>
       <div class="detail-abstract">${pub.abstract}</div>` : `
-      <div style="padding:1.2rem;background:#f9fbfd;border-radius:10px;color:#6c7a8e;font-size:0.88rem;margin-bottom:1.5rem;border:1px solid #e8edf5;">
+      <div style="padding:1.2rem;background:#f9fbfd;border-radius:10px;color:#6c7a8e;font-size:1.6rem;margin-bottom:1.5rem;border:1px solid #e8edf5;">
         <i class="fas fa-info-circle" style="margin-right:6px;"></i>No abstract available for this publication.
       </div>`}
 
       <div class="detail-section-title">Publication details</div>
       <table class="detail-meta-table">
-        <tr><td>Authors</td><td>${pub.authors}</td></tr>
+        <tr><td>Authors</td><td>${authorsExpanded}</td></tr>
         <tr><td>Year</td><td>${yearStr !== 'n.d.' ? yearStr : '<em style="color:#6c7a8e;">Work in progress</em>'}</td></tr>
         <tr><td>Date</td><td>${pub.date || '—'}</td></tr>
         <tr><td>Outlet / Journal</td><td>${pub.outlet || '—'}</td></tr>
         <tr><td>Publication type</td><td>${typeLabel}</td></tr>
-        <tr><td>Language</td><td>English</td></tr>
+        <tr><td>Language</td><td>${pub.lang === 'fr' ? 'French' : pub.lang === 'km' ? 'Khmer' : 'English'}</td></tr>
         <tr><td>Open Access</td><td>${pub.oa ? '<span class="detail-badge-oa" style="margin:0;"><i class="fas fa-lock-open"></i> Open Access</span>' : '<span style="color:#6c7a8e;">Restricted</span>'}</td></tr>
         ${pub.forthcoming ? `<tr><td>Status</td><td><span class="forthcoming">Forthcoming</span></td></tr>` : ''}
         ${pub.underReview ? `<tr><td>Status</td><td><span class="under-review">Under Review</span></td></tr>` : ''}
-        ${pub.link ? `<tr><td>External link</td><td><a href="${pub.link}" target="_blank">${pub.link} <i class="fas fa-external-link-alt" style="font-size:0.7rem;"></i></a></td></tr>` : ''}
+        ${pub.link ? `<tr><td>External link</td><td><a href="${pub.link}" target="_blank" style="color:#b1040e;">${pub.link} <i class="fas fa-external-link-alt" style="font-size:1.4rem;"></i></a></td></tr>` : ''}
       </table>
 
       ${pub.keywords && pub.keywords.length ? `
@@ -504,7 +637,7 @@ ER  -`;
     <!-- Fingerprint tab -->
     <div id="detailTabFingerprint" style="display:none;">
       ${fpItems.length ? `
-      <p style="font-size:0.88rem;color:#4b5e77;margin-bottom:1.5rem;line-height:1.6;">
+      <p style="font-size:1.6rem;color:#4b5e77;margin-bottom:1.5rem;line-height:1.6;">
         Dive into the research topics of '<em>${pub.title}</em>'. Together they form a unique fingerprint.
       </p>
       <div class="detail-fp-header">Research topics</div>
@@ -517,41 +650,54 @@ ER  -`;
           <div class="detail-fp-bar-bg">
             <div class="detail-fp-bar" style="width:${fp.pct}%"></div>
           </div>
-          <div style="font-size:0.72rem;color:#9aaebf;margin-top:3px;">${fp.cat}</div>
+          <div style="font-size:1.5rem;color:#9aaebf;margin-top:3px;">${fp.cat}</div>
         </div>`).join('')}` : `
-      <p style="color:#6c7a8e;font-size:0.88rem;padding:1rem 0;">No fingerprint data available for this publication.</p>`}
+      <p style="color:#6c7a8e;font-size:1.6rem;padding:1rem 0;">No fingerprint data available for this publication.</p>`}
     </div>
 
-    <!-- Cite tab -->
+    <!-- Cite tab — redesigned -->
     <div id="detailTabCite" style="display:none;">
       <div class="detail-section-title">Cite this publication</div>
-      <div class="detail-cite-tabs">
-        <div class="detail-cite-tab active" onclick="switchCiteTab(this,'apa')">APA</div>
-        <div class="detail-cite-tab" onclick="switchCiteTab(this,'harvard')">Harvard</div>
-        <div class="detail-cite-tab" onclick="switchCiteTab(this,'bibtex')">BibTeX</div>
-        <div class="detail-cite-tab" onclick="switchCiteTab(this,'ris')">RIS</div>
+
+      <!-- Tab selector bar -->
+      <div class="cite-tab-bar">
+        <button class="cite-tab-btn active" onclick="switchCiteTab(this,'apa')">APA</button>
+        <button class="cite-tab-btn" onclick="switchCiteTab(this,'harvard')">Harvard</button>
+        <button class="cite-tab-btn" onclick="switchCiteTab(this,'chicago')">Chicago</button>
+        <button class="cite-tab-btn" onclick="switchCiteTab(this,'bibtex')">BibTeX</button>
+        <button class="cite-tab-btn" onclick="switchCiteTab(this,'ris')">RIS</button>
       </div>
-      <div class="detail-cite-box" id="citeBoxApa">
-        <button class="detail-copy-btn" onclick="copyText('citeBoxApa')"><i class="fas fa-copy" style="margin-right:3px;"></i>Copy</button>
-        ${apa}
+
+      <!-- Citation boxes -->
+      <div class="cite-box-wrap">
+        <div class="cite-box" id="citeBoxApa">
+          <button class="cite-copy-btn" onclick="copyText('citeBoxApa')"><i class="fas fa-copy"></i> Copy</button>
+          <div class="cite-text">${apa}</div>
+        </div>
+        <div class="cite-box" id="citeBoxHarvard" style="display:none;">
+          <button class="cite-copy-btn" onclick="copyText('citeBoxHarvard')"><i class="fas fa-copy"></i> Copy</button>
+          <div class="cite-text">${harvard}</div>
+        </div>
+        <div class="cite-box" id="citeBoxChicago" style="display:none;">
+          <button class="cite-copy-btn" onclick="copyText('citeBoxChicago')"><i class="fas fa-copy"></i> Copy</button>
+          <div class="cite-text">${chicago}</div>
+        </div>
+        <div class="cite-box" id="citeBoxBibtex" style="display:none;font-family:monospace;">
+          <button class="cite-copy-btn" onclick="copyText('citeBoxBibtex')"><i class="fas fa-copy"></i> Copy</button>
+          <div class="cite-text" style="white-space:pre;">${bibtex}</div>
+        </div>
+        <div class="cite-box" id="citeBoxRis" style="display:none;font-family:monospace;">
+          <button class="cite-copy-btn" onclick="copyText('citeBoxRis')"><i class="fas fa-copy"></i> Copy</button>
+          <div class="cite-text" style="white-space:pre;">${ris}</div>
+        </div>
       </div>
-      <div class="detail-cite-box" id="citeBoxHarvard" style="display:none;">
-        <button class="detail-copy-btn" onclick="copyText('citeBoxHarvard')"><i class="fas fa-copy" style="margin-right:3px;"></i>Copy</button>
-        ${harvard}
-      </div>
-      <div class="detail-cite-box" id="citeBoxBibtex" style="display:none;font-family:monospace;font-size:0.8rem;">
-        <button class="detail-copy-btn" onclick="copyText('citeBoxBibtex')"><i class="fas fa-copy" style="margin-right:3px;"></i>Copy</button>
-        ${bibtex}
-      </div>
-      <div class="detail-cite-box" id="citeBoxRis" style="display:none;font-family:monospace;font-size:0.8rem;">
-        <button class="detail-copy-btn" onclick="copyText('citeBoxRis')"><i class="fas fa-copy" style="margin-right:3px;"></i>Copy</button>
-        ${ris}
-      </div>
-      <div style="margin-top:1rem;display:flex;gap:8px;flex-wrap:wrap;">
-        <a class="detail-export-btn" href="data:text/plain;charset=utf-8,${encodeURIComponent(ris)}" download="citation_nith.ris">
+
+      <!-- Export buttons -->
+      <div class="cite-export-row">
+        <a class="cite-export-btn" href="data:text/plain;charset=utf-8,${encodeURIComponent(ris)}" download="citation_nith.ris">
           <i class="fas fa-download"></i> Export RIS
         </a>
-        <a class="detail-export-btn" href="data:text/plain;charset=utf-8,${encodeURIComponent(bibtex)}" download="citation_nith.bib">
+        <a class="cite-export-btn" href="data:text/plain;charset=utf-8,${encodeURIComponent(bibtex)}" download="citation_nith.bib">
           <i class="fas fa-download"></i> Export BibTeX
         </a>
       </div>
@@ -564,36 +710,36 @@ ER  -`;
 
     ${pub.oa || pub.link ? `
     <div class="detail-card">
-      <div class="detail-card-title"><i class="fas fa-folder-open" style="margin-right:5px;color:#1f4a7c;"></i>Access to Publication</div>
+      <div class="detail-card-title"><i class="fas fa-folder-open" style="margin-right:5px;color:#b1040e;"></i>Access to Publication</div>
       ${pub.oa ? '<div class="detail-badge-oa"><i class="fas fa-lock-open"></i> Open Access</div>' : ''}
       ${pub.link ? `<a class="detail-access-link" href="${pub.link}" target="_blank">
-        <span class="access-icon"><i class="fas fa-external-link-alt" style="color:#1f4a7c;font-size:0.9rem;"></i></span>
-        <span>Open full text<span class="detail-access-sub">${pub.outlet || 'External link'}</span></span>
+        <span class="access-icon"><i class="fas fa-external-link-alt" style="color:#b1040e;font-size:1.6rem;"></i></span>
+        <span style="font-size:1.6rem;">Open full text<span class="detail-access-sub" style="font-size:1.5rem;">${pub.outlet || 'External link'}</span></span>
       </a>` : ''}
     </div>` : ''}
 
     ${pub.downloads ? `
     <div class="detail-card">
-      <div class="detail-card-title"><i class="fas fa-chart-bar" style="margin-right:5px;color:#1f4a7c;"></i>Usage statistics</div>
+      <div class="detail-card-title"><i class="fas fa-chart-bar" style="margin-right:5px;color:#b1040e;"></i>Usage statistics</div>
       <div class="detail-stat-row">
         <div class="detail-stat-num">${pub.downloads}</div>
-        <div style="line-height:1.3;"><strong>Downloads</strong><br><span style="font-size:0.75rem;color:#6c7a8e;">Full-text downloads</span></div>
+        <div style="line-height:1.3;font-size:1.6rem;"><strong>Downloads</strong><br><span style="font-size:1.5rem;color:#6c7a8e;">Full-text downloads</span></div>
       </div>
     </div>` : ''}
 
     <div class="detail-card">
-      <div class="detail-card-title"><i class="fas fa-user-circle" style="margin-right:5px;color:#1f4a7c;"></i>Author profile</div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#1f4a7c,#4a7fb5);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1rem;flex-shrink:0;">K</div>
+      <div class="detail-card-title"><i class="fas fa-user-circle" style="margin-right:5px;color:#b1040e;"></i>Author profile</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#b1040e,#e84655);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:2rem;flex-shrink:0;">K</div>
         <div>
-          <div style="font-size:0.9rem;font-weight:700;color:#0f2b4d;">Kosal Nith</div>
-          <div style="font-size:0.75rem;color:#6c7a8e;">Economist & Researcher</div>
+          <div style="font-size:1.7rem;font-weight:700;color:#2e2d29;">Kosal Nith</div>
+          <div style="font-size:1.5rem;color:#6c7a8e;">Economist &amp; Researcher</div>
         </div>
       </div>
-      <div style="font-size:0.8rem;color:#4b5e77;line-height:1.6;margin-bottom:10px;">
-        <i class="fas fa-map-marker-alt" style="color:#9aaebf;margin-right:4px;font-size:0.75rem;"></i>
+      <div style="font-size:1.6rem;color:#4b5e77;line-height:1.6;margin-bottom:12px;">
+        <i class="fas fa-map-marker-alt" style="color:#b1040e;margin-right:6px;font-size:1.5rem;"></i>
         Cambodia Development Resource Institute<br>
-        <span style="margin-left:14px;">Phnom Penh, Cambodia</span>
+        <span style="margin-left:20px;">Phnom Penh, Cambodia</span>
       </div>
       <div style="display:flex;flex-direction:column;gap:6px;">
         <a href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ" target="_blank" class="detail-share-btn">
@@ -603,13 +749,13 @@ ER  -`;
           <i class="fas fa-id-badge" style="color:#A6CE39;"></i> ORCID
         </a>
         <a href="https://ideas.repec.org/f/pni504.html" target="_blank" class="detail-share-btn">
-          <i class="fas fa-chart-line" style="color:#1f4a7c;"></i> IDEAS/RePec
+          <i class="fas fa-chart-line" style="color:#b1040e;"></i> IDEAS/RePec
         </a>
       </div>
     </div>
 
     <div class="detail-card">
-      <div class="detail-card-title"><i class="fas fa-share-alt" style="margin-right:5px;color:#1f4a7c;"></i>Share</div>
+      <div class="detail-card-title"><i class="fas fa-share-alt" style="margin-right:5px;color:#b1040e;"></i>Share</div>
       <div class="detail-share-row">
         <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(pub.title)}&url=${encodeURIComponent(pub.link || 'https://kosalnith.com')}" target="_blank" class="detail-share-btn">
           <i class="fab fa-twitter" style="color:#1da1f2;"></i> Twitter
@@ -622,8 +768,8 @@ ER  -`;
 
     <div class="detail-card">
       <div class="detail-card-title"><i class="fas fa-atom" style="margin-right:5px;color:#7b3fa0;"></i>Altmetric</div>
-      <div style="display:flex;align-items:center;gap:12px;padding:4px 0 8px;">
-        <svg viewBox="0 0 100 100" width="54" height="54" style="flex-shrink:0;">
+      <div style="display:flex;align-items:center;gap:14px;padding:4px 0 8px;">
+        <svg viewBox="0 0 100 100" width="60" height="60" style="flex-shrink:0;">
           <circle cx="50" cy="50" r="8" fill="#7b3fa0"/>
           <circle cx="50" cy="18" r="7" fill="#e8821a"/>
           <circle cx="76" cy="30" r="6" fill="#7b3fa0"/>
@@ -640,9 +786,7 @@ ER  -`;
           <line x1="50" y1="50" x2="20" y2="60" stroke="#c0c0c0" stroke-width="2.5"/>
           <line x1="50" y1="50" x2="26" y2="30" stroke="#7b3fa0" stroke-width="2.5"/>
         </svg>
-        <div>
-          <div style="font-size:0.78rem;color:#6c7a8e;line-height:1.5;">Attention score<br>across online sources</div>
-        </div>
+        <div style="font-size:1.6rem;color:#6c7a8e;line-height:1.6;">Attention score<br>across online sources</div>
       </div>
     </div>
   `;
@@ -661,9 +805,9 @@ function switchDetailTab(el, tab) {
 }
 
 function switchCiteTab(el, fmt) {
-  document.querySelectorAll('.detail-cite-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.cite-tab-btn').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
-  ['apa', 'harvard', 'bibtex', 'ris'].forEach(id => {
+  ['apa', 'harvard', 'chicago', 'bibtex', 'ris'].forEach(id => {
     const box = document.getElementById('citeBox' + id.charAt(0).toUpperCase() + id.slice(1));
     if (box) box.style.display = id === fmt ? 'block' : 'none';
   });
@@ -671,15 +815,16 @@ function switchCiteTab(el, fmt) {
 
 function copyText(boxId) {
   const box = document.getElementById(boxId);
-  const text = box.innerText.replace(/^[\s\S]*?Copy\n?/, '').trim();
+  const textEl = box.querySelector('.cite-text');
+  const text = textEl ? textEl.innerText.trim() : box.innerText.replace(/^Copy\n?/, '').trim();
   navigator.clipboard.writeText(text).then(() => {
-    const btn = box.querySelector('.detail-copy-btn');
+    const btn = box.querySelector('.cite-copy-btn');
     const orig = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-check" style="margin-right:3px;color:#2c6e2c;"></i>Copied!';
+    btn.innerHTML = '<i class="fas fa-check" style="margin-right:3px;color:#2c6e2c;"></i> Copied!';
     setTimeout(() => btn.innerHTML = orig, 1800);
   }).catch(() => {
     const range = document.createRange();
-    range.selectNodeContents(box);
+    range.selectNodeContents(textEl || box);
     window.getSelection().removeAllRanges();
     window.getSelection().addRange(range);
   });

@@ -33,10 +33,10 @@ const activities = [
      type: "Keynote"
   ══════════════════════════════════════════════════ */
   {
-    title: "The Extractive Industry Sustainability Workshop",
+    title: "Extractive Industry Sustainability Workshop",
     titleUrl: "",
     person: "Kosal Nith", role: "Keynote Speaker",
-    date: "February 2023", location: "Phnom Penh, Cambodia",
+    date: "Feb 2023", location: "Phnom Penh, Cambodia",
     type: "Keynote", typeCategory: "Conference presentations",
     description: "Keynote on extractive industry sustainability, organized by Youth Resource Development Program.",
     keywords: ["Extractive industry", "Sustainability", "Natural resources"],
@@ -67,14 +67,16 @@ const activities = [
   },
   {
     title: "5th NBC Annual Macroeconomic Conference",
-    titleUrl: "",
+    titleUrl: "https://www.nbc.gov.kh/download_files/news_and_events/announ_eng/5th_Macroconference_in_Eng.pdf",
     person: "Kosal Nith", role: "Keynote Speaker",
-    date: "December 2018", location: "Phnom Penh, Cambodia",
+    date: "18 Dec 2018", location: "Cambodia-Japan Cooperation Center, Phnom Penh, Cambodia",
     type: "Keynote", typeCategory: "Conference presentations",
     description: "Keynote presentation at the National Bank of Cambodia Annual Macroeconomic Conference.",
     keywords: ["Macroeconomics", "Monetary policy", "Cambodia", "National Bank of Cambodia"],
     sdg: ["SDG 8 - Decent Work and Economic Growth", "SDG 17 - Partnerships for the Goals"],
-    resources: []
+    resources: [
+      { type: "video", label: "Recording",    url: "https://www.youtube.com/watch?v=Yutzfbn7qao" },
+    ]
   },
 
   /* ══════════════════════════════════════════════════
@@ -84,9 +86,9 @@ const activities = [
   ══════════════════════════════════════════════════ */
   {
     title: "3rd Southeast Asia Economic Research and Development Conference",
-    titleUrl: "",
+    titleUrl: "https://saerdconf.github.io/",
     person: "Kosal Nith", role: "Presenter",
-    date: "October 2025", location: "Siem Reap, Cambodia",
+    date: "30 Oct 2025 → 31 Oct 2025", location: "Paññāsāstra University of Cambodia, Siem Reap, Cambodia",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented research on economic development in Southeast Asia.",
     keywords: ["Economic development", "Southeast Asia", "Cambodia"],
@@ -95,9 +97,9 @@ const activities = [
   },
   {
     title: "PHC Conference on Monetary Innovations in Support of Riel Promotion, Financial Inclusion, and Green Financing",
-    titleUrl: "",
+    titleUrl: "https://www.pacte-grenoble.fr/en/news/monetary-innovations-support-riel-promotion-financial-inclusion-and-green-financing",
     person: "Kosal Nith", role: "Presenter",
-    date: "October 2025", location: "Phnom Penh, Cambodia",
+    date: "21 Oct 2025 → 22 Oct 2025", location: "Royal University of Law and Economics, Phnom Penh, Cambodia",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented on monetary innovations supporting Riel promotion, financial inclusion, and green financing.",
     keywords: ["Monetary policy", "Financial inclusion", "Green finance", "Riel", "Cambodia"],
@@ -106,20 +108,22 @@ const activities = [
   },
   {
     title: "3rd Ponlok Chomnes National Policy Forum",
-    titleUrl: "",
+    titleUrl: "https://policypulse.org/publications/knowledge-briefs/ponlok-chomnes-national-policy-forum-2025-booklet/",
     person: "Kosal Nith", role: "Presenter",
-    date: "September 2025", location: "Phnom Penh, Cambodia",
+    date: "5 Sep 2025", location: "Phnom Penh, Cambodia",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented policy-relevant research on Cambodia's development at the national policy forum.",
     keywords: ["Policy", "Cambodia", "Development"],
     sdg: ["SDG 16 - Peace, Justice and Strong Institutions", "SDG 8 - Decent Work and Economic Growth"],
-    resources: []
+    resources: [
+      { type: "video", label: "Recording",    url: "https://www.youtube.com/watch?v=vFDko4rZ40o" },
+    ]
   },
   {
     title: "6th Pluralumn Workshop on Empowering Young Mind",
-    titleUrl: "",
+    titleUrl: "https://www.uni-bremen.de/en/hospo/news/details/susanna-bolz-praesentiert-auf-dem-6th-pluralumn-workshop-in-hamburg",
     person: "Kosal Nith", role: "Presenter",
-    date: "August 2025", location: "Hamburg, Germany (Virtual)",
+    date: "27 Aug 2025 → 29 Aug 2025", location: "University of Hamburg , Hamburg, Germany (Virtual)",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented at the Pluralumn Workshop on Empowering Young Mind (virtual participation).",
     keywords: ["Youth", "Empowerment", "Education"],
@@ -128,9 +132,9 @@ const activities = [
   },
   {
     title: "6th Nordic Post-Keynesian Conference",
-    titleUrl: "",
+    titleUrl: "https://www.business.aau.dk/research/research-groups/mamtep/pkconference?marketing=pkconference.aau.dk",
     person: "Kosal Nith", role: "Presenter",
-    date: "April 2025", location: "Aalborg, Denmark",
+    date: "23 Apr 2025 → 25 Apr 2025", location: "Aalborg, Denmark",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented on post-Keynesian economics and macroeconomic policy.",
     keywords: ["Post-Keynesian", "Macroeconomics", "Heterodox economics"],
@@ -141,7 +145,7 @@ const activities = [
     title: "28th Forum for Macroeconomics and Macroeconomic Policies Conference",
     titleUrl: "https://www.boeckler.de/de/dokumentationen-2720-progressive-perspectives-in-times-of-polycrisis-57227.htm",
     person: "Kosal Nith", role: "Presenter",
-    date: "October 2024", location: "Berlin, Germany",
+    date: "24 Oct 2024 → 26 Oct 2024", location: "Holiday Inn Berlin, Berlin, Germany",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented on macroeconomic policy challenges at the FMM Conference.",
     keywords: ["Macroeconomics", "Policy", "Macroeconomic policy"],
@@ -153,9 +157,9 @@ const activities = [
   },
   {
     title: "China-Southeast Asia Sustainable Development Workshop",
-    titleUrl: "",
+    titleUrl: "https://ysi.ineteconomics.org/event/china-southeast-asia-sustainable-development-workshop/",
     person: "Kosal Nith", role: "Presenter",
-    date: "October 2024", location: "Suzhou, China",
+    date: "21 Oct 2024 → 22 Oct 2024", location: "Xi’an Jiaotong-Liverpool University, Suzhou, China",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented on sustainable development and China-Southeast Asia economic relations.",
     keywords: ["Sustainable development", "China", "Southeast Asia", "Regional development"],
@@ -164,9 +168,9 @@ const activities = [
   },
   {
     title: "Workshop on Southeast Asia Economic Development in the Post-Pandemic Era",
-    titleUrl: "",
+    titleUrl: "https://ysi.ineteconomics.org/event/ysi-workshop-on-southeast-asia-economic-development-in-the-post-pandemic-era/",
     person: "Kosal Nith", role: "Presenter",
-    date: "September 2024", location: "Kuala Lumpur, Malaysia",
+    date: "12 Sep 2024 → 13 Sep 2024", location: "University of Malaya, Kuala Lumpur, Malaysia",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented on Southeast Asia economic development in the post-pandemic context.",
     keywords: ["Southeast Asia", "Post-pandemic", "Economic development"],
@@ -175,9 +179,9 @@ const activities = [
   },
   {
     title: "1st Southeast Asia Economic Research and Development Conference",
-    titleUrl: "",
+    titleUrl: "https://cdri.org.kh/news/southeast-asia-s-economic-research-and-development-conference",
     person: "Kosal Nith", role: "Presenter",
-    date: "December 2023", location: "Phnom Penh, Cambodia",
+    date: "16 Dec 2023 → 17 Dec 2023", location: "Phnom Penh, Cambodia",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented research on economic development in Southeast Asia at the inaugural conference.",
     keywords: ["Economic research", "Southeast Asia", "Development"],
@@ -186,9 +190,9 @@ const activities = [
   },
   {
     title: "32nd Association of Southeast Asian Studies Annual Conference",
-    titleUrl: "",
+    titleUrl: "https://aseasuk.org/aseas-conference/2023-conference/",
     person: "Kosal Nith", role: "Presenter",
-    date: "November 2023", location: "Depok, Indonesia",
+    date: "27 Nov 2023 → 30 Nov 2023", location: "University of Indonesia, Depok, Indonesia",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented at the Association of Southeast Asian Studies Annual Conference.",
     keywords: ["Southeast Asian studies", "ASEAN", "Regional studies"],
@@ -196,10 +200,10 @@ const activities = [
     resources: []
   },
   {
-    title: "CDRI Regional Symposium",
-    titleUrl: "",
+    title: "CDRI Regional Symposium 2023",
+    titleUrl: "https://cdri.org.kh/news/regional-symposium-on-the-greater-mekong-subregion-s-economic-recovery-the-uncertainty-of-external-events-and-inclusive-development",
     person: "Kosal Nith", role: "Presenter",
-    date: "November 2023", location: "Phnom Penh, Cambodia",
+    date: "22 Nov 2023", location: "Hyatt Regency Phnom Penh, Phnom Penh, Cambodia",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented at the Cambodia Development Resource Institute Regional Symposium.",
     keywords: ["CDRI", "Regional development", "Cambodia"],
@@ -208,9 +212,9 @@ const activities = [
   },
   {
     title: "ELADES YSI Alumni Workshop",
-    titleUrl: "",
+    titleUrl: "https://elades.cepal.org/es/node/64",
     person: "Kosal Nith", role: "Presenter",
-    date: "July 2022", location: "Santiago, Chile (Virtual)",
+    date: "12 Jul 2022 → 13 Jul 2022", location: "Economic Commission for Latin America and the Caribbean, Santiago, Chile (Virtual)",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented at the ELADES Young Scholars Initiative Alumni Workshop (virtual).",
     keywords: ["Young scholars", "Heterodox economics", "Latin America"],
@@ -219,9 +223,9 @@ const activities = [
   },
   {
     title: "5th Nordic Post-Keynesian Conference",
-    titleUrl: "",
+    titleUrl: "https://www.business.aau.dk/the-fifth-nordic-post-keynesian-conference-e16577",
     person: "Kosal Nith", role: "Presenter",
-    date: "April 2022", location: "Aalborg, Denmark",
+    date: "27 Apr 2022 → 29 Apr 2022", location: " Aalborg University, Aalborg, Denmark",
     type: "Conference presentation", typeCategory: "Conference presentations",
     description: "Presented on post-Keynesian economics.",
     keywords: ["Post-Keynesian", "Macroeconomics", "Heterodox economics"],
@@ -265,10 +269,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at National University of Management",
+    title: "Economic Resarch Seminar",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
-    date: "2024", location: "Phnom Penh, Cambodia",
+    date: "2024", location: "National University of Management, Phnom Penh, Cambodia",
     type: "Seminar", typeCategory: "Talks and presentations in private or public companies",
     description: "Invited seminar at National University of Management on macroeconomic policy.",
     keywords: ["Macroeconomics", "Policy", "Cambodia", "Higher education"],
@@ -276,7 +280,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Voice of America",
+    title: "Voice of America",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2023", location: "Phnom Penh, Cambodia",
@@ -287,7 +291,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Politico 360",
+    title: "Politico 360",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2023", location: "Phnom Penh, Cambodia",
@@ -298,7 +302,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Glocator Research and Consulting",
+    title: "Glocator Research and Consulting",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2023", location: "Phnom Penh, Cambodia",
@@ -309,7 +313,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Youth Resource Development Program",
+    title: "Youth Resource Development Program",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2021", location: "Phnom Penh, Cambodia",
@@ -320,7 +324,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at IR's Talk",
+    title: "IR's Talk",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2021", location: "Phnom Penh, Cambodia",
@@ -331,7 +335,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Social Breaking News",
+    title: "Social Breaking News",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2021", location: "Phnom Penh, Cambodia",
@@ -342,7 +346,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Sethakech",
+    title: "Sethakech",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2021", location: "Phnom Penh, Cambodia",
@@ -353,10 +357,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Future Forum",
+    title: "Panel Policy Discussion",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
-    date: "2020", location: "Phnom Penh, Cambodia",
+    date: "2020", location: "Future Forum, Phnom Penh, Cambodia",
     type: "Seminar", typeCategory: "Talks and presentations in private or public companies",
     description: "Invited seminar at Future Forum on economic development.",
     keywords: ["Economic development", "Cambodia", "Future Forum"],
@@ -364,7 +368,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Markets and Markets Research Private Ltd",
+    title: "Markets and Markets Research Private Ltd",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2020", location: "Virtual",
@@ -375,7 +379,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Politikoffee",
+    title: "Weekly Politikoffee Forum",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2020", location: "Virtual",
@@ -386,7 +390,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Youth Resource Development Program",
+    title: "Youth Resource Development Program",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2020", location: "Phnom Penh, Cambodia",
@@ -397,10 +401,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Cambodia Development Center",
+    title: "Cambodia Development Center",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
-    date: "2019", location: "Phnom Penh, Cambodia",
+    date: "2019", location: "Cambodia Development Center, Phnom Penh, Cambodia",
     type: "Seminar", typeCategory: "Talks and presentations in private or public companies",
     description: "Invited seminar at Cambodia Development Center.",
     keywords: ["Development", "Cambodia"],
@@ -408,7 +412,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Future Forum",
+    title: "Future Forum",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2019", location: "Phnom Penh, Cambodia",
@@ -419,7 +423,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Voice of Democracy (VOD)",
+    title: "Voice of Democracy (VOD)",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2019", location: "Phnom Penh, Cambodia",
@@ -430,7 +434,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Royal University of Law and Economics",
+    title: "Royal University of Law and Economics",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2019", location: "Phnom Penh, Cambodia",
@@ -441,7 +445,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Invited Seminar at Youth Resource Development Program",
+    title: "Youth Resource Development Program",
     titleUrl: "",
     person: "Kosal Nith", role: "Speaker",
     date: "2018", location: "Phnom Penh, Cambodia",
@@ -519,7 +523,7 @@ const activities = [
     title: "Summer School on the Professions of Francophone Tourism",
     titleUrl: "",
     person: "Kosal Nith", role: "Participant",
-    date: "21 Jul 2019 → 26 Jul 2019", location: "École Normale Supérieure de Luang Prabang, Laos",
+    date: "21 Jul 2019 → 26 Jul 2019", location: "École Normale Supérieure de Luang Prabang, Luang Prabang, Laos",
     type: "Participation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar",
     description: "Attended summer school on Francophone tourism professions in Laos.",
     keywords: ["Tourism", "Francophone", "Laos", "Summer school"],
@@ -548,7 +552,7 @@ const activities = [
     title: "Untold Stories Behind Financial Crises (1825–2025): Plurality of Causes and Multidimensional Consequences",
     titleUrl: "https://triangle.ens-lyon.fr/spip.php?article13572",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "15 Dec 2025 → 16 Dec 2025", location: "University of Lumière Lyon 2, Lyon, France",
+    date: "15 Dec 2025 → 16 Dec 2025", location: "University of Lumière Lyon 2, Lyon, France (Virtual)",
     type: "Organisation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar",
     description: "Co-organizing conference on the history of financial crises from 1825 to 2025.",
     keywords: ["Financial crises", "Economic history", "Lyon"],
@@ -559,7 +563,7 @@ const activities = [
     title: "Webinar Series on Rethinking Capitalism and Economic Order",
     titleUrl: "https://ysi.ineteconomics.org/event/rethinking-capitalism-and-economic-order-i/",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "September 2025 → present", location: "Online",
+    date: "Sep 2025 → present", location: "Online",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing an ongoing webinar series on rethinking capitalism and the global economic order.",
     keywords: ["Capitalism", "Economic order", "Heterodox economics", "Webinar"],
@@ -567,10 +571,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Lead organiser, 3rd Southeast Asia Economic Research and Development Conference",
-    titleUrl: "",
-    person: "Kosal Nith", role: "Lead organiser",
-    date: "October 2025", location: "Siem Reap, Cambodia",
+    title: "3rd Southeast Asia Economic Research and Development Conference",
+    titleUrl: "https://saerdconf.github.io/",
+    person: "Kosal Nith", role: "Co-organiser",
+    date: "30 Oct 2025 → 31 Oct 2025", location: "Paññāsāstra University of Cambodia, Siem Reap, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Lead organiser of the 3rd annual Southeast Asia Economic Research and Development Conference.",
     keywords: ["Conference", "Southeast Asia", "Economic development"],
@@ -578,10 +582,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Lead organiser, CDRI Regional Symposium",
-    titleUrl: "",
+    title: "CDRI Regional Symposium 2024",
+    titleUrl: "https://cdri.org.kh/news/2nd-regional-symposium-on-digital-and-green-economy-in-the-greater-mekong-subregion",
     person: "Kosal Nith", role: "Lead organiser",
-    date: "2024", location: "Phnom Penh, Cambodia",
+    date: "3 Dec 2024", location: "Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Lead organiser of the CDRI Regional Symposium.",
     keywords: ["CDRI", "Regional development", "Cambodia", "Symposium"],
@@ -589,10 +593,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, China-Southeast Asia Sustainable Development Workshop",
-    titleUrl: "",
+    title: "China-Southeast Asia Sustainable Development Workshop",
+    titleUrl: "https://ysi.ineteconomics.org/event/china-southeast-asia-sustainable-development-workshop/",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "October 2024", location: "Suzhou, China",
+    date: "21 Oct 2024 → 22 Oct 2024", location: "Xi’an Jiaotong-Liverpool University, Suzhou, China",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing the China-Southeast Asia Sustainable Development Workshop.",
     keywords: ["Sustainable development", "China", "Southeast Asia"],
@@ -600,10 +604,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Workshop on Southeast Asia Economic Development in the Post-Pandemic Era",
-    titleUrl: "",
+    title: "Workshop on Southeast Asia Economic Development in the Post-Pandemic Era",
+    titleUrl: "https://ysi.ineteconomics.org/event/ysi-workshop-on-southeast-asia-economic-development-in-the-post-pandemic-era/",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "September 2024", location: "Kuala Lumpur, Malaysia",
+    date: "12 Sep 2024 → 13 Sep 2024", location: "University of Malaya, Kuala Lumpur, Malaysia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing workshop on post-pandemic economic development in Southeast Asia.",
     keywords: ["Post-pandemic", "Economic development", "Southeast Asia"],
@@ -611,10 +615,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Lead organiser, 2nd Southeast Asia Economic Research and Development Conference",
-    titleUrl: "",
+    title: "2nd Southeast Asia Economic Research and Development Conference",
+    titleUrl: "https://saerdconf.github.io/2024-edition.html",
     person: "Kosal Nith", role: "Lead organiser",
-    date: "2024", location: "Phnom Penh, Cambodia",
+    date: "Aug 15 2024 → 16 Aug 2024", location: "Paññāsāstra University of Cambodia, Siem Reap, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Lead organiser of the 2nd Southeast Asia Economic Research and Development Conference.",
     keywords: ["Conference", "Southeast Asia", "Economic development"],
@@ -622,10 +626,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Lead organiser, 1st Southeast Asia Economic Research and Development Conference",
-    titleUrl: "",
+    title: "1st Southeast Asia Economic Research and Development Conference",
+    titleUrl: "https://saerdconf.github.io/2023-edition.html",
     person: "Kosal Nith", role: "Lead organiser",
-    date: "December 2023", location: "Phnom Penh, Cambodia",
+    date: "16 Dec 2023 → 17 Dec 2023", location: "Royal University of Law and Economics, Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Lead organiser of the inaugural Southeast Asia Economic Research and Development Conference.",
     keywords: ["Conference", "Southeast Asia", "Economic development"],
@@ -633,10 +637,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Lead organiser, CDRI Regional Symposium",
-    titleUrl: "",
+    title: "CDRI Regional Symposium 2023",
+    titleUrl: "https://cdri.org.kh/news/regional-symposium-on-the-greater-mekong-subregion-s-economic-recovery-the-uncertainty-of-external-events-and-inclusive-development",
     person: "Kosal Nith", role: "Lead organiser",
-    date: "November 2023", location: "Phnom Penh, Cambodia",
+    date: "03 Nov 2023", location: "Hyatt Regency Phnom Penh, Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Lead organiser of the CDRI Regional Symposium.",
     keywords: ["CDRI", "Regional development", "Cambodia", "Symposium"],
@@ -644,43 +648,45 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Sethakech Webinar Series",
+    title: "Sethakech Webinar Series",
     titleUrl: "",
-    person: "Kosal Nith", role: "Co-organiser",
+    person: "Kosal Nith", role: "Speaker",
     date: "2021", location: "Phnom Penh, Cambodia",
-    type: "Organisation", typeCategory: "Conference organisation or participation",
+    type: "Participation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar",
     description: "Co-organizing the Sethakech Webinar Series on economic issues.",
     keywords: ["Webinar", "Economics", "Cambodia", "Sethakech"],
     sdg: ["SDG 8 - Decent Work and Economic Growth", "SDG 16 - Peace, Justice and Strong Institutions"],
     resources: []
   },
   {
-    title: "Co-organiser, Sethakech Webinar Series",
-    titleUrl: "",
+    title: "Sethakech Webinar Series",
+    titleUrl: "https://sites.google.com/view/sethakech/webinars",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "2020", location: "Phnom Penh, Cambodia",
-    type: "Organisation", typeCategory: "Conference organisation or participation",
+    date: "Jul 2020 → Aug 2021", location: "Phnom Penh, Cambodia",
+    type: "Organisation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar",
     description: "Co-organizing the Sethakech Webinar Series on economic issues.",
     keywords: ["Webinar", "Economics", "Cambodia", "Sethakech"],
     sdg: ["SDG 8 - Decent Work and Economic Growth", "SDG 16 - Peace, Justice and Strong Institutions"],
     resources: []
   },
   {
-    title: "Lead organiser, Econ Study Trip",
-    titleUrl: "",
+    title: "Econ Study Trip 2019",
+    titleUrl: "https://www.facebook.com/share/v/18EbxMXSz5/",
     person: "Kosal Nith", role: "Lead organiser",
-    date: "2019", location: "Siem Reap, Cambodia",
+    date: "07 Mar 2019 → 10 Mar 2019", location: "Siem Reap, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Lead organiser of the Economics Study Trip to Siem Reap.",
     keywords: ["Education", "Economics", "Cambodia"],
     sdg: ["SDG 4 - Quality Education", "SDG 8 - Decent Work and Economic Growth"],
-    resources: []
+    resources: [
+      { type: "video", label: "Recording",    url: "https://www.facebook.com/share/v/1GatnguyBv/" },
+      ]
   },
   {
-    title: "Co-organiser, Econ Juniors' Day",
+    title: "Econ Juniors' Day 2018",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "October 2018", location: "Phnom Penh, Cambodia",
+    date: "23 Oct 2018", location: "Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing the Econ Juniors' Day event.",
     keywords: ["Education", "Economics", "Youth", "Cambodia"],
@@ -688,10 +694,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Extractive Industries Exposure Trip",
+    title: "Extractive Industries Exposure Trip",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "September 2018", location: "Preah Vihear, Cambodia",
+    date: "Sep 2018", location: "Preah Vihear, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing extractive industries exposure trip to Preah Vihear.",
     keywords: ["Extractive industry", "Field trip", "Cambodia"],
@@ -699,10 +705,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Extractive Industries Advocacy Workshop",
+    title: "Extractive Industries Advocacy Workshop",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "August 2018", location: "Phnom Penh, Cambodia",
+    date: "Aug 2018", location: "Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing workshop on advocacy around extractive industries.",
     keywords: ["Extractive industry", "Advocacy", "Cambodia"],
@@ -710,7 +716,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Econ New Year Day",
+    title: "Econ New Year Day 2018",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
     date: "2018", location: "Phnom Penh, Cambodia",
@@ -721,10 +727,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Ligue de la Filière Spéciale Francophone",
+    title: "Ligue de la Filière Spéciale Francophone 2018-2019",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "2018", location: "Phnom Penh, Cambodia",
+    date: "Nov 2018 → Feb 2029", location: "Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing the Francophone League event.",
     keywords: ["Francophone", "Education", "Cambodia"],
@@ -732,7 +738,7 @@ const activities = [
     resources: []
   },
   {
-    title: "Lead organiser, Potluck Social Discussion",
+    title: "Potluck Social Discussion",
     titleUrl: "",
     person: "Kosal Nith", role: "Lead organiser",
     date: "2018", location: "Phnom Penh, Cambodia",
@@ -743,10 +749,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Extractive Industries Campaign",
+    title: "Extractive Industries Campaign 2018",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "2018", location: "Phnom Penh, Cambodia",
+    date: "Nov 2018", location: "Youth Resource Development Program, Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing campaign on extractive industries.",
     keywords: ["Extractive industry", "Advocacy", "Campaign"],
@@ -754,10 +760,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Youth's Perspective on Space for Social Activism",
+    title: "Youth's Perspective on Space for Social Activism",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "October 2017", location: "Phnom Penh, Cambodia",
+    date: "Jul 2017 → Oct 2017", location: "Youth Resource Development Program, Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing forum on youth perspectives on social activism.",
     keywords: ["Youth", "Social activism", "Civil society", "Cambodia"],
@@ -765,10 +771,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Econ New Year Day",
+    title: "Econ New Year Day 2018",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "2017", location: "Phnom Penh, Cambodia",
+    date: "23 Dec 2017", location: "Royal University of Law and Economics, Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing the Economics New Year Day event.",
     keywords: ["Economics", "Community", "Cambodia"],
@@ -776,10 +782,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Ligue de la Filière Spéciale Francophone",
+    title: "Ligue de la Filière Spéciale Francophone 2017-2018",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "2017", location: "Phnom Penh, Cambodia",
+    date: "Nov 2017 → Feb 2018", location: "Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing the Francophone League event.",
     keywords: ["Francophone", "Education", "Cambodia"],
@@ -787,10 +793,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Extractive Industries Campaign",
+    title: "Extractive Industries Campaign 2018",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "2017", location: "Phnom Penh, Cambodia",
+    date: "2017", location: "Youth Resource Development Program, Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing campaign on extractive industries.",
     keywords: ["Extractive industry", "Advocacy", "Campaign"],
@@ -798,10 +804,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Econ New Year Day",
+    title: "Econ New Year Day 2017",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "2016", location: "Phnom Penh, Cambodia",
+    date: "22 Dec 2016", location: "Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing the Economics New Year Day event.",
     keywords: ["Economics", "Community", "Cambodia"],
@@ -809,10 +815,10 @@ const activities = [
     resources: []
   },
   {
-    title: "Co-organiser, Ligue de la Filière Spéciale Francophone",
+    title: "Ligue de la Filière Spéciale Francophone 2016-2017",
     titleUrl: "",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "2016", location: "Phnom Penh, Cambodia",
+    date: "Nov 2016 → Feb 2017", location: "Phnom Penh, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Co-organizing the Francophone League event.",
     keywords: ["Francophone", "Education", "Cambodia"],
@@ -826,10 +832,10 @@ const activities = [
      type: "Consultancy"
   ══════════════════════════════════════════════════ */
   {
-    title: "Consultant, Food and Agriculture Organization of the United Nations (FAO)",
-    titleUrl: "",
+    title: "Public-Social-Private Partnerships for Ecologically-Sound Agriculture and Resilient Livelihood in Northern Tonle Sap Basin (PEARL)",
+    titleUrl: "https://www.greenclimate.fund/project/fp199",
     person: "Kosal Nith", role: "Consultant",
-    date: "December 2025 – present", location: "Remote",
+    date: "Dec 2025 → present", location: "Remote",
     type: "Consultancy", typeCategory: "Consultancy",
     description: "Providing consulting services on agricultural economics for the UN Food and Agriculture Organization.",
     keywords: ["Agriculture", "FAO", "United Nations", "Food security"],
