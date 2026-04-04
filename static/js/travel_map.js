@@ -21,19 +21,19 @@ const tmPinTypes = {
   brewery:     { color:'#b7410e', icon:'fa-solid fa-beer-mug-empty',      label:'Brewery'          },
 
   /* ── NATURE & OUTDOORS  (teal / green family — matches Rexby) ── */
-  beach:       { color:'#16a085', icon:'fa-solid fa-umbrella-beach',      label:'Beach'            },
-  park:        { color:'#27ae60', icon:'fa-solid fa-tree',                label:'Park'             },
-  hike:        { color:'#1e8449', icon:'fa-solid fa-person-hiking',       label:'Hike'             },
-  waterfall:   { color:'#148f77', icon:'fa-solid fa-water',               label:'Waterfall'        },
+  beach:       { color:'#3aa3aa', icon:'fa-solid fa-umbrella-beach',      label:'Beach'            },
+  park:        { color:'#a5ae00', icon:'fa-solid fa-tree',                label:'Park'             },
+  hike:        { color:'#1caa0d', icon:'fa-solid fa-person-hiking',       label:'Hike'             },
+  waterfall:   { color:'#3faa9c', icon:'fa-solid fa-water',               label:'Waterfall'        },
   hotspring:   { color:'#ca6f1e', icon:'fa-solid fa-hot-tub-person',      label:'Hot Spring'       },
   wildlife:    { color:'#117a65', icon:'fa-solid fa-paw',                 label:'Wildlife'         },
   campsite:    { color:'#1a5276', icon:'fa-solid fa-campground',          label:'Campsite'         },
 
   /* ── SIGHTSEEING & CULTURE  (golden / amber — matches Rexby) ── */
-  sightseeing: { color:'#d4ac0d', icon:'fa-solid fa-binoculars',          label:'Sightseeing'      },
+  sightseeing: { color:'#ff4e22', icon:'fa-solid fa-binoculars',          label:'Sightseeing'      },
   museum:      { color:'#b7950b', icon:'fa-solid fa-building-columns',    label:'Museum'           },
-  culture:     { color:'#9a7d0a', icon:'fa-solid fa-masks-theater',       label:'Culture'          },
-  photospot:   { color:'#d68910', icon:'fa-solid fa-camera-retro',        label:'Photospot'        },
+  culture:     { color:'#5260c1', icon:'fa-solid fa-masks-theater',       label:'Culture'          },
+  photospot:   { color:'#ff7b31', icon:'fa-solid fa-camera-retro',        label:'Photospot'        },
   area:        { color:'#7d6608', icon:'fa-solid fa-map-location-dot',    label:'Area'             },
 
   /* ── TRANSPORT  (dark slate blue — matches Rexby) ── */

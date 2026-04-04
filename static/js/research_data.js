@@ -228,6 +228,7 @@ const publicationsData = [
   { title: "Determinants of Informal Borrowing: Evidence from Households in 11 Rural Villages in Cambodia",
     authors: "Kosal Nith & Sovannroeun Samreth", date: "2025 (forthcoming)",
     outlet: "Journal of International Development Studies",
+    month: "forthcoming",
     type: "articles", year: "2025", oa: false, lang: "en", forthcoming: true,
     breadcrumb: "Journal article › Research › peer-review",
     abstract: "Informal borrowing remains an important source of financing for rural Cambodian households, exposing them to exploitative interest rates. Using survey data from 1,183 households in 11 villages, we analyze how financial literacy, social capital, and household characteristics shape borrowing behavior. Higher financial literacy is significantly correlated with a lower likelihood of relying on informal loans. Finance-related group membership reduces informal borrowing; other community group membership does not. Household income and residential land ownership reduce reliance on informal borrowing.",
@@ -237,8 +238,9 @@ const publicationsData = [
   // ══ Book Chapters (2) ════════════════════════════════════════
 
   { title: "Cambodian Cassava: An Analysis on Production, Productivity, and Gender Impacts",
-    authors: "Nith, Kosal and Yuki Kanayama", date: "Oct 2025",
-    outlet: "Navigating Through Crisis: Socio-Economic Impact of COVID-19 in the Mekong Delta Countries, Springer",
+    authors: "Kosal Nith & Yuki Kanayama", date: "Oct 2025",
+    outlet: "Navigating Through Crisis: Socio-Economic Impact of COVID-19 in the Mekong Delta Countries",
+    publisher: "Springer", month: "October", year_pub: "2025",
     type: "chapters", year: "2026", oa: true, lang: "en",
     breadcrumb: "Book chapter › Research › peer-review",
     abstract: "Using data from 301 cassava-farming households across five major cultivation provinces, this study examines the pandemic's impact on production, labor productivity, and labor participation. Between 2019 and 2021, average production costs rose by 9.3%, while income declined by 8.5%. Despite expanding cultivated land and increasing hired labor, overall productivity decreased.",
@@ -254,24 +256,32 @@ const publicationsData = [
     abstract: "This paper examines how the development of food science, the role of R&D in the promotion, and the development of the food industry could positively impact the agricultural sector in Cambodia.",
     keywords: ["Food Science","R&D","Agriculture","Policy","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
-    link: "https://www.futureforum.asia/policy-briefs-and-snapshots/food-science-in-cambodia" },
+    link: "https://www.futureforum.asia/policy-briefs-and-snapshots/food-science-in-cambodia",
+    resources: [
+      { label: "Paper", url: "https://www.futureforum.asia/policy-briefs-and-snapshots/food-science-in-cambodia", icon: "fa-file-pdf" },
+      { label: "Slides", url: "", icon: "fa-person-chalkboard" },
+      { label: "Thread", url: "", icon: "fa-brands fa-x-twitter" }
+    ] },
 
   // ══ Working Papers (4) ═══════════════════════════════════════
-
   { title: "Does Social Capital Strengthen the Stability of Household Income? Evidence from Cambodia",
     authors: "Kosal Nith, Sovannroeun Samreth & Dina Chhorn",
     date: "Aug 2025", outlet: "Working paper",
+    abstract: "The measurement of Special Economic Zones (SEZ) spatial impacts remains a persistent challenge for practitioners in understudied regions where conventional data collection methods prove cost-prohibitive. This study advances a replicable geospatial methodology leveraging Google's Open Buildings 2.5D Temporal Dataset to analyze development patterns in data-scarce contexts. Through examination of 11 SEZs in Cambodia's Svay Rieng province (2016-2023), we reveal two critical findings that challenge prevailing assumptions: first, SEZ-induced spillovers extend substantially beyond the conventionally assumed 1-2 kilometer impact radius; second, development follows a distinctive dual-ring spatial pattern, with outer zones (2-5km) demonstrating near-equivalent building density (21.27/km²) to immediate perimeter areas. Our approach provides three key contributions to the literature and practice: (1) a transferable framework for SEZ impact assessment in understudied regions, (2) empirical evidence challenging linear distance-decay models of agglomeration effects, and (3) demonstration of how accessible satellite-derived data can overcome traditional barriers to evidence-based planning. The methodology's versatility extends beyond SEZ analysis, offering practitioners an operational toolkit for growth monitoring, infrastructure impact assessment, and cross-border development analysis across ASEAN's diverse development contexts. By transforming publicly available building data into actionable spatial intelligence, this approach significantly enhances planning capacity in regions where ground-truth data remains systematically unavailable.",
     type: "working", year: "2025", oa: false, lang: "en",
     breadcrumb: "Working paper",
     keywords: ["Social Capital","Household Income","Income Stability","Cambodia"],
-    kwStrength: ["full","full","full","none"] },
+    kwStrength: ["full","full","full","none"],
+    resources: [
+      { label: "Slides", url: "", icon: "fa-person-chalkboard" }
+    ] },
 
   { title: "Measuring SEZ Spillovers in Data-Scarce Regions: Evidence from Cambodia's Open Building Data",
     authors: "Kosal Nith, Daniel Yonto, Yudo Angorro & Vuthoun Khiev",
     date: "Jun 2025", outlet: "Submitted to South East Asia Research",
     type: "working", year: "2025", oa: false, lang: "en", underReview: true,
     breadcrumb: "Working paper",
-    abstract: "This study advances a replicable geospatial methodology leveraging Google's Open Buildings 2.5D Temporal Dataset to analyze development patterns in data-scarce contexts. Examining 11 SEZs in Cambodia's Svay Rieng province (2016–2023), we find SEZ-induced spillovers extend substantially beyond the conventionally assumed 1–2 km radius, with outer zones (2–5 km) demonstrating near-equivalent building density.",
+    abstract: "The measurement of Special Economic Zones (SEZ) spatial impacts remains a persistent challenge for practitioners in understudied regions where conventional data collection methods prove cost-prohibitive. This study advances a replicable geospatial methodology leveraging Google's Open Buildings 2.5D Temporal Dataset to analyze development patterns in data-scarce contexts. Through examination of 11 SEZs in Cambodia's Svay Rieng province (2016-2023), we reveal two critical findings that challenge prevailing assumptions: first, SEZ-induced spillovers extend substantially beyond the conventionally assumed 1-2 kilometer impact radius; second, development follows a distinctive dual-ring spatial pattern, with outer zones (2-5km) demonstrating near-equivalent building density (21.27/km²) to immediate perimeter areas. Our approach provides three key contributions to the literature and practice: (1) a transferable framework for SEZ impact assessment in understudied regions, (2) empirical evidence challenging linear distance-decay models of agglomeration effects, and (3) demonstration of how accessible satellite-derived data can overcome traditional barriers to evidence-based planning. The methodology's versatility extends beyond SEZ analysis, offering practitioners an operational toolkit for growth monitoring, infrastructure impact assessment, and cross-border development analysis across ASEAN's diverse development contexts. By transforming publicly available building data into actionable spatial intelligence, this approach significantly enhances planning capacity in regions where ground-truth data remains systematically unavailable.",
     keywords: ["Special Economic Zones","Spillovers","Geospatial Analysis","Open Buildings","Cambodia"],
     kwStrength: ["full","full","full","half","none"] },
 
@@ -283,7 +293,12 @@ const publicationsData = [
     abstract: "Analysing Cambodia's Greenfield FDI inflows and outflows over 20 years (2003–2022) using fDiMarkets data. Key attracting sectors include real estate, financial services, and renewable energy. Most FDI is concentrated in the capital. Cambodia's outward FDI began in 2008, mainly targeting ASEAN countries.",
     keywords: ["Foreign Direct Investment","Greenfield FDI","Global Value Chains","Economic Development","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
-    downloads: 43 },
+    downloads: 43,
+    resources: [
+      { label: "Paper", url: "https://www.cdri.org.kh/webdata/doc/2024/wp149e.pdf", icon: "fa-file-pdf" },
+      { label: "Slides", url: "", icon: "fa-person-chalkboard" },
+      { label: "Thread", url: "", icon: "fa-brands fa-x-twitter" }
+    ] },
 
   { title: "Monetary Policy and Household Income Distribution: An Empirical Analysis from Cambodia",
     authors: "Kosal Nith", date: "Apr 2022", outlet: "Future Forum",
@@ -292,7 +307,12 @@ const publicationsData = [
     abstract: "Using a Structural VAR model, this paper finds that monetary policy shocks via exchange rate have positive consequences on inflation, real output, and unemployment. Cross-sectional data 2014–2020 shows earning heterogeneity, Fisher, and interest rate exposure channels amplify monetary policy effects. Household consumption and liability inequality rose while income and asset inequality fell over 7 years.",
     keywords: ["Monetary Policy","Income Distribution","Structural VAR","Inequality","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
-    downloads: 28 },
+    downloads: 28,
+    resources: [
+      { label: "Paper", url: "", icon: "fa-file-pdf" },
+      { label: "Online Appendix", url: "", icon: "fa-file-lines" },
+      { label: "Replication Files", url: "", icon: "fa-code" }
+    ] },
 
   // ══ Other Publications (6) ═══════════════════════════════════
 
@@ -312,7 +332,13 @@ const publicationsData = [
     breadcrumb: "Other publication › Research report",
     abstract: "This study uses a two-step GMM estimator on national-level data for 32 crop products and 14 livestock products from Cambodia (1989–2018) to identify the potential products and factors in agriculture that public banks should subsidize.",
     keywords: ["Public Banks","Government Ownership","Agriculture","Subsidies","Cambodia"],
-    kwStrength: ["full","full","full","half","none"] },
+    kwStrength: ["full","full","full","half","none"],
+    resources: [
+      { label: "Paper", url: "", icon: "fa-file-pdf" },
+      { label: "Slides", url: "", icon: "fa-person-chalkboard" },
+      { label: "Replication Files", url: "", icon: "fa-code" },
+      { label: "Thread", url: "", icon: "fa-brands fa-x-twitter" }
+    ] },
 
   { title: "Mapping Study: Youth and Civil Society in Urban Cambodia",
     authors: "Kosal Nith", date: "Sep 2022", outlet: "Future Forum",
@@ -345,7 +371,11 @@ const publicationsData = [
     abstract: "Comparing Cambodian agriculture to Southeast Asian neighbors over 22 years (1996–2018), this paper identifies factors constraining the transition from extensive to intensive agriculture, including high production costs, limited technology use, and low market prices.",
     keywords: ["Agriculture","Intensive Farming","Productivity","Southeast Asia","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
-    downloads: 7 },
+    downloads: 7,
+    resources: [
+      { label: "Paper", url: "", icon: "fa-file-pdf" },
+      { label: "Slides", url: "", icon: "fa-person-chalkboard" }
+    ] },
 
   // ══ Policy Briefs (2) ════════════════════════════════════════
 
@@ -355,7 +385,11 @@ const publicationsData = [
     breadcrumb: "Policy brief",
     abstract: "Cambodia's current monetary policy lacks the autonomy to tackle affordable housing due to non-independent monetary tools and high dollarization. Liquidity-providing collateralized operations (LPCO) show promise as an innovative approach, partnering with private banks to offer low-interest mortgages.",
     keywords: ["Monetary Policy","Affordable Housing","Dollarization","Cambodia"],
-    kwStrength: ["full","full","full","none"] },
+    kwStrength: ["full","full","full","none"],
+    resources: [
+      { label: "Paper", url: "", icon: "fa-file-pdf" },
+      { label: "Slides", url: "", icon: "fa-person-chalkboard" }
+    ] },
 
   { title: "How Should Cambodia Prepare for the Fourth Industrial Revolution?",
     authors: "Kosal Nith", date: "8 May 2020",
@@ -364,7 +398,11 @@ const publicationsData = [
     breadcrumb: "Policy brief",
     keywords: ["Industry 4.0","Technology","Economic Development","Cambodia"],
     kwStrength: ["full","full","half","none"],
-    link: "https://www.cd-center.org/wp-content/uploads/2020/05/P126_20200508_EC19W1.pdf" },
+    link: "https://www.cd-center.org/wp-content/uploads/2020/05/P126_20200508_EC19W1.pdf",
+    resources: [
+      { label: "Paper", url: "https://www.cd-center.org/wp-content/uploads/2020/05/P126_20200508_EC19W1.pdf", icon: "fa-file-pdf" },
+      { label: "Slides", url: "", icon: "fa-person-chalkboard" }
+    ] },
 
   // ══ Work in Progress (3) ═════════════════════════════════════
 

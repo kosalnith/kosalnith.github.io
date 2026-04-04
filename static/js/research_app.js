@@ -57,6 +57,17 @@ function getFilteredPublications() {
   return filtered;
 }
 
+// ===== Abstract toggle =====
+function toggleAbstract(btn) {
+  const absDiv = btn.closest('.pub-details').querySelector('.abstract-text');
+  const chevron = btn.querySelector('.abstract-chevron');
+  const hint = btn.querySelector('.abstract-hint');
+  const isOpen = absDiv.style.display !== 'none';
+  absDiv.style.display = isOpen ? 'none' : 'block';
+  chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+  if (hint) hint.textContent = isOpen ? '(click to expand)' : '(click to collapse)';
+}
+
 // ===== Co-author website directory =====
 const coAuthorLinks = {
   'Sovannroeun Samreth':    'https://scholar.google.com/citations?user=samreth',
@@ -79,19 +90,15 @@ const coAuthorLinks = {
   'Hang Panha Hour':        'https://scholar.google.com/citations?user=hour',
 };
 
-// ===== Author display: "Kosal Nith" bold+crimson, then "(with X, Y and Z)" with links =====
-// Format matches image 2: Kosal Nith (with Stéphane Dupraz and Jón Steinsson)
+// ===== Author display: only "(with X, Y and Z)" — Kosal Nith omitted (his page) =====
 function formatAuthorsChicagoMeta(authorsStr) {
   if (!authorsStr) return '';
 
   const parts = authorsStr.split(/\s*&\s*|\s*,\s*(?=[A-Z])/);
-  const first = parts[0].trim();
   const coAuthors = parts.slice(1).map(a => a.trim()).filter(Boolean);
 
-  // First author: bold crimson (always Kosal Nith)
-  const firstHtml = `<span style="color:#b1040e;font-weight:700;">${first}</span>`;
-
-  if (!coAuthors.length) return firstHtml;
+  // Solo author — show nothing
+  if (!coAuthors.length) return '';
 
   // Build co-author list with links
   const coHtml = coAuthors.map(name => {
@@ -101,7 +108,7 @@ function formatAuthorsChicagoMeta(authorsStr) {
       : `<span style="color:#2e2d29;">${name}</span>`;
   });
 
-  // Join: "X", "X and Y", "X, Y and Z"
+  // Join: "X" / "X and Y" / "X, Y and Z"
   let coStr;
   if (coHtml.length === 1) {
     coStr = coHtml[0];
@@ -111,10 +118,39 @@ function formatAuthorsChicagoMeta(authorsStr) {
     coStr = coHtml.slice(0, -1).join(', ') + ' and ' + coHtml[coHtml.length - 1];
   }
 
-  return `${firstHtml} <span style="color:#4a5568;font-weight:400;">(with ${coStr})</span>`;
+  return `<span style="color:#4a5568;font-weight:400;">(with ${coStr})</span>`;
 }
 
-// ===== Rendering: Publications List =====
+// ===== Publication info line formatter =====
+// Renders: *Journal*, vol(issue), pages, Month Year.
+// Falls back gracefully when vol/issue/pages are absent.
+function formatPubInfo(pub) {
+  const parts = [];
+
+  // Outlet in italics
+  if (pub.outlet) parts.push(`<em>${pub.outlet}</em>`);
+
+  // vol(issue) e.g. "140(4)"
+  if (pub.vol) {
+    parts.push(pub.issue ? `${pub.vol}(${pub.issue})` : `${pub.vol}`);
+  }
+
+  // pages e.g. "835–888"
+  if (pub.pages) parts.push(pub.pages);
+
+  // Month Year e.g. "May 2025" — use pub.month if set, else pub.date
+  const timeStr = pub.month && pub.year && pub.year !== 'progress'
+    ? `${pub.month} ${pub.year}`
+    : pub.date || '';
+  if (timeStr) parts.push(timeStr);
+
+  // DOI
+  if (pub.doi) parts.push(`DOI: <a href="https://doi.org/${pub.doi}" target="_blank" style="color:#b1040e;">${pub.doi}</a>`);
+
+  return parts.join(', ');
+}
+
+
 
 function renderPublicationsWithPagination() {
   const filtered = getFilteredPublications();
@@ -145,24 +181,48 @@ function renderPublicationsWithPagination() {
             <div class="pub-title">
               <a href="#" class="pub-detail-link" data-pub-idx="${publicationsData.indexOf(pub)}">${pub.title}</a>
             </div>
-            <div class="pub-meta">${formatAuthorsChicagoMeta(pub.authors)}</div>
-            <div class="pub-outlet" style="font-size:1.6rem;color:#4a5568;margin-bottom:0.3rem;">${pub.date ? `${pub.date}, ` : ''}<em style="color:#4a5568;">${pub.outlet || ''}</em></div>
+            ${formatAuthorsChicagoMeta(pub.authors) ? `<div class="pub-meta">${formatAuthorsChicagoMeta(pub.authors)}</div>` : ''}
+            <div class="pub-outlet">${formatPubInfo(pub)}</div>
             <div class="pub-breadcrumb">${pub.breadcrumb || 'Research output'}</div>
-            <div class="badge-row">
-              ${pub.oa ? '<span class="oa-badge"><i class="fas fa-lock-open"></i> Open Access</span>' : ''}
-              ${pub.forthcoming ? '<span class="forthcoming">Forthcoming</span>' : ''}
-              ${pub.underReview ? '<span class="under-review">Under Review</span>' : ''}
-              ${pub.award ? '<span class="award-badge"><i class="fas fa-trophy"></i> Award Winner</span>' : ''}
-            </div>
-            <div class="pub-links">
-              ${pub.abstract ? `<button class="link-btn abstract-toggle">📄 Abstract</button>` : ''}
-              ${pub.link ? `<a class="link-btn" href="${pub.link}" target="_blank">🔗 Open</a>` : ''}
-            </div>
-            <div class="abstract-text">${pub.abstract || ''}</div>
-            <div class="keywords">
-              ${pub.keywords ? pub.keywords.map((k, idx) =>
-                `<span class="keyword"><span class="kw-dot ${pub.kwStrength[idx]}"></span> ${k}</span>`
-              ).join('') : ''}
+
+            <div class="card-bottom">
+
+              ${(pub.oa || pub.forthcoming || pub.underReview || pub.award) ? `
+              <div class="badge-row">
+                ${pub.oa ? '<span class="oa-badge"><i class="fas fa-lock-open"></i> Open Access</span>' : ''}
+                ${pub.forthcoming ? '<span class="forthcoming"><i class="fas fa-clock"></i> Forthcoming</span>' : ''}
+                ${pub.underReview ? '<span class="under-review"><i class="fas fa-rotate"></i> Under Review</span>' : ''}
+                ${pub.award ? '<span class="award-badge"><i class="fas fa-trophy"></i> Award Winner</span>' : ''}
+              </div>` : ''}
+
+              <div class="pub-actions">
+                ${pub.abstract ? `
+                <button class="abstract-toggle-btn" onclick="toggleAbstract(this)">
+                  <i class="fas fa-chevron-right abstract-chevron"></i>
+                  <strong>Abstract</strong>
+                  <span class="abstract-hint">(click to expand)</span>
+                </button>` : ''}
+                ${pub.abstract && pub.link ? `<span class="pub-actions-sep">·</span>` : ''}
+                ${pub.link ? `<a class="link-btn" href="${pub.link}" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> Open</a>` : ''}
+              </div>
+
+              ${pub.abstract ? `<div class="abstract-text" style="display:none;">${pub.abstract}</div>` : ''}
+
+              ${pub.resources && pub.resources.length ? `
+              <div class="pub-resources">
+                ${pub.resources.map(r => r.url
+                  ? `<a class="resource-btn" href="${r.url}" target="_blank"><i class="fas ${r.icon}"></i> ${r.label}</a>`
+                  : `<span class="resource-btn resource-btn--inactive"><i class="fas ${r.icon}"></i> ${r.label}</span>`
+                ).join('')}
+              </div>` : ''}
+
+              ${pub.keywords && pub.keywords.length ? `
+              <div class="pub-keywords">
+                ${pub.keywords.slice(0, 3).map((k, i) =>
+                  `<span class="pub-kw"><span class="pub-kw-dot ${pub.kwStrength[i] || 'none'}"></span>${k}</span>`
+                ).join('')}
+              </div>` : ''}
+
             </div>
           </div>
           <div class="right-stats">
@@ -202,14 +262,6 @@ function renderPublicationsWithPagination() {
   const end = Math.min(startIdx + pageItems.length, totalItems);
   document.getElementById('resultCount').innerText =
     totalItems === 0 ? '0 results' : `${start} - ${end} out of ${totalItems} results`;
-
-  document.querySelectorAll('.abstract-toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const absDiv = btn.closest('.pub-details').querySelector('.abstract-text');
-      absDiv.classList.toggle('open');
-      btn.innerText = absDiv.classList.contains('open') ? 'Hide Abstract' : '📄 Abstract';
-    });
-  });
 
   renderPaginationControls(totalPages);
 }
@@ -479,23 +531,84 @@ function initEventListeners() {
   });
 }
 
-// ===== Detail Page =====
+// ===== Detail Page — URL routing =====
+
+// Build a clean URL slug from a publication title
+function titleToSlug(title) {
+  return title.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .substring(0, 80)
+    .replace(/-+$/, '');
+}
+
+// Find publication index by slug
+function findIdxBySlug(slug) {
+  return publicationsData.findIndex(p => titleToSlug(p.title) === slug);
+}
+
+// Update <meta> OG tags for social sharing
+function updateMetaTags(pub) {
+  const base = 'https://kosalnith.github.io/research_main.html';
+  const slug = titleToSlug(pub.title);
+  const url  = `${base}?pub=${slug}`;
+  const desc = pub.abstract
+    ? pub.abstract.substring(0, 200) + '…'
+    : `${pub.authors}. ${pub.outlet || ''}. ${pub.year || ''}`;
+
+  const setMeta = (sel, val) => {
+    let el = document.querySelector(sel);
+    if (!el) { el = document.createElement('meta'); document.head.appendChild(el); }
+    el.setAttribute('content', val);
+  };
+  const setMetaProp = (prop, val) => setMeta(`meta[property="${prop}"]`, val);
+  const setMetaName  = (name, val) => setMeta(`meta[name="${name}"]`, val);
+
+  setMetaProp('og:title',       pub.title + ' · Kosal Nith');
+  setMetaProp('og:description', desc);
+  setMetaProp('og:url',         url);
+  setMetaProp('og:type',        'article');
+  setMetaName('twitter:title',  pub.title + ' · Kosal Nith');
+  setMetaName('twitter:description', desc);
+  setMeta('link[rel="canonical"]', url);
+
+  // Update canonical href
+  let canon = document.querySelector('link[rel="canonical"]');
+  if (!canon) { canon = document.createElement('link'); canon.rel = 'canonical'; document.head.appendChild(canon); }
+  canon.href = url;
+}
 
 function showList() {
   document.getElementById('pubDetailView').style.display = 'none';
-  document.getElementById('pubListView').style.display = 'block';
+  document.getElementById('pubListView').style.display  = 'block';
   window.scrollTo(0, 0);
   document.title = 'Kosal Nith · Research output';
-  history.pushState({}, '', window.location.pathname);
+  history.pushState({ view: 'list' }, '', window.location.pathname);
+  // Restore default meta
+  const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
+  setMeta('meta[property="og:title"]',       'Research output · Kosal Nith');
+  setMeta('meta[property="og:description"]', 'Research output by Kosal Nith — economist and researcher at CDRI.');
+  setMeta('meta[property="og:url"]',         'https://kosalnith.github.io/research_main.html');
 }
 
 function showDetail(idx) {
   const pub = publicationsData[idx];
+  if (!pub) return;
   currentDetailIdx = idx;
-  document.getElementById('pubListView').style.display = 'none';
+  document.getElementById('pubListView').style.display   = 'none';
   document.getElementById('pubDetailView').style.display = 'block';
   window.scrollTo(0, 0);
   document.title = pub.title + ' · Kosal Nith';
+
+  // Push ?pub=slug to URL
+  const slug    = titleToSlug(pub.title);
+  const newUrl  = `${window.location.pathname}?pub=${slug}`;
+  history.pushState({ view: 'detail', idx }, '', newUrl);
+  updateMetaTags(pub);
+
+  // Build shareable URL
+  const shareUrl = `https://kosalnith.github.io/research_main.html?pub=${slug}`;
 
   // Prev / Next nav
   const prevPub = publicationsData[idx - 1];
@@ -511,6 +624,21 @@ function showDetail(idx) {
     <button class="detail-back-btn" onclick="showList()" style="margin:0;white-space:nowrap;">
       <i class="fas fa-list"></i> All publications
     </button>
+    <div class="detail-share-inline">
+      <span class="detail-share-label"><i class="fas fa-share-nodes"></i> Share</span>
+      <a class="detail-share-inline-btn" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(pub.title)}&url=${encodeURIComponent(shareUrl)}" target="_blank" title="Share on X / Twitter">
+        <i class="fab fa-x-twitter"></i>
+      </a>
+      <a class="detail-share-inline-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}" target="_blank" title="Share on LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a class="detail-share-inline-btn" href="mailto:?subject=${encodeURIComponent(pub.title)}&body=${encodeURIComponent('Check out this paper: ' + shareUrl)}" title="Share via Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <button class="detail-share-inline-btn detail-copy-link-btn" onclick="copyPubLink('${shareUrl}')" title="Copy link">
+        <i class="fas fa-link" id="copyLinkIcon"></i>
+      </button>
+    </div>
     <button class="detail-nav-btn ${!nextPub ? 'disabled' : ''}" onclick="${nextPub ? `showDetail(${idx + 1})` : ''}" style="flex-direction:row-reverse;text-align:right;">
       <span>
         <span class="nav-label">Next</span>
@@ -864,6 +992,23 @@ function copyText(boxId) {
   });
 }
 
+// Copy shareable pub link to clipboard
+function copyPubLink(url) {
+  navigator.clipboard.writeText(url).then(() => {
+    const icon = document.getElementById('copyLinkIcon');
+    if (icon) {
+      icon.className = 'fas fa-check';
+      icon.parentElement.style.color = '#2c6e2c';
+      setTimeout(() => {
+        icon.className = 'fas fa-link';
+        icon.parentElement.style.color = '';
+      }, 2000);
+    }
+  }).catch(() => {
+    prompt('Copy this link:', url);
+  });
+}
+
 // ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
   renderSdgList();
@@ -871,4 +1016,22 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTypeList();
   renderPublicationsWithPagination();
   initEventListeners();
+
+  // On load: check ?pub=slug in URL and open that publication directly
+  const params = new URLSearchParams(window.location.search);
+  const pubSlug = params.get('pub');
+  if (pubSlug) {
+    const idx = findIdxBySlug(pubSlug);
+    if (idx !== -1) showDetail(idx);
+  }
+
+  // Handle browser back / forward button
+  window.addEventListener('popstate', (e) => {
+    const st = e.state;
+    if (st && st.view === 'detail' && typeof st.idx === 'number') {
+      showDetail(st.idx);
+    } else {
+      showList();
+    }
+  });
 });
