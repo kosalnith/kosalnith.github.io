@@ -35,11 +35,16 @@ const tmPinTypes = {
   culture:     { color:'#5260c1', icon:'fa-solid fa-masks-theater',       label:'Culture'          },
   photospot:   { color:'#ff7b31', icon:'fa-solid fa-camera-retro',        label:'Photospot'        },
   area:        { color:'#7d6608', icon:'fa-solid fa-map-location-dot',    label:'Area'             },
+  town:        { color:'#41087d', icon:'fa-solid ffa-mountain-city',      label:'Town'             },
+  city:        { color:'#eed410', icon:'fa-solid fa-city',                label:'City'             },
+  village:     { color:'#710ab5', icon:'fa-solid fa-people-roof',         label:'Village'          },
+  zoo:         { color:'#04265d', icon:'fa-solid fa-paw',                 label:'Zoo'              },
 
   /* ── TRANSPORT  (dark slate blue — matches Rexby) ── */
   transport:   { color:'#2e4057', icon:'fa-solid fa-bus',                 label:'Public Transport' },
   harbor:      { color:'#1a252f', icon:'fa-solid fa-anchor',              label:'Harbor'           },
   airport:     { color:'#283747', icon:'fa-solid fa-plane-departure',     label:'Airport'          },
+  train:       { color:'#13ce83', icon:'fa-solid fa-train-subway',          label:'Train Station'    },
 
   /* ── ACCOMMODATION  (purple / indigo — matches Rexby) ── */
   hotel:       { color:'#6c3483', icon:'fa-solid fa-bed',                 label:'Hotel'            },
@@ -50,6 +55,7 @@ const tmPinTypes = {
   activity:    { color:'#e67e22', icon:'fa-solid fa-person-running',      label:'Activity'         },
   tours:       { color:'#ca6f1e', icon:'fa-solid fa-route',               label:'Tours'            },
   spa:         { color:'#a569bd', icon:'fa-solid fa-spa',                 label:'Spa'              },
+  walking:     { color:'#242755', icon:'fa-solid fa-person-walking',                 label:'Walking'              },
 
   /* ── SHOPPING  (hot pink) ── */
   shop:        { color:'#c0392b', icon:'fa-solid fa-bag-shopping',        label:'Shop'             },
@@ -65,9 +71,14 @@ const tmPinTypes = {
 const tmCountries = [
   { name:"Austria", lat:47.8, lng:13.0, flag:"at", desc:"Alpine majesty, classical music, imperial palaces, and charming villages.",
     cities:[
-      {name:"Vienna",    lat:48.2082, lng:16.3738, type:"sightseeing",  desc:"Imperial capital of art, music, and coffeehouse culture.", imgs:["Ethiopia25","vienna_2","vienna_3","vienna_4"]},
+      {name:"Vienna",    lat:48.2082, lng:16.3738, type:"city",  desc:"Imperial capital of art, music, and coffeehouse culture.", imgs:["ep20","ep21","ep22","ep23", "ep24"]},
       {name:"Salzburg",  lat:47.8095, lng:13.0550, type:"culture", desc:"Birthplace of Mozart, baroque architecture and Alpine setting.", imgs:["salzburg_1","salzburg_2","salzburg_3","salzburg_4"]},
-      {name:"Innsbruck", lat:47.2682, lng:11.3923, type:"park",   desc:"Mountain city nestled in the Alps, gateway to ski resorts.", imgs:["innsbruck_1","innsbruck_2","innsbruck_3","innsbruck_4"]},
+      {name:"Hafelekarspitze", lat:47.3162, lng:11.3996, type:"sightseeing",   desc:"High Alpine peak above Innsbruck, cable car access, sweeping views.", imgs:["ep1","ep2","ep3","ep4"]},
+      {name:"Innsbruck", lat:47.2650, lng:11.3920, type:"city",   desc:"Tyrolean city nestled in Alps, colourful houses, imperial history, winter sports.", imgs:["ep5","ep6","ep7","ep8"]},
+      {name:"Hallstatt", lat:47.5667, lng:13.6620, type:"walking",   desc:"Lakeside village with pastel houses, alpine views, and historic salt mines.", imgs:["ep9","ep10","ep11"]},
+      {name:"Hallstatt", lat:47.5646, lng:13.6498, type:"village",   desc:"Lakeside village with pastel houses, alpine views, and historic salt mines.", imgs:["ep12","ep13","ep14", "ep15"]},
+      {name:"Alpenzoo Innsbruck - Tirol", lat:47.2813, lng:11.3982, type:"zoo",   desc:"Alpine zoo showcasing mountain wildlife, perched above Innsbruck with views.", imgs:["ep17","ep18","ep19"]},
+
     ]},
   { name:"Cambodia", lat:12.0, lng:104.5, flag:"kh", desc:"Home to Angkor Wat, ancient temples, and lush landscapes of Khmer heritage.",
     cities:[
@@ -80,9 +91,10 @@ const tmCountries = [
   { name:"China", lat:35.0, lng:105.0, flag:"cn", desc:"Ancient wonders, futuristic cities, and the Great Wall stretching to the horizon.",
     cities:[
       {name:"Beijing",  lat:39.9042, lng:116.4074, type:"airport",  desc:"Imperial capital, home to the Forbidden City and Great Wall.", imgs:["beijing_1","beijing_2","beijing_3","beijing_4"]},
-      {name:"Shanghai", lat:31.2304, lng:121.4737, type:"culture", desc:"Futuristic skyline meets colonial Bund architecture.", imgs:["shanghai_1","shanghai_2","shanghai_3","shanghai_4"]},
-      {name:"Xi'an",    lat:34.3416, lng:108.9398, type:"photospot", desc:"Ancient capital, home of the Terracotta Army.", imgs:["xian_1","xian_2","xian_3","xian_4"]},
+      {name:"Shanghai", lat:31.2304, lng:121.4737, type:"city", desc:"Futuristic skyline meets colonial Bund architecture.", imgs:["ep29","shanghai_2","shanghai_3","shanghai_4"]},
+      {name:"Suzhou",    lat:31.3025, lng:120.5842, type:"culture", desc:"Ancient canal city famed for classical gardens, silk heritage, and bridges.", imgs:["xian_1","xian_2","xian_3","xian_4"]},
     ]},
+
   { name:"Denmark", lat:56.0, lng:10.0, flag:"dk", desc:"Hygge lifestyle, Viking history, and modern Scandinavian design.",
     cities:[
       {name:"Copenhagen", lat:55.6761, lng:12.5683, type:"sightseeing",  desc:"Colorful Nyhavn, cycling culture, and world-class cuisine.", imgs:["copenhagen_1","copenhagen_2","copenhagen_3","copenhagen_4"]},
@@ -108,9 +120,10 @@ const tmCountries = [
   { name:"Germany", lat:51.0, lng:10.0, flag:"de", desc:"Castles, beer gardens, fairy-tale forests, and cutting-edge innovation.",
     cities:[
       {name:"Berlin",  lat:52.5200, lng:13.4050, type:"sightseeing",  desc:"Reunified capital, cutting-edge art and tumultuous history.", imgs:["berlin_1","berlin_2","berlin_3","berlin_4"]},
-      {name:"Munich",  lat:48.1351, lng:11.5820, type:"university", desc:"Beer gardens, Oktoberfest, and Baroque Marienplatz.", imgs:["munich_1","munich_2","munich_3","munich_4"]},
+      {name:"Munich Central Station",  lat:48.1404, lng:11.5600, type:"train", desc:"Major Bavarian rail hub, bustling platforms, shops, and international connections.", imgs:["ep25","ep26","ep27"]},
       {name:"Hamburg", lat:53.5753, lng:10.0153, type:"culture", desc:"Great port city, Speicherstadt warehouse district.", imgs:["hamburg_1","hamburg_2","hamburg_3","hamburg_4"]},
     ]},
+
   { name:"India", lat:22.0, lng:79.0, flag:"in", desc:"A subcontinent of ancient temples, spice markets, and breathtaking diversity.",
     cities:[
       {name:"New Delhi",  lat:28.6139, lng:77.2090, type:"sightseeing",  desc:"Mughal forts, colonial boulevards, and vibrant bazaars.", imgs:["new_delhi_1","new_delhi_2","new_delhi_3","new_delhi_4"]},
@@ -131,7 +144,7 @@ const tmCountries = [
     ]},
   { name:"Netherlands", lat:52.5, lng:5.0, flag:"nl", desc:"Windmills, tulip fields, golden age canals, and vibrant cycling culture.",
     cities:[
-      {name:"Amsterdam", lat:52.3702, lng:4.8952, type:"airport", desc:"Canal rings, Rijksmuseum, Anne Frank House and bike lanes.", imgs:["amsterdam_1","amsterdam_2","amsterdam_3","amsterdam_4"]},
+      {name:"Amstersdam Airport Schipol", lat:52.3180, lng:4.7486, type:"airport", desc:"Major Dutch airport hub with global connections, trains, shops, and lounges.", imgs:["ep28"]},
     ]},
   { name:"Philippines", lat:12.5, lng:122.5, flag:"ph", desc:"Over 7,000 islands, pristine beaches, and legendary warm hospitality.",
     cities:[
