@@ -28,6 +28,7 @@ const tmPinTypes = {
   hotspring:   { color:'#ca6f1e', icon:'fa-solid fa-hot-tub-person',      label:'Hot Spring'       },
   wildlife:    { color:'#117a65', icon:'fa-solid fa-paw',                 label:'Wildlife'         },
   campsite:    { color:'#1a5276', icon:'fa-solid fa-campground',          label:'Campsite'         },
+  lake:         { color:'#aabed3', icon:'fa-solid fa-water',          label:'Lake'         },
 
   /* ── SIGHTSEEING & CULTURE  (golden / amber — matches Rexby) ── */
   sightseeing: { color:'#ff4e22', icon:'fa-solid fa-binoculars',          label:'Sightseeing'      },
@@ -75,7 +76,7 @@ const tmCountries = [
   { name:"Austria", lat:47.8, lng:13.0, flag:"at", desc:"Alpine majesty, classical music, imperial palaces, and charming villages.",
     cities:[
       {name:"Vienna",    lat:48.2082, lng:16.3738, type:"city",  desc:"Imperial capital of art, music, and coffeehouse culture.", imgs:["ep20","ep21","ep22","ep23", "ep24"]},
-      {name:"Salzburg",  lat:47.8095, lng:13.0550, type:"culture", desc:"Birthplace of Mozart, baroque architecture and Alpine setting.", imgs:["salzburg_1","salzburg_2","salzburg_3","salzburg_4"]},
+      {name:"Salzburg",  lat:47.8095, lng:13.0550, type:"train", desc:"Birthplace of Mozart, baroque architecture and Alpine setting.", imgs:["ep103"]},
       {name:"Hafelekarspitze", lat:47.3162, lng:11.3996, type:"sightseeing",   desc:"High Alpine peak above Innsbruck, cable car access, sweeping views.", imgs:["ep1","ep2","ep3","ep4"]},
       {name:"Innsbruck", lat:47.2650, lng:11.3920, type:"city",   desc:"Tyrolean city nestled in Alps, colourful houses, imperial history, winter sports.", imgs:["ep5","ep6","ep7","ep8"]},
       {name:"Hallstatt", lat:47.5667, lng:13.6620, type:"walking",   desc:"Lakeside village with pastel houses, alpine views, and historic salt mines.", imgs:["ep9","ep10","ep11"]},
@@ -89,7 +90,7 @@ const tmCountries = [
       {name:"Phnom Penh", lat:11.5564, lng:104.9282, type:"sightseeing",  desc:"Vibrant capital on the Mekong with rich royal heritage.", imgs:["phnom_penh_1","phnom_penh_2","phnom_penh_3","phnom_penh_4"]},
       {name:"Kampot",     lat:10.6112, lng:104.1806, type:"park",   desc:"Riverside town famed for pepper plantations and French villas.", imgs:["kampot_1","kampot_2","kampot_3","kampot_4"]},
       {name:"Koh Rong",   lat:10.7226, lng:103.2440, type:"beach",    desc:"Tropical island known for white beaches and clear waters.", imgs:["koh_rong_1","koh_rong_2","koh_rong_3","koh_rong_4"]},
-      {name:"Phnom Preah",lat:12.1738, lng:102.9069, type:"hike",   desc:"Forested mountain rising above plains, offering peaceful nature and scenic views.", imgs:["PhnomPreah202301","PhnomPreah","WaterFell2021","koh_rong_4"]},
+      {name:"Phnom Preah",lat:12.1738, lng:102.9069, type:"hike",   desc:"Forested mountain rising above plains, offering peaceful nature and scenic views.", imgs:["ep114","ep115","ep116","ep117"]},
     ]},
   { name:"China", lat:35.0, lng:105.0, flag:"cn", desc:"Ancient wonders, futuristic cities, and the Great Wall stretching to the horizon.",
     cities:[
@@ -115,11 +116,11 @@ const tmCountries = [
   { name:"Fiji", lat:-17.5, lng:178.0, flag:"fj", desc:"Coral reefs, turquoise waters, and the warm tropical Bula spirit.",
     cities:[
       {name:"Suva", lat:-18.1416, lng:178.4419, type:"city", desc:"Capital city on the Pacific, vibrant market and cultural hub.", imgs:["suva_1","suva_2","suva_3","suva_4"]},
-      {name:"Nadi", lat:-17.7765, lng:177.4356, type:"airport",   desc:"Gateway city with lush gardens and Mamanuca Islands access.", imgs:["nadi_1","nadi_2","nadi_3","nadi_4"]},
+      {name:"Nadi", lat:-17.7765, lng:177.4356, type:"sightseeing",   desc:"Gateway city with lush gardens and Mamanuca Islands access.", imgs:["ep118","ep119","ep120","ep121"]},
     ]},
   { name:"Finland", lat:62.0, lng:25.0, flag:"fi", desc:"A thousand lakes, Nordic saunas, and the magical Northern Lights.",
     cities:[
-      {name:"Helsinki", lat:60.1699, lng:24.9384, type:"airport", desc:"Design capital on the Baltic, cathedral squares and saunas.", imgs:["helsinki_1","helsinki_2","helsinki_3","helsinki_4"]},
+      {name:"Helsinki Airport", lat:60.3181, lng:24.9520, type:"airport", desc:"Modern Nordic hub offering efficient transit, sleek design, and calm atmosphere", imgs:["ep99"]},
     ]},
   { name:"France", lat:46.5, lng:2.5, flag:"fr", desc:"Art, romance, cuisine, and iconic landmarks from coast to countryside.",
     cities:[
@@ -129,7 +130,7 @@ const tmCountries = [
     cities:[
       {name:"Berlin",  lat:52.5200, lng:13.4050, type:"sightseeing",  desc:"Reunified capital, cutting-edge art and tumultuous history.", imgs:["berlin_1","berlin_2","berlin_3","berlin_4"]},
       {name:"Munich Central Station",  lat:48.1404, lng:11.5600, type:"train", desc:"Major Bavarian rail hub, bustling platforms, shops, and international connections.", imgs:["ep25","ep26","ep27"]},
-      {name:"Hamburg", lat:53.5753, lng:10.0153, type:"culture", desc:"Great port city, Speicherstadt warehouse district.", imgs:["hamburg_1","hamburg_2","hamburg_3","hamburg_4"]},
+      {name:"Frankfurt", lat:50.1109, lng:8.6846, type:"city", desc:"A major financial hub that's home to the European Central Bank.", imgs:["ep100","ep101","ep102"]},
     ]},
 
   { name:"India", lat:22.0, lng:79.0, flag:"in", desc:"A subcontinent of ancient temples, spice markets, and breathtaking diversity.",
@@ -162,7 +163,10 @@ const tmCountries = [
     cities:[
       {name:"Manila",         lat:14.5995, lng:120.9842, type:"sightseeing",  desc:"Historic Intramuros, bustling bayside capital of the archipelago.", imgs:["manila_1","manila_2","manila_3","manila_4"]},
       {name:"Chocolate Hills", lat:9.8374, lng:124.1499, type:"park",   desc:"Famous limestone formations, turning brown in dry season, creating scenic landscapes.", imgs:["Phillipines25","IMG_5896","IMG_5909","IMG_5917"]},
+      {name:"Bohol Waterfall", lat:9.6920, lng:124.3684, type:"waterfall",   desc:"Island paradise with Chocolate Hills, tarsiers, beaches, and clear waters", imgs:["ep109","ep110","ep111","ep112", "ep113"]},
+
     ]},
+
   { name:"Qatar", lat:25.3, lng:51.2, flag:"qa", desc:"Futuristic skylines, desert dunes, and a crossroads of ancient trade routes.",
     cities:[
       {name:"Doha", lat:25.2854, lng:51.5310, type:"airport", desc:"Ultramodern capital with the Museum of Islamic Art and Souq Waqif.", imgs:["doha_1","doha_2","doha_3","doha_4"]},
@@ -191,10 +195,15 @@ const tmCountries = [
     ]},
   { name:"Switzerland", lat:46.8, lng:8.0, flag:"ch", desc:"Alpine peaks, pristine lakes, chocolate, and precision watchmaking.",
     cities:[
-      {name:"Zürich",     lat:47.3769, lng:8.5417, type:"culture", desc:"Financial hub with old town, Lake Zürich and vibrant culture.", imgs:["zurich_1","zurich_2","zurich_3","zurich_4"]},
-      {name:"Geneva",     lat:46.2044, lng:6.1432, type:"culture", desc:"International city, Jet d'Eau on Lake Geneva.", imgs:["geneva_1","geneva_2","geneva_3","geneva_4"]},
-      {name:"Interlaken", lat:46.6863, lng:7.8632, type:"park",   desc:"Adventure capital between two lakes, gateway to the Alps.", imgs:["interlaken_1","interlaken_2","interlaken_3","interlaken_4"]},
+      {name:"Thun",     lat:46.7581, lng:7.6293, type:"lake", desc:"Lakeside town with medieval castle, turquoise waters, and mountain views.", imgs:["ep95","ep96"]},
+      {name:"Grindelwald",     lat:46.6614, lng:8.0541, type:"hike", desc:"Alpine village with dramatic peaks, glaciers, and scenic hiking trails.", imgs:["ep92","ep93","ep94"]},
+      {name:"Interlaken", lat:46.6863, lng:7.8632, type:"hike",   desc:"Adventure capital between two lakes, gateway to the Alps.", imgs:["ep89","ep90","ep91"]},
+      {name:"Brienz", lat:46.7538, lng:8.0384, type:"lake",   desc:"Charming lakeside village with turquoise waters, woodcarving traditions, and mountains.", imgs:["ep97","ep98"]},
+
     ]},
+
+  
+
   { name:"Thailand", lat:15.0, lng:101.0, flag:"th", desc:"Land of smiles, golden temples, vibrant street food, and tropical beaches.",
     cities:[
       {name:"Bangkok", lat:13.7367, lng:100.5231, type:"sightseeing", desc:"Temple of the Emerald Buddha, floating markets and tuk-tuks.", imgs:["bangkok_1","bangkok_2","bangkok_3","bangkok_4"]},
@@ -221,26 +230,46 @@ const tmCountries = [
     ]},
   { name:"Zambia", lat:-14.5, lng:27.5, flag:"zm", desc:"Victoria Falls, wild safaris, and the mighty Zambezi River.",
     cities:[
-      {name:"Lusaka",      lat:-15.3875, lng:28.3228, type:"sightseeing", desc:"Rapidly growing capital with markets and modern development.", imgs:["lusaka_1","lusaka_2","lusaka_3","lusaka_4"]},
-      {name:"Livingstone", lat:-17.8619, lng:25.8564, type:"waterfall",  desc:"Victoria Falls town, adventure capital of Africa.", imgs:["livingstone_1","livingstone_2","livingstone_3","livingstone_4"]},
+      {name:"Lusaka",      lat:-15.3875, lng:28.3228, type:"sightseeing", desc:"Rapidly growing capital with markets and modern development.", imgs:["ep122","ep123"]},
+      {name:"South Luangwa National Park", lat:-13.0358, lng:31.7867, type:"wildlife",  desc:"Wildlife-rich savanna famous for walking safaris and abundant African animals.", imgs:["ep104","ep105","ep106","ep107", "ep108"]},
     ]},
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 /* ── LIGHTBOX ────────────────────────────────────────────────── */
-let tmLbSrcs = [], tmLbIdx = 0, tmLbCity = '';
+/* tmLbNames holds raw image name strings (no path/extension).
+   Thumbs are shown instantly; full-res is loaded in the background
+   and swapped in once ready — so the lightbox opens with zero delay. */
+let tmLbNames = [], tmLbIdx = 0, tmLbCity = '';
 
-function tmOpenLb(srcs, idx, cityName) {
-  tmLbSrcs = srcs; tmLbIdx = idx; tmLbCity = cityName;
+function tmOpenLb(names, idx, cityName) {
+  tmLbNames = names; tmLbIdx = idx; tmLbCity = cityName;
   tmRenderLb();
   document.getElementById('tm-lb').classList.add('tm-on');
 }
 function tmCloseLb() { document.getElementById('tm-lb').classList.remove('tm-on'); }
-function tmLbNav(dir) { tmLbIdx = (tmLbIdx + dir + tmLbSrcs.length) % tmLbSrcs.length; tmRenderLb(); }
+function tmLbNav(dir) { tmLbIdx = (tmLbIdx + dir + tmLbNames.length) % tmLbNames.length; tmRenderLb(); }
 function tmRenderLb() {
-  document.getElementById('tm-lb-img').src = tmLbSrcs[tmLbIdx];
+  const imgEl = document.getElementById('tm-lb-img');
+  const name  = tmLbNames[tmLbIdx];
+
+  /* 1. Show thumb instantly — no waiting */
+  imgEl.src = tmThumb(name);
+  imgEl.classList.remove('tm-lb-loaded');
+
+  /* 2. Load full-res in background; swap when ready */
+  const hires = new Image();
+  hires.onload = () => {
+    /* Only swap if user hasn't navigated away */
+    if (tmLbNames[tmLbIdx] === name) {
+      imgEl.src = hires.src;
+      imgEl.classList.add('tm-lb-loaded');
+    }
+  };
+  hires.src = tmFull(name);
+
   document.getElementById('tm-lb-caption').textContent =
-    `${tmLbCity} · Photo ${tmLbIdx + 1} of ${tmLbSrcs.length}`;
-  document.getElementById('tm-lb-dots').innerHTML = tmLbSrcs
+    `${tmLbCity} · Photo ${tmLbIdx + 1} of ${tmLbNames.length}`;
+  document.getElementById('tm-lb-dots').innerHTML = tmLbNames
     .map((_,i) => `<div class="tm-lb-dot${i===tmLbIdx?' tm-on':''}"
                         onclick="(function(){tmLbIdx=${i};tmRenderLb();})()"></div>`)
     .join('');
@@ -315,8 +344,7 @@ function tmCityPopupHtml(country, city) {
       : `<div class="tm-zoom-hint"><i class="fa-solid fa-expand"></i> View</div>`;
     return `
     <div class="tm-ph" data-idx="${i}">
-      <img src="${tmThumb(name)}" alt="" loading="lazy"
-           onerror="this.src='${tmFull(name)}';this.onerror=null;">
+      <img src="${tmThumb(name)}" alt="" loading="lazy">
       ${overlay}
     </div>`;
   }).join('');
@@ -358,7 +386,7 @@ let tmLastGalleryCardName = '';   /* city name shown on back button */
 tmCountries.forEach(c => {
   /* Location pins — country globe pins removed; only typed location pins shown */
   c.cities.forEach(city => {
-    const fullSrcs = city.imgs.map(name => tmFull(name));
+    const imgNames = city.imgs;   /* raw names — lightbox resolves paths itself */
     const pinType  = city.type || 'default';
     const marker   = L.marker([city.lat, city.lng], { icon:tmCityIcon(pinType), riseOnHover:true })
       .bindPopup(tmCityPopupHtml(c, city), { maxWidth:410, minWidth:350, className:'tm-popup', offset:[0,-8] })
@@ -370,7 +398,7 @@ tmCountries.forEach(c => {
             ph.addEventListener('click', function(e) {
               e.stopPropagation();
               /* overflow tile (last visible when >6 photos) opens at idx 5 */
-              tmOpenLb(fullSrcs, parseInt(this.dataset.idx) || 0, city.name);
+              tmOpenLb(imgNames, parseInt(this.dataset.idx) || 0, city.name);
             });
           });
         }, 80);
@@ -949,8 +977,7 @@ function tmRenderGallery() {
 
     cities.forEach(city => {
       /* city may be a merged entry: city.types = [{type, lat, lng}, ...] */
-      const allImgs  = city.imgs;
-      const fullSrcs = allImgs.map(name => tmFull(name));
+      const allImgs  = city.imgs;          /* raw name strings — no URLs yet */
       const n        = allImgs.length;
 
       /* Primary type = first entry; used for card accent colour */
@@ -1000,11 +1027,12 @@ function tmRenderGallery() {
       card.appendChild(photoGrid);
       card.appendChild(info);
 
+      /* Pass raw names — tmOpenLb handles thumb→full upgrade internally */
       card.querySelectorAll('.tm-gc-ph').forEach(ph => {
         ph.style.cursor = 'zoom-in';
         ph.addEventListener('click', function(e) {
           e.stopPropagation();
-          tmOpenLb(fullSrcs, parseInt(this.dataset.idx) || 0, city.name);
+          tmOpenLb(allImgs, parseInt(this.dataset.idx) || 0, city.name);
         });
       });
 
@@ -1046,59 +1074,30 @@ function tmRenderGallery() {
 tmBuildGalleryFilters();
 function tmGalleryPhotoGrid(imgs) {
   const n = imgs.length;
+  /* All tiles always load from the thumbs folder — fast, small, consistent.
+     Full-res is only fetched when the user explicitly clicks to open the lightbox. */
   const th = name => `static/img/explore/thumbs/${name}.jpg`;
+  const tile = (name, idx, extra) => {
+    const overflow = (extra !== undefined)
+      ? `<div class="tm-gc-more">+${extra}</div>` : '';
+    return `<div class="tm-gc-ph" data-idx="${idx}"><img src="${th(name)}" loading="lazy" alt="">${overflow}</div>`;
+  };
 
-  /* ── 1 photo: single full-width hero ── */
-  if (n === 1) {
-    return `<div class="tm-gc-photos tm-gc-photos--1">
-      <div class="tm-gc-ph" data-idx="0">
-        <img src="${th(imgs[0])}" loading="lazy" alt="" onerror="this.src='${tmFull(imgs[0])}'">
-      </div>
-    </div>`;
-  }
+  if (n === 1) return `<div class="tm-gc-photos tm-gc-photos--1">${tile(imgs[0],0)}</div>`;
+  if (n === 2) return `<div class="tm-gc-photos tm-gc-photos--2">${tile(imgs[0],0)}${tile(imgs[1],1)}</div>`;
+  if (n === 3) return `<div class="tm-gc-photos tm-gc-photos--3">${tile(imgs[0],0)}${tile(imgs[1],1)}${tile(imgs[2],2)}</div>`;
+  if (n === 4) return `<div class="tm-gc-photos tm-gc-photos--4">${tile(imgs[0],0)}${tile(imgs[1],1)}${tile(imgs[2],2)}${tile(imgs[3],3)}</div>`;
 
-  /* ── 2 photos: equal columns ── */
-  if (n === 2) {
-    return `<div class="tm-gc-photos tm-gc-photos--2">
-      <div class="tm-gc-ph" data-idx="0"><img src="${th(imgs[0])}" loading="lazy" alt="" onerror="this.src='${tmFull(imgs[0])}'"></div>
-      <div class="tm-gc-ph" data-idx="1"><img src="${th(imgs[1])}" loading="lazy" alt="" onerror="this.src='${tmFull(imgs[1])}'"></div>
-    </div>`;
-  }
-
-  /* ── 3 photos: hero left + 2 stacked right ── */
-  if (n === 3) {
-    return `<div class="tm-gc-photos tm-gc-photos--3">
-      <div class="tm-gc-ph" data-idx="0"><img src="${th(imgs[0])}" loading="lazy" alt="" onerror="this.src='${tmFull(imgs[0])}'"></div>
-      <div class="tm-gc-ph" data-idx="1"><img src="${th(imgs[1])}" loading="lazy" alt="" onerror="this.src='${tmFull(imgs[1])}'"></div>
-      <div class="tm-gc-ph" data-idx="2"><img src="${th(imgs[2])}" loading="lazy" alt="" onerror="this.src='${tmFull(imgs[2])}'"></div>
-    </div>`;
-  }
-
-  /* ── 4 photos: 2×2 grid ── */
-  if (n === 4) {
-    return `<div class="tm-gc-photos tm-gc-photos--4">
-      <div class="tm-gc-ph" data-idx="0"><img src="${th(imgs[0])}" loading="lazy" alt="" onerror="this.src='${tmFull(imgs[0])}'"></div>
-      <div class="tm-gc-ph" data-idx="1"><img src="${th(imgs[1])}" loading="lazy" alt="" onerror="this.src='${tmFull(imgs[1])}'"></div>
-      <div class="tm-gc-ph" data-idx="2"><img src="${th(imgs[2])}" loading="lazy" alt="" onerror="this.src='${tmFull(imgs[2])}'"></div>
-      <div class="tm-gc-ph" data-idx="3"><img src="${th(imgs[3])}" loading="lazy" alt="" onerror="this.src='${tmFull(imgs[3])}'"></div>
-    </div>`;
-  }
-
-  /* ── 5+ photos: hero top full-width + 4 equal thumbs below, last = +N ── */
+  /* ── 5+ photos: hero top + 4 strip tiles; last strip tile shows +N overflow ── */
   const extra = n - 5;
-  const tiles = imgs.slice(1, 5).map((name, i) => {
+  const stripTiles = imgs.slice(1, 5).map((name, i) => {
     const isOverflow = extra > 0 && i === 3;
-    return `<div class="tm-gc-ph" data-idx="${i + 1}">
-      <img src="${th(name)}" loading="lazy" alt="" onerror="this.src='${tmFull(name)}'">
-      ${isOverflow ? `<div class="tm-gc-more">+${extra + 1}</div>` : ''}
-    </div>`;
+    return tile(name, i + 1, isOverflow ? extra + 1 : undefined);
   }).join('');
 
   return `<div class="tm-gc-photos tm-gc-photos--5plus">
-    <div class="tm-gc-ph tm-gc-ph--hero" data-idx="0">
-      <img src="${th(imgs[0])}" loading="lazy" alt="" onerror="this.src='${tmFull(imgs[0])}'">
-    </div>
-    <div class="tm-gc-ph-strip">${tiles}</div>
+    <div class="tm-gc-ph tm-gc-ph--hero" data-idx="0"><img src="${th(imgs[0])}" loading="lazy" alt=""></div>
+    <div class="tm-gc-ph-strip">${stripTiles}</div>
   </div>`;
 }
 

@@ -82,6 +82,9 @@ main.page-content {
   color: var(--tm-ink);
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(26,22,18,.1);
+  /* Isolate the map into its own compositing layer so repaints stay contained */
+  contain: layout style;
+  will-change: contents;
 }
 
 #tm-map {
@@ -115,7 +118,7 @@ main.page-content {
   width: 7px; height: 7px; border-radius: 50%;
   background: var(--tm-amber);
   box-shadow: 0 0 0 2px rgba(200,96,26,.25);
-  animation: tm-pulse 4s ease-in-out infinite;
+  animation: tm-pulse 6s ease-in-out infinite;
   will-change: box-shadow;
 }
 @keyframes tm-pulse {
@@ -147,10 +150,11 @@ main.page-content {
   animation: tm-enterDown .8s cubic-bezier(.16,1,.3,1) .15s both;
 }
 .tm-stat-pill {
-  background: var(--tm-card); border: 1px solid var(--tm-card-border);
+  background: rgba(247, 246, 246, 0.97); border: 1px solid var(--tm-card-border);
   border-radius: 100px; padding: 8px 18px;
   display: flex; align-items: center; gap: 10px;
-  box-shadow: var(--tm-sh-sm); backdrop-filter: blur(12px);
+  box-shadow: var(--tm-sh-sm);
+  /* backdrop-filter removed — GPU compositor cost on mobile; use solid bg instead */
 }
 .tm-stat-pill .tm-num {
   font-size: 1.7rem; font-weight: 700; line-height: 1; color: var(--tm-amber); /* was 1.6rem */
@@ -177,14 +181,14 @@ main.page-content {
   position: absolute;
   left: -36px; top: 50%; transform: translateY(-50%);
   width: 36px; height: 52px;
-  background: var(--tm-card); border: 1px solid var(--tm-card-border);
+  background: rgba(247, 246, 246, 0.97); border: 1px solid var(--tm-card-border);
   border-right: none;
   border-radius: 12px 0 0 12px;
   box-shadow: -4px 0 16px rgba(26,22,18,.1);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; color: var(--tm-muted);
   transition: background .18s, color .18s;
-  backdrop-filter: blur(12px);
+  /* backdrop-filter removed — GPU compositor cost */
 }
 .tm-panel-toggle:hover { background: var(--tm-amber-pale); color: var(--tm-amber); }
 .tm-panel-toggle i { font-size: 1.4rem; transition: transform .3s cubic-bezier(.16,1,.3,1); }
@@ -203,18 +207,20 @@ main.page-content {
   /* backdrop-filter removed — caused continuous GPU compositing on the panel */
   border: 1px solid var(--tm-card-border);
   border-radius: 16px 0 0 16px;
-  box-shadow: -8px 0 40px rgba(26,22,18,.1);
+  /* box-shadow: -8px 0 40px rgba(26,22,18,.1); */
   overflow: hidden;
   transition: opacity .25s ease;
   /* entrance animation */
   transform: translateX(100%);
   animation: tm-slidePanel .9s cubic-bezier(.16,1,.3,1) .2s both;
 }
+/*
 .tm-panel-inner::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
   background: linear-gradient(90deg, var(--tm-amber), var(--tm-amber2), #f0a060);
   border-radius: 16px 0 0 0;
 }
+*/
 @keyframes tm-slidePanel { to { transform: none; } }
 
 .tm-panel-header {
@@ -378,6 +384,7 @@ main.page-content {
   width: 30px; height: 30px;
   display: flex; align-items: center; justify-content: center;
   position: relative; cursor: pointer;
+  will-change: transform;
 }
 .tm-city-pill {
   width: 28px; height: 28px; border-radius: 50%;
@@ -428,7 +435,7 @@ main.page-content {
   cursor: pointer; color: var(--tm-muted);
   font-size: 1.4rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
   transition: background .18s, color .18s;
-  backdrop-filter: blur(12px);
+  /* backdrop-filter removed — GPU cost */
   white-space: nowrap;
 }
 .tm-legend-toggle::before {
@@ -452,17 +459,18 @@ main.page-content {
   /* backdrop-filter removed — caused continuous GPU compositing */
   border: 1px solid var(--tm-card-border);
   border-radius: 16px;
-  box-shadow: 0 8px 40px rgba(26,22,18,.13);
+  /*box-shadow: 0 8px 40px rgba(26,22,18,.13);*/
   overflow: hidden;
   transition: opacity .25s ease, max-height .35s cubic-bezier(.16,1,.3,1);
-  max-height: 60vh;
+  max-height: 40vh;
 }
+/*
 .tm-legend-inner::before {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
   background: linear-gradient(90deg, var(--tm-amber), var(--tm-amber2), #f0a060);
   border-radius: 0 0 16px 16px;
 }
-
+*/
 /* Header — mirrors tm-panel-header */
 .tm-legend-header {
   padding: 16px 16px 10px; border-bottom: 1px solid var(--tm-sand3); flex-shrink: 0;
@@ -626,8 +634,7 @@ main.page-content {
 /* "+N more" overflow overlay on tile 6 */
 .tm-ph-more {
   position: absolute; inset: 0;
-  background: rgba(10,8,6,.52);
-  backdrop-filter: blur(3px);
+  background: rgba(10,8,6,.65);
   display: flex; align-items: center; justify-content: center;
   font-size: 2.2rem; font-weight: 700; color: #fff;
   letter-spacing: -.01em;
@@ -638,7 +645,7 @@ main.page-content {
 /* Photo count badge — bottom-right corner of the grid */
 .tm-photo-count {
   position: absolute; bottom: 8px; right: 8px;
-  background: rgba(10,8,6,.55); backdrop-filter: blur(6px);
+  background: rgba(10,8,6,.72);
   color: #fff; border-radius: 100px;
   padding: 3px 9px; font-size: 1.3rem; font-weight: 600;
   display: flex; align-items: center; gap: 5px;
@@ -752,7 +759,8 @@ main.page-content {
 /* ── Lightbox — fixed, above everything including site header ── */
 .tm-lb {
   display: none; position: fixed; inset: 0;
-  background: rgba(10,8,6,.94); backdrop-filter: blur(24px);
+  background: rgba(10,8,6,.95);
+  /* backdrop-filter removed — GPU compositor cost; solid dark bg is equivalent */
   z-index: 99999;
   justify-content: center; align-items: center; flex-direction: column;
 }
@@ -762,7 +770,7 @@ main.page-content {
   width: 44px; height: 44px; border-radius: 50%;
   background: rgba(247,243,236,.1); border: 1px solid rgba(247,243,236,.2);
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: #fff; font-size: 1.7rem; transition: background .2s; /* was 1.6rem */
+  cursor: pointer; color: #fff; font-size: 1.7rem; transition: background .2s;
 }
 .tm-lb-close:hover { background: var(--tm-amber); border-color: var(--tm-amber); }
 .tm-lb-nav {
@@ -770,7 +778,7 @@ main.page-content {
   width: 44px; height: 44px; border-radius: 50%;
   background: rgba(247,243,236,.1); border: 1px solid rgba(247,243,236,.2);
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: #fff; font-size: 1.7rem; transition: background .2s; /* was 1.6rem */
+  cursor: pointer; color: #fff; font-size: 1.7rem; transition: background .2s;
 }
 .tm-lb-nav:hover { background: rgba(200,96,26,.7); border-color: var(--tm-amber); }
 .tm-lb-prev { left: 20px; }
@@ -779,6 +787,13 @@ main.page-content {
   max-width: 90vw; max-height: 82vh; object-fit: contain;
   border-radius: 14px; box-shadow: 0 30px 80px rgba(0,0,0,.7);
   animation: tm-lbPop .28s cubic-bezier(.16,1,.3,1);
+  /* Smooth crossfade when full-res swaps in over the thumb */
+  transition: filter .35s ease;
+  filter: blur(4px);
+}
+/* Once full-res is loaded JS adds this class — clears the blur */
+.tm-lb img.tm-lb-loaded {
+  filter: none;
 }
 @keyframes tm-lbPop {
   from { opacity: 0; transform: scale(.9); }
@@ -806,7 +821,7 @@ main.page-content {
   border-radius: 100px;
   padding: 10px 18px 10px 14px;
   box-shadow: var(--tm-sh-md);
-  backdrop-filter: blur(16px);
+  /* backdrop-filter removed — GPU cost on mobile */
   cursor: pointer;
   pointer-events: all;
   color: var(--tm-ink3);
@@ -829,8 +844,8 @@ main.page-content {
   display: none; /* shown only in mobile media query */
   position: fixed; inset: 0; z-index: 99998;
   align-items: flex-end; justify-content: center;
-  background: rgba(10,8,6,.45);
-  backdrop-filter: blur(4px);
+  background: rgba(10,8,6,.55);
+  /* backdrop-filter removed — GPU cost */
   opacity: 0; pointer-events: none;
   transition: opacity .25s ease;
 }
@@ -1136,7 +1151,7 @@ main.page-content {
 /* +N overlay */
 .tm-gc-more {
   position: absolute; inset: 0;
-  background: rgba(10,8,6,.5); backdrop-filter: blur(3px);
+  background: rgba(10,8,6,.65);
   display: flex; align-items: center; justify-content: center;
   font-size: 2rem; font-weight: 700; color: #fff;
   text-shadow: 0 2px 8px rgba(0,0,0,.4);
@@ -1146,7 +1161,7 @@ main.page-content {
 /* Photo count badge */
 .tm-gc-photo-count {
   position: absolute; bottom: 8px; right: 8px; z-index: 4;
-  background: rgba(10,8,6,.55); backdrop-filter: blur(6px);
+  background: rgba(10,8,6,.72);
   color: #fff; border-radius: 100px;
   padding: 3px 10px; font-size: 1.3rem; font-weight: 600;
   display: flex; align-items: center; gap: 5px;
@@ -1495,7 +1510,7 @@ main.page-content {
   opacity: 0;
   writing-mode: horizontal-tb !important;
   border: 1px solid #e8e3dc;
-  box-shadow: 0 8px 32px rgba(26,22,18,.16);
+  /* box-shadow: 0 8px 32px rgba(26,22,18,.16); */
   transition: width .32s cubic-bezier(.16,1,.3,1), opacity .22s ease;
   order: 1;
 }

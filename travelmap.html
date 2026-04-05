@@ -26,13 +26,16 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
 
   <!-- ④ Google Fonts used by the travel map widget -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- ⑤ Leaflet CSS -->
+  <!-- ⑤ Leaflet CSS — preconnect for faster tile fetching -->
+  <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
-  <!-- ⑥ Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- ⑥ Leaflet JS — defer so it doesn't block HTML parsing -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
 
   <!-- ⑦ Travel Map Widget Styles -->
   <link rel="stylesheet" href="static/css/travel_map.css">
@@ -381,8 +384,8 @@
      All globals prefixed with "tm" to prevent name collisions
      with the site JS (search.js, activity-widget.js, etc.)
 ═══════════════════════════════════════════════════════════ -->
-<script src="static/js/travel_map.js"></script>
-<script src="static/js/search.js"></script>
+<script src="static/js/travel_map.js" defer></script>
+<script src="static/js/search.js" defer></script>
 
 
 </body>
