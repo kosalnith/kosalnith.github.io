@@ -55,7 +55,10 @@ const tmPinTypes = {
   activity:    { color:'#e67e22', icon:'fa-solid fa-person-running',      label:'Activity'         },
   tours:       { color:'#ca6f1e', icon:'fa-solid fa-route',               label:'Tours'            },
   spa:         { color:'#a569bd', icon:'fa-solid fa-spa',                 label:'Spa'              },
-  walking:     { color:'#242755', icon:'fa-solid fa-person-walking',                 label:'Walking'              },
+  walking:     { color:'#242755', icon:'fa-solid fa-person-walking',      label:'Walking'          },
+  workshop:    { color:'#d950de', icon:'fa-solid fa-comment-dots',        label:'Workshop'         },
+  conference:  { color:'#b75214', icon:'fa-solid fa-chalkboard-user',    label:'Conference'       },
+
 
   /* ── SHOPPING  (hot pink) ── */
   shop:        { color:'#c0392b', icon:'fa-solid fa-bag-shopping',        label:'Shop'             },
@@ -90,24 +93,29 @@ const tmCountries = [
     ]},
   { name:"China", lat:35.0, lng:105.0, flag:"cn", desc:"Ancient wonders, futuristic cities, and the Great Wall stretching to the horizon.",
     cities:[
-      {name:"Beijing",  lat:39.9042, lng:116.4074, type:"airport",  desc:"Imperial capital, home to the Forbidden City and Great Wall.", imgs:["beijing_1","beijing_2","beijing_3","beijing_4"]},
+      {name:"Beijing Capital International Airport",  lat:40.0822, lng:116.6053, type:"airport",  desc:"Massive global hub with terminals, flights, shops, and bustling travellers.", imgs:["ep34"]},
       {name:"Shanghai", lat:31.2304, lng:121.4737, type:"city", desc:"Futuristic skyline meets colonial Bund architecture.", imgs:["ep29"]},
-      {name:"Suzhou",    lat:31.3025, lng:120.5842, type:"culture", desc:"Ancient canal city famed for classical gardens, silk heritage, and bridges.", imgs:["xian_1","xian_2","xian_3","xian_4"]},
+      {name:"Suzhou",    lat:31.3025, lng:120.5842, type:"culture", desc:"Ancient canal city famed for classical gardens, silk heritage, and bridges.", imgs:["ep30","ep31","ep32","ep33"]},
+      {name:"C-SEASD Workshop",   lat:31.2749, lng:120.7380, type:"workshop", desc:"It was a two‑day academic workshop connecting China and Southeast Asia researchers to discuss sustainable development challenges.", imgs:["ep35","ep36","ep37", "ep84"]},
+       {name:"Fuyong Subdistrict",   lat:22.6715, lng:113.8225, type:"area", desc:"Urban area in Shenzhen, China, known for its transport hubs and local communities.", imgs:["ep77","ep78","ep79"]},
     ]},
 
   { name:"Denmark", lat:56.0, lng:10.0, flag:"dk", desc:"Hygge lifestyle, Viking history, and modern Scandinavian design.",
     cities:[
-      {name:"Copenhagen", lat:55.6761, lng:12.5683, type:"sightseeing",  desc:"Colorful Nyhavn, cycling culture, and world-class cuisine.", imgs:["copenhagen_1","copenhagen_2","copenhagen_3","copenhagen_4"]},
-      {name:"Aarhus",     lat:56.1629, lng:10.2039, type:"culture", desc:"Denmark's second city, vibrant arts scene and Latin Quarter.", imgs:["aarhus_1","aarhus_2","aarhus_3","aarhus_4"]},
+      {name:"Copenhagen", lat:55.6761, lng:12.5683, type:"city",  desc:"Colorful Nyhavn, cycling culture, and world-class cuisine.", imgs:["ep38","ep39","ep40","ep41"]},
+      {name:"Aalborg",     lat:57.0311, lng:9.9166, type:"culture", desc:"Historic Danish city known for vibrant culture, waterfronts, and modern architecture.", imgs:["ep42","ep43","ep44","ep45"]},
+      {name:"6th Nordic Post-Keynesian Conference",     lat:57.0147, lng:9.9753, type:"conference", desc:"International economics conference gathering scholars to discuss Post-Keynesian theory and research.", imgs:["ep46","ep47","ep48"]},
     ]},
+
+
   { name:"Ethiopia", lat:9.5, lng:39.5, flag:"et", desc:"Ancient rock churches, coffee origins, and breathtaking highland landscapes.",
     cities:[
       {name:"Addis Ababa", lat:9.0320, lng:38.7469, type:"airport", desc:"Africa's diplomatic capital, high-altitude city with rich culture.", imgs:["addis_ababa_1","addis_ababa_2","addis_ababa_3","addis_ababa_4"]},
     ]},
   { name:"Fiji", lat:-17.5, lng:178.0, flag:"fj", desc:"Coral reefs, turquoise waters, and the warm tropical Bula spirit.",
     cities:[
-      {name:"Suva", lat:-18.1416, lng:178.4419, type:"sightseeing", desc:"Capital city on the Pacific, vibrant market and cultural hub.", imgs:["suva_1","suva_2","suva_3","suva_4"]},
-      {name:"Nadi", lat:-17.7765, lng:177.4356, type:"beach",   desc:"Gateway city with lush gardens and Mamanuca Islands access.", imgs:["nadi_1","nadi_2","nadi_3","nadi_4"]},
+      {name:"Suva", lat:-18.1416, lng:178.4419, type:"city", desc:"Capital city on the Pacific, vibrant market and cultural hub.", imgs:["suva_1","suva_2","suva_3","suva_4"]},
+      {name:"Nadi", lat:-17.7765, lng:177.4356, type:"airport",   desc:"Gateway city with lush gardens and Mamanuca Islands access.", imgs:["nadi_1","nadi_2","nadi_3","nadi_4"]},
     ]},
   { name:"Finland", lat:62.0, lng:25.0, flag:"fi", desc:"A thousand lakes, Nordic saunas, and the magical Northern Lights.",
     cities:[
@@ -115,7 +123,7 @@ const tmCountries = [
     ]},
   { name:"France", lat:46.5, lng:2.5, flag:"fr", desc:"Art, romance, cuisine, and iconic landmarks from coast to countryside.",
     cities:[
-      {name:"Paris", lat:48.8566, lng:2.3522, type:"sightseeing", desc:"City of Light — Eiffel Tower, Louvre, and café terraces.", imgs:["paris_1","paris_2","paris_3","paris_4"]},
+      {name:"Paris", lat:48.8566, lng:2.3522, type:"sightseeing", desc:"City of Light — Eiffel Tower, Louvre, and café terraces.", imgs:["ep74","ep75","ep76",]},
     ]},
   { name:"Germany", lat:51.0, lng:10.0, flag:"de", desc:"Castles, beer gardens, fairy-tale forests, and cutting-edge innovation.",
     cities:[
@@ -131,8 +139,12 @@ const tmCountries = [
     ]},
   { name:"Indonesia", lat:-3.0, lng:117.0, flag:"id", desc:"Thousands of islands, volcanoes, rainforests, and vibrant cultures.",
     cities:[
-      {name:"Jakarta", lat:-6.2088, lng:106.8456, type:"sightseeing", desc:"Sprawling megacity, melting pot of cultures and cuisines.", imgs:["jakarta_1","jakarta_2","jakarta_3","jakarta_4"]},
+      {name:"Jakarta", lat:-6.2088, lng:106.8456, type:"beach", desc:"Sprawling megacity, melting pot of cultures and cuisines.", imgs:["ep49","ep50","ep51","ep52", "ep56"]},
+      {name:"32nd ASEAS Conference", lat:-6.3605, lng:106.8272, type:"conference", desc:"International hybrid conference in Indonesia uniting scholars to discuss Southeast Asian studies and interdisciplinary research.", imgs:["ep53","ep54","ep55"]},
     ]},
+
+
+
   { name:"Laos", lat:18.5, lng:103.0, flag:"la", desc:"Serene mountains, Buddhist monasteries, and the mighty Mekong River.",
     cities:[
       {name:"Luang Prabang", lat:19.8845, lng:102.1347, type:"culture", desc:"UNESCO World Heritage town, golden temples on the Mekong.", imgs:["luang_prabang_1","luang_prabang_2","luang_prabang_3","luang_prabang_4"]},
@@ -168,12 +180,14 @@ const tmCountries = [
     ]},
   { name:"Spain", lat:40.0, lng:-3.5, flag:"es", desc:"Flamenco, siesta, tapas, and a mosaic of vibrant historic cities.",
     cities:[
-      {name:"Madrid",    lat:40.4168, lng:-3.7038, type:"sightseeing",  desc:"Royal Palace, Prado Museum, and vibrant nightlife.", imgs:["madrid_1","madrid_2","madrid_3","madrid_4"]},
-      {name:"Barcelona", lat:41.3851, lng:2.1734,  type:"culture", desc:"Gaudí's Sagrada Família, Gothic Quarter and La Rambla.", imgs:["barcelona_1","barcelona_2","barcelona_3","barcelona_4"]},
+      {name:"Madrid",    lat:40.4168, lng:-3.7038, type:"city",  desc:"Royal Palace, Prado Museum, and vibrant nightlife.", imgs:["ep68","ep69","ep70","ep71", "ep72", "ep73"]},
+      {name:"Barcelona", lat:41.3851, lng:2.1734,  type:"culture", desc:"Gaudí's Sagrada Família, Gothic Quarter and La Rambla.", imgs:["ep57","ep58","ep59","ep60", "ep61", "ep67"]},
+      {name:"Mercat de la Boqueria", lat:41.3818, lng:2.1715,  type:"shop", desc:"Famous Barcelona market offering fresh food, vibrant stalls, and local delicacies..", imgs:["ep62","ep63","ep64","ep65", "ep66"]},
+
     ]},
   { name:"Sweden", lat:62.0, lng:15.0, flag:"se", desc:"Archipelagos, minimalist design, and the magic of endless summer light.",
     cities:[
-      {name:"Stockholm", lat:59.3293, lng:18.0686, type:"sightseeing", desc:"Venice of the North — islands, Viking history and design.", imgs:["stockholm_1","stockholm_2","stockholm_3","stockholm_4"]},
+      {name:"Stockholm", lat:59.3293, lng:18.0686, type:"sightseeing", desc:"Venice of the North — islands, Viking history and design.", imgs:["ep80","ep81","ep82","ep83"]},
     ]},
   { name:"Switzerland", lat:46.8, lng:8.0, flag:"ch", desc:"Alpine peaks, pristine lakes, chocolate, and precision watchmaking.",
     cities:[
@@ -638,10 +652,19 @@ if (window.visualViewport) {
   const galleryEl  = document.getElementById('tm-gallery-view');
   if (!btnMap || !btnGallery || !mapShell || !galleryEl) return;
 
+  function tmSidebarsVisible(show) {
+    ['tm-gs-left','tm-gs-right'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('tm-gs--visible', show);
+    });
+  }
+
   function showMap() {
     mapShell.style.display  = '';
     galleryEl.style.display = 'none';
     galleryEl.setAttribute('aria-hidden', 'true');
+    galleryEl.classList.remove('tm-gallery--active');
+    tmSidebarsVisible(false);
     btnMap.classList.add('tm-view-btn--active');
     btnMap.setAttribute('aria-pressed', 'true');
     btnGallery.classList.remove('tm-view-btn--active');
@@ -653,11 +676,13 @@ if (window.visualViewport) {
     mapShell.style.display  = 'none';
     galleryEl.style.display = 'block';
     galleryEl.setAttribute('aria-hidden', 'false');
+    galleryEl.classList.add('tm-gallery--active');
+    tmSidebarsVisible(true);
     btnGallery.classList.add('tm-view-btn--active');
     btnGallery.setAttribute('aria-pressed', 'true');
     btnMap.classList.remove('tm-view-btn--active');
     btnMap.setAttribute('aria-pressed', 'false');
-    tmRenderGallery('');
+    tmRenderGallery();
   }
 
   btnMap.addEventListener('click', showMap);
@@ -665,11 +690,271 @@ if (window.visualViewport) {
 })();
 
 /* ══════════════════════════════════════════════════════════════
+   GALLERY SIDEBAR TOGGLES
+══════════════════════════════════════════════════════════════ */
+(function tmSidebarToggles() {
+  function initSidebar(sidebarId, toggleId, panelId, chevronId, collapseClass) {
+    const sidebar  = document.getElementById(sidebarId);
+    const toggle   = document.getElementById(toggleId);
+    const chevron  = document.getElementById(chevronId);
+    if (!sidebar || !toggle) return;
+
+    /* Start collapsed */
+    sidebar.classList.add(collapseClass);
+
+    toggle.addEventListener('click', () => {
+      const isCollapsed = sidebar.classList.toggle(collapseClass);
+      if (chevron) chevron.style.transform = isCollapsed ? '' : 'rotate(180deg)';
+    });
+  }
+
+  initSidebar('tm-gs-left',  'tm-gs-left-toggle',  'tm-gs-left-panel',  'tm-gs-left-chevron',  'tm-gs--collapsed');
+  initSidebar('tm-gs-right', 'tm-gs-right-toggle', 'tm-gs-right-panel', 'tm-gs-right-chevron', 'tm-gs--collapsed');
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   GALLERY — search + filter state
+══════════════════════════════════════════════════════════════ */
+let tmGalleryQuery      = '';
+let tmGalleryCountries  = new Set();   /* multi-select */
+let tmGalleryTypes      = new Set();   /* multi-select */
+
+function tmUpdateFilterBadge(id, set) {
+  const badge = document.getElementById(id);
+  if (!badge) return;
+  const n = set.size;
+  badge.textContent = n ? n : '';
+  badge.classList.toggle('tm-gs-badge--on', n > 0);
+}
+
+/* ── Build filter chips once ── */
+function tmBuildGalleryFilters() {
+
+  /* ── Country chips ── */
+  const countryChips = document.getElementById('tm-gf-countries');
+  if (countryChips) {
+    tmCountries.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'tm-gf-chip';
+      btn.dataset.value = c.name;
+      btn.innerHTML = `
+        <div class="tm-gf-flag-wrap"><span class="fi fi-${c.flag}"></span></div>
+        <span class="tm-gf-chip-label">${c.name}</span>`;
+      btn.addEventListener('click', () => {
+        if (tmGalleryCountries.has(c.name)) tmGalleryCountries.delete(c.name);
+        else tmGalleryCountries.add(c.name);
+        btn.classList.toggle('tm-gf-chip--on', tmGalleryCountries.has(c.name));
+        tmUpdateFilterBadge('tm-gf-country-badge', tmGalleryCountries);
+        tmRenderGallery();
+      });
+      countryChips.appendChild(btn);
+    });
+  }
+
+  /* ── Type chips ── */
+  const usedTypes = new Set();
+  tmCountries.forEach(c => c.cities.forEach(city => usedTypes.add(city.type || 'default')));
+  const typeChips = document.getElementById('tm-gf-types');
+  if (typeChips) {
+    Object.entries(tmPinTypes).forEach(([key, t]) => {
+      if (!usedTypes.has(key) || key === 'default') return;
+      const btn = document.createElement('button');
+      btn.className = 'tm-gf-chip';
+      btn.dataset.value = key;
+      btn.innerHTML = `
+        <div class="tm-gf-icon-circle" style="background:${t.color}">
+          <i class="${t.icon}"></i>
+        </div>
+        <span class="tm-gf-chip-label">${t.label}</span>`;
+      btn.addEventListener('click', () => {
+        if (tmGalleryTypes.has(key)) tmGalleryTypes.delete(key);
+        else tmGalleryTypes.add(key);
+        btn.classList.toggle('tm-gf-chip--on', tmGalleryTypes.has(key));
+        tmUpdateFilterBadge('tm-gf-type-badge', tmGalleryTypes);
+        tmRenderGallery();
+      });
+      typeChips.appendChild(btn);
+    });
+  }
+
+  /* ── Footer reset buttons ── */
+  document.getElementById('tm-gf-country-reset')?.addEventListener('click', () => {
+    tmGalleryCountries.clear();
+    countryChips?.querySelectorAll('.tm-gf-chip').forEach(b => b.classList.remove('tm-gf-chip--on'));
+    tmUpdateFilterBadge('tm-gf-country-badge', tmGalleryCountries);
+    tmRenderGallery();
+  });
+  document.getElementById('tm-gf-type-reset')?.addEventListener('click', () => {
+    tmGalleryTypes.clear();
+    typeChips?.querySelectorAll('.tm-gf-chip').forEach(b => b.classList.remove('tm-gf-chip--on'));
+    tmUpdateFilterBadge('tm-gf-type-badge', tmGalleryTypes);
+    tmRenderGallery();
+  });
+
+  /* ── Search ── */
+  const inp = document.getElementById('tm-gallery-search');
+  const clearBtn = document.getElementById('tm-gallery-search-clear');
+  if (inp) {
+    inp.addEventListener('input', e => {
+      tmGalleryQuery = e.target.value;
+      if (clearBtn) clearBtn.style.display = tmGalleryQuery ? 'flex' : 'none';
+      tmRenderGallery();
+    });
+  }
+  if (clearBtn) {
+    clearBtn.style.display = 'none';
+    clearBtn.addEventListener('click', () => {
+      if (inp) inp.value = '';
+      tmGalleryQuery = '';
+      clearBtn.style.display = 'none';
+      tmRenderGallery();
+    });
+  }
+
+  /* ── Clear all ── */
+  document.getElementById('tm-gallery-clear-all')?.addEventListener('click', () => {
+    tmGalleryQuery = '';
+    tmGalleryCountries.clear();
+    tmGalleryTypes.clear();
+    if (inp) inp.value = '';
+    if (clearBtn) clearBtn.style.display = 'none';
+    document.querySelectorAll('.tm-gf-chip').forEach(b => b.classList.remove('tm-gf-chip--on'));
+    tmUpdateFilterBadge('tm-gf-country-badge', tmGalleryCountries);
+    tmUpdateFilterBadge('tm-gf-type-badge', tmGalleryTypes);
+    tmRenderGallery();
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
    GALLERY RENDERER
 ══════════════════════════════════════════════════════════════ */
+function tmRenderGallery() {
+  const container = document.getElementById('tm-gallery-countries');
+  const activeBar = document.getElementById('tm-gallery-active-bar');
+  const countEl   = document.getElementById('tm-gallery-result-count');
+  if (!container) return;
+  container.innerHTML = '';
 
-/* Build the photo mosaic HTML based on image count.
-   Thumbs are used for fast loading; lightbox opens full images. */
+  const q = tmGalleryQuery.toLowerCase().trim();
+
+  /* Filter countries + cities */
+  let totalCards = 0;
+  const sections = [];
+
+  tmCountries.forEach(country => {
+    /* Country filter — show if none selected OR country is in set */
+    if (tmGalleryCountries.size > 0 && !tmGalleryCountries.has(country.name)) return;
+
+    /* Filter cities */
+    const matchingCities = country.cities.filter(city => {
+      const matchesType   = tmGalleryTypes.size === 0 || tmGalleryTypes.has(city.type);
+      const matchesSearch = !q ||
+        country.name.toLowerCase().includes(q) ||
+        city.name.toLowerCase().includes(q);
+      return matchesType && matchesSearch;
+    });
+
+    if (matchingCities.length > 0) {
+      sections.push({ country, cities: matchingCities });
+      totalCards += matchingCities.length;
+    }
+  });
+
+  /* Active bar */
+  const hasFilter = q || tmGalleryCountries.size > 0 || tmGalleryTypes.size > 0;
+  if (activeBar) {
+    activeBar.style.display = hasFilter ? 'flex' : 'none';
+    if (countEl) countEl.textContent = `${totalCards} location${totalCards !== 1 ? 's' : ''} found`;
+  }
+
+  if (sections.length === 0) {
+    container.innerHTML = '<p class="tm-gallery-empty"><i class="fa-solid fa-magnifying-glass"></i><br>No locations match your filters.</p>';
+    return;
+  }
+
+  sections.forEach(({ country, cities }) => {
+    const section = document.createElement('div');
+    section.className = 'tm-gc-section';
+
+    const header = document.createElement('div');
+    header.className = 'tm-gc-country-header';
+    header.innerHTML = `
+      <span class="tm-gc-flag fi fi-${country.flag}"></span>
+      <h3 class="tm-gc-country-name">${country.name}</h3>
+      <span class="tm-gc-country-desc">${country.desc}</span>`;
+    section.appendChild(header);
+
+    const locGrid = document.createElement('div');
+    locGrid.className = 'tm-gc-locations';
+
+    cities.forEach(city => {
+      const t = tmPinTypes[city.type] || tmPinTypes.default;
+      const fullSrcs = city.imgs.map(name => tmFull(name));
+      const n = city.imgs.length;
+
+      const card = document.createElement('div');
+      card.className = 'tm-gc-card';
+
+      const photoGrid = document.createElement('div');
+      photoGrid.className = 'tm-gc-photo-wrap';
+      photoGrid.innerHTML = tmGalleryPhotoGrid(city.imgs);
+
+      if (n > 1) {
+        const badge = document.createElement('span');
+        badge.className = 'tm-gc-photo-count';
+        badge.innerHTML = `<i class="fa-solid fa-images"></i> ${n}`;
+        photoGrid.querySelector('.tm-gc-photos').appendChild(badge);
+      }
+
+      const info = document.createElement('div');
+      info.className = 'tm-gc-info';
+      info.innerHTML = `
+        <div class="tm-gc-type-badge" style="color:${t.color};background:${t.color}14;border-color:${t.color}30">
+          <i class="${t.icon}"></i> ${t.label}
+        </div>
+        <button class="tm-gc-loc-name" data-lat="${city.lat}" data-lng="${city.lng}" title="View on map">
+          ${city.name} <i class="fa-solid fa-map-location-dot"></i>
+        </button>
+        <p class="tm-gc-loc-desc">${city.desc}</p>`;
+
+      card.appendChild(photoGrid);
+      card.appendChild(info);
+
+      card.querySelectorAll('.tm-gc-ph').forEach(ph => {
+        ph.style.cursor = 'zoom-in';
+        ph.addEventListener('click', function(e) {
+          e.stopPropagation();
+          tmOpenLb(fullSrcs, parseInt(this.dataset.idx) || 0, city.name);
+        });
+      });
+
+      card.querySelector('.tm-gc-loc-name').addEventListener('click', function() {
+        const lat = parseFloat(this.dataset.lat);
+        const lng  = parseFloat(this.dataset.lng);
+        document.getElementById('tm-btn-map').click();
+        setTimeout(() => {
+          tmMap.flyTo([lat, lng], 14, { duration: 1.4 });
+          setTimeout(() => {
+            tmAllMarkers.forEach(({ marker }) => {
+              const pos = marker.getLatLng();
+              if (Math.abs(pos.lat - lat) < 0.001 && Math.abs(pos.lng - lng) < 0.001) {
+                marker.openPopup();
+              }
+            });
+          }, 1500);
+        }, 100);
+      });
+
+      locGrid.appendChild(card);
+    });
+
+    section.appendChild(locGrid);
+    container.appendChild(section);
+  });
+}
+
+/* Init filters once */
+tmBuildGalleryFilters();
 function tmGalleryPhotoGrid(imgs) {
   const n = imgs.length;
   const th = name => `static/img/explore/thumbs/${name}.jpg`;
@@ -728,119 +1013,5 @@ function tmGalleryPhotoGrid(imgs) {
   </div>`;
 }
 
-function tmRenderGallery(filter) {
-  const container = document.getElementById('tm-gallery-countries');
-  if (!container) return;
-  container.innerHTML = '';
-
-  const q = filter.toLowerCase().trim();
-  const filtered = q
-    ? tmCountries.filter(c =>
-        c.name.toLowerCase().includes(q) ||
-        c.cities.some(city => city.name.toLowerCase().includes(q))
-      )
-    : tmCountries;
-
-  if (filtered.length === 0) {
-    container.innerHTML = '<p class="tm-gallery-empty">No locations found.</p>';
-    return;
-  }
-
-  filtered.forEach(country => {
-    const section = document.createElement('div');
-    section.className = 'tm-gc-section';
-
-    /* Country header */
-    const header = document.createElement('div');
-    header.className = 'tm-gc-country-header';
-    header.innerHTML = `
-      <span class="tm-gc-flag fi fi-${country.flag}"></span>
-      <h3 class="tm-gc-country-name">${country.name}</h3>
-      <span class="tm-gc-country-desc">${country.desc}</span>`;
-    section.appendChild(header);
-
-    /* Locations grid */
-    const locGrid = document.createElement('div');
-    locGrid.className = 'tm-gc-locations';
-
-    country.cities.forEach(city => {
-      const t = tmPinTypes[city.type] || tmPinTypes.default;
-      const fullSrcs = city.imgs.map(name => tmFull(name));
-      const n = city.imgs.length;
-
-      const card = document.createElement('div');
-      card.className = 'tm-gc-card';
-
-      /* Photo grid */
-      const photoGrid = document.createElement('div');
-      photoGrid.className = 'tm-gc-photo-wrap';
-      photoGrid.innerHTML = tmGalleryPhotoGrid(city.imgs);
-
-      /* Photo count badge */
-      if (n > 1) {
-        const badge = document.createElement('span');
-        badge.className = 'tm-gc-photo-count';
-        badge.innerHTML = `<i class="fa-solid fa-images"></i> ${n}`;
-        photoGrid.querySelector('.tm-gc-photos').appendChild(badge);
-      }
-
-      /* Info */
-      const info = document.createElement('div');
-      info.className = 'tm-gc-info';
-      info.innerHTML = `
-        <div class="tm-gc-type-badge" style="color:${t.color};background:${t.color}14;border-color:${t.color}30">
-          <i class="${t.icon}"></i> ${t.label}
-        </div>
-        <button class="tm-gc-loc-name" data-lat="${city.lat}" data-lng="${city.lng}" title="View on map">
-          ${city.name} <i class="fa-solid fa-map-location-dot"></i>
-        </button>
-        <p class="tm-gc-loc-desc">${city.desc}</p>`;
-
-      card.appendChild(photoGrid);
-      card.appendChild(info);
-
-      /* Click photos → lightbox */
-      card.querySelectorAll('.tm-gc-ph').forEach(ph => {
-        ph.style.cursor = 'zoom-in';
-        ph.addEventListener('click', function(e) {
-          e.stopPropagation();
-          tmOpenLb(fullSrcs, parseInt(this.dataset.idx) || 0, city.name);
-        });
-      });
-
-      /* Click location name → switch to map and fly there */
-      card.querySelector('.tm-gc-loc-name').addEventListener('click', function() {
-        const lat = parseFloat(this.dataset.lat);
-        const lng  = parseFloat(this.dataset.lng);
-        /* 1. Switch to map view */
-        document.getElementById('tm-btn-map').click();
-        /* 2. Fly to location and open popup */
-        setTimeout(() => {
-          tmMap.flyTo([lat, lng], 14, { duration: 1.4 });
-          /* Find and open the matching marker popup */
-          setTimeout(() => {
-            tmAllMarkers.forEach(({ marker }) => {
-              const pos = marker.getLatLng();
-              if (Math.abs(pos.lat - lat) < 0.001 && Math.abs(pos.lng - lng) < 0.001) {
-                marker.openPopup();
-              }
-            });
-          }, 1500);
-        }, 100);
-      });
-
-      locGrid.appendChild(card);
-    });
-
-    section.appendChild(locGrid);
-    container.appendChild(section);
-  });
-}
-
-/* Gallery search */
-(function() {
-  const inp = document.getElementById('tm-gallery-search');
-  if (inp) inp.addEventListener('input', e => tmRenderGallery(e.target.value));
-})();
 
 })(); /* end IIFE */
