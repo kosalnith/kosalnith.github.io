@@ -101,6 +101,15 @@
       <h2 class="center">My Travel Stamps</h2>
       <p>A personal passport collection capturing my work journeys, research engagements, and holidays across the global.</p>
     </header>
+    <!-- ── View toggle bar — sits snugly under the heading ── -->
+    <div class="tm-view-toggle-bar">
+      <button class="tm-view-btn tm-view-btn--active" id="tm-btn-map" aria-pressed="true">
+        <i class="fa-solid fa-map"></i> Map
+      </button>
+      <button class="tm-view-btn" id="tm-btn-gallery" aria-pressed="false">
+        <i class="fa-solid fa-images"></i> Gallery
+      </button>
+    </div>
   </section>
 </div>
 
@@ -108,17 +117,8 @@
 <main class="page-content" id="page-content">
   <div id="main-content" tabindex="-1"></div>
 
-  <!-- ── View toggle bar ── -->
-  <div class="tm-view-toggle-bar">
-    <button class="tm-view-btn tm-view-btn--active" id="tm-btn-map" aria-pressed="true">
-      <i class="fa-solid fa-map"></i> Map
-    </button>
-    <button class="tm-view-btn" id="tm-btn-gallery" aria-pressed="false">
-      <i class="fa-solid fa-images"></i> Gallery
-    </button>
-  </div>
-
   <div class="tm-page">
+    <div class="tm-shell-wrap">
     <div class="tm-shell" id="tm-shell">
 
       <div id="tm-map"></div>
@@ -126,9 +126,11 @@
 
       <!-- Back to Gallery button — shown only after navigating from a gallery card -->
       <div class="tm-back-bar" id="tm-back-bar" style="display:none">
-        <button class="tm-back-btn" id="tm-back-btn">
-          <i class="fa-solid fa-arrow-left"></i>
-          <span>Back to Gallery</span>
+        <button class="tm-back-btn" id="tm-back-btn"
+          style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:#1a1612;border:none;color:#fff;font-size:1.4rem;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(26,22,18,.35);white-space:nowrap;">
+          <i class="fa-solid fa-arrow-left" style="font-size:1.2rem;color:#f0441a;"></i>
+          <span style="color:#9a8e82;font-size:1.25rem;font-weight:400;">Back to</span>
+          <span id="tm-back-city-name" style="color:#fff;">Gallery</span>
         </button>
       </div>
 
@@ -205,12 +207,6 @@
         <span class="tm-fab-badge" id="tm-fab-badge"></span>
       </button>
 
-      <!-- Hint bar -->
-      <div class="tm-bottom-hint">
-        <i class="fa-regular fa-hand-pointer"></i>
-        <span>Click country pin · Location pins show 4 photos · Click photos to enlarge</span>
-      </div>
-
     </div><!-- /.tm-shell -->
 
     <!-- Mobile Pin Types bottom sheet — shown when FAB is tapped -->
@@ -234,6 +230,7 @@
 
     <!-- Whitespace between map and footer -->
     <div class="tm-page-spacer"></div>
+    </div><!-- /.tm-shell-wrap -->
 
     <!-- ── Gallery view — hidden by default ── -->
     <div class="tm-gallery-view" id="tm-gallery-view" aria-hidden="true">

@@ -355,6 +355,8 @@ function tmCityPopupHtml(country, city) {
 let tmActiveItem   = null;
 const tmAllMarkers = [];        /* { marker, type } — populated in forEach below */
 const tmActiveFilters = new Set(); /* empty = show all */
+let tmLastGalleryCardId   = null; /* data-card-id to find card after re-render */
+let tmLastGalleryCardName = '';   /* city name shown on back button */
 
 tmCountries.forEach(c => {
   /* Location pins — country globe pins removed; only typed location pins shown */
@@ -394,7 +396,6 @@ function tmRenderList(filter) {
     const locWord = c.cities.length > 1 ? 'locations' : 'city';
     const el = document.createElement('div');
     el.className = 'tm-country-item';
-    el.style.animationDelay = `${i * 0.032 + 0.4}s`;
     el.innerHTML = `
       <div class="tm-c-flag"><span class="fi fi-${c.flag}"></span></div>
       <div class="tm-c-body">
@@ -636,10 +637,17 @@ function tmFitHeight() {
   tmMap.invalidateSize();
 }
 tmFitHeight();
-window.addEventListener('resize', tmFitHeight);
+/* Debounced resize — prevents tmFitHeight firing dozens of times per second
+   during window resize or mobile address-bar scroll, which caused heavy CPU load */
+let tmResizeTimer = null;
+function tmDebouncedFitHeight() {
+  clearTimeout(tmResizeTimer);
+  tmResizeTimer = setTimeout(tmFitHeight, 120);
+}
+window.addEventListener('resize', tmDebouncedFitHeight);
 /* Also refit when mobile browser chrome shows/hides (address bar scroll) */
 if (window.visualViewport) {
-  window.visualViewport.addEventListener('resize', tmFitHeight);
+  window.visualViewport.addEventListener('resize', tmDebouncedFitHeight);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -686,7 +694,36 @@ if (window.visualViewport) {
   }
 
   btnMap.addEventListener('click', showMap);
-  btnGallery.addEventListener('click', showGallery);
+  btnGallery.addEventListener('click', () => {
+    /* Hide back bar when user manually switches to gallery */
+    const backBar = document.getElementById('tm-back-bar');
+    if (backBar) backBar.style.display = 'none';
+    showGallery();
+  });
+})();
+
+/* ── Back to Gallery button ── */
+(function tmBackButton() {
+  const backBtn = document.getElementById('tm-back-btn');
+  const backBar = document.getElementById('tm-back-bar');
+  if (!backBtn) return;
+  backBtn.addEventListener('click', () => {
+    if (backBar) backBar.style.display = 'none';
+    /* Switch to gallery — this calls tmRenderGallery() which rebuilds the DOM */
+    document.getElementById('tm-btn-gallery').click();
+    /* After render, find the fresh card by its data-card-id and scroll to it */
+    setTimeout(() => {
+      if (!tmLastGalleryCardId) return;
+      const freshCard = document.querySelector(
+        `.tm-gc-card[data-card-id="${tmLastGalleryCardId}"]`
+      );
+      if (freshCard) {
+        freshCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        freshCard.classList.add('tm-gc-card--highlight');
+        setTimeout(() => freshCard.classList.remove('tm-gc-card--highlight'), 1800);
+      }
+    }, 150);
+  });
 })();
 
 /* ══════════════════════════════════════════════════════════════
@@ -845,14 +882,14 @@ function tmRenderGallery() {
     /* Country filter — show if none selected OR country is in set */
     if (tmGalleryCountries.size > 0 && !tmGalleryCountries.has(country.name)) return;
 
-    /* Filter cities */
+    /* Filter cities then sort A → Z by name */
     const matchingCities = country.cities.filter(city => {
       const matchesType   = tmGalleryTypes.size === 0 || tmGalleryTypes.has(city.type);
       const matchesSearch = !q ||
         country.name.toLowerCase().includes(q) ||
         city.name.toLowerCase().includes(q);
       return matchesType && matchesSearch;
-    });
+    }).sort((a, b) => a.name.localeCompare(b.name));
 
     if (matchingCities.length > 0) {
       sections.push({ country, cities: matchingCities });
@@ -894,6 +931,7 @@ function tmRenderGallery() {
 
       const card = document.createElement('div');
       card.className = 'tm-gc-card';
+      card.dataset.cardId = `${city.lat}_${city.lng}`;
 
       const photoGrid = document.createElement('div');
       photoGrid.className = 'tm-gc-photo-wrap';
@@ -912,7 +950,8 @@ function tmRenderGallery() {
         <div class="tm-gc-type-badge" style="color:${t.color};background:${t.color}14;border-color:${t.color}30">
           <i class="${t.icon}"></i> ${t.label}
         </div>
-        <button class="tm-gc-loc-name" data-lat="${city.lat}" data-lng="${city.lng}" title="View on map">
+        <button class="tm-gc-loc-name" data-lat="${city.lat}" data-lng="${city.lng}" title="View on map"
+          style="background:none;border:none;padding:0;margin:0;box-shadow:none;outline:none;border-radius:0;">
           ${city.name} <i class="fa-solid fa-map-location-dot"></i>
         </button>
         <p class="tm-gc-loc-desc">${city.desc}</p>`;
@@ -931,7 +970,17 @@ function tmRenderGallery() {
       card.querySelector('.tm-gc-loc-name').addEventListener('click', function() {
         const lat = parseFloat(this.dataset.lat);
         const lng  = parseFloat(this.dataset.lng);
+        /* Store identity so back button can find the fresh card after re-render */
+        tmLastGalleryCardId   = `${city.lat}_${city.lng}`;
+        tmLastGalleryCardName = city.name;
         document.getElementById('tm-btn-map').click();
+        const backBar = document.getElementById('tm-back-bar');
+        const backBtn = document.getElementById('tm-back-btn');
+        if (backBar) backBar.style.display = 'flex';
+        if (backBtn) {
+          const nameEl = document.getElementById('tm-back-city-name');
+          if (nameEl) nameEl.textContent = city.name;
+        }
         setTimeout(() => {
           tmMap.flyTo([lat, lng], 14, { duration: 1.4 });
           setTimeout(() => {

@@ -302,20 +302,17 @@ function tmCityPopupHtml(country, city) {
   else if (n === 2)  layoutClass = 'tm-photos--2';
   else if (n === 3)  layoutClass = 'tm-photos--3';
   else if (n === 4)  layoutClass = 'tm-photos--4';
-  else if (n <= 6)   layoutClass = 'tm-photos--5-6';
-  else if (n <= 9)   layoutClass = 'tm-photos--7-9';
-  else               layoutClass = 'tm-photos--10plus';
+  else               layoutClass = 'tm-photos--5-6';
 
-  /* For 7+ photos show first 6 visible tiles + a "+N more" overlay on the last */
-  const visibleImgs = n <= 6 ? city.imgs : city.imgs.slice(0, 6);
-  const extraCount  = n > 6 ? n - 5 : 0;  /* tiles 1-5 shown normally, tile 6 = overflow */
+  /* Always show max 5 tiles; tile 5 becomes "+N more" when n > 5 */
+  const visibleImgs = n <= 5 ? city.imgs : city.imgs.slice(0, 5);
+  const extraCount  = n > 5 ? n - 4 : 0;  /* tiles 1-4 normal, tile 5 = overflow */
 
   const photos = visibleImgs.map((name, i) => {
-    const isOverflowTile = extraCount > 0 && i === 5;
+    const isOverflowTile = extraCount > 0 && i === 4;
     const overlay = isOverflowTile
       ? `<div class="tm-ph-more">+${extraCount}</div>`
       : `<div class="tm-zoom-hint"><i class="fa-solid fa-expand"></i> View</div>`;
-    /* For the overflow tile the data-idx still opens the full lightbox from img 5 */
     return `
     <div class="tm-ph" data-idx="${i}">
       <img src="${tmThumb(name)}" alt="" loading="lazy"
@@ -355,8 +352,8 @@ function tmCityPopupHtml(country, city) {
 let tmActiveItem   = null;
 const tmAllMarkers = [];        /* { marker, type } — populated in forEach below */
 const tmActiveFilters = new Set(); /* empty = show all */
-let tmLastGalleryCard = null;   /* card element to scroll back to */
-let tmLastGalleryCardName = ''; /* for accessibility */
+let tmLastGalleryCardId   = null; /* data-card-id to find card after re-render */
+let tmLastGalleryCardName = '';   /* city name shown on back button */
 
 tmCountries.forEach(c => {
   /* Location pins — country globe pins removed; only typed location pins shown */
@@ -625,15 +622,20 @@ document.getElementById('tm-s-c').textContent = new Set(tmCountries.map(c => tmC
   }
 })();
 
-/* ── MAP HEIGHT: fills gap between header and bottom of viewport ─ */
+/* ── MAP HEIGHT: fills most of the viewport below header + toggle bar ─ */
 function tmFitHeight() {
-  const header = document.querySelector('header.su-masthead');
-  const shell  = document.getElementById('tm-shell');
+  const header     = document.querySelector('header.su-masthead');
+  const shell      = document.getElementById('tm-shell');
+  const toggleBar  = document.querySelector('.tm-view-toggle-bar');
+  const heading    = document.getElementById('academics');
   if (!header || !shell) return;
-  /* Use visualViewport height on mobile (accounts for browser chrome/address bar) */
   const vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
-  const minH = window.innerWidth <= 480 ? 380 : window.innerWidth <= 768 ? 420 : 480;
-  shell.style.height = Math.max(minH, vh - header.offsetHeight - 2) + 'px';
+  const toggleH  = toggleBar ? toggleBar.offsetHeight : 0;
+  const headingH = heading   ? heading.offsetHeight   : 0;
+  /* 32px = bottom wrapper padding; 16px = small visual gap at bottom */
+  const used = header.offsetHeight + headingH + toggleH + 32 + 16;
+  const minH = window.innerWidth <= 480 ? 400 : window.innerWidth <= 768 ? 460 : 540;
+  shell.style.height = Math.max(minH, vh - used) + 'px';
   tmMap.invalidateSize();
 }
 tmFitHeight();
@@ -709,17 +711,20 @@ if (window.visualViewport) {
   if (!backBtn) return;
   backBtn.addEventListener('click', () => {
     if (backBar) backBar.style.display = 'none';
-    /* Switch to gallery */
+    /* Switch to gallery — this calls tmRenderGallery() which rebuilds the DOM */
     document.getElementById('tm-btn-gallery').click();
-    /* Scroll to the card after gallery renders */
+    /* After render, find the fresh card by its data-card-id and scroll to it */
     setTimeout(() => {
-      if (tmLastGalleryCard) {
-        tmLastGalleryCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        /* Brief highlight pulse on the card */
-        tmLastGalleryCard.classList.add('tm-gc-card--highlight');
-        setTimeout(() => tmLastGalleryCard.classList.remove('tm-gc-card--highlight'), 1800);
+      if (!tmLastGalleryCardId) return;
+      const freshCard = document.querySelector(
+        `.tm-gc-card[data-card-id="${tmLastGalleryCardId}"]`
+      );
+      if (freshCard) {
+        freshCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        freshCard.classList.add('tm-gc-card--highlight');
+        setTimeout(() => freshCard.classList.remove('tm-gc-card--highlight'), 1800);
       }
-    }, 120);
+    }, 150);
   });
 })();
 
@@ -888,9 +893,30 @@ function tmRenderGallery() {
       return matchesType && matchesSearch;
     }).sort((a, b) => a.name.localeCompare(b.name));
 
-    if (matchingCities.length > 0) {
-      sections.push({ country, cities: matchingCities });
-      totalCards += matchingCities.length;
+    /* Merge cities that share the same name into one card */
+    const mergedMap = new Map();
+    matchingCities.forEach(city => {
+      const key = city.name.trim().toLowerCase();
+      if (mergedMap.has(key)) {
+        const m = mergedMap.get(key);
+        m.imgs  = m.imgs.concat(city.imgs);
+        m.types.push({ type: city.type, lat: city.lat, lng: city.lng });
+      } else {
+        mergedMap.set(key, {
+          name:  city.name,
+          desc:  city.desc,
+          lat:   city.lat,
+          lng:   city.lng,
+          imgs:  [...city.imgs],
+          types: [{ type: city.type, lat: city.lat, lng: city.lng }],
+        });
+      }
+    });
+    const mergedCities = Array.from(mergedMap.values());
+
+    if (mergedCities.length > 0) {
+      sections.push({ country, cities: mergedCities });
+      totalCards += mergedCities.length;
     }
   });
 
@@ -922,16 +948,29 @@ function tmRenderGallery() {
     locGrid.className = 'tm-gc-locations';
 
     cities.forEach(city => {
-      const t = tmPinTypes[city.type] || tmPinTypes.default;
-      const fullSrcs = city.imgs.map(name => tmFull(name));
-      const n = city.imgs.length;
+      /* city may be a merged entry: city.types = [{type, lat, lng}, ...] */
+      const allImgs  = city.imgs;
+      const fullSrcs = allImgs.map(name => tmFull(name));
+      const n        = allImgs.length;
+
+      /* Primary type = first entry; used for card accent colour */
+      const primaryT = tmPinTypes[city.types[0].type] || tmPinTypes.default;
+
+      /* Use first entry's coords as the map jump target */
+      const primaryLat = city.types[0].lat;
+      const primaryLng = city.types[0].lng;
+
+      /* Unique card ID = name-slug so back-button can find it */
+      const cardId = city.name.trim().toLowerCase().replace(/\s+/g, '_');
 
       const card = document.createElement('div');
       card.className = 'tm-gc-card';
+      card.dataset.cardId = cardId;
 
+      /* ── Photo grid ── */
       const photoGrid = document.createElement('div');
       photoGrid.className = 'tm-gc-photo-wrap';
-      photoGrid.innerHTML = tmGalleryPhotoGrid(city.imgs);
+      photoGrid.innerHTML = tmGalleryPhotoGrid(allImgs);
 
       if (n > 1) {
         const badge = document.createElement('span');
@@ -940,13 +979,19 @@ function tmRenderGallery() {
         photoGrid.querySelector('.tm-gc-photos').appendChild(badge);
       }
 
+      /* ── Type badges — one per distinct type ── */
+      const typeBadgesHtml = city.types.map(({ type }) => {
+        const t = tmPinTypes[type] || tmPinTypes.default;
+        return `<div class="tm-gc-type-badge" style="color:${t.color};background:${t.color}14;border-color:${t.color}30">
+          <i class="${t.icon}"></i> ${t.label}
+        </div>`;
+      }).join('');
+
       const info = document.createElement('div');
       info.className = 'tm-gc-info';
       info.innerHTML = `
-        <div class="tm-gc-type-badge" style="color:${t.color};background:${t.color}14;border-color:${t.color}30">
-          <i class="${t.icon}"></i> ${t.label}
-        </div>
-        <button class="tm-gc-loc-name" data-lat="${city.lat}" data-lng="${city.lng}" title="View on map"
+        <div class="tm-gc-type-badges">${typeBadgesHtml}</div>
+        <button class="tm-gc-loc-name" data-lat="${primaryLat}" data-lng="${primaryLng}" title="View on map"
           style="background:none;border:none;padding:0;margin:0;box-shadow:none;outline:none;border-radius:0;">
           ${city.name} <i class="fa-solid fa-map-location-dot"></i>
         </button>
@@ -966,12 +1011,16 @@ function tmRenderGallery() {
       card.querySelector('.tm-gc-loc-name').addEventListener('click', function() {
         const lat = parseFloat(this.dataset.lat);
         const lng  = parseFloat(this.dataset.lng);
-        /* Store reference to this card so back button can scroll to it */
-        tmLastGalleryCard = card;
+        tmLastGalleryCardId   = cardId;
         tmLastGalleryCardName = city.name;
         document.getElementById('tm-btn-map').click();
         const backBar = document.getElementById('tm-back-bar');
+        const backBtn = document.getElementById('tm-back-btn');
         if (backBar) backBar.style.display = 'flex';
+        if (backBtn) {
+          const nameEl = document.getElementById('tm-back-city-name');
+          if (nameEl) nameEl.textContent = city.name;
+        }
         setTimeout(() => {
           tmMap.flyTo([lat, lng], 14, { duration: 1.4 });
           setTimeout(() => {
