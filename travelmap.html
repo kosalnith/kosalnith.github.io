@@ -124,6 +124,14 @@
       <div id="tm-map"></div>
       <div class="tm-map-fade"></div>
 
+      <!-- Back to Gallery button — shown only after navigating from a gallery card -->
+      <div class="tm-back-bar" id="tm-back-bar" style="display:none">
+        <button class="tm-back-btn" id="tm-back-btn">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back to Gallery</span>
+        </button>
+      </div>
+
       <!-- Floating stats pills -->
       <div class="tm-top-bar">
         <div class="tm-top-stats">
@@ -262,12 +270,6 @@
 
 <!-- Activity sidebar (left) -->
 <div class="tm-gs-sidebar tm-gs-sidebar--left" id="tm-gs-left">
-  <button class="tm-gs-toggle" id="tm-gs-left-toggle" aria-label="Toggle activity filter">
-    <i class="fa-solid fa-layer-group"></i>
-    <span>Activity</span>
-    <span class="tm-gs-badge" id="tm-gf-type-badge"></span>
-    <i class="fa-solid fa-chevron-left tm-gs-chevron" id="tm-gs-left-chevron"></i>
-  </button>
   <div class="tm-gs-panel" id="tm-gs-left-panel">
     <div class="tm-gs-panel-header">
       <span class="tm-gf-label"><i class="fa-solid fa-layer-group"></i> Activity Type</span>
@@ -279,16 +281,16 @@
       </button>
     </div>
   </div>
+  <button class="tm-gs-toggle" id="tm-gs-left-toggle" aria-label="Toggle activity filter">
+    <i class="fa-solid fa-layer-group"></i>
+    <span>Activity</span>
+    <span class="tm-gs-badge" id="tm-gf-type-badge"></span>
+    <i class="fa-solid fa-chevron-right tm-gs-chevron" id="tm-gs-left-chevron"></i>
+  </button>
 </div>
 
 <!-- Country sidebar (right) -->
 <div class="tm-gs-sidebar tm-gs-sidebar--right" id="tm-gs-right">
-  <button class="tm-gs-toggle" id="tm-gs-right-toggle" aria-label="Toggle country filter">
-    <i class="fa-solid fa-earth-americas"></i>
-    <span>Country</span>
-    <span class="tm-gs-badge" id="tm-gf-country-badge"></span>
-    <i class="fa-solid fa-chevron-right tm-gs-chevron" id="tm-gs-right-chevron"></i>
-  </button>
   <div class="tm-gs-panel" id="tm-gs-right-panel">
     <div class="tm-gs-panel-header">
       <span class="tm-gf-label"><i class="fa-solid fa-earth-americas"></i> Country</span>
@@ -300,6 +302,12 @@
       </button>
     </div>
   </div>
+  <button class="tm-gs-toggle" id="tm-gs-right-toggle" aria-label="Toggle country filter">
+    <i class="fa-solid fa-earth-americas"></i>
+    <span>Country</span>
+    <span class="tm-gs-badge" id="tm-gf-country-badge"></span>
+    <i class="fa-solid fa-chevron-left tm-gs-chevron" id="tm-gs-right-chevron"></i>
+  </button>
 </div>
 
 

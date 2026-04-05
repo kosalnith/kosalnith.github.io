@@ -355,6 +355,8 @@ function tmCityPopupHtml(country, city) {
 let tmActiveItem   = null;
 const tmAllMarkers = [];        /* { marker, type } — populated in forEach below */
 const tmActiveFilters = new Set(); /* empty = show all */
+let tmLastGalleryCard = null;   /* card element to scroll back to */
+let tmLastGalleryCardName = ''; /* for accessibility */
 
 tmCountries.forEach(c => {
   /* Location pins — country globe pins removed; only typed location pins shown */
@@ -394,7 +396,6 @@ function tmRenderList(filter) {
     const locWord = c.cities.length > 1 ? 'locations' : 'city';
     const el = document.createElement('div');
     el.className = 'tm-country-item';
-    el.style.animationDelay = `${i * 0.032 + 0.4}s`;
     el.innerHTML = `
       <div class="tm-c-flag"><span class="fi fi-${c.flag}"></span></div>
       <div class="tm-c-body">
@@ -636,10 +637,17 @@ function tmFitHeight() {
   tmMap.invalidateSize();
 }
 tmFitHeight();
-window.addEventListener('resize', tmFitHeight);
+/* Debounced resize — prevents tmFitHeight firing dozens of times per second
+   during window resize or mobile address-bar scroll, which caused heavy CPU load */
+let tmResizeTimer = null;
+function tmDebouncedFitHeight() {
+  clearTimeout(tmResizeTimer);
+  tmResizeTimer = setTimeout(tmFitHeight, 120);
+}
+window.addEventListener('resize', tmDebouncedFitHeight);
 /* Also refit when mobile browser chrome shows/hides (address bar scroll) */
 if (window.visualViewport) {
-  window.visualViewport.addEventListener('resize', tmFitHeight);
+  window.visualViewport.addEventListener('resize', tmDebouncedFitHeight);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -686,7 +694,33 @@ if (window.visualViewport) {
   }
 
   btnMap.addEventListener('click', showMap);
-  btnGallery.addEventListener('click', showGallery);
+  btnGallery.addEventListener('click', () => {
+    /* Hide back bar when user manually switches to gallery */
+    const backBar = document.getElementById('tm-back-bar');
+    if (backBar) backBar.style.display = 'none';
+    showGallery();
+  });
+})();
+
+/* ── Back to Gallery button ── */
+(function tmBackButton() {
+  const backBtn = document.getElementById('tm-back-btn');
+  const backBar = document.getElementById('tm-back-bar');
+  if (!backBtn) return;
+  backBtn.addEventListener('click', () => {
+    if (backBar) backBar.style.display = 'none';
+    /* Switch to gallery */
+    document.getElementById('tm-btn-gallery').click();
+    /* Scroll to the card after gallery renders */
+    setTimeout(() => {
+      if (tmLastGalleryCard) {
+        tmLastGalleryCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        /* Brief highlight pulse on the card */
+        tmLastGalleryCard.classList.add('tm-gc-card--highlight');
+        setTimeout(() => tmLastGalleryCard.classList.remove('tm-gc-card--highlight'), 1800);
+      }
+    }, 120);
+  });
 })();
 
 /* ══════════════════════════════════════════════════════════════
@@ -845,14 +879,14 @@ function tmRenderGallery() {
     /* Country filter — show if none selected OR country is in set */
     if (tmGalleryCountries.size > 0 && !tmGalleryCountries.has(country.name)) return;
 
-    /* Filter cities */
+    /* Filter cities then sort A → Z by name */
     const matchingCities = country.cities.filter(city => {
       const matchesType   = tmGalleryTypes.size === 0 || tmGalleryTypes.has(city.type);
       const matchesSearch = !q ||
         country.name.toLowerCase().includes(q) ||
         city.name.toLowerCase().includes(q);
       return matchesType && matchesSearch;
-    });
+    }).sort((a, b) => a.name.localeCompare(b.name));
 
     if (matchingCities.length > 0) {
       sections.push({ country, cities: matchingCities });
@@ -912,7 +946,8 @@ function tmRenderGallery() {
         <div class="tm-gc-type-badge" style="color:${t.color};background:${t.color}14;border-color:${t.color}30">
           <i class="${t.icon}"></i> ${t.label}
         </div>
-        <button class="tm-gc-loc-name" data-lat="${city.lat}" data-lng="${city.lng}" title="View on map">
+        <button class="tm-gc-loc-name" data-lat="${city.lat}" data-lng="${city.lng}" title="View on map"
+          style="background:none;border:none;padding:0;margin:0;box-shadow:none;outline:none;border-radius:0;">
           ${city.name} <i class="fa-solid fa-map-location-dot"></i>
         </button>
         <p class="tm-gc-loc-desc">${city.desc}</p>`;
@@ -931,7 +966,12 @@ function tmRenderGallery() {
       card.querySelector('.tm-gc-loc-name').addEventListener('click', function() {
         const lat = parseFloat(this.dataset.lat);
         const lng  = parseFloat(this.dataset.lng);
+        /* Store reference to this card so back button can scroll to it */
+        tmLastGalleryCard = card;
+        tmLastGalleryCardName = city.name;
         document.getElementById('tm-btn-map').click();
+        const backBar = document.getElementById('tm-back-bar');
+        if (backBar) backBar.style.display = 'flex';
         setTimeout(() => {
           tmMap.flyTo([lat, lng], 14, { duration: 1.4 });
           setTimeout(() => {
