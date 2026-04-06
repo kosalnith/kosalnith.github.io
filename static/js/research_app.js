@@ -35,12 +35,20 @@ function getFilteredPublications() {
   const selectedLangs = Array.from(document.querySelectorAll('input[data-lang]:checked'))
     .map(cb => cb.getAttribute('data-lang'));
 
+  // SDG filter
+  const selectedSdgs = Array.from(document.querySelectorAll('.sdg-checkbox:checked'))
+    .map(cb => cb.getAttribute('data-sdg'));
+
   let filtered = publicationsData.filter(p => {
     if (types.length && !types.includes(p.type)) return false;
     const yearNum = parseInt(p.year);
     if (!isNaN(yearNum) && (yearNum < yearRangeMin || yearNum > yearRangeMax)) return false;
     if (oaOnly && !p.oa) return false;
     if (selectedLangs.length && !selectedLangs.includes(p.lang || 'en')) return false;
+    // SDG: publication must have at least one of the selected SDGs
+    if (selectedSdgs.length) {
+      if (!p.sdgs || !p.sdgs.some(s => selectedSdgs.includes(s))) return false;
+    }
     return true;
   });
 
@@ -55,6 +63,15 @@ function getFilteredPublications() {
     );
   }
   return filtered;
+}
+
+// ===== Debounce utility =====
+function debounce(fn, delay) {
+  let timer;
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
 }
 
 // ===== Abstract toggle =====
@@ -227,22 +244,8 @@ function renderPublicationsWithPagination() {
           </div>
           <div class="right-stats">
             <div class="altmetric-donut">
-              <svg viewBox="0 0 100 100" width="48" height="48">
-                <circle cx="50" cy="50" r="8" fill="#7b3fa0"/>
-                <circle cx="50" cy="18" r="7" fill="#e8821a"/>
-                <circle cx="76" cy="30" r="6" fill="#7b3fa0"/>
-                <circle cx="82" cy="60" r="6" fill="#7b3fa0"/>
-                <circle cx="62" cy="82" r="6" fill="#7b3fa0"/>
-                <circle cx="36" cy="80" r="5" fill="#7b3fa0"/>
-                <circle cx="20" cy="60" r="5" fill="#c0c0c0"/>
-                <circle cx="26" cy="30" r="5" fill="#7b3fa0"/>
-                <line x1="50" y1="50" x2="50" y2="18" stroke="#7b3fa0" stroke-width="2.5"/>
-                <line x1="50" y1="50" x2="76" y2="30" stroke="#7b3fa0" stroke-width="2.5"/>
-                <line x1="50" y1="50" x2="82" y2="60" stroke="#7b3fa0" stroke-width="2.5"/>
-                <line x1="50" y1="50" x2="62" y2="82" stroke="#7b3fa0" stroke-width="2.5"/>
-                <line x1="50" y1="50" x2="36" y2="80" stroke="#7b3fa0" stroke-width="2.5"/>
-                <line x1="50" y1="50" x2="20" y2="60" stroke="#c0c0c0" stroke-width="2.5"/>
-                <line x1="50" y1="50" x2="26" y2="30" stroke="#7b3fa0" stroke-width="2.5"/>
+              <svg viewBox="0 0 100 100" width="48" height="48" aria-hidden="true">
+                <use href="#altmetric-icon"/>
               </svg>
             </div>
             ${pub.downloads ? `
@@ -383,11 +386,17 @@ function updateYearSliderUI() {
   const pctMin = (minVal - YEAR_MIN_BOUND) / (YEAR_MAX_BOUND - YEAR_MIN_BOUND) * 100;
   const pctMax = (maxVal - YEAR_MIN_BOUND) / (YEAR_MAX_BOUND - YEAR_MIN_BOUND) * 100;
 
-  // Floating labels (activity-widget style)
+  // Hide floating pill labels (replaced by static minmax display)
   const minLabel = document.getElementById('yearMinLabel');
   const maxLabel = document.getElementById('yearMaxLabel');
-  if (minLabel) { minLabel.textContent = minVal; minLabel.style.left = pctMin + '%'; }
-  if (maxLabel) { maxLabel.textContent = maxVal; maxLabel.style.left = pctMax + '%'; }
+  if (minLabel) minLabel.style.display = 'none';
+  if (maxLabel) maxLabel.style.display = 'none';
+
+  // Update static min/max labels below the track to show selected years
+  const minStatic = document.getElementById('yearMinStatic');
+  const maxStatic = document.getElementById('yearMaxStatic');
+  if (minStatic) { minStatic.textContent = minVal; minStatic.style.color = minVal > YEAR_MIN_BOUND ? '#b1040e' : ''; minStatic.style.fontWeight = minVal > YEAR_MIN_BOUND ? '700' : ''; }
+  if (maxStatic) { maxStatic.textContent = maxVal; maxStatic.style.color = maxVal < YEAR_MAX_BOUND ? '#b1040e' : ''; maxStatic.style.fontWeight = maxVal < YEAR_MAX_BOUND ? '700' : ''; }
 
   // Fill bar
   const fill = document.getElementById('yearFill');
@@ -421,11 +430,12 @@ function updateFiltersAndResetPage() {
 }
 
 function initEventListeners() {
-  document.getElementById('searchInput').addEventListener('input', (e) => {
+  // Debounced search input
+  document.getElementById('searchInput').addEventListener('input', debounce((e) => {
     currentSearchTerm = e.target.value;
     currentPage = 1;
     renderPublicationsWithPagination();
-  });
+  }, 200));
 
   document.getElementById('fullTypeList').addEventListener('change', updateFiltersAndResetPage);
   document.getElementById('oaFilterCheckbox').addEventListener('change', updateFiltersAndResetPage);
@@ -434,6 +444,16 @@ function initEventListeners() {
   document.querySelectorAll('input[data-lang]').forEach(cb => {
     cb.addEventListener('change', updateFiltersAndResetPage);
   });
+
+  // SDG filter — event delegation on the container (handles dynamic checkboxes)
+  const sdgContainer = document.getElementById('sdgList');
+  if (sdgContainer) {
+    sdgContainer.addEventListener('change', (e) => {
+      if (e.target.classList.contains('sdg-checkbox')) {
+        updateFiltersAndResetPage();
+      }
+    });
+  }
 
   // Top pill buttons
   document.querySelectorAll('.type-pill[data-filter-type]').forEach(btn => {
@@ -616,10 +636,7 @@ function showDetail(idx) {
   document.getElementById('detailNavRow').innerHTML = `
     <button class="detail-nav-btn ${!prevPub ? 'disabled' : ''}" onclick="${prevPub ? `showDetail(${idx - 1})` : ''}">
       <i class="fas fa-chevron-left"></i>
-      <span>
-        <span class="nav-label">Previous</span>
-        ${prevPub ? prevPub.title.substring(0, 50) + (prevPub.title.length > 50 ? '…' : '') : '—'}
-      </span>
+      <span class="nav-label">Previous</span>
     </button>
     <button class="detail-back-btn" onclick="showList()" style="margin:0;white-space:nowrap;">
       <i class="fas fa-list"></i> All publications
@@ -640,10 +657,7 @@ function showDetail(idx) {
       </button>
     </div>
     <button class="detail-nav-btn ${!nextPub ? 'disabled' : ''}" onclick="${nextPub ? `showDetail(${idx + 1})` : ''}" style="flex-direction:row-reverse;text-align:right;">
-      <span>
-        <span class="nav-label">Next</span>
-        ${nextPub ? nextPub.title.substring(0, 50) + (nextPub.title.length > 50 ? '…' : '') : '—'}
-      </span>
+      <span class="nav-label">Next</span>
       <i class="fas fa-chevron-right"></i>
     </button>
   `;
@@ -1009,13 +1023,63 @@ function copyPubLink(url) {
   });
 }
 
-// ===== Init =====
+// ===== Sticky Sidebar Fallback =====
+// CSS position:sticky can be broken when any ancestor has overflow:hidden/auto/scroll.
+// This JS fallback detects that situation and switches to position:fixed instead.
+function initStickySidebar() {
+  const sidebar = document.querySelector('.research-sidebar');
+  if (!sidebar) return;
+
+  // Test if sticky actually works: after a tiny scroll, check if the sidebar moved
+  // A simpler reliable approach: always use the scroll-based fixed fallback
+  const twoCol = document.querySelector('.two-columns');
+  if (!twoCol) return;
+
+  function onScroll() {
+    const colRect  = twoCol.getBoundingClientRect();
+    const sidebarH = sidebar.offsetHeight;
+    const viewH    = window.innerHeight;
+
+    // Only fix when the two-column layout top is scrolled above viewport top
+    if (colRect.top <= 20) {
+      // Don't go past the bottom of the two-column container
+      const bottomLimit = colRect.bottom - sidebarH;
+      if (bottomLimit <= 20) {
+        sidebar.classList.remove('is-fixed');
+        sidebar.style.position = 'absolute';
+        sidebar.style.top = (twoCol.offsetHeight - sidebarH) + 'px';
+      } else {
+        sidebar.style.position = '';
+        sidebar.style.top = '';
+        sidebar.classList.add('is-fixed');
+      }
+    } else {
+      sidebar.classList.remove('is-fixed');
+      sidebar.style.position = '';
+      sidebar.style.top = '';
+    }
+  }
+
+  // Only activate the JS fallback if CSS sticky is not working
+  // We detect this by checking if the sidebar's computed position is actually sticky
+  const computed = window.getComputedStyle(sidebar).position;
+  if (computed !== 'sticky') {
+    // CSS sticky is not supported or blocked — use JS fallback
+    twoCol.style.position = 'relative';
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+  // If sticky IS working, also listen for scroll to handle max-height overflow scroll
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSdgList();
   initYearSlider();
   renderTypeList();
   renderPublicationsWithPagination();
   initEventListeners();
+  initStickySidebar();
 
   // On load: check ?pub=slug in URL and open that publication directly
   const params = new URLSearchParams(window.location.search);

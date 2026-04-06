@@ -112,6 +112,7 @@ const publicationsData = [
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Taxation","Capital Gains Tax","Infrastructure","Fiscal Policy","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 9 - Industry, Innovation, and Infrastructure","SDG 10 - Reduced Inequalities","SDG 17 - Partnerships for the Goals"],
     link: "https://cambodianess.com/article/capital-gains-tax-is-a-smart-way-to-build-infrastructure" },
 
   { title: "Transforming the Tax System with Personal Income Tax",
@@ -120,6 +121,7 @@ const publicationsData = [
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Personal Income Tax","Tax Reform","Fiscal Policy","Cambodia"],
     kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 10 - Reduced Inequalities","SDG 16 - Peace, Justice and Strong Institutions"],
     link: "https://cambodianess.com/article/transforming-the-tax-system-with-personal-income-tax" },
 
   { title: "Cambodia Needs Progressive Taxation to Invest in Its Future",
@@ -128,6 +130,7 @@ const publicationsData = [
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Progressive Taxation","Public Investment","Inequality","Cambodia"],
     kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 1 - No Poverty","SDG 10 - Reduced Inequalities","SDG 17 - Partnerships for the Goals"],
     link: "https://cambojanews.com/op-ed-cambodia-needs-progressive-taxation-to-invest-in-its-future/" },
 
   { title: "Connecting Communities to Support Cambodia's Vulnerable",
@@ -136,6 +139,7 @@ const publicationsData = [
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Social Protection","Vulnerable Households","Community","Cambodia"],
     kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 1 - No Poverty","SDG 3 - Good Health and Well-being","SDG 10 - Reduced Inequalities"],
     link: "https://eastasiaforum.org/2025/08/13/connecting-communities-to-support-cambodias-vulnerable/" },
 
   { title: "Ascending the Development Ladder in Cambodia: Progressing Towards Higher Income Status",
@@ -145,6 +149,7 @@ const publicationsData = [
     breadcrumb: "Op-Ed / Commentary › Conference commentary",
     keywords: ["Economic Development","Middle-Income Status","Growth","Cambodia"],
     kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 8 - Decent Work and Economic Growth","SDG 9 - Industry, Innovation, and Infrastructure","SDG 10 - Reduced Inequalities"],
     link: "https://coc2023.cdri.org.kh/ascending-the-development-ladder-in-cambodia-progressing-towards-higher-income-status/" },
 
   { title: "Explainer: How Cambodia's Central Bank Addressed Economic Challenges During the Pandemic",
@@ -153,6 +158,7 @@ const publicationsData = [
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Monetary Policy","Central Bank","COVID-19","Cambodia"],
     kwStrength: ["full","full","full","none"],
+    sdgs: ["SDG 8 - Decent Work and Economic Growth","SDG 3 - Good Health and Well-being"],
     link: "https://cambojanews.com/explainer-how-cambodias-central-bank-addressed-economic-challenges-during-the-pandemic/" },
 
   { title: "Will Cambodia Commit to Protecting Its Forests?",
@@ -161,6 +167,7 @@ const publicationsData = [
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Deforestation","Forest Policy","Climate","Cambodia"],
     kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 13 - Climate Action","SDG 15 - Life on Land"],
     link: "https://thediplomat.com/2021/11/will-cambodia-commit-to-protecting-its-forests/" },
 
   { title: "Pandemic Offers Chance to Consider Higher Taxes, not Donations, From Rich",
@@ -169,6 +176,7 @@ const publicationsData = [
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Taxation","Inequality","COVID-19","Cambodia"],
     kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 1 - No Poverty","SDG 10 - Reduced Inequalities","SDG 3 - Good Health and Well-being"],
     link: "https://vodenglish.news/opinion-pandemic-offers-chance-to-consider-higher-taxes-not-donations-from-rich/" },
 
   { title: "How Cambodia's Agricultural Lending Can Get a Bigger Bang for Its Buck",
@@ -177,6 +185,7 @@ const publicationsData = [
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Agricultural Finance","Credit","Rural Economy","Cambodia"],
     kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 2 - Zero Hunger","SDG 1 - No Poverty","SDG 8 - Decent Work and Economic Growth"],
     link: "https://www.eastasiaforum.org/2021/05/29/how-cambodias-agricultural-lending-can-get-a-bigger-bang-for-its-buck/" },
 
   { title: "Rising Inflation Threatens to Swamp Cambodian Households",
@@ -185,6 +194,7 @@ const publicationsData = [
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Inflation","Household Welfare","Monetary Policy","Cambodia"],
     kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 1 - No Poverty","SDG 10 - Reduced Inequalities","SDG 8 - Decent Work and Economic Growth"],
     link: "https://thediplomat.com/2021/05/rising-inflation-threatens-to-swamp-cambodian-households/" },
 
   { title: "Lockdown's Food Security Crisis Must Address Demand and Supply",
@@ -193,6 +203,7 @@ const publicationsData = [
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Food Security","COVID-19","Lockdown","Cambodia"],
     kwStrength: ["full","full","full","none"],
+    sdgs: ["SDG 2 - Zero Hunger","SDG 1 - No Poverty","SDG 3 - Good Health and Well-being"],
     link: "https://vodenglish.news/lockdowns-food-security-crisis-must-address-demand-and-supply/" },
 
   { title: "Cambodia's Economic Recovery Uncertain Amid Covid",
@@ -200,28 +211,32 @@ const publicationsData = [
     type: "opeds", year: "2021", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Economic Recovery","COVID-19","GDP","Cambodia"],
-    kwStrength: ["full","full","half","none"] },
+    kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 8 - Decent Work and Economic Growth","SDG 9 - Industry, Innovation, and Infrastructure"] },
 
   { title: "Cambodia Will Lose Its Fight Against Deforestation If Change Isn't Made",
     authors: "Kosal Nith", date: "16 Mar 2021", outlet: "Southeast Asia Globe",
     type: "opeds", year: "2021", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Deforestation","Forest Policy","Environment","Cambodia"],
-    kwStrength: ["full","full","half","none"] },
+    kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 13 - Climate Action","SDG 15 - Life on Land","SDG 16 - Peace, Justice and Strong Institutions"] },
 
   { title: "Kingdom's Agro-Processing Potential",
     authors: "Kosal Nith", date: "8 Jun 2020", outlet: "The Phnom Penh Post",
     type: "opeds", year: "2020", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Agro-Processing","Agriculture","Industry","Cambodia"],
-    kwStrength: ["full","full","half","none"] },
+    kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 2 - Zero Hunger","SDG 8 - Decent Work and Economic Growth","SDG 9 - Industry, Innovation, and Infrastructure"] },
 
   { title: "Cambodia's Agricultural Sector is in Dire Need of Revitalization",
     authors: "Kosal Nith", date: "21 May 2020", outlet: "Southeast Asia Globe",
     type: "opeds", year: "2020", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
     keywords: ["Agriculture","Rural Development","Policy","Cambodia"],
-    kwStrength: ["full","full","half","none"] },
+    kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 2 - Zero Hunger","SDG 1 - No Poverty","SDG 8 - Decent Work and Economic Growth"] },
 
   // ══ Journal Article (1) ══════════════════════════════════════
 
@@ -233,7 +248,8 @@ const publicationsData = [
     breadcrumb: "Journal article › Research › peer-review",
     abstract: "Informal borrowing remains an important source of financing for rural Cambodian households, exposing them to exploitative interest rates. Using survey data from 1,183 households in 11 villages, we analyze how financial literacy, social capital, and household characteristics shape borrowing behavior. Higher financial literacy is significantly correlated with a lower likelihood of relying on informal loans. Finance-related group membership reduces informal borrowing; other community group membership does not. Household income and residential land ownership reduce reliance on informal borrowing.",
     keywords: ["Informal Borrowing","Financial Literacy","Social Capital","Rural Households","Cambodia"],
-    kwStrength: ["full","full","full","half","none"] },
+    kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 1 - No Poverty","SDG 8 - Decent Work and Economic Growth","SDG 10 - Reduced Inequalities"] },
 
   // ══ Book Chapters (2) ════════════════════════════════════════
 
@@ -246,6 +262,7 @@ const publicationsData = [
     abstract: "Using data from 301 cassava-farming households across five major cultivation provinces, this study examines the pandemic's impact on production, labor productivity, and labor participation. Between 2019 and 2021, average production costs rose by 9.3%, while income declined by 8.5%. Despite expanding cultivated land and increasing hired labor, overall productivity decreased.",
     keywords: ["Cassava","COVID-19","Agricultural Productivity","Gender","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 2 - Zero Hunger","SDG 5 - Gender Equality","SDG 8 - Decent Work and Economic Growth"],
     link: "https://link.springer.com/chapter/10.1007/978-981-95-1637-7_3" },
 
   { title: "Food Science in Cambodia",
@@ -256,6 +273,7 @@ const publicationsData = [
     abstract: "This paper examines how the development of food science, the role of R&D in the promotion, and the development of the food industry could positively impact the agricultural sector in Cambodia.",
     keywords: ["Food Science","R&D","Agriculture","Policy","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 2 - Zero Hunger","SDG 9 - Industry, Innovation, and Infrastructure","SDG 12 - Responsible Consumption and Production"],
     link: "https://www.futureforum.asia/policy-briefs-and-snapshots/food-science-in-cambodia",
     resources: [
       { label: "Paper", url: "https://www.futureforum.asia/policy-briefs-and-snapshots/food-science-in-cambodia", icon: "fa-file-pdf" },
@@ -272,6 +290,7 @@ const publicationsData = [
     breadcrumb: "Working paper",
     keywords: ["Social Capital","Household Income","Income Stability","Cambodia"],
     kwStrength: ["full","full","full","none"],
+    sdgs: ["SDG 1 - No Poverty","SDG 10 - Reduced Inequalities","SDG 8 - Decent Work and Economic Growth"],
     resources: [
       { label: "Slides", url: "", icon: "fa-person-chalkboard" }
     ] },
@@ -283,7 +302,8 @@ const publicationsData = [
     breadcrumb: "Working paper",
     abstract: "The measurement of Special Economic Zones (SEZ) spatial impacts remains a persistent challenge for practitioners in understudied regions where conventional data collection methods prove cost-prohibitive. This study advances a replicable geospatial methodology leveraging Google's Open Buildings 2.5D Temporal Dataset to analyze development patterns in data-scarce contexts. Through examination of 11 SEZs in Cambodia's Svay Rieng province (2016-2023), we reveal two critical findings that challenge prevailing assumptions: first, SEZ-induced spillovers extend substantially beyond the conventionally assumed 1-2 kilometer impact radius; second, development follows a distinctive dual-ring spatial pattern, with outer zones (2-5km) demonstrating near-equivalent building density (21.27/km²) to immediate perimeter areas. Our approach provides three key contributions to the literature and practice: (1) a transferable framework for SEZ impact assessment in understudied regions, (2) empirical evidence challenging linear distance-decay models of agglomeration effects, and (3) demonstration of how accessible satellite-derived data can overcome traditional barriers to evidence-based planning. The methodology's versatility extends beyond SEZ analysis, offering practitioners an operational toolkit for growth monitoring, infrastructure impact assessment, and cross-border development analysis across ASEAN's diverse development contexts. By transforming publicly available building data into actionable spatial intelligence, this approach significantly enhances planning capacity in regions where ground-truth data remains systematically unavailable.",
     keywords: ["Special Economic Zones","Spillovers","Geospatial Analysis","Open Buildings","Cambodia"],
-    kwStrength: ["full","full","full","half","none"] },
+    kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 9 - Industry, Innovation, and Infrastructure","SDG 11 - Sustainable Cities and Communities","SDG 8 - Decent Work and Economic Growth"] },
 
   { title: "20 Years of FDI in Cambodia: Towards Upper Middle-Income Status and Beyond",
     authors: "Kosal Nith, Simona Iammarino & Sumontheany Muth",
@@ -293,6 +313,7 @@ const publicationsData = [
     abstract: "Analysing Cambodia's Greenfield FDI inflows and outflows over 20 years (2003–2022) using fDiMarkets data. Key attracting sectors include real estate, financial services, and renewable energy. Most FDI is concentrated in the capital. Cambodia's outward FDI began in 2008, mainly targeting ASEAN countries.",
     keywords: ["Foreign Direct Investment","Greenfield FDI","Global Value Chains","Economic Development","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 8 - Decent Work and Economic Growth","SDG 9 - Industry, Innovation, and Infrastructure","SDG 17 - Partnerships for the Goals"],
     downloads: 43,
     resources: [
       { label: "Paper", url: "https://www.cdri.org.kh/webdata/doc/2024/wp149e.pdf", icon: "fa-file-pdf" },
@@ -307,6 +328,7 @@ const publicationsData = [
     abstract: "Using a Structural VAR model, this paper finds that monetary policy shocks via exchange rate have positive consequences on inflation, real output, and unemployment. Cross-sectional data 2014–2020 shows earning heterogeneity, Fisher, and interest rate exposure channels amplify monetary policy effects. Household consumption and liability inequality rose while income and asset inequality fell over 7 years.",
     keywords: ["Monetary Policy","Income Distribution","Structural VAR","Inequality","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 10 - Reduced Inequalities","SDG 1 - No Poverty","SDG 8 - Decent Work and Economic Growth"],
     downloads: 28,
     resources: [
       { label: "Paper", url: "", icon: "fa-file-pdf" },
@@ -324,6 +346,7 @@ const publicationsData = [
     abstract: "Based on data from 14,820 establishments in Khan Meanchey, Phnom Penh, this report examines MSME market dynamics and resilience. Despite a strong post-pandemic recovery in 2023, early signs of slowdown emerged in 2024. The high business turnover — 1,790 openings versus 825 closures — reflects a survivalist approach to entrepreneurship. Most MSMEs remain informal and micro-scale.",
     keywords: ["MSMEs","Urban Economy","Phnom Penh","Resilience","Entrepreneurship"],
     kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 8 - Decent Work and Economic Growth","SDG 11 - Sustainable Cities and Communities","SDG 9 - Industry, Innovation, and Infrastructure"],
     downloads: 12 },
 
   { title: "Government Ownership of Banks: Diversifying of Potential Products and Factors to Subsidize Agriculture",
@@ -333,6 +356,7 @@ const publicationsData = [
     abstract: "This study uses a two-step GMM estimator on national-level data for 32 crop products and 14 livestock products from Cambodia (1989–2018) to identify the potential products and factors in agriculture that public banks should subsidize.",
     keywords: ["Public Banks","Government Ownership","Agriculture","Subsidies","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 2 - Zero Hunger","SDG 8 - Decent Work and Economic Growth","SDG 1 - No Poverty"],
     resources: [
       { label: "Paper", url: "", icon: "fa-file-pdf" },
       { label: "Slides", url: "", icon: "fa-person-chalkboard" },
@@ -346,12 +370,14 @@ const publicationsData = [
     breadcrumb: "Other publication › Research report",
     abstract: "Around 65.3% of Cambodia's population is under 30. This mapping study — commissioned by the EU Delegation to Cambodia — explores the aspirations, challenges, and needs of youth actors in civil society organizations in urban Cambodia.",
     keywords: ["Youth","Civil Society","Civic Engagement","Democracy","Cambodia"],
-    kwStrength: ["full","full","half","none","none"] },
+    kwStrength: ["full","full","half","none","none"],
+    sdgs: ["SDG 4 - Quality Education","SDG 16 - Peace, Justice and Strong Institutions","SDG 10 - Reduced Inequalities"] },
 
   { title: "Household Saving and Debt",
     authors: "Kosal Nith & Summer-Solstice Thomas", date: "Jun 2021",
     outlet: "Revisiting the Pandemic: Rapid Survey on the Impact of Covid-19 on MSMEs and Households, The Asia Foundation",
     type: "other", year: "2021", oa: false, lang: "en",
+    sdgs: ["SDG 1 - No Poverty","SDG 8 - Decent Work and Economic Growth"],
     breadcrumb: "Other publication › Book section" },
 
   { title: "Rapport de Stage : Assistant de Programme de l'Engagement des Jeunes pour l'Action Sociale",
@@ -361,7 +387,8 @@ const publicationsData = [
     breadcrumb: "Other publication › Internship report",
     abstract: "Le présent document décrit le YRDP ainsi que mon travail dans cette organisation. Ce rapport vise à fournir un aperçu de l'utilisation des matières étudiées à l'Université Royale de Droit et de Sciences Économiques pour la mise en oeuvre de travail dans l'organisation de YRDP.",
     keywords: ["Youth","Civil Society","Social Engagement","Cambodia"],
-    kwStrength: ["full","full","half","none"] },
+    kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 4 - Quality Education","SDG 16 - Peace, Justice and Strong Institutions"] },
 
   { title: "Reinvigorating Cambodian Agriculture: Transforming from Extensive to Intensive Agriculture",
     authors: "Kosal Nith & Singhong Ly", date: "Dec 2018",
@@ -371,6 +398,7 @@ const publicationsData = [
     abstract: "Comparing Cambodian agriculture to Southeast Asian neighbors over 22 years (1996–2018), this paper identifies factors constraining the transition from extensive to intensive agriculture, including high production costs, limited technology use, and low market prices.",
     keywords: ["Agriculture","Intensive Farming","Productivity","Southeast Asia","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 2 - Zero Hunger","SDG 8 - Decent Work and Economic Growth","SDG 9 - Industry, Innovation, and Infrastructure"],
     downloads: 7,
     resources: [
       { label: "Paper", url: "", icon: "fa-file-pdf" },
@@ -386,6 +414,7 @@ const publicationsData = [
     abstract: "Cambodia's current monetary policy lacks the autonomy to tackle affordable housing due to non-independent monetary tools and high dollarization. Liquidity-providing collateralized operations (LPCO) show promise as an innovative approach, partnering with private banks to offer low-interest mortgages.",
     keywords: ["Monetary Policy","Affordable Housing","Dollarization","Cambodia"],
     kwStrength: ["full","full","full","none"],
+    sdgs: ["SDG 1 - No Poverty","SDG 11 - Sustainable Cities and Communities","SDG 10 - Reduced Inequalities"],
     resources: [
       { label: "Paper", url: "", icon: "fa-file-pdf" },
       { label: "Slides", url: "", icon: "fa-person-chalkboard" }
@@ -398,6 +427,7 @@ const publicationsData = [
     breadcrumb: "Policy brief",
     keywords: ["Industry 4.0","Technology","Economic Development","Cambodia"],
     kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 9 - Industry, Innovation, and Infrastructure","SDG 8 - Decent Work and Economic Growth","SDG 4 - Quality Education"],
     link: "https://www.cd-center.org/wp-content/uploads/2020/05/P126_20200508_EC19W1.pdf",
     resources: [
       { label: "Paper", url: "https://www.cd-center.org/wp-content/uploads/2020/05/P126_20200508_EC19W1.pdf", icon: "fa-file-pdf" },
@@ -409,15 +439,18 @@ const publicationsData = [
   { title: "Dollarization and Monetary Policy in Cambodia: Challenges, International Lessons, and Policy Implications",
     authors: "Kosal Nith, Sovannroeun Samreth & Hang Panha Hour",
     type: "progress", year: "progress", oa: false, lang: "en",
+    sdgs: ["SDG 8 - Decent Work and Economic Growth","SDG 10 - Reduced Inequalities"],
     breadcrumb: "Work in progress" },
 
   { title: "International Trade and Globalization in Cambodia: The Role of International Cooperation",
     authors: "Kosal Nith & Ronald A. Ruran",
     type: "progress", year: "progress", oa: false, lang: "en",
+    sdgs: ["SDG 17 - Partnerships for the Goals","SDG 8 - Decent Work and Economic Growth"],
     breadcrumb: "Work in progress" },
 
   { title: "The Survey on Skills Demand in Cambodia",
     authors: "Kosal Nith, Dina Chhorn, Sivly Houy & Muny Nhim Kean",
     type: "progress", year: "progress", oa: false, lang: "en",
+    sdgs: ["SDG 4 - Quality Education","SDG 8 - Decent Work and Economic Growth"],
     breadcrumb: "Work in progress" }
 ];
