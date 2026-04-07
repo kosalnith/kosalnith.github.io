@@ -577,6 +577,9 @@ function updateMetaTags(pub) {
     ? pub.abstract.substring(0, 200) + '…'
     : `${pub.authors}. ${pub.outlet || ''}. ${pub.year || ''}`;
 
+  // Each publication has its own ogImage field pointing to a unique branded card
+  const ogImage = pub.ogImage || 'https://kosalnith.github.io/static/img/og-research.png';
+
   const setMeta = (sel, val) => {
     let el = document.querySelector(sel);
     if (!el) { el = document.createElement('meta'); document.head.appendChild(el); }
@@ -585,13 +588,22 @@ function updateMetaTags(pub) {
   const setMetaProp = (prop, val) => setMeta(`meta[property="${prop}"]`, val);
   const setMetaName  = (name, val) => setMeta(`meta[name="${name}"]`, val);
 
-  setMetaProp('og:title',       pub.title + ' · Kosal Nith');
-  setMetaProp('og:description', desc);
-  setMetaProp('og:url',         url);
-  setMetaProp('og:type',        'article');
-  setMetaName('twitter:title',  pub.title + ' · Kosal Nith');
+  document.title = pub.title + ' · Kosal Nith';
+
+  setMetaProp('og:title',           pub.title + ' · Kosal Nith');
+  setMetaProp('og:description',     desc);
+  setMetaProp('og:url',             url);
+  setMetaProp('og:type',            'article');
+  setMetaProp('og:image',           ogImage);
+  setMetaProp('og:image:width',     '1200');
+  setMetaProp('og:image:height',    '630');
+  setMetaProp('og:site_name',       'Kosal Nith · Research Portal');
+
+  setMetaName('twitter:card',        'summary_large_image');
+  setMetaName('twitter:title',       pub.title + ' · Kosal Nith');
   setMetaName('twitter:description', desc);
-  setMeta('link[rel="canonical"]', url);
+  setMetaName('twitter:image',       ogImage);
+  setMetaName('twitter:site',        '@kosalnith');
 
   // Update canonical href
   let canon = document.querySelector('link[rel="canonical"]');
@@ -610,6 +622,9 @@ function showList() {
   setMeta('meta[property="og:title"]',       'Research output · Kosal Nith');
   setMeta('meta[property="og:description"]', 'Research output by Kosal Nith — economist and researcher at CDRI.');
   setMeta('meta[property="og:url"]',         'https://kosalnith.github.io/research_main.html');
+  setMeta('meta[property="og:image"]',       'https://kosalnith.github.io/static/img/og-research.png');
+  setMeta('meta[name="twitter:image"]',      'https://kosalnith.github.io/static/img/og-research.png');
+  setMeta('meta[name="twitter:card"]',       'summary_large_image');
 }
 
 function showDetail(idx) {

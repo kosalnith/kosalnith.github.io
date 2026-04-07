@@ -107,6 +107,7 @@ const publicationsData = [
   // ══ Op-Eds & Commentaries (15) ════════════════════════════════
 
   { title: "Capital Gains Tax Is a Smart Way to Build Infrastructure",
+    ogImage: "https://kosalnith.github.io/static/img/og/capital-gains-tax-is-a-smart-way-to-build-infrastructure.png",
     authors: "Kosal Nith", date: "22 Mar 2026", outlet: "Cambodianess",
     type: "opeds", year: "2026", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -116,6 +117,7 @@ const publicationsData = [
     link: "https://cambodianess.com/article/capital-gains-tax-is-a-smart-way-to-build-infrastructure" },
 
   { title: "Transforming the Tax System with Personal Income Tax",
+    ogImage: "https://kosalnith.github.io/static/img/og/transforming-the-tax-system-with-personal-income-tax.png",
     authors: "Kosal Nith", date: "4 Jan 2026", outlet: "Cambodianess",
     type: "opeds", year: "2026", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -125,6 +127,7 @@ const publicationsData = [
     link: "https://cambodianess.com/article/transforming-the-tax-system-with-personal-income-tax" },
 
   { title: "Cambodia Needs Progressive Taxation to Invest in Its Future",
+    ogImage: "https://kosalnith.github.io/static/img/og/cambodia-needs-progressive-taxation-to-invest-in-its-future.png",
     authors: "Kosal Nith", date: "17 Oct 2025", outlet: "Camboja News",
     type: "opeds", year: "2025", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -134,6 +137,7 @@ const publicationsData = [
     link: "https://cambojanews.com/op-ed-cambodia-needs-progressive-taxation-to-invest-in-its-future/" },
 
   { title: "Connecting Communities to Support Cambodia's Vulnerable",
+    ogImage: "https://kosalnith.github.io/static/img/og/connecting-communities-to-support-cambodias-vulnerable.png",
     authors: "Kosal Nith", date: "13 Aug 2025", outlet: "East Asia Forum",
     type: "opeds", year: "2025", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -143,6 +147,7 @@ const publicationsData = [
     link: "https://eastasiaforum.org/2025/08/13/connecting-communities-to-support-cambodias-vulnerable/" },
 
   { title: "Ascending the Development Ladder in Cambodia: Progressing Towards Higher Income Status",
+    ogImage: "https://kosalnith.github.io/static/img/og/ascending-the-development-ladder-in-cambodia-progressing-towards-higher-income-s.png",
     authors: "Kosal Nith, Sovannroeun Samreth & Sopheak Song", date: "7 Dec 2023",
     outlet: "The Cambodia Outlook Conference",
     type: "opeds", year: "2024", oa: false, lang: "en",
@@ -153,6 +158,7 @@ const publicationsData = [
     link: "https://coc2023.cdri.org.kh/ascending-the-development-ladder-in-cambodia-progressing-towards-higher-income-status/" },
 
   { title: "Explainer: How Cambodia's Central Bank Addressed Economic Challenges During the Pandemic",
+    ogImage: "https://kosalnith.github.io/static/img/og/explainer-how-cambodias-central-bank-addressed-economic-challenges-during-the-pa.png",
     authors: "Kosal Nith", date: "7 Jul 2023", outlet: "The Camboja News",
     type: "opeds", year: "2023", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -162,6 +168,7 @@ const publicationsData = [
     link: "https://cambojanews.com/explainer-how-cambodias-central-bank-addressed-economic-challenges-during-the-pandemic/" },
 
   { title: "Will Cambodia Commit to Protecting Its Forests?",
+    ogImage: "https://kosalnith.github.io/static/img/og/will-cambodia-commit-to-protecting-its-forests.png",
     authors: "Kosal Nith", date: "13 Nov 2021", outlet: "The Diplomat",
     type: "opeds", year: "2021", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -171,6 +178,7 @@ const publicationsData = [
     link: "https://thediplomat.com/2021/11/will-cambodia-commit-to-protecting-its-forests/" },
 
   { title: "Pandemic Offers Chance to Consider Higher Taxes, not Donations, From Rich",
+    ogImage: "https://kosalnith.github.io/static/img/og/pandemic-offers-chance-to-consider-higher-taxes-not-donations-from-rich.png",
     authors: "Kosal Nith", date: "13 Aug 2021", outlet: "VOD",
     type: "opeds", year: "2021", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -180,6 +188,7 @@ const publicationsData = [
     link: "https://vodenglish.news/opinion-pandemic-offers-chance-to-consider-higher-taxes-not-donations-from-rich/" },
 
   { title: "How Cambodia's Agricultural Lending Can Get a Bigger Bang for Its Buck",
+    ogImage: "https://kosalnith.github.io/static/img/og/how-cambodias-agricultural-lending-can-get-a-bigger-bang-for-its-buck.png",
     authors: "Kosal Nith", date: "29 May 2021", outlet: "East Asia Forum",
     type: "opeds", year: "2021", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -189,6 +198,7 @@ const publicationsData = [
     link: "https://www.eastasiaforum.org/2021/05/29/how-cambodias-agricultural-lending-can-get-a-bigger-bang-for-its-buck/" },
 
   { title: "Rising Inflation Threatens to Swamp Cambodian Households",
+    ogImage: "https://kosalnith.github.io/static/img/og/rising-inflation-threatens-to-swamp-cambodian-households.png",
     authors: "Kosal Nith", date: "26 May 2021", outlet: "The Diplomat",
     type: "opeds", year: "2021", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -198,6 +208,7 @@ const publicationsData = [
     link: "https://thediplomat.com/2021/05/rising-inflation-threatens-to-swamp-cambodian-households/" },
 
   { title: "Lockdown's Food Security Crisis Must Address Demand and Supply",
+    ogImage: "https://kosalnith.github.io/static/img/og/lockdowns-food-security-crisis-must-address-demand-and-supply.png",
     authors: "Kosal Nith & Kimly Lay", date: "4 May 2021", outlet: "VOD",
     type: "opeds", year: "2021", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -207,6 +218,7 @@ const publicationsData = [
     link: "https://vodenglish.news/lockdowns-food-security-crisis-must-address-demand-and-supply/" },
 
   { title: "Cambodia's Economic Recovery Uncertain Amid Covid",
+    ogImage: "https://kosalnith.github.io/static/img/og/cambodias-economic-recovery-uncertain-amid-covid.png",
     authors: "Kosal Nith", date: "6 Apr 2021", outlet: "The Phnom Penh Post",
     type: "opeds", year: "2021", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -215,6 +227,7 @@ const publicationsData = [
     sdgs: ["SDG 8 - Decent Work and Economic Growth","SDG 9 - Industry, Innovation, and Infrastructure"] },
 
   { title: "Cambodia Will Lose Its Fight Against Deforestation If Change Isn't Made",
+    ogImage: "https://kosalnith.github.io/static/img/og/cambodia-will-lose-its-fight-against-deforestation-if-change-isnt-made.png",
     authors: "Kosal Nith", date: "16 Mar 2021", outlet: "Southeast Asia Globe",
     type: "opeds", year: "2021", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -223,6 +236,7 @@ const publicationsData = [
     sdgs: ["SDG 13 - Climate Action","SDG 15 - Life on Land","SDG 16 - Peace, Justice and Strong Institutions"] },
 
   { title: "Kingdom's Agro-Processing Potential",
+    ogImage: "https://kosalnith.github.io/static/img/og/kingdoms-agro-processing-potential.png",
     authors: "Kosal Nith", date: "8 Jun 2020", outlet: "The Phnom Penh Post",
     type: "opeds", year: "2020", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -231,6 +245,7 @@ const publicationsData = [
     sdgs: ["SDG 2 - Zero Hunger","SDG 8 - Decent Work and Economic Growth","SDG 9 - Industry, Innovation, and Infrastructure"] },
 
   { title: "Cambodia's Agricultural Sector is in Dire Need of Revitalization",
+    ogImage: "https://kosalnith.github.io/static/img/og/cambodias-agricultural-sector-is-in-dire-need-of-revitalization.png",
     authors: "Kosal Nith", date: "21 May 2020", outlet: "Southeast Asia Globe",
     type: "opeds", year: "2020", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Op-Ed",
@@ -241,6 +256,7 @@ const publicationsData = [
   // ══ Journal Article (1) ══════════════════════════════════════
 
   { title: "Determinants of Informal Borrowing: Evidence from Households in 11 Rural Villages in Cambodia",
+    ogImage: "https://kosalnith.github.io/static/img/og/determinants-of-informal-borrowing-evidence-from-households-in-11-rural-villages.png",
     authors: "Kosal Nith & Sovannroeun Samreth", date: "2025 (forthcoming)",
     outlet: "Journal of International Development Studies",
     month: "forthcoming",
@@ -254,6 +270,7 @@ const publicationsData = [
   // ══ Book Chapters (2) ════════════════════════════════════════
 
   { title: "Cambodian Cassava: An Analysis on Production, Productivity, and Gender Impacts",
+    ogImage: "https://kosalnith.github.io/static/img/og/cambodian-cassava-an-analysis-on-production-productivity-and-gender-impacts.png",
     authors: "Kosal Nith & Yuki Kanayama", date: "Oct 2025",
     outlet: "Navigating Through Crisis: Socio-Economic Impact of COVID-19 in the Mekong Delta Countries",
     publisher: "Springer", month: "October", year_pub: "2025",
@@ -266,6 +283,7 @@ const publicationsData = [
     link: "https://link.springer.com/chapter/10.1007/978-981-95-1637-7_3" },
 
   { title: "Food Science in Cambodia",
+    ogImage: "https://kosalnith.github.io/static/img/og/food-science-in-cambodia.png",
     authors: "Kosal Nith", date: "2021",
     outlet: "Micro-Policy Intervention: Contemporary Policy Discussion in Cambodia, Future Forum, Ch. 13",
     type: "chapters", year: "2021", oa: true, lang: "en",
@@ -283,6 +301,7 @@ const publicationsData = [
 
   // ══ Working Papers (4) ═══════════════════════════════════════
   { title: "Does Social Capital Strengthen the Stability of Household Income? Evidence from Cambodia",
+    ogImage: "https://kosalnith.github.io/static/img/og/does-social-capital-strengthen-the-stability-of-household-income-evidence-from-c.png",
     authors: "Kosal Nith, Sovannroeun Samreth & Dina Chhorn",
     date: "Aug 2025", outlet: "Working paper",
     abstract: "The measurement of Special Economic Zones (SEZ) spatial impacts remains a persistent challenge for practitioners in understudied regions where conventional data collection methods prove cost-prohibitive. This study advances a replicable geospatial methodology leveraging Google's Open Buildings 2.5D Temporal Dataset to analyze development patterns in data-scarce contexts. Through examination of 11 SEZs in Cambodia's Svay Rieng province (2016-2023), we reveal two critical findings that challenge prevailing assumptions: first, SEZ-induced spillovers extend substantially beyond the conventionally assumed 1-2 kilometer impact radius; second, development follows a distinctive dual-ring spatial pattern, with outer zones (2-5km) demonstrating near-equivalent building density (21.27/km²) to immediate perimeter areas. Our approach provides three key contributions to the literature and practice: (1) a transferable framework for SEZ impact assessment in understudied regions, (2) empirical evidence challenging linear distance-decay models of agglomeration effects, and (3) demonstration of how accessible satellite-derived data can overcome traditional barriers to evidence-based planning. The methodology's versatility extends beyond SEZ analysis, offering practitioners an operational toolkit for growth monitoring, infrastructure impact assessment, and cross-border development analysis across ASEAN's diverse development contexts. By transforming publicly available building data into actionable spatial intelligence, this approach significantly enhances planning capacity in regions where ground-truth data remains systematically unavailable.",
@@ -296,6 +315,7 @@ const publicationsData = [
     ] },
 
   { title: "Measuring SEZ Spillovers in Data-Scarce Regions: Evidence from Cambodia's Open Building Data",
+    ogImage: "https://kosalnith.github.io/static/img/og/measuring-sez-spillovers-in-data-scarce-regions-evidence-from-cambodias-open-bui.png",
     authors: "Kosal Nith, Daniel Yonto, Yudo Angorro & Vuthoun Khiev",
     date: "Jun 2025", outlet: "Submitted to South East Asia Research",
     type: "working", year: "2025", oa: false, lang: "en", underReview: true,
@@ -306,6 +326,7 @@ const publicationsData = [
     sdgs: ["SDG 9 - Industry, Innovation, and Infrastructure","SDG 11 - Sustainable Cities and Communities","SDG 8 - Decent Work and Economic Growth"] },
 
   { title: "20 Years of FDI in Cambodia: Towards Upper Middle-Income Status and Beyond",
+    ogImage: "https://kosalnith.github.io/static/img/og/20-years-of-fdi-in-cambodia-towards-upper-middle-income-status-and-beyond.png",
     authors: "Kosal Nith, Simona Iammarino & Sumontheany Muth",
     date: "May 2024", outlet: "CDRI Working Paper 149",
     type: "working", year: "2024", oa: true, lang: "en",
@@ -322,6 +343,7 @@ const publicationsData = [
     ] },
 
   { title: "Monetary Policy and Household Income Distribution: An Empirical Analysis from Cambodia",
+    ogImage: "https://kosalnith.github.io/static/img/og/monetary-policy-and-household-income-distribution-an-empirical-analysis-from-cam.png",
     authors: "Kosal Nith", date: "Apr 2022", outlet: "Future Forum",
     type: "working", year: "2022", oa: false, lang: "en",
     breadcrumb: "Working paper",
@@ -339,6 +361,7 @@ const publicationsData = [
   // ══ Other Publications (6) ═══════════════════════════════════
 
   { title: "Assessing MSME Market Dynamics and Resilience in Phnom Penh: Challenges and Opportunities",
+    ogImage: "https://kosalnith.github.io/static/img/og/assessing-msme-market-dynamics-and-resilience-in-phnom-penh-challenges-and-oppor.png",
     authors: "Kosal Nith, Dina Chhorn, I Younan An, Sivly Houy, Muny Nhim Kean & Sosengphyrun Mao",
     date: "Nov 2025", outlet: "Cambodia Development Resource Institute",
     type: "other", year: "2025", oa: true, lang: "en",
@@ -350,6 +373,7 @@ const publicationsData = [
     downloads: 12 },
 
   { title: "Government Ownership of Banks: Diversifying of Potential Products and Factors to Subsidize Agriculture",
+    ogImage: "https://kosalnith.github.io/static/img/og/government-ownership-of-banks-diversifying-of-potential-products-and-factors-to.png",
     authors: "Kosal Nith", date: "Dec 2025", outlet: "Future Forum",
     type: "other", year: "2025", oa: false, lang: "en",
     breadcrumb: "Other publication › Research report",
@@ -365,6 +389,7 @@ const publicationsData = [
     ] },
 
   { title: "Mapping Study: Youth and Civil Society in Urban Cambodia",
+    ogImage: "https://kosalnith.github.io/static/img/og/mapping-study-youth-and-civil-society-in-urban-cambodia.png",
     authors: "Kosal Nith", date: "Sep 2022", outlet: "Future Forum",
     type: "other", year: "2022", oa: false, lang: "en",
     breadcrumb: "Other publication › Research report",
@@ -374,6 +399,7 @@ const publicationsData = [
     sdgs: ["SDG 4 - Quality Education","SDG 16 - Peace, Justice and Strong Institutions","SDG 10 - Reduced Inequalities"] },
 
   { title: "Household Saving and Debt",
+    ogImage: "https://kosalnith.github.io/static/img/og/household-saving-and-debt.png",
     authors: "Kosal Nith & Summer-Solstice Thomas", date: "Jun 2021",
     outlet: "Revisiting the Pandemic: Rapid Survey on the Impact of Covid-19 on MSMEs and Households, The Asia Foundation",
     type: "other", year: "2021", oa: false, lang: "en",
@@ -381,6 +407,7 @@ const publicationsData = [
     breadcrumb: "Other publication › Book section" },
 
   { title: "Rapport de Stage : Assistant de Programme de l'Engagement des Jeunes pour l'Action Sociale",
+    ogImage: "https://kosalnith.github.io/static/img/og/rapport-de-stage-assistant-de-programme-de-lengagement-des-jeunes-pour-laction-s.png",
     authors: "Kosal Nith", date: "Jan 2019",
     outlet: "Royal University of Law and Economics",
     type: "other", year: "2019", oa: false, lang: "fr",
@@ -391,6 +418,7 @@ const publicationsData = [
     sdgs: ["SDG 4 - Quality Education","SDG 16 - Peace, Justice and Strong Institutions"] },
 
   { title: "Reinvigorating Cambodian Agriculture: Transforming from Extensive to Intensive Agriculture",
+    ogImage: "https://kosalnith.github.io/static/img/og/reinvigorating-cambodian-agriculture-transforming-from-extensive-to-intensive-ag.png",
     authors: "Kosal Nith & Singhong Ly", date: "Dec 2018",
     outlet: "National Bank of Cambodia — 5th Annual Macroeconomic Conference",
     type: "other", year: "2018", oa: false, lang: "en", award: true,
@@ -408,6 +436,7 @@ const publicationsData = [
   // ══ Policy Briefs (2) ════════════════════════════════════════
 
   { title: "Monetary Policy: How Does It Become a Tool to Support Poor Households Afford to Purchase an Affordable House?",
+    ogImage: "https://kosalnith.github.io/static/img/og/monetary-policy-how-does-it-become-a-tool-to-support-poor-households-afford-to-p.png",
     authors: "Kosal Nith", date: "Nov 2022", outlet: "Policy brief",
     type: "policy", year: "2022", oa: false, lang: "en",
     breadcrumb: "Policy brief",
@@ -421,6 +450,7 @@ const publicationsData = [
     ] },
 
   { title: "How Should Cambodia Prepare for the Fourth Industrial Revolution?",
+    ogImage: "https://kosalnith.github.io/static/img/og/how-should-cambodia-prepare-for-the-fourth-industrial-revolution.png",
     authors: "Kosal Nith", date: "8 May 2020",
     outlet: "Cambodia Development Center, Essay Contest 2019",
     type: "policy", year: "2020", oa: false, lang: "en", award: true,
@@ -437,18 +467,21 @@ const publicationsData = [
   // ══ Work in Progress (3) ═════════════════════════════════════
 
   { title: "Dollarization and Monetary Policy in Cambodia: Challenges, International Lessons, and Policy Implications",
+    ogImage: "https://kosalnith.github.io/static/img/og/dollarization-and-monetary-policy-in-cambodia-challenges-international-lessons-a.png",
     authors: "Kosal Nith, Sovannroeun Samreth & Hang Panha Hour",
     type: "progress", year: "progress", oa: false, lang: "en",
     sdgs: ["SDG 8 - Decent Work and Economic Growth","SDG 10 - Reduced Inequalities"],
     breadcrumb: "Work in progress" },
 
   { title: "International Trade and Globalization in Cambodia: The Role of International Cooperation",
+    ogImage: "https://kosalnith.github.io/static/img/og/international-trade-and-globalization-in-cambodia-the-role-of-international-coop.png",
     authors: "Kosal Nith & Ronald A. Ruran",
     type: "progress", year: "progress", oa: false, lang: "en",
     sdgs: ["SDG 17 - Partnerships for the Goals","SDG 8 - Decent Work and Economic Growth"],
     breadcrumb: "Work in progress" },
 
   { title: "The Survey on Skills Demand in Cambodia",
+    ogImage: "https://kosalnith.github.io/static/img/og/the-survey-on-skills-demand-in-cambodia.png",
     authors: "Kosal Nith, Dina Chhorn, Sivly Houy & Muny Nhim Kean",
     type: "progress", year: "progress", oa: false, lang: "en",
     sdgs: ["SDG 4 - Quality Education","SDG 8 - Decent Work and Economic Growth"],
