@@ -438,6 +438,10 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
 .detail-keyword {
   font-size: 1.5rem; background: #f1f5f9; border: 1px solid #dce6f0;
   padding: 4px 12px; border-radius: 40px; color: #2c4766;
+  cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.detail-keyword:hover {
+  background: #b1040e; color: #fff; border-color: #b1040e;
 }
 
 /* fingerprint bars */
@@ -1025,14 +1029,19 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
   border-radius: 20px !important;
   padding: 3px 12px !important;
   white-space: nowrap !important;
-  cursor: default !important;
+  cursor: pointer !important;
   transition: all 0.12s !important;
   box-sizing: border-box !important;
 }
-.research-container .pub-kw:hover {
-  background: #e6edf7 !important;
+.research-container .pub-kw:hover,
+.research-container .pub-kw:focus {
+  background: #b1040e !important;
   border-color: #b1040e !important;
-  color: #b1040e !important;
+  color: #fff !important;
+}
+.research-container .pub-kw:hover .pub-kw-dot,
+.research-container .pub-kw:focus .pub-kw-dot {
+  background: rgba(255,255,255,0.7) !important;
 }
 .research-container .pub-kw-dot {
   width: 7px !important; height: 7px !important;

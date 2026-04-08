@@ -236,24 +236,19 @@ function renderPublicationsWithPagination() {
               ${pub.keywords && pub.keywords.length ? `
               <div class="pub-keywords">
                 ${pub.keywords.slice(0, 3).map((k, i) =>
-                  `<span class="pub-kw"><span class="pub-kw-dot ${pub.kwStrength[i] || 'none'}"></span>${k}</span>`
+                  `<button class="pub-kw kw-clickable" data-keyword="${k.replace(/"/g,'&quot;')}" title="Find all publications with keyword: ${k.replace(/"/g,'&quot;')}"><span class="pub-kw-dot ${pub.kwStrength[i] || 'none'}"></span>${k}</button>`
                 ).join('')}
               </div>` : ''}
 
             </div>
           </div>
+          ${pub.downloads ? `
           <div class="right-stats">
-            <div class="altmetric-donut">
-              <svg viewBox="0 0 100 100" width="48" height="48" aria-hidden="true">
-                <use href="#altmetric-icon"/>
-              </svg>
-            </div>
-            ${pub.downloads ? `
             <div class="download-circle">
               <div class="dl-num">${pub.downloads}</div>
               <div class="dl-label">Downloads</div>
-            </div>` : ''}
-          </div>
+            </div>
+          </div>` : ''}
         </div>`;
     }
   }
@@ -542,11 +537,30 @@ function initEventListeners() {
 
 
   document.getElementById('publicationsContainer').addEventListener('click', (e) => {
+    // Keyword click
+    const kw = e.target.closest('.kw-clickable');
+    if (kw) {
+      e.preventDefault();
+      e.stopPropagation();
+      filterByKeyword(kw.getAttribute('data-keyword'));
+      return;
+    }
+    // Publication detail link
     const link = e.target.closest('.pub-detail-link');
     if (link) {
       e.preventDefault();
       const idx = parseInt(link.getAttribute('data-pub-idx'));
       showDetail(idx);
+    }
+  });
+
+  // Keyword clicks on the detail page
+  document.getElementById('pubDetailView').addEventListener('click', (e) => {
+    const kw = e.target.closest('.kw-clickable');
+    if (kw) {
+      e.preventDefault();
+      e.stopPropagation();
+      filterByKeyword(kw.getAttribute('data-keyword'));
     }
   });
 }
@@ -811,7 +825,7 @@ function showDetail(idx) {
       ${pub.keywords && pub.keywords.length ? `
       <div class="detail-section-title">Keywords</div>
       <div class="detail-keywords">
-        ${pub.keywords.map(k => `<span class="detail-keyword">${k}</span>`).join('')}
+        ${pub.keywords.map(k => `<button class="detail-keyword kw-clickable" data-keyword="${k.replace(/"/g,'&quot;')}" title="Find all publications with keyword: ${k.replace(/"/g,'&quot;')}">${k}</button>`).join('')}
       </div>` : ''}
 
       ${related.length ? `
@@ -957,29 +971,6 @@ function showDetail(idx) {
       </div>
     </div>
 
-    <div class="detail-card">
-      <div class="detail-card-title"><i class="fas fa-atom" style="margin-right:5px;color:#7b3fa0;"></i>Altmetric</div>
-      <div style="display:flex;align-items:center;gap:14px;padding:4px 0 8px;">
-        <svg viewBox="0 0 100 100" width="60" height="60" style="flex-shrink:0;">
-          <circle cx="50" cy="50" r="8" fill="#7b3fa0"/>
-          <circle cx="50" cy="18" r="7" fill="#e8821a"/>
-          <circle cx="76" cy="30" r="6" fill="#7b3fa0"/>
-          <circle cx="82" cy="60" r="6" fill="#7b3fa0"/>
-          <circle cx="62" cy="82" r="6" fill="#7b3fa0"/>
-          <circle cx="36" cy="80" r="5" fill="#7b3fa0"/>
-          <circle cx="20" cy="60" r="5" fill="#c0c0c0"/>
-          <circle cx="26" cy="30" r="5" fill="#7b3fa0"/>
-          <line x1="50" y1="50" x2="50" y2="18" stroke="#7b3fa0" stroke-width="2.5"/>
-          <line x1="50" y1="50" x2="76" y2="30" stroke="#7b3fa0" stroke-width="2.5"/>
-          <line x1="50" y1="50" x2="82" y2="60" stroke="#7b3fa0" stroke-width="2.5"/>
-          <line x1="50" y1="50" x2="62" y2="82" stroke="#7b3fa0" stroke-width="2.5"/>
-          <line x1="50" y1="50" x2="36" y2="80" stroke="#7b3fa0" stroke-width="2.5"/>
-          <line x1="50" y1="50" x2="20" y2="60" stroke="#c0c0c0" stroke-width="2.5"/>
-          <line x1="50" y1="50" x2="26" y2="30" stroke="#7b3fa0" stroke-width="2.5"/>
-        </svg>
-        <div style="font-size:1.6rem;color:#6c7a8e;line-height:1.6;">Attention score<br>across online sources</div>
-      </div>
-    </div>
   `;
 }
 
@@ -1038,7 +1029,31 @@ function copyPubLink(url) {
   });
 }
 
-// ===== Sticky Sidebar Fallback =====
+// ===== Keyword click — filter publications by keyword =====
+function filterByKeyword(keyword) {
+  // Switch to list view
+  showList();
+  // Set the search input to the keyword
+  const input = document.getElementById('searchInput');
+  if (input) {
+    input.value = keyword;
+    currentSearchTerm = keyword;
+  }
+  // Clear all other filters so only keyword search is active
+  document.querySelectorAll('#fullTypeList input').forEach(cb => cb.checked = false);
+  document.getElementById('oaFilterCheckbox').checked = false;
+  document.querySelectorAll('input[data-lang]').forEach(cb => cb.checked = false);
+  document.querySelectorAll('.sdg-checkbox').forEach(cb => cb.checked = false);
+  document.getElementById('yearSliderMin').value = YEAR_MIN_BOUND;
+  document.getElementById('yearSliderMax').value = YEAR_MAX_BOUND;
+  updateYearSliderUI();
+  currentPage = 1;
+  renderPublicationsWithPagination();
+  // Scroll to top of results
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
 // CSS position:sticky can be broken when any ancestor has overflow:hidden/auto/scroll.
 // This JS fallback detects that situation and switches to position:fixed instead.
 function initStickySidebar() {
