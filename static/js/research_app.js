@@ -87,24 +87,24 @@ function toggleAbstract(btn) {
 
 // ===== Co-author website directory =====
 const coAuthorLinks = {
-  'Sovannroeun Samreth':    'https://scholar.google.com/citations?user=samreth',
-  'Dina Chhorn':            'https://www.cdri.org.kh/staff/dina-chhorn',
-  'Yuki Kanayama':          'https://scholar.google.com/citations?user=kanayama',
-  'Simona Iammarino':       'https://www.lse.ac.uk/geography-and-environment/people/academic-staff/simona-iammarino',
-  'Sumontheany Muth':       'https://scholar.google.com/citations?user=muth',
-  'Daniel Yonto':           'https://www.danielyonto.com',
-  'Yudo Angorro':           'https://scholar.google.com/citations?user=angorro',
-  'Vuthoun Khiev':          'https://scholar.google.com/citations?user=khiev',
-  'I Younan An':            'https://www.cdri.org.kh',
-  'Sivly Houy':             'https://www.cdri.org.kh',
-  'Muny Nhim Kean':         'https://www.cdri.org.kh',
-  'Sosengphyrun Mao':       'https://www.cdri.org.kh',
-  'Summer-Solstice Thomas': 'https://asiafoundation.org',
-  'Singhong Ly':            'https://scholar.google.com/citations?user=ly',
-  'Kimly Lay':              'https://scholar.google.com/citations?user=lay',
-  'Sopheak Song':           'https://www.cdri.org.kh',
+  'Sovannroeun Samreth':    'https://rdb.eva.saitama-u.ac.jp/search/detail.html?systemId=22ca3a9d2e4959a4520e17560c007669&lang=en',
+  'Dina Chhorn':            'https://sites.google.com/site/chhorndinaedu',
+  'Yuki Kanayama':          'https://sites.google.com/view/yukikanayama',
+  'Simona Iammarino':       'https://www.gssi.it/people/professors/lectures-social-science-gssi-cities/item/25922-iammarino-simona',
+  'Sumontheany Muth':       'https://www.cdri.org.kh/staff/muth-sumontheany',
+  'Daniel Yonto':           'https://scholar.xjtlu.edu.cn/en/persons/DanielYonto/',
+  'Yudo Angorro':           'https://www.sbm.itb.ac.id/member/yudo-anggoro/',
+  'Vuthoun Khiev':          'https://www.asianvision.org/archives/personnel/mr-khiev-vuthoun',
+  'I Younan An':            'https://iyounanan.weebly.com/',
+  'Sivly Houy':             'https://cdri.org.kh/staff/houy-sivly',
+  'Muny Nhim Kean':         'linkedin.com/in/nhim-kean-muny-a169a5259?originalSubdomain=kh',
+  'Sosengphyrun Mao':       'https://cdri.org.kh/staff/mao-sosengphyrun',
+  'Summer-Solstice Thomas': 'https://www.linkedin.com/in/summer-solstice-thomas-59654b193/',
+  'Singhong Ly':            'https://www.linkedin.com/in/singhong-ly-79b2341bb/',
+  'Kimly Lay':              'https://www.linkedin.com/in/lay-kimly-31b496157/',
+  'Sopheak Song':           'https://cdri.org.kh/staff/song-sopheak',
   'Ronald A. Ruran':        'https://scholar.google.com/citations?user=ruran',
-  'Hang Panha Hour':        'https://scholar.google.com/citations?user=hour',
+  'Hang Panha Hour':        'https://www.linkedin.com/in/hour-hang-panha/',
 };
 
 // ===== Author display: only "(with X, Y and Z)" — Kosal Nith omitted (his page) =====
@@ -121,7 +121,7 @@ function formatAuthorsChicagoMeta(authorsStr) {
   const coHtml = coAuthors.map(name => {
     const url = coAuthorLinks[name];
     return url
-      ? `<a href="${url}" target="_blank" style="color:#1f4a7c;font-weight:500;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${name}</a>`
+      ? `<a href="${url}" target="_blank" style="color:#9f260b;font-weight:600;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${name}</a>`
       : `<span style="color:#2e2d29;">${name}</span>`;
   });
 
@@ -138,33 +138,489 @@ function formatAuthorsChicagoMeta(authorsStr) {
   return `<span style="color:#4a5568;font-weight:400;">(with ${coStr})</span>`;
 }
 
-// ===== Publication info line formatter =====
-// Renders: *Journal*, vol(issue), pages, Month Year.
-// Falls back gracefully when vol/issue/pages are absent.
+// ===== Publication info line formatter — Chicago Manual of Style (17th ed.) =====
+//
+// Maps every Zotero item type to its CMS citation format.
+// pub.zoteroType  — the Zotero type string (see list below); falls back to pub.type
+// pub.type        — internal site type: articles | chapters | working | opeds | policy | other | progress
+//
+// ─── Zotero type → CMS format ─────────────────────────────────────────────────
+//
+//  artwork            →  Title. Medium. Institution/Collection, City, Year.           [CMS 14.235]
+//  audioRecording     →  *Album Title*. Label/Studio, Year.                           [CMS 14.263]
+//  bill               →  Bill No., Title, Congress, Session (Year).                   [CMS 14.299]
+//  blogPost           →  "Post Title." *Blog Name* (blog). Date.                      [CMS 14.208]
+//  book               →  *Title*. Publisher, City, Year.                              [CMS 14.75]
+//  bookSection        →  in *Book Title*, ch. N, Editor (ed./eds.), Publisher,
+//                          City, Month Year.                                           [CMS 14.103]
+//  case               →  Case Name, Reporter Vol Reporter Page (Court Year).          [CMS 14.282]
+//  conferencePaper    →  Paper presented at Conference Name, City, Date.              [CMS 14.217]
+//  dataset            →  *Dataset Title*. Repository, Year. DOI/URL.                  [CMS 14.257]
+//  dictionaryEntry    →  "Entry." *Dictionary Name*, Edition. Publisher, Year.        [CMS 14.232]
+//  document           →  Title. Institution, Date.                                    [CMS 14.229]
+//  email              →  Author to Recipient, "Subject," Date.                        [CMS 14.211]
+//  encyclopediaArticle→  "Article." *Encyclopedia Name*, Edition. Publisher, Year.    [CMS 14.232]
+//  film               →  *Title*. Directed by Director. Studio, Year.                 [CMS 14.261]
+//  forumPost          →  "Post Title." Forum/Platform. Date.                          [CMS 14.208]
+//  hearing            →  Title, Hearing before Committee, Congress, Session (Year).   [CMS 14.302]
+//  instantMessage     →  Author to Recipient, Date.                                   [CMS 14.212]
+//  interview          →  Interviewee, interview by Interviewer, Date.                 [CMS 14.218]
+//  journalArticle     →  *Journal Name*, vol(issue), pages, Month Year.               [CMS 14.170]
+//  letter             →  Author to Recipient, Date. Collection, Archive, City.        [CMS 14.111]
+//  magazineArticle    →  *Magazine Name*, Date.                                       [CMS 14.188]
+//  manuscript         →  "Title." Unpublished manuscript, Institution, Year.          [CMS 14.224]
+//  map                →  *Map Title*. Scale. Publisher, Year.                         [CMS 14.237]
+//  newspaperArticle   →  *Newspaper Name*, Date, edition/section.                     [CMS 14.191]
+//  patent             →  Patent No. Number, filed Date, issued Date.                  [CMS 14.258]
+//  podcast            →  "Episode Title." *Podcast Name*. Date.                       [CMS 14.265]
+//  preprint           →  Series Name No. N, Month Year. DOI.                          [CMS 14.229]
+//  presentation       →  Paper/Talk presented at Conference, City, Date.              [CMS 14.217]
+//  radioBroadcast     →  "Episode Title." *Program Name*. Network, Date.              [CMS 14.265]
+//  report             →  Report Title. Series No. N. Institution, City, Month Year.   [CMS 14.229]
+//  software           →  *Software Name*, version N. Publisher, Year.                 [CMS 14.256]
+//  standard           →  Standard No. Title. Organization, Year.                      [CMS 14.258]
+//  statute            →  Statute Name, Code Vol § Section (Year).                     [CMS 14.289]
+//  thesis             →  "Title." PhD diss./MA thesis, University, Year.              [CMS 14.224]
+//  tvBroadcast        →  "Episode Title." *Series Name*, Season N, Ep. N. Network, Date. [CMS 14.265]
+//  videoRecording     →  *Title*. Directed by Director. Platform/Distributor, Year.   [CMS 14.263]
+//  webpage            →  "Page Title." *Website Name*. Date. URL.                     [CMS 14.207]
+//
+// ─── Italics rules (CMS) ──────────────────────────────────────────────────────
+//   Italic  : journal names, book/album/film/podcast/software titles, periodicals,
+//             newspaper/magazine names, encyclopedia/dictionary names, website names
+//   Roman   : report series, working paper series, statute names, standard numbers,
+//             unpublished manuscript descriptions, archive/collection names
+//
+// ─── Helper ───────────────────────────────────────────────────────────────────
+function _doi(pub) {
+  if (!pub.doi) return '';
+  return `DOI: <a href="https://doi.org/${pub.doi}" target="_blank" style="color:#b1040e;">${pub.doi}</a>`;
+}
+function _dateStr(pub) {
+  // Prefer explicit month + year_pub; fall back to pub.date
+  if (pub.month && pub.year_pub) return `${pub.month} ${pub.year_pub}`;
+  if (pub.month && pub.year && pub.year !== 'progress') return `${pub.month} ${pub.year}`;
+  return pub.date || '';
+}
+function _join(arr, sep = ', ') {
+  return arr.filter(Boolean).join(sep);
+}
+
+// ─── Main formatter ────────────────────────────────────────────────────────────
 function formatPubInfo(pub) {
-  const parts = [];
+  // Resolve the Zotero type; fall back to internal type
+  const ztype = pub.zoteroType || '';
 
-  // Outlet in italics
-  if (pub.outlet) parts.push(`<em>${pub.outlet}</em>`);
-
-  // vol(issue) e.g. "140(4)"
-  if (pub.vol) {
-    parts.push(pub.issue ? `${pub.vol}(${pub.issue})` : `${pub.vol}`);
+  // ── Artwork  [CMS 14.235] ────────────────────────────────────────────────
+  if (ztype === 'artwork') {
+    return _join([
+      pub.medium || '',
+      pub.institution || pub.outlet || '',
+      pub.pubCity || '',
+      _dateStr(pub),
+      _doi(pub)
+    ]);
   }
 
-  // pages e.g. "835–888"
-  if (pub.pages) parts.push(pub.pages);
+  // ── Audio Recording  [CMS 14.263] ────────────────────────────────────────
+  if (ztype === 'audioRecording') {
+    return _join([
+      pub.outlet ? `<em>${pub.outlet}</em>` : '',   // album/label
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
 
-  // Month Year e.g. "May 2025" — use pub.month if set, else pub.date
-  const timeStr = pub.month && pub.year && pub.year !== 'progress'
-    ? `${pub.month} ${pub.year}`
-    : pub.date || '';
-  if (timeStr) parts.push(timeStr);
+  // ── Bill  [CMS 14.299] ───────────────────────────────────────────────────
+  if (ztype === 'bill') {
+    // pub.billNumber, pub.legislativeBody, pub.session
+    const parts = [];
+    if (pub.billNumber)     parts.push(`Bill No. ${pub.billNumber}`);
+    if (pub.legislativeBody) parts.push(pub.legislativeBody);
+    if (pub.session)         parts.push(`${pub.session} Session`);
+    if (_dateStr(pub))       parts.push(`(${_dateStr(pub)})`);
+    return parts.join(', ');
+  }
 
-  // DOI
-  if (pub.doi) parts.push(`DOI: <a href="https://doi.org/${pub.doi}" target="_blank" style="color:#b1040e;">${pub.doi}</a>`);
+  // ── Blog Post  [CMS 14.208] ──────────────────────────────────────────────
+  if (ztype === 'blogPost') {
+    return _join([
+      pub.outlet ? `<em>${pub.outlet}</em> (blog)` : '',
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
 
-  return parts.join(', ');
+  // ── Book  [CMS 14.75] ────────────────────────────────────────────────────
+  if (ztype === 'book') {
+    return _join([
+      pub.edition ? `${pub.edition} ed.` : '',
+      pub.editor  ? `${pub.editor} (${pub.editorRole || 'ed.'})` : '',
+      pub.publisher || pub.outlet || '',
+      pub.pubCity || '',
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
+
+  // ── Book Section / Chapter  [CMS 14.103] ─────────────────────────────────
+  if (ztype === 'bookSection' || pub.type === 'chapters') {
+    let html = '';
+    if (pub.outlet) html += `in <em>${pub.outlet}</em>`;
+    if (pub.chapterNum) html += `, ch. ${pub.chapterNum}`;
+    if (pub.editor)     html += `, ${pub.editor} (${pub.editorRole || 'ed.'})`;
+    if (pub.edition)    html += `, ${pub.edition} ed.`;
+    if (pub.publisher)  html += `, ${pub.publisher}`;
+    if (pub.pubCity)    html += `, ${pub.pubCity}`;
+    const t = _dateStr(pub);
+    if (t) html += `, ${t}`;
+    if (pub.pages) html += `, ${pub.pages}`;
+    if (pub.doi)   html += `. ${_doi(pub)}`;
+    return html;
+  }
+
+  // ── Case  [CMS 14.282] ───────────────────────────────────────────────────
+  if (ztype === 'case') {
+    // pub.reporter, pub.reporterVolume, pub.firstPage, pub.court
+    const parts = [];
+    if (pub.reporter)       parts.push(`${pub.reporterVolume || ''} ${pub.reporter} ${pub.firstPage || ''}`.trim());
+    if (pub.court)          parts.push(pub.court);
+    if (_dateStr(pub))      parts.push(_dateStr(pub));
+    return parts.join(', ');
+  }
+
+  // ── Conference Paper / Presentation  [CMS 14.217] ────────────────────────
+  if (ztype === 'conferencePaper' || ztype === 'presentation') {
+    const verb = ztype === 'presentation' ? 'Presented at' : 'Paper presented at';
+    return _join([
+      pub.outlet ? `${verb} ${pub.outlet}` : '',   // conference name in roman (CMS)
+      pub.pubCity || '',
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
+
+  // ── Dataset  [CMS 14.257] ────────────────────────────────────────────────
+  if (ztype === 'dataset') {
+    return _join([
+      pub.outlet ? `<em>${pub.outlet}</em>` : '',   // repository name italic
+      pub.version ? `Version ${pub.version}` : '',
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
+
+  // ── Dictionary Entry / Encyclopedia Article  [CMS 14.232] ────────────────
+  if (ztype === 'dictionaryEntry' || ztype === 'encyclopediaArticle') {
+    return _join([
+      pub.outlet ? `<em>${pub.outlet}</em>` : '',   // reference work title italic
+      pub.edition ? `${pub.edition} ed.` : '',
+      pub.publisher || '',
+      pub.pubCity || '',
+      _dateStr(pub)
+    ]);
+  }
+
+  // ── Document / Generic  [CMS 14.229] ─────────────────────────────────────
+  if (ztype === 'document') {
+    return _join([
+      pub.outlet || '',        // institution in roman
+      pub.pubCity || '',
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
+
+  // ── Email  [CMS 14.211] ──────────────────────────────────────────────────
+  if (ztype === 'email') {
+    // pub.recipient, pub.subject
+    const parts = [];
+    if (pub.recipient) parts.push(`to ${pub.recipient}`);
+    if (pub.subject)   parts.push(`"${pub.subject}"`);
+    if (_dateStr(pub)) parts.push(_dateStr(pub));
+    return parts.join(', ');
+  }
+
+  // ── Film  [CMS 14.261] ───────────────────────────────────────────────────
+  if (ztype === 'film') {
+    return _join([
+      pub.director ? `Directed by ${pub.director}` : '',
+      pub.outlet || pub.publisher || '',   // studio/distributor
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
+
+  // ── Forum Post  [CMS 14.208] ─────────────────────────────────────────────
+  if (ztype === 'forumPost') {
+    return _join([
+      pub.outlet || '',   // forum/platform name in roman
+      _dateStr(pub)
+    ]);
+  }
+
+  // ── Hearing  [CMS 14.302] ────────────────────────────────────────────────
+  if (ztype === 'hearing') {
+    return _join([
+      pub.committee ? `Hearing before ${pub.committee}` : '',
+      pub.legislativeBody || '',
+      pub.session ? `${pub.session} Session` : '',
+      _dateStr(pub)
+    ]);
+  }
+
+  // ── Instant Message  [CMS 14.212] ────────────────────────────────────────
+  if (ztype === 'instantMessage') {
+    return _join([
+      pub.recipient ? `to ${pub.recipient}` : '',
+      _dateStr(pub)
+    ]);
+  }
+
+  // ── Interview  [CMS 14.218] ──────────────────────────────────────────────
+  if (ztype === 'interview') {
+    // pub.interviewer, pub.interviewType ("personal interview", "telephone", etc.)
+    return _join([
+      pub.interviewer ? `Interview by ${pub.interviewer}` : (pub.outlet || 'Interview'),
+      pub.interviewType || '',
+      _dateStr(pub)
+    ]);
+  }
+
+  // ── Journal Article  [CMS 14.170] ────────────────────────────────────────
+  if (ztype === 'journalArticle' || pub.type === 'articles') {
+    const parts = [];
+    if (pub.outlet) parts.push(`<em>${pub.outlet}</em>`);
+
+    if (pub.forthcoming) {
+      const yr = pub.year && pub.year !== 'progress' ? pub.year : '';
+      parts.push('forthcoming' + (yr ? ' ' + yr : ''));
+    } else {
+      if (pub.vol)   parts.push(pub.issue ? `${pub.vol}(${pub.issue})` : String(pub.vol));
+      if (pub.pages) parts.push(pub.pages);
+      const t = _dateStr(pub);
+      if (t) parts.push(t);
+    }
+    const d = _doi(pub);
+    if (d) parts.push(d);
+    return parts.join(', ');
+  }
+
+  // ── Letter  [CMS 14.111] ─────────────────────────────────────────────────
+  if (ztype === 'letter') {
+    // pub.recipient, pub.archive, pub.archiveLocation (city)
+    return _join([
+      pub.recipient ? `to ${pub.recipient}` : '',
+      _dateStr(pub),
+      pub.archive || pub.outlet || '',          // collection/archive in roman
+      pub.archiveLocation || pub.pubCity || ''
+    ]);
+  }
+
+  // ── Magazine Article  [CMS 14.188] ───────────────────────────────────────
+  if (ztype === 'magazineArticle') {
+    return _join([
+      pub.outlet ? `<em>${pub.outlet}</em>` : '',   // magazine italic
+      _dateStr(pub),
+      pub.pages ? pub.pages : '',
+      _doi(pub)
+    ]);
+  }
+
+  // ── Manuscript  [CMS 14.224] ─────────────────────────────────────────────
+  if (ztype === 'manuscript') {
+    return _join([
+      'Unpublished manuscript',
+      pub.outlet || pub.institution || '',
+      pub.pubCity || '',
+      _dateStr(pub)
+    ]);
+  }
+
+  // ── Map  [CMS 14.237] ────────────────────────────────────────────────────
+  if (ztype === 'map') {
+    return _join([
+      pub.scale ? `Scale ${pub.scale}` : '',
+      pub.publisher || pub.outlet || '',
+      pub.pubCity || '',
+      _dateStr(pub)
+    ]);
+  }
+
+  // ── Newspaper Article  [CMS 14.191] ──────────────────────────────────────
+  if (ztype === 'newspaperArticle') {
+    return _join([
+      pub.outlet ? `<em>${pub.outlet}</em>` : '',   // newspaper italic
+      _dateStr(pub),
+      pub.section ? pub.section : '',
+      pub.edition ? pub.edition : '',
+      _doi(pub)
+    ]);
+  }
+
+  // ── Patent  [CMS 14.258] ─────────────────────────────────────────────────
+  if (ztype === 'patent') {
+    // pub.patentNumber, pub.filingDate, pub.issueDate
+    const parts = [];
+    if (pub.patentNumber) parts.push(`Patent No. ${pub.patentNumber}`);
+    if (pub.filingDate)   parts.push(`filed ${pub.filingDate}`);
+    const t = _dateStr(pub);
+    if (t) parts.push(`issued ${t}`);
+    return parts.join(', ');
+  }
+
+  // ── Podcast  [CMS 14.265] ────────────────────────────────────────────────
+  if (ztype === 'podcast') {
+    return _join([
+      pub.outlet ? `<em>${pub.outlet}</em>` : '',   // podcast title italic
+      pub.episodeNumber ? `Episode ${pub.episodeNumber}` : '',
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
+
+  // ── Preprint  [CMS 14.229 — treat like working paper] ────────────────────
+  if (ztype === 'preprint') {
+    const series = pub.seriesNum
+      ? `${pub.seriesName || pub.outlet || 'Preprint'} No. ${pub.seriesNum}`
+      : (pub.seriesName || pub.outlet || 'Preprint');
+    return _join([series, _dateStr(pub), _doi(pub)]);
+  }
+
+  // ── Radio Broadcast  [CMS 14.265] ────────────────────────────────────────
+  if (ztype === 'radioBroadcast') {
+    return _join([
+      pub.outlet ? `<em>${pub.outlet}</em>` : '',   // program title italic
+      pub.network || '',
+      _dateStr(pub)
+    ]);
+  }
+
+  // ── Report  [CMS 14.229] ─────────────────────────────────────────────────
+  // Series name and report number in roman (institutional publication)
+  if (ztype === 'report') {
+    const seriesStr = pub.seriesNum
+      ? `${pub.seriesName || pub.outlet || ''} No. ${pub.seriesNum}`
+      : (pub.seriesName || pub.outlet || '');
+    return _join([
+      seriesStr,                    // roman
+      pub.institution || '',
+      pub.pubCity || '',
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
+
+  // ── Software  [CMS 14.256] ───────────────────────────────────────────────
+  if (ztype === 'software') {
+    return _join([
+      pub.version ? `Version ${pub.version}` : '',
+      pub.publisher || pub.outlet || '',
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
+
+  // ── Standard  [CMS 14.258] ───────────────────────────────────────────────
+  if (ztype === 'standard') {
+    // pub.number, pub.organization
+    return _join([
+      pub.standardNumber ? `No. ${pub.standardNumber}` : '',
+      pub.organization || pub.outlet || '',
+      _dateStr(pub)
+    ]);
+  }
+
+  // ── Statute  [CMS 14.289] ────────────────────────────────────────────────
+  // pub.code, pub.codeVolume, pub.section
+  if (ztype === 'statute') {
+    const parts = [];
+    if (pub.code)        parts.push(pub.code);
+    if (pub.codeVolume && pub.section)
+      parts.push(`${pub.codeVolume} § ${pub.section}`);
+    if (_dateStr(pub)) parts.push(`(${_dateStr(pub)})`);
+    return parts.join(', ');
+  }
+
+  // ── Thesis / Dissertation  [CMS 14.224] ──────────────────────────────────
+  if (ztype === 'thesis') {
+    // pub.thesisType: "PhD dissertation" | "MA thesis" | etc.
+    return _join([
+      pub.thesisType || 'PhD dissertation',
+      pub.outlet || pub.institution || '',    // university in roman
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
+
+  // ── TV Broadcast  [CMS 14.265] ───────────────────────────────────────────
+  if (ztype === 'tvBroadcast') {
+    return _join([
+      pub.outlet ? `<em>${pub.outlet}</em>` : '',   // series italic
+      pub.season  ? `Season ${pub.season}`  : '',
+      pub.episodeNumber ? `Ep. ${pub.episodeNumber}` : '',
+      pub.network || '',
+      _dateStr(pub)
+    ]);
+  }
+
+  // ── Video Recording  [CMS 14.263] ────────────────────────────────────────
+  if (ztype === 'videoRecording') {
+    return _join([
+      pub.director ? `Directed by ${pub.director}` : '',
+      pub.publisher || pub.outlet || '',
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
+
+  // ── Web Page  [CMS 14.207] ───────────────────────────────────────────────
+  if (ztype === 'webpage') {
+    return _join([
+      pub.outlet ? `<em>${pub.outlet}</em>` : '',   // website name italic
+      _dateStr(pub),
+      pub.accessDate ? `Accessed ${pub.accessDate}` : ''
+    ]);
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Internal site types (no zoteroType set) — kept for backward compatibility
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ── Working paper (internal)  [CMS 14.229] ────────────────────────────────
+  if (pub.type === 'working') {
+    const parts = [];
+    if (pub.underReview && pub.seriesName) {
+      // Under review: journal name italic
+      parts.push(`Submitted to <em>${pub.seriesName.replace(/^Submitted to /i, '')}</em>`);
+    } else {
+      const series = pub.seriesNum
+        ? `${pub.seriesName || pub.outlet || ''} No. ${pub.seriesNum}`
+        : (pub.seriesName || pub.outlet || '');
+      if (series) parts.push(series);   // roman
+    }
+    const t = _dateStr(pub);
+    if (t) parts.push(t);
+    const d = _doi(pub);
+    if (d) parts.push(d);
+    return parts.join(', ');
+  }
+
+  // ── Op-Ed / Commentary (internal)  [CMS 14.191 / 14.188] ─────────────────
+  if (pub.type === 'opeds') {
+    return _join([
+      pub.outlet ? `<em>${pub.outlet}</em>` : '',   // periodical italic
+      _dateStr(pub),
+      _doi(pub)
+    ]);
+  }
+
+  // ── Policy brief / Other / Work in progress (internal)  [CMS 14.229] ─────
+  return _join([
+    pub.outlet || '',   // institutional name in roman
+    _dateStr(pub),
+    _doi(pub)
+  ]);
 }
 
 
@@ -196,7 +652,7 @@ function renderPublicationsWithPagination() {
         <div class="publication">
           <div class="pub-details">
             <div class="pub-title">
-              <a href="#" class="pub-detail-link" data-pub-idx="${publicationsData.indexOf(pub)}">${pub.title}</a>
+              <a href="research_main/${titleToSlug(pub.title)}.html" class="pub-detail-link" data-pub-idx="${publicationsData.indexOf(pub)}">${pub.title}</a>
             </div>
             ${formatAuthorsChicagoMeta(pub.authors) ? `<div class="pub-meta">${formatAuthorsChicagoMeta(pub.authors)}</div>` : ''}
             <div class="pub-outlet">${formatPubInfo(pub)}</div>
@@ -228,7 +684,7 @@ function renderPublicationsWithPagination() {
               ${pub.resources && pub.resources.length ? `
               <div class="pub-resources">
                 ${pub.resources.map(r => r.url
-                  ? `<a class="resource-btn" href="${r.url}" target="_blank"><i class="fas ${r.icon}"></i> ${r.label}</a>`
+                  ? `<a class="resource-btn" href="${r.url}" target="_blank" ${pub.downloads !== undefined ? `data-track-dl data-pub-slug="${slugify(pub.title)}"` : ''}><i class="fas ${r.icon}"></i> ${r.label}</a>`
                   : `<span class="resource-btn resource-btn--inactive"><i class="fas ${r.icon}"></i> ${r.label}</span>`
                 ).join('')}
               </div>` : ''}
@@ -242,10 +698,10 @@ function renderPublicationsWithPagination() {
 
             </div>
           </div>
-          ${pub.downloads ? `
+          ${pub.downloads !== undefined ? `
           <div class="right-stats">
-            <div class="download-circle">
-              <div class="dl-num">${pub.downloads}</div>
+            <div class="download-circle" id="dlcircle-${slugify(pub.title)}">
+              <div class="dl-num" id="dlnum-${slugify(pub.title)}">–</div>
               <div class="dl-label">Downloads</div>
             </div>
           </div>` : ''}
@@ -262,6 +718,8 @@ function renderPublicationsWithPagination() {
     totalItems === 0 ? '0 results' : `${start} - ${end} out of ${totalItems} results`;
 
   renderPaginationControls(totalPages);
+  // Refresh live download counts for newly rendered circles
+  if (typeof loadAllDownloadCounts === 'function') loadAllDownloadCounts();
 }
 
 function renderPaginationControls(totalPages) {
@@ -630,6 +1088,7 @@ function showList() {
   document.getElementById('pubListView').style.display  = 'block';
   window.scrollTo(0, 0);
   document.title = 'Kosal Nith · Research output';
+  // Strip ?pub= query param, keep base path
   history.pushState({ view: 'list' }, '', window.location.pathname);
   // Restore default meta
   const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
@@ -650,7 +1109,7 @@ function showDetail(idx) {
   window.scrollTo(0, 0);
   document.title = pub.title + ' · Kosal Nith';
 
-  // Push ?pub=slug to URL
+  // Push ?pub=slug to URL (works on both file:// and https://)
   const slug    = titleToSlug(pub.title);
   const newUrl  = `${window.location.pathname}?pub=${slug}`;
   history.pushState({ view: 'detail', idx }, '', newUrl);
@@ -1103,6 +1562,82 @@ function initStickySidebar() {
 }
 
 
+// ===== Download counting via CountAPI =====
+// Namespace keyed to the site so counts are isolated per publication.
+const DL_NAMESPACE = 'kosalnith-research';
+
+/**
+ * Convert a publication title into a short URL-safe slug used as the
+ * CountAPI key (max 60 chars, lowercase, hyphens only).
+ */
+function slugify(title) {
+  return title.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 60);
+}
+
+/**
+ * Fetch the current hit count for a slug from CountAPI.
+ * Falls back silently on network error.
+ */
+async function fetchDownloadCount(slug) {
+  try {
+    const res = await fetch(`https://api.countapi.xyz/get/${DL_NAMESPACE}/${slug}`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    return (data && typeof data.value === 'number') ? data.value : null;
+  } catch { return null; }
+}
+
+/**
+ * Increment the hit counter for a slug and return the new value.
+ * On first ever hit, CountAPI auto-creates the key starting at 1.
+ */
+async function incrementDownloadCount(slug) {
+  try {
+    const res = await fetch(`https://api.countapi.xyz/hit/${DL_NAMESPACE}/${slug}`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    return (data && typeof data.value === 'number') ? data.value : null;
+  } catch { return null; }
+}
+
+/**
+ * Load live counts for every visible download circle and display them.
+ * All papers start at 0. CountAPI auto-creates the key on first hit.
+ */
+async function loadAllDownloadCounts() {
+  const circles = document.querySelectorAll('.download-circle[id^="dlcircle-"]');
+  await Promise.all(Array.from(circles).map(async (circle) => {
+    const slug = circle.id.replace('dlcircle-', '');
+    const numEl = document.getElementById('dlnum-' + slug);
+    if (!numEl) return;
+    const count = await fetchDownloadCount(slug);
+    // null means key doesn't exist yet (0 downloads), show 0
+    numEl.textContent = (count !== null) ? count : 0;
+  }));
+}
+
+/**
+ * Wire up click handlers on resource buttons that have data-track-dl.
+ * Each click increments the CountAPI counter and updates the circle live.
+ */
+function initDownloadTracking() {
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-track-dl]');
+    if (!btn) return;
+    const slug = btn.getAttribute('data-pub-slug');
+    if (!slug) return;
+    // Fire-and-forget; update display if circle exists
+    const newCount = await incrementDownloadCount(slug);
+    if (newCount !== null) {
+      const numEl = document.getElementById('dlnum-' + slug);
+      if (numEl) numEl.textContent = newCount;
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSdgList();
   initYearSlider();
@@ -1110,10 +1645,11 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPublicationsWithPagination();
   initEventListeners();
   initStickySidebar();
+  initDownloadTracking();
+  loadAllDownloadCounts();
 
-  // On load: check ?pub=slug in URL and open that publication directly
-  const params = new URLSearchParams(window.location.search);
-  const pubSlug = params.get('pub');
+  // On load: read ?pub=slug from query string and open that publication
+  const pubSlug = new URLSearchParams(window.location.search).get('pub');
   if (pubSlug) {
     const idx = findIdxBySlug(pubSlug);
     if (idx !== -1) showDetail(idx);

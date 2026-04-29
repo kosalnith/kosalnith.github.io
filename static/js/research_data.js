@@ -10,48 +10,48 @@ const allPublicationTypes = [
   { key: "book_chapter",            label: "Book chapter",                           count: 2,  dataFilter: "chapters"  },
   { key: "book",                    label: "Book",                                   count: 0,  dataFilter: null        },
   { key: "report",                  label: "Report",                                 count: 0,  dataFilter: null        },
-  { key: "conf_abstract_conf",      label: "Conference abstract for conference",     count: 0,  dataFilter: null        },
-  { key: "conf_abstract_proc",      label: "Conference abstract in proceeding",      count: 0,  dataFilter: null        },
-  { key: "phd_thesis",              label: "PhD thesis",                             count: 0,  dataFilter: null        },
-  { key: "conf_abstract_journal",   label: "Conference abstract in journal",         count: 0,  dataFilter: null        },
-  { key: "paper_no_publisher",      label: "Paper without publisher/journal",        count: 0,  dataFilter: null        },
-  { key: "poster",                  label: "Poster",                                 count: 0,  dataFilter: null        },
+  //{ key: "conf_abstract_conf",      label: "Conference abstract for conference",     count: 0,  dataFilter: null        },
+  //{ key: "conf_abstract_proc",      label: "Conference abstract in proceeding",      count: 0,  dataFilter: null        },
+  //{ key: "phd_thesis",              label: "PhD thesis",                             count: 0,  dataFilter: null        },
+  //{ key: "conf_abstract_journal",   label: "Conference abstract in journal",         count: 0,  dataFilter: null        },
+  //{ key: "paper_no_publisher",      label: "Paper without publisher/journal",        count: 0,  dataFilter: null        },
+  //{ key: "poster",                  label: "Poster",                                 count: 0,  dataFilter: null        },
   { key: "review_article",          label: "Review article",                         count: 0,  dataFilter: null        },
   { key: "working_paper",           label: "Working paper",                          count: 4,  dataFilter: "working"   },
-  { key: "conf_article_journal",    label: "Conference article in journal",          count: 0,  dataFilter: null        },
-  { key: "anthology",               label: "Anthology",                              count: 0,  dataFilter: null        },
-  { key: "editorial",               label: "Editorial",                              count: 0,  dataFilter: null        },
-  { key: "literature_review",       label: "Literature review",                      count: 0,  dataFilter: null        },
-  { key: "comment_debate",          label: "Comment/debate",                         count: 0,  dataFilter: null        },
-  { key: "net_publication",         label: "Net publication - Internet publication", count: 0,  dataFilter: null        },
-  { key: "other_contribution",      label: "Other contribution",                     count: 0,  dataFilter: null        },
-  { key: "contrib_newspaper_review",  label: "Contribution to newspaper - Review",          count: 0, dataFilter: null },
-  { key: "contrib_newspaper_feature", label: "Contribution to newspaper - Feature article", count: 0, dataFilter: null },
-  { key: "contrib_newspaper_article", label: "Contribution to newspaper - Newspaper article", count: 0, dataFilter: null },
-  { key: "preprint",                label: "Preprint",                               count: 0,  dataFilter: null        },
-  { key: "encyclopedia_chapter",    label: "Encyclopedia chapter",                   count: 0,  dataFilter: null        },
-  { key: "report_chapter",          label: "Report chapter",                         count: 0,  dataFilter: null        },
-  { key: "preface_intro",           label: "Preface/Introduction/postscript",        count: 0,  dataFilter: null        },
-  { key: "letter",                  label: "Letter",                                 count: 0,  dataFilter: null        },
-  { key: "sound_visual",            label: "Sound/Visual production (digital)",      count: 0,  dataFilter: null        },
-  { key: "patent",                  label: "Patent",                                 count: 0,  dataFilter: null        },
-  { key: "contrib_newspaper_comment", label: "Contribution to newspaper - Comment/debate", count: 0, dataFilter: null },
-  { key: "compendium_notes",        label: "Compendium/lecture notes",               count: 0,  dataFilter: null        },
-  { key: "memorandum",              label: "Memorandum",                             count: 0,  dataFilter: null        },
-  { key: "doctoral_thesis",         label: "Doctoral thesis",                        count: 0,  dataFilter: null        },
-  { key: "case_report",             label: "Case Report",                            count: 0,  dataFilter: null        },
-  { key: "computer_programme",      label: "Computer programme",                     count: 0,  dataFilter: null        },
-  { key: "comment",                 label: "Comment",                                count: 0,  dataFilter: null        },
-  { key: "memorandum_contribution", label: "Memorandum contribution",                count: 0,  dataFilter: null        },
-  { key: "2d_3d",                   label: "2D/3D (Physical product)",                count: 0,  dataFilter: null        },
-  { key: "interactive_production",  label: "Interactive production",                 count: 0,  dataFilter: null        },
-  { key: "qanda_hearing",           label: "Question & Answer/hearing",              count: 0,  dataFilter: null        },
-  { key: "compendium_chapter",      label: "Compendium/lecture notes chapter",       count: 0,  dataFilter: null        },
-  { key: "qanda_contribution",      label: "Question & Answer/hearing contribution", count: 0,  dataFilter: null        },
+  //{ key: "conf_article_journal",    label: "Conference article in journal",          count: 0,  dataFilter: null        },
+  //{ key: "anthology",               label: "Anthology",                              count: 0,  dataFilter: null        },
+  //{ key: "editorial",               label: "Editorial",                              count: 0,  dataFilter: null        },
+  //{ key: "literature_review",       label: "Literature review",                      count: 0,  dataFilter: null        },
+  //{ key: "comment_debate",          label: "Comment/debate",                         count: 0,  dataFilter: null        },
+  //{ key: "net_publication",         label: "Net publication - Internet publication", count: 0,  dataFilter: null        },
+  //{ key: "other_contribution",      label: "Other contribution",                     count: 0,  dataFilter: null        },
+  //{ key: "contrib_newspaper_review",  label: "Contribution to newspaper - Review",          count: 0, dataFilter: null },
+  //{ key: "contrib_newspaper_feature", label: "Contribution to newspaper - Feature article", count: 0, dataFilter: null },
+  //{ key: "contrib_newspaper_article", label: "Contribution to newspaper - Newspaper article", count: 0, dataFilter: null },
+  //{ key: "preprint",                label: "Preprint",                               count: 0,  dataFilter: null        },
+  //{ key: "encyclopedia_chapter",    label: "Encyclopedia chapter",                   count: 0,  dataFilter: null        },
+  //{ key: "report_chapter",          label: "Report chapter",                         count: 0,  dataFilter: null        },
+  //{ key: "preface_intro",           label: "Preface/Introduction/postscript",        count: 0,  dataFilter: null        },
+  //{ key: "letter",                  label: "Letter",                                 count: 0,  dataFilter: null        },
+  //{ key: "sound_visual",            label: "Sound/Visual production (digital)",      count: 0,  dataFilter: null        },
+  //{ key: "patent",                  label: "Patent",                                 count: 0,  dataFilter: null        },
+  //{ key: "contrib_newspaper_comment", label: "Contribution to newspaper - Comment/debate", count: 0, dataFilter: null },
+  //{ key: "compendium_notes",        label: "Compendium/lecture notes",               count: 0,  dataFilter: null        },
+  //{ key: "memorandum",              label: "Memorandum",                             count: 0,  dataFilter: null        },
+  //{ key: "doctoral_thesis",         label: "Doctoral thesis",                        count: 0,  dataFilter: null        },
+  //{ key: "case_report",             label: "Case Report",                            count: 0,  dataFilter: null        },
+  //{ key: "computer_programme",      label: "Computer programme",                     count: 0,  dataFilter: null        },
+  //{ key: "comment",                 label: "Comment",                                count: 0,  dataFilter: null        },
+  //{ key: "memorandum_contribution", label: "Memorandum contribution",                count: 0,  dataFilter: null        },
+  //{ key: "2d_3d",                   label: "2D/3D (Physical product)",                count: 0,  dataFilter: null        },
+  //{ key: "interactive_production",  label: "Interactive production",                 count: 0,  dataFilter: null        },
+  //{ key: "qanda_hearing",           label: "Question & Answer/hearing",              count: 0,  dataFilter: null        },
+  //{ key: "compendium_chapter",      label: "Compendium/lecture notes chapter",       count: 0,  dataFilter: null        },
+  //{ key: "qanda_contribution",      label: "Question & Answer/hearing contribution", count: 0,  dataFilter: null        },
   { key: "article",                 label: "Article",                                count: 0,  dataFilter: null        },
-  { key: "doctoral_thesis_dup",     label: "Doctoral Thesis",                        count: 0,  dataFilter: null        },
-  { key: "dataset",                 label: "Dataset",                                count: 0,  dataFilter: null        },
-  { key: "masters_thesis",          label: "Master's Thesis",                        count: 0,  dataFilter: null        }
+  //{ key: "doctoral_thesis_dup",     label: "Doctoral Thesis",                        count: 0,  dataFilter: null        },
+  //{ key: "dataset",                 label: "Dataset",                                count: 0,  dataFilter: null        },
+  //{ key: "masters_thesis",          label: "Master's Thesis",                        count: 0,  dataFilter: null        }
 ];
 
 allPublicationTypes.push({ key: "op_ed",            label: "Op-Ed / Commentary", count: 15, dataFilter: "opeds"    });
@@ -150,7 +150,7 @@ const publicationsData = [
     ogImage: "https://kosalnith.github.io/static/img/og/ascending-the-development-ladder-in-cambodia-progressing-towards-higher-income-s.png",
     authors: "Kosal Nith, Sovannroeun Samreth & Sopheak Song", date: "7 Dec 2023",
     outlet: "The Cambodia Outlook Conference",
-    type: "opeds", year: "2024", oa: false, lang: "en",
+    type: "opeds", year: "2023", oa: false, lang: "en",
     breadcrumb: "Op-Ed / Commentary › Conference commentary",
     keywords: ["Economic Development","Middle-Income Status","Growth","Cambodia"],
     kwStrength: ["full","full","half","none"],
@@ -257,12 +257,14 @@ const publicationsData = [
 
   { title: "Determinants of Informal Borrowing: Evidence from Households in 11 Rural Villages in Cambodia",
     ogImage: "https://kosalnith.github.io/static/img/og/determinants-of-informal-borrowing-evidence-from-households-in-11-rural-villages.png",
-    authors: "Kosal Nith & Sovannroeun Samreth", date: "2025 (forthcoming)",
+    authors: "Kosal Nith & Sovannroeun Samreth", date: "2026",
     outlet: "Journal of International Development Studies",
     month: "forthcoming",
-    type: "articles", year: "2025", oa: false, lang: "en", forthcoming: true,
+    // Citation fields (Chicago author-date style for journal)
+    // vol, issue, pages left blank until assigned; forthcoming: true triggers special rendering
+    type: "articles", year: "2026", oa: false, lang: "en", forthcoming: true,
     breadcrumb: "Journal article › Research › peer-review",
-    abstract: "Informal borrowing remains an important source of financing for rural Cambodian households, exposing them to exploitative interest rates. Using survey data from 1,183 households in 11 villages, we analyze how financial literacy, social capital, and household characteristics shape borrowing behavior. Higher financial literacy is significantly correlated with a lower likelihood of relying on informal loans. Finance-related group membership reduces informal borrowing; other community group membership does not. Household income and residential land ownership reduce reliance on informal borrowing.",
+    abstract: "Informal borrowing remains an important source of financing for rural Cambodian households, exposing them to exploitative interest rates. This study examines the determinants of informal credit reliance using survey data from 1,183 households in 11 villages. We analyze how financial literacy, measured based on understanding of basic financial and economic concepts, social capital (based on community-based group participation), and household characteristics shape borrowing behavior. Higher financial literacy is significantly correlated with a lower likelihood of relying on informal loans. Finance- or credit-related group membership reduces informal borrowing; other community group membership does not. Household income and residential land ownership reduce reliance on informal borrowing. Household head’s age has nonlinear effects. Reliance on informal credit initially declines with age, reflecting greater experience. Increases observed at older ages may be related to changing economic circumstances. Combining financial literacy enhancement, income improvement, and finance-related community networks can promote safe and sustainable financial inclusion in Cambodia.",
     keywords: ["Informal Borrowing","Financial Literacy","Social Capital","Rural Households","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
     sdgs: ["SDG 1 - No Poverty","SDG 8 - Decent Work and Economic Growth","SDG 10 - Reduced Inequalities"] },
@@ -273,19 +275,35 @@ const publicationsData = [
     ogImage: "https://kosalnith.github.io/static/img/og/cambodian-cassava-an-analysis-on-production-productivity-and-gender-impacts.png",
     authors: "Kosal Nith & Yuki Kanayama", date: "Oct 2025",
     outlet: "Navigating Through Crisis: Socio-Economic Impact of COVID-19 in the Mekong Delta Countries",
-    publisher: "Springer", month: "October", year_pub: "2025",
+    // Chicago book-chapter fields
+    chapterNum: "3",                    // chapter number (optional)
+    editor: "Sovannroeun Samreth",      // book editor(s)
+    editorRole: "ed.",                  // "ed." or "eds."
+    publisher: "Springer",
+    pubCity: "Singapore",
+    month: "October", year_pub: "2025",
     type: "chapters", year: "2026", oa: true, lang: "en",
     breadcrumb: "Book chapter › Research › peer-review",
-    abstract: "Using data from 301 cassava-farming households across five major cultivation provinces, this study examines the pandemic's impact on production, labor productivity, and labor participation. Between 2019 and 2021, average production costs rose by 9.3%, while income declined by 8.5%. Despite expanding cultivated land and increasing hired labor, overall productivity decreased.",
+    abstract: "Although the agriculture sector in Cambodia was initially considered less vulnerable to the COVID-19 pandemic, cassava farmers experienced severe economic hardship due to the increase in input prices, fluctuations in output prices, and challenges in infrastructure development. However, these aggregate impacts hide the disproportionate repercussions faced by cash crop farmers, who were more severely affected by public health restrictions and market disruptions. Using data from 301 cassava-farming households across five major cultivation provinces, this study examines the pandemic’s impact on production, labor productivity, and labor participation in Cambodia. Although the price of fresh cassava slightly increased and the price of cassava chips remained stable, farmers lost income due to the increase in input prices and the fall in productivity. Between 2019 and 2021, average production costs rose by 9.3%, while income declined by 8.5%. Despite expanding cultivated land and increasing hired labor, overall productivity decreased. These findings underscore the vulnerability of Cambodia’s cassava sector to external shocks and highlight the need for targeted policy interventions. The paper concludes with actionable recommendations to enhance value addition, strengthen domestic markets for cassava products, and support a resilient post-pandemic recovery.",
     keywords: ["Cassava","COVID-19","Agricultural Productivity","Gender","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
     sdgs: ["SDG 2 - Zero Hunger","SDG 5 - Gender Equality","SDG 8 - Decent Work and Economic Growth"],
-    link: "https://link.springer.com/chapter/10.1007/978-981-95-1637-7_3" },
-
+    link: "https://link.springer.com/chapter/10.1007/978-981-95-1637-7_3",
+   resources: [
+      { label: "Paper", url: "research/papers/camCassava_2026.pdf", icon: "fa-file-pdf" },
+      { label: "Slides", url: "research/slides/Kosal_SARED23.pdf", icon: "fa-person-chalkboard" }
+    ] },
   { title: "Food Science in Cambodia",
     ogImage: "https://kosalnith.github.io/static/img/og/food-science-in-cambodia.png",
     authors: "Kosal Nith", date: "2021",
-    outlet: "Micro-Policy Intervention: Contemporary Policy Discussion in Cambodia, Future Forum, Ch. 13",
+    outlet: "Micro-Policy Intervention: Contemporary Policy Discussion in Cambodia",
+    // Chicago book-chapter fields
+    chapterNum: "13",
+    editor: "Future Forum",
+    editorRole: "ed.",
+    publisher: "Future Forum",
+    pubCity: "Phnom Penh",
+    year_pub: "2021",
     type: "chapters", year: "2021", oa: true, lang: "en",
     breadcrumb: "Book chapter › Book",
     abstract: "This paper examines how the development of food science, the role of R&D in the promotion, and the development of the food industry could positively impact the agricultural sector in Cambodia.",
@@ -294,9 +312,7 @@ const publicationsData = [
     sdgs: ["SDG 2 - Zero Hunger","SDG 9 - Industry, Innovation, and Infrastructure","SDG 12 - Responsible Consumption and Production"],
     link: "https://www.futureforum.asia/policy-briefs-and-snapshots/food-science-in-cambodia",
     resources: [
-      { label: "Paper", url: "https://www.futureforum.asia/policy-briefs-and-snapshots/food-science-in-cambodia", icon: "fa-file-pdf" },
-      { label: "Slides", url: "", icon: "fa-person-chalkboard" },
-      { label: "Thread", url: "", icon: "fa-brands fa-x-twitter" }
+      { label: "Paper", url: "research/papers/CamFood_2019.pdf", icon: "fa-file-pdf" }
     ] },
 
   // ══ Working Papers (4) ═══════════════════════════════════════
@@ -304,20 +320,26 @@ const publicationsData = [
     ogImage: "https://kosalnith.github.io/static/img/og/does-social-capital-strengthen-the-stability-of-household-income-evidence-from-c.png",
     authors: "Kosal Nith, Sovannroeun Samreth & Dina Chhorn",
     date: "Aug 2025", outlet: "Working paper",
-    abstract: "The measurement of Special Economic Zones (SEZ) spatial impacts remains a persistent challenge for practitioners in understudied regions where conventional data collection methods prove cost-prohibitive. This study advances a replicable geospatial methodology leveraging Google's Open Buildings 2.5D Temporal Dataset to analyze development patterns in data-scarce contexts. Through examination of 11 SEZs in Cambodia's Svay Rieng province (2016-2023), we reveal two critical findings that challenge prevailing assumptions: first, SEZ-induced spillovers extend substantially beyond the conventionally assumed 1-2 kilometer impact radius; second, development follows a distinctive dual-ring spatial pattern, with outer zones (2-5km) demonstrating near-equivalent building density (21.27/km²) to immediate perimeter areas. Our approach provides three key contributions to the literature and practice: (1) a transferable framework for SEZ impact assessment in understudied regions, (2) empirical evidence challenging linear distance-decay models of agglomeration effects, and (3) demonstration of how accessible satellite-derived data can overcome traditional barriers to evidence-based planning. The methodology's versatility extends beyond SEZ analysis, offering practitioners an operational toolkit for growth monitoring, infrastructure impact assessment, and cross-border development analysis across ASEAN's diverse development contexts. By transforming publicly available building data into actionable spatial intelligence, this approach significantly enhances planning capacity in regions where ground-truth data remains systematically unavailable.",
+    // Chicago working paper fields: seriesName + number (if any)
+    seriesName: "Working Paper",
+    month: "August", year_pub: "2025",
+    abstract: "",
     type: "working", year: "2025", oa: false, lang: "en",
     breadcrumb: "Working paper",
     keywords: ["Social Capital","Household Income","Income Stability","Cambodia"],
     kwStrength: ["full","full","full","none"],
     sdgs: ["SDG 1 - No Poverty","SDG 10 - Reduced Inequalities","SDG 8 - Decent Work and Economic Growth"],
     resources: [
-      { label: "Slides", url: "", icon: "fa-person-chalkboard" }
+      { label: "Slides", url: "research/slides/SC_slides.pdf", icon: "fa-person-chalkboard" }
     ] },
 
   { title: "Measuring SEZ Spillovers in Data-Scarce Regions: Evidence from Cambodia's Open Building Data",
     ogImage: "https://kosalnith.github.io/static/img/og/measuring-sez-spillovers-in-data-scarce-regions-evidence-from-cambodias-open-bui.png",
     authors: "Kosal Nith, Daniel Yonto, Yudo Angorro & Vuthoun Khiev",
     date: "Jun 2025", outlet: "Submitted to South East Asia Research",
+    // Chicago: under review — show journal name in roman (not yet accepted)
+    seriesName: "Submitted to South East Asia Research",
+    month: "June", year_pub: "2025",
     type: "working", year: "2025", oa: false, lang: "en", underReview: true,
     breadcrumb: "Working paper",
     abstract: "The measurement of Special Economic Zones (SEZ) spatial impacts remains a persistent challenge for practitioners in understudied regions where conventional data collection methods prove cost-prohibitive. This study advances a replicable geospatial methodology leveraging Google's Open Buildings 2.5D Temporal Dataset to analyze development patterns in data-scarce contexts. Through examination of 11 SEZs in Cambodia's Svay Rieng province (2016-2023), we reveal two critical findings that challenge prevailing assumptions: first, SEZ-induced spillovers extend substantially beyond the conventionally assumed 1-2 kilometer impact radius; second, development follows a distinctive dual-ring spatial pattern, with outer zones (2-5km) demonstrating near-equivalent building density (21.27/km²) to immediate perimeter areas. Our approach provides three key contributions to the literature and practice: (1) a transferable framework for SEZ impact assessment in understudied regions, (2) empirical evidence challenging linear distance-decay models of agglomeration effects, and (3) demonstration of how accessible satellite-derived data can overcome traditional barriers to evidence-based planning. The methodology's versatility extends beyond SEZ analysis, offering practitioners an operational toolkit for growth monitoring, infrastructure impact assessment, and cross-border development analysis across ASEAN's diverse development contexts. By transforming publicly available building data into actionable spatial intelligence, this approach significantly enhances planning capacity in regions where ground-truth data remains systematically unavailable.",
@@ -329,29 +351,36 @@ const publicationsData = [
     ogImage: "https://kosalnith.github.io/static/img/og/20-years-of-fdi-in-cambodia-towards-upper-middle-income-status-and-beyond.png",
     authors: "Kosal Nith, Simona Iammarino & Sumontheany Muth",
     date: "May 2024", outlet: "CDRI Working Paper 149",
+    // Chicago working paper fields
+    seriesName: "CDRI Working Paper",
+    seriesNum: "149",
+    month: "May", year_pub: "2024",
     type: "working", year: "2024", oa: true, lang: "en",
     breadcrumb: "Working paper",
-    abstract: "Analysing Cambodia's Greenfield FDI inflows and outflows over 20 years (2003–2022) using fDiMarkets data. Key attracting sectors include real estate, financial services, and renewable energy. Most FDI is concentrated in the capital. Cambodia's outward FDI began in 2008, mainly targeting ASEAN countries.",
+    abstract: "This study investigates Cambodia’s progress and potential in this regard by analysing its position and trajectory relative to Greenfield Foreign Direct Investment (FDI) inflows and outflows – where foreign firms establish new operations in Cambodia and Cambodian investors set up businesses abroad. This study also provides preliminary insights on Cambodia's integration into Global and Regional Value Chains (GVCs), always using FDI as a proxy, considering sectoral, functional, and geographical trends and comparing them with those of its neighbouring countries – Lao People’s Democratic Republic and Vietnam – over the 20 years between 2003 and 2022. The research employs a desk review, SWOT analysis, and descriptive statistics by using academic literature, policy documents, stakeholder policy dialogues, and the fDiMarkets database by Financial Times. The analysis shows that FDI has been instrumental in reshaping Cambodia’s economic structure, significantly contributing to economic development and job creation. Key sectors attracting FDI include real estate, financial services, and alternative/renewable energy, while textiles, real estate, and consumer products are notable for generating employment opportunities. However, most FDI projects are concentrated in the capital and coastal areas, and have focused on low-tech manufacturing, which offer limited opportunities for spillovers and industrial upgrading. Cambodia’s outward FDI began in 2008, mainly targeting ASEAN countries. This paper highlights that Cambodia has developed a robust policy framework to attract and re-orient inward FDI, including a provision of various incentives for Qualified Investment Projects. Recent FDI inflow trends indicate growing interest in sectors such as alternative and renewable energy, rubber, automotive OEM, leisure and entertainment, food, tobacco, beverages, and paper, printing, and packaging industries. These sectors could be pivotal for Cambodia’s future growth.",
     keywords: ["Foreign Direct Investment","Greenfield FDI","Global Value Chains","Economic Development","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
     sdgs: ["SDG 8 - Decent Work and Economic Growth","SDG 9 - Industry, Innovation, and Infrastructure","SDG 17 - Partnerships for the Goals"],
-    downloads: 43,
+    downloads: 0,
     resources: [
-      { label: "Paper", url: "https://www.cdri.org.kh/webdata/doc/2024/wp149e.pdf", icon: "fa-file-pdf" },
-      { label: "Slides", url: "", icon: "fa-person-chalkboard" },
-      { label: "Thread", url: "", icon: "fa-brands fa-x-twitter" }
+      { label: "Paper", url: "research/papers/20Y_FDI_2024.pdf", icon: "fa-file-pdf" },
+      { label: "Slides", url: "research/slides/FDICam_Slides_28FMM.pdf", icon: "fa-person-chalkboard" },
+      { label: "Thread", url: "https://x.com/KosalNith/status/1851881716870156789?s=20", icon: "fa-brands fa-x-twitter" }
     ] },
 
   { title: "Monetary Policy and Household Income Distribution: An Empirical Analysis from Cambodia",
     ogImage: "https://kosalnith.github.io/static/img/og/monetary-policy-and-household-income-distribution-an-empirical-analysis-from-cam.png",
     authors: "Kosal Nith", date: "Apr 2022", outlet: "Future Forum",
+    // Chicago working paper fields
+    seriesName: "Future Forum Working Paper",
+    month: "April", year_pub: "2022",
     type: "working", year: "2022", oa: false, lang: "en",
     breadcrumb: "Working paper",
-    abstract: "Using a Structural VAR model, this paper finds that monetary policy shocks via exchange rate have positive consequences on inflation, real output, and unemployment. Cross-sectional data 2014–2020 shows earning heterogeneity, Fisher, and interest rate exposure channels amplify monetary policy effects. Household consumption and liability inequality rose while income and asset inequality fell over 7 years.",
+    abstract: "This paper investigates to estimate the distributional effects of monetary policy shocks on macroeconomic aggregates and aggregate consumption. An earning heterogeneity channel, a Fisher channel and an interest rate exposure channel were applied as transmission channels affect aggregate spending when households have different average propensities of consume. Through the Structural VAR model, I find that monetary policy shock pursuant to the exchange rate has positive consequences on inflation, real output and the unemployment rate. Simultaneously, sufficient statistics from Cambodian cross-sectional data in the time period 2014–2020 suggests that all three channels are likely to amplify the effects of monetary policy. Furthermore, I discover that the increase in inequality of household consumption and liabilities over the past 7 years, while decreasing household income and assets inequality over the same period.",
     keywords: ["Monetary Policy","Income Distribution","Structural VAR","Inequality","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
     sdgs: ["SDG 10 - Reduced Inequalities","SDG 1 - No Poverty","SDG 8 - Decent Work and Economic Growth"],
-    downloads: 28,
+    downloads: 0,
     resources: [
       { label: "Paper", url: "", icon: "fa-file-pdf" },
       { label: "Online Appendix", url: "", icon: "fa-file-lines" },
@@ -366,26 +395,29 @@ const publicationsData = [
     date: "Nov 2025", outlet: "Cambodia Development Resource Institute",
     type: "other", year: "2025", oa: true, lang: "en",
     breadcrumb: "Other publication › Research report",
-    abstract: "Based on data from 14,820 establishments in Khan Meanchey, Phnom Penh, this report examines MSME market dynamics and resilience. Despite a strong post-pandemic recovery in 2023, early signs of slowdown emerged in 2024. The high business turnover — 1,790 openings versus 825 closures — reflects a survivalist approach to entrepreneurship. Most MSMEs remain informal and micro-scale.",
+    abstract: "This report examines the market dynamics and resilience of micro, small, and medium enterprises (MSMEs) in Khan Meanchey, Phnom Penh, based on data from 14,820 establishments. MSMEs are deeply embedded in the urban economy, with nearly every household engaged in business activity. Despite a strong post-pandemic recovery in 2023, early signs of slowdown emerged in 2024 due to inflation, digital disruption, and rent insecurity. The high business turnover—1,790 openings versus 825 closures—reflects a survivalist approach to entrepreneurship rather than scalable growth. Most MSMEs remain informal and micro-scale, which limits their access to credit and formal support. Sectoral analysis reveals a concentration in low-productivity sectors, such as retail and food services, characterised by gender disparities and limited digital adoption. Formalisation and digital tools are linked to improved outcomes, especially in retail and hospitality. Manufacturing remains marginal and informal. Spatial analysis reveals localised resilience but highlights vulnerability to fluctuations in consumer demand, financial constraints, and tenancy issues. The report recommends targeted policy interventions, including formalisation incentives, digital transformation support, and inclusive training for women-led businesses. Strengthening MSME data systems and enabling secure access to tenancy and credit are essential for long-term resilience and inclusive urban development.",
     keywords: ["MSMEs","Urban Economy","Phnom Penh","Resilience","Entrepreneurship"],
     kwStrength: ["full","full","full","half","none"],
     sdgs: ["SDG 8 - Decent Work and Economic Growth","SDG 11 - Sustainable Cities and Communities","SDG 9 - Industry, Innovation, and Infrastructure"],
-    downloads: 12 },
+    downloads: 0, 
+    resources: [
+      { label: "Paper", url: "research/papers/camMSME_2025.pdf", icon: "fa-file-pdf" }
+    ]},
 
   { title: "Government Ownership of Banks: Diversifying of Potential Products and Factors to Subsidize Agriculture",
     ogImage: "https://kosalnith.github.io/static/img/og/government-ownership-of-banks-diversifying-of-potential-products-and-factors-to.png",
     authors: "Kosal Nith", date: "Dec 2025", outlet: "Future Forum",
     type: "other", year: "2025", oa: false, lang: "en",
     breadcrumb: "Other publication › Research report",
-    abstract: "This study uses a two-step GMM estimator on national-level data for 32 crop products and 14 livestock products from Cambodia (1989–2018) to identify the potential products and factors in agriculture that public banks should subsidize.",
+    abstract: "It has recently been shown that government ownership of banks has a significant role in addressing market failures, improving social welfare and economic development. This study explores and identifies the potential products and factors in agriculture that public banks should subsidize. In this paper, the author investigates statistical properties of the two-step generalized method of moments (GMM) estimator to analyze the direct and indirect consumption of inputs in agricultural production on national-level data for 32 crop products and 14 livestock products from Cambodia during the 1989–2018 period. Many specifications have statistical significance and negative competent production growth. These results suggest that the proposed subsidies should clearly define the types of specialty products by local producers and their potential markets, both local and international. This paper investigates some policy options for government ownership of banks to improve agriculture. However, it must also adapt to new climate change and emergency events for the long-run sustainable development of the sector. Future directions should consider studying micro-data for specific types of products and regions.",
     keywords: ["Public Banks","Government Ownership","Agriculture","Subsidies","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
     sdgs: ["SDG 2 - Zero Hunger","SDG 8 - Decent Work and Economic Growth","SDG 1 - No Poverty"],
     resources: [
-      { label: "Paper", url: "", icon: "fa-file-pdf" },
-      { label: "Slides", url: "", icon: "fa-person-chalkboard" },
-      { label: "Replication Files", url: "", icon: "fa-code" },
-      { label: "Thread", url: "", icon: "fa-brands fa-x-twitter" }
+      { label: "Paper", url: "research/papers/GOB_2021.pdf", icon: "fa-file-pdf" },
+      { label: "Slides", url: "research/slides/GOB_Slides_ ELADES.pdf", icon: "fa-person-chalkboard" },
+      { label: "Replication Files", url: "https://github.com/kosalnith/PublicBanks", icon: "fa-code" },
+      { label: "Thread", url: "https://x.com/KosalNith/status/1418566500298805268?s=20", icon: "fa-brands fa-x-twitter" }
     ] },
 
   { title: "Mapping Study: Youth and Civil Society in Urban Cambodia",
@@ -393,7 +425,7 @@ const publicationsData = [
     authors: "Kosal Nith", date: "Sep 2022", outlet: "Future Forum",
     type: "other", year: "2022", oa: false, lang: "en",
     breadcrumb: "Other publication › Research report",
-    abstract: "Around 65.3% of Cambodia's population is under 30. This mapping study — commissioned by the EU Delegation to Cambodia — explores the aspirations, challenges, and needs of youth actors in civil society organizations in urban Cambodia.",
+    abstract: "Cambodia has one of the highest proportions of young people in the world. According to the United Nations Development Programme (2019), around 65.3% of the population is under the age of 30. This demographic dividend presents an opportunity for future prosperity, as the youth population can contribute to economic growth, social welfare, and inclusion. However, many Cambodian youth continue to face challenges in education, employment, and capacity development. Their potential role in promoting positive change is shaped by the support they receive. Barriers to youth participation in civil society include a shrinking democratic space, limited avenues for engagement with policies and politics, restrictive social norms, financial dependence, and a lack of encouragement and support. Despite these challenges, youth participation is vital for building democratic resilience and achieving a peaceful, inclusive, and prosperous society. Civil society organizations in Cambodia are working to harness the potential of youth as agents of change by enhancing their critical thinking and leadership skills, creating spaces for dialogue, and promoting engagement with governance and policy issues. Yet, further understanding is needed to clarify the roles and challenges of youth in civic engagement and social development. The European Union Delegation to Cambodia (EUD) recognises the importance of youth participation and is developing strategies to increase engagement during 2021–2027. To support this, a mapping study on youth and civil society in urban Cambodia was conducted to explore the aspirations, challenges, and needs of youth actors. The study aims to inform EUD’s efforts to empower youth and promote transformative change.",
     keywords: ["Youth","Civil Society","Civic Engagement","Democracy","Cambodia"],
     kwStrength: ["full","full","half","none","none"],
     sdgs: ["SDG 4 - Quality Education","SDG 16 - Peace, Justice and Strong Institutions","SDG 10 - Reduced Inequalities"] },
@@ -404,7 +436,10 @@ const publicationsData = [
     outlet: "Revisiting the Pandemic: Rapid Survey on the Impact of Covid-19 on MSMEs and Households, The Asia Foundation",
     type: "other", year: "2021", oa: false, lang: "en",
     sdgs: ["SDG 1 - No Poverty","SDG 8 - Decent Work and Economic Growth"],
-    breadcrumb: "Other publication › Book section" },
+    breadcrumb: "Other publication › Book section",
+    resources: [
+      { label: "Paper", url: "research/papers/COVID19HHSD_2021.pdf", icon: "fa-file-pdf" }
+    ] },
 
   { title: "Rapport de Stage : Assistant de Programme de l'Engagement des Jeunes pour l'Action Sociale",
     ogImage: "https://kosalnith.github.io/static/img/og/rapport-de-stage-assistant-de-programme-de-lengagement-des-jeunes-pour-laction-s.png",
@@ -415,7 +450,11 @@ const publicationsData = [
     abstract: "Le présent document décrit le YRDP ainsi que mon travail dans cette organisation. Ce rapport vise à fournir un aperçu de l'utilisation des matières étudiées à l'Université Royale de Droit et de Sciences Économiques pour la mise en oeuvre de travail dans l'organisation de YRDP.",
     keywords: ["Youth","Civil Society","Social Engagement","Cambodia"],
     kwStrength: ["full","full","half","none"],
-    sdgs: ["SDG 4 - Quality Education","SDG 16 - Peace, Justice and Strong Institutions"] },
+    sdgs: ["SDG 4 - Quality Education","SDG 16 - Peace, Justice and Strong Institutions"], 
+  resources: [
+      { label: "Paper", url: "research/papers/RapportduStage_2018.pdf", icon: "fa-file-pdf" },
+      { label: "Slides", url: "resarch/slides/Internship_Sharing_2018.pdf", icon: "fa-person-chalkboard" }
+    ]},
 
   { title: "Reinvigorating Cambodian Agriculture: Transforming from Extensive to Intensive Agriculture",
     ogImage: "https://kosalnith.github.io/static/img/og/reinvigorating-cambodian-agriculture-transforming-from-extensive-to-intensive-ag.png",
@@ -427,10 +466,10 @@ const publicationsData = [
     keywords: ["Agriculture","Intensive Farming","Productivity","Southeast Asia","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
     sdgs: ["SDG 2 - Zero Hunger","SDG 8 - Decent Work and Economic Growth","SDG 9 - Industry, Innovation, and Infrastructure"],
-    downloads: 7,
+    downloads: 0,
     resources: [
-      { label: "Paper", url: "", icon: "fa-file-pdf" },
-      { label: "Slides", url: "", icon: "fa-person-chalkboard" }
+      { label: "Paper", url: "research/papers/RCA_2018.pdf", icon: "fa-file-pdf" },
+      { label: "Slides", url: "resarch/slides/RCA_Slides.pdf", icon: "fa-person-chalkboard" }
     ] },
 
   // ══ Policy Briefs (2) ════════════════════════════════════════
@@ -460,8 +499,8 @@ const publicationsData = [
     sdgs: ["SDG 9 - Industry, Innovation, and Infrastructure","SDG 8 - Decent Work and Economic Growth","SDG 4 - Quality Education"],
     link: "https://www.cd-center.org/wp-content/uploads/2020/05/P126_20200508_EC19W1.pdf",
     resources: [
-      { label: "Paper", url: "https://www.cd-center.org/wp-content/uploads/2020/05/P126_20200508_EC19W1.pdf", icon: "fa-file-pdf" },
-      { label: "Slides", url: "", icon: "fa-person-chalkboard" }
+      { label: "Paper", url: "research/papers/camIP4_2020.pdf", icon: "fa-file-pdf" },
+      { label: "Slides", url: "research/slides/IP4.0_CDC.pdf", icon: "fa-person-chalkboard" }
     ] },
 
   // ══ Work in Progress (3) ═════════════════════════════════════

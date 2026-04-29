@@ -47,6 +47,12 @@
 
   <script src="/static/js/modernizr.min.js"></script>
   <script src="/static/js/modernizr-additional-tests.js"></script>
+  <script>
+    // Suppress list-view flash when opening a direct ?pub= link
+    if (new URLSearchParams(window.location.search).get('pub')) {
+      document.documentElement.style.setProperty('--hide-list', 'none');
+    }
+  </script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FXRBQVKK80"></script>
   <script>
@@ -113,23 +119,6 @@
 
     <!-- Publication Detail Page -->
     <div id="pubDetailView">
-      <div class="detail-site-header">
-        <svg width="22" height="22" viewBox="0 0 40 40" fill="none" style="flex-shrink:0">
-          <path d="M20 10 C16 8 10 7 4 8 L4 32 C10 31 16 32 20 34 Z" fill="#a8c5e8"/>
-          <path d="M20 10 C24 8 30 7 36 8 L36 32 C30 31 24 32 20 34 Z" fill="#7da8d0"/>
-          <rect x="18.5" y="9" width="3" height="25" fill="white" rx="1"/>
-        </svg>
-        <span class="header-title">Kosal Nith · Research Portal</span>
-        <span class="header-sep">|</span>
-        <a href="#" onclick="showList();return false;">Research output</a>
-        <div class="header-spacer"></div>
-        <a href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ" target="_blank">
-          <i class="fas fa-graduation-cap" style="margin-right:4px;"></i>Scholar
-        </a>
-        <a href="https://orcid.org/0000-0002-6976-4733" target="_blank" style="margin-left:12px;">
-          <i class="fas fa-id-badge" style="margin-right:4px;"></i>ORCID
-        </a>
-      </div>
       <div class="detail-container">
         <div class="detail-nav-row" id="detailNavRow"></div>
         <div class="detail-breadcrumb" id="detailBreadcrumb"></div>
@@ -144,7 +133,7 @@
     <div id="pubListView">
       <div class="research-container">
         <div class="research-header">
-          <div class="research-title">Research output</div>
+          <div class="research-title">Research</div>
           <div class="type-pills">
             <button class="type-pill" data-filter-type="articles">
               <span class="pill-number">1</span><span class="pill-label">Journal article</span>
@@ -171,10 +160,28 @@
           </div>
         </div>
 
+        <!-- Mobile filter toggle button -->
+        <div class="mobile-filter-bar">
+          <button class="mobile-filter-toggle" id="mobileFilterToggle">
+            <i class="fas fa-sliders-h"></i>
+            <span>Filters</span>
+            <span class="mobile-filter-badge" id="mobileFilterBadge"></span>
+          </button>
+          <span class="mobile-result-count" id="mobileResultCount"></span>
+        </div>
+
+        <!-- Backdrop -->
+        <div class="filter-backdrop" id="filterBackdrop"></div>
+
         <div class="two-columns">
           <aside class="research-sidebar">
             <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Search in all content</a>
-            <div class="filter-section-label">Filters for Publications</div>
+            <div class="filter-sidebar-header">
+              <div class="filter-section-label">Filters for Publications</div>
+              <button class="filter-close-btn" id="filterCloseBtn" aria-label="Close filters">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
 
             <!-- Type filter -->
             <div class="filter-group">
@@ -246,45 +253,19 @@
               </div>
             </div>
 
-            <!-- Journals & Outlets -->
-            <div class="filter-group">
-              <div class="filter-heading">Journals &amp; Outlets</div>
-            <div class="journals-list">
-              Journal of Int'l Development Studies<br>
-              South East Asia Research<br>
-              East Asia Forum<br>
-              The Diplomat<br>
-              Cambodianess
-              </div>
-            </div>
 
-            <!-- Profiles -->
-            <div class="filter-group" style="border-bottom:none;">
-              <div class="filter-heading">Profiles</div>
-            <div class="profile-links">
-              <a href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ" target="_blank">Google Scholar</a>
-              <a href="https://orcid.org/0000-0002-6976-4733" target="_blank">ORCID</a>
-              <a href="https://ideas.repec.org/f/pni504.html" target="_blank">IDEAS/RePec</a>
-              </div>
-            </div>
           </aside>
 
           <div class="main-content">
             <div class="search-section">
               <div class="search-heading">Find Publications</div>
+              <div class="search-subtext">Search across 33 papers, working papers &amp; op-eds</div>
               <div class="search-row">
                 <div class="search-input-wrapper">
                   <i class="fas fa-search"></i>
-                  <input type="text" id="searchInput" placeholder="Search by title, author, keyword...">
+                  <input type="text" id="searchInput" placeholder="Title, author, keyword, topic…">
                 </div>
-                <div class="search-options">
-                  <span><i class="fas fa-lightbulb"></i> concept 🔍</span>
-                  <span><i class="fas fa-align-left"></i> matching text 🔍</span>
-                  <i class="fas fa-search-plus" style="color:#9aaebf"></i>
-                </div>
-              </div>
-              <div style="text-align: right;">
-                <a href="#" class="advanced-link">Advanced search <i class="fas fa-arrow-right"></i></a>
+                <button class="search-btn" onclick="document.getElementById('searchInput').dispatchEvent(new Event('input'))">Search</button>
               </div>
             </div>
 
@@ -367,6 +348,75 @@
 </div><!-- dialog-off-canvas-main-canvas -->
 
 <script src="static/js/research_data.js"></script>
+<script>
+// Mobile filter drawer
+(function() {
+  function initMobileFilter() {
+    var toggle  = document.getElementById('mobileFilterToggle');
+    var close   = document.getElementById('filterCloseBtn');
+    var backdrop= document.getElementById('filterBackdrop');
+    var sidebar = document.querySelector('.research-sidebar');
+    if (!toggle || !sidebar) return;
+
+    function openFilters() {
+      sidebar.classList.add('filter-open');
+      backdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeFilters() {
+      sidebar.classList.remove('filter-open');
+      backdrop.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', openFilters);
+    if (close)    close.addEventListener('click', closeFilters);
+    backdrop.addEventListener('click', closeFilters);
+
+    // Sync active-filter badge count
+    function updateBadge() {
+      var checked = document.querySelectorAll('.research-sidebar input[type=checkbox]:checked').length;
+      var badge = document.getElementById('mobileFilterBadge');
+      var mobileCount = document.getElementById('mobileResultCount');
+      var desktopCount = document.getElementById('resultCount');
+      if (badge) {
+        badge.textContent = checked > 0 ? checked : '';
+        badge.style.display = checked > 0 ? 'inline-flex' : 'none';
+      }
+      if (mobileCount && desktopCount) {
+        mobileCount.textContent = desktopCount.textContent;
+      }
+    }
+
+    document.addEventListener('change', updateBadge);
+    // Poll result count for sync
+    setInterval(function() {
+      var mobileCount = document.getElementById('mobileResultCount');
+      var desktopCount = document.getElementById('resultCount');
+      if (mobileCount && desktopCount) {
+        mobileCount.textContent = desktopCount.textContent;
+      }
+    }, 300);
+
+    updateBadge();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileFilter);
+  } else {
+    initMobileFilter();
+  }
+})();
+</script>
 <script src="static/js/research_app.js"></script>
+<script src="static/js/search.js"></script>
+
+<script>
+  (function() {
+    if (new URLSearchParams(window.location.search).get('pub')) {
+      var lv = document.getElementById('pubListView');
+      if (lv) lv.style.display = 'none';
+    }
+  })();
+</script>
 </body>
 </html>
