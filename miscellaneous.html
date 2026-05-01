@@ -43,12 +43,12 @@
   <meta name="msapplication-square310x310logo" content="https://www-media.stanford.edu/assets/favicon/mstile-310x310.png">
 
   <title>Miscellaneous | Kosal Nith</title>
-  <link rel="stylesheet" media="all" href="static/css/mainFop.css">
+
   <link rel="stylesheet" media="all" href="static/css/main.css">
-  <link rel="stylesheet" media="all" href="static/css/mainshims.css">
-  <link rel="stylesheet" media="all" href="static/css/maincontent.css">
+
   <link rel="stylesheet" media="all" href="static/css/mainformat.css">
-  <link rel="stylesheet" media="print" href="static/css/main4L.css">
+
+  <link rel="stylesheet" media="all" href="static/css/darkmode.css">
   <!-- Social media: X Icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -102,7 +102,6 @@
             <button class="su-multi-menu__nav-toggle su-multi-menu__nav-toggle--right " aria-expanded="false">Menu</button>
             <ul class="su-multi-menu__menu su-multi-menu__menu-lv1">
               <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="index.html"><span class="su-multi-menu__link-text-wrapper">Home</span></a></li>
-              <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="bio.html"><span class="su-multi-menu__link-text-wrapper">Bio</span></a></li>
               <li class="su-multi-menu__item "><a class="su-multi-menu__link" href="research.html"><span class="su-multi-menu__link-text-wrapper">Research</span></a></li>
               <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="activity.html"><span class="su-multi-menu__link-text-wrapper">Activity</span></a></li>              
               <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="press.html"><span class="su-multi-menu__link-text-wrapper">Press</span></a></li>
@@ -110,6 +109,7 @@
               <li class="su-multi-menu__item su-multi-menu__item--active-trail su-multi-menu__item--current"><a aria-current="true" class="su-multi-menu__link" href="miscellaneous.html"><span class="su-multi-menu__link-text-wrapper">Miscellaneous</span></a></li>
               <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="https://kosalnith.substack.com"><span class="su-multi-menu__link-text-wrapper">Blog</span></a></li>
               <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="personal.html"><span class="su-multi-menu__link-text-wrapper">Personal</span></a></li>
+               <li class="su-multi-menu__item dm-toggle-li" id="dm-toggle-li"></li>
             </ul>
           </nav>
         </div>
@@ -649,6 +649,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', checkWindowSize);
 });
   </script>
+    <script src="static/js/darkmode.js"></script>
   <script src="static/js/search.js"></script>
 </body>
 </html>

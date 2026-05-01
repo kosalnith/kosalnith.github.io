@@ -12,17 +12,92 @@ let sortOrder = 'desc'; // 'desc' = newest first, 'asc' = oldest first
 
 // ===== Filtering =====
 
+// Maps sidebar label → pub.type dataFilter bucket
 function getFilterKeyFromTypeLabel(label) {
   const mapping = {
-    "Journal article": "articles",
-    "Book chapter": "chapters",
-    "Working paper": "working",
-    "Other publication": "other",
-    "Op-Ed / Commentary": "opeds",
-    "Policy brief": "policy",
-    "Work in progress": "progress"
+    "Journal article":        "articles",
+    "Book chapter":           "chapters",
+    "Working paper":          "working",
+    "Other publication":      "other",
+    "Op-Ed / Commentary":     "opeds",
+    "Policy brief":           "policy",
+    "Work in progress":       "progress"
   };
   return mapping[label] || null;
+}
+
+// Maps pub.zoteroType → dataFilter bucket
+function getFilterKeyFromZoteroType(zt) {
+  const map = {
+    journalArticle: "articles", bookSection: "chapters", book: "books",
+    thesis: "thesis", manuscript: "manuscript", preprint: "preprints",
+    report: "reports", document: "documents", dataset: "datasets",
+    software: "software", conferencePaper: "confpapers", presentation: "presentations",
+    newspaperArticle: "opeds", magazineArticle: "opeds", blogPost: "opeds",
+    forumPost: "forum", webpage: "webpage", encyclopediaArticle: "encyclopedia",
+    dictionaryEntry: "dictionary", map: "maps", case: "legalcase", bill: "bills",
+    statute: "statutes", hearing: "hearings", patent: "patents", standard: "standards",
+    film: "film", tvBroadcast: "tv", radioBroadcast: "radio", podcast: "podcast",
+    audioRecording: "audio", videoRecording: "video", artwork: "artwork",
+    interview: "interviews", letter: "letters", email: "email", instantMessage: "im"
+  };
+  return map[zt] || null;
+}
+
+// Returns a clean human-readable type label for a publication card
+// Uses zoteroType first (precise), falls back to internal pub.type bucket
+function getTypeLabel(pub) {
+  const ztLabels = {
+    journalArticle:      "Journal article",
+    bookSection:         "Book chapter",
+    book:                "Book",
+    thesis:              "Thesis / Dissertation",
+    manuscript:          "Manuscript",
+    preprint:            "Preprint",
+    report:              "Report",
+    document:            "Document",
+    dataset:             "Dataset",
+    software:            "Software",
+    conferencePaper:     "Conference paper",
+    presentation:        "Presentation",
+    newspaperArticle:    "Newspaper article",
+    magazineArticle:     "Magazine article",
+    blogPost:            "Blog post",
+    forumPost:           "Forum post",
+    webpage:             "Web page",
+    encyclopediaArticle: "Encyclopedia article",
+    dictionaryEntry:     "Dictionary entry",
+    map:                 "Map",
+    case:                "Legal case",
+    bill:                "Bill / Legislation",
+    statute:             "Statute",
+    hearing:             "Hearing",
+    patent:              "Patent",
+    standard:            "Standard",
+    film:                "Film",
+    tvBroadcast:         "TV broadcast",
+    radioBroadcast:      "Radio broadcast",
+    podcast:             "Podcast",
+    audioRecording:      "Audio recording",
+    videoRecording:      "Video recording",
+    artwork:             "Artwork",
+    interview:           "Interview",
+    letter:              "Letter",
+    email:               "Email",
+    instantMessage:      "Instant message"
+  };
+  if (pub.zoteroType && ztLabels[pub.zoteroType]) return ztLabels[pub.zoteroType];
+  // Fallback to internal type
+  const fallback = {
+    articles:  "Journal article",
+    chapters:  "Book chapter",
+    working:   "Working paper",
+    opeds:     "Newspaper article",
+    policy:    "Policy brief",
+    other:     "Report",
+    progress:  "Work in progress"
+  };
+  return fallback[pub.type] || "Research output";
 }
 
 function getFilteredPublications() {
@@ -40,7 +115,10 @@ function getFilteredPublications() {
     .map(cb => cb.getAttribute('data-sdg'));
 
   let filtered = publicationsData.filter(p => {
-    if (types.length && !types.includes(p.type)) return false;
+    if (types.length) {
+      const ztBucket = p.zoteroType ? getFilterKeyFromZoteroType(p.zoteroType) : null;
+      if (!types.includes(p.type) && !(ztBucket && types.includes(ztBucket))) return false;
+    }
     const yearNum = parseInt(p.year);
     if (!isNaN(yearNum) && (yearNum < yearRangeMin || yearNum > yearRangeMax)) return false;
     if (oaOnly && !p.oa) return false;
@@ -656,7 +734,7 @@ function renderPublicationsWithPagination() {
             </div>
             ${formatAuthorsChicagoMeta(pub.authors) ? `<div class="pub-meta">${formatAuthorsChicagoMeta(pub.authors)}</div>` : ''}
             <div class="pub-outlet">${formatPubInfo(pub)}</div>
-            <div class="pub-breadcrumb">${pub.breadcrumb || 'Research output'}</div>
+            <div class="pub-type-label"><i class="fas fa-tag"></i> ${getTypeLabel(pub)}</div>
 
             <div class="card-bottom">
 
@@ -683,10 +761,18 @@ function renderPublicationsWithPagination() {
 
               ${pub.resources && pub.resources.length ? `
               <div class="pub-resources">
-                ${pub.resources.map(r => r.url
-                  ? `<a class="resource-btn" href="${r.url}" target="_blank" ${pub.downloads !== undefined ? `data-track-dl data-pub-slug="${slugify(pub.title)}"` : ''}><i class="fas ${r.icon}"></i> ${r.label}</a>`
-                  : `<span class="resource-btn resource-btn--inactive"><i class="fas ${r.icon}"></i> ${r.label}</span>`
-                ).join('')}
+                ${pub.resources.map(r => {
+                  let rtype = 'default';
+                  if (r.icon.includes('fa-file-pdf'))               rtype = 'paper';
+                  else if (r.icon.includes('fa-person-chalkboard')) rtype = 'slides';
+                  else if (r.icon.includes('fa-code'))               rtype = 'replication';
+                  else if (r.icon.includes('fa-x-twitter'))          rtype = 'thread';
+                  else if (r.icon.includes('fa-file-lines'))         rtype = 'appendix';
+                  const iconClass = r.icon.startsWith('fa-brands') ? r.icon : `fas ${r.icon}`;
+                  return r.url
+                    ? `<a class="resource-btn resource-btn--${rtype}" href="${r.url}" target="_blank" ${pub.downloads !== undefined ? `data-track-dl data-pub-slug="${slugify(pub.title)}"` : ''}><i class="${iconClass}"></i>${r.label}</a>`
+                    : `<span class="resource-btn resource-btn--inactive resource-btn--${rtype}"><i class="${iconClass}"></i>${r.label}</span>`;
+                }).join('')}
               </div>` : ''}
 
               ${pub.keywords && pub.keywords.length ? `
@@ -801,11 +887,27 @@ function renderSdgList() {
 function renderTypeList() {
   const container = document.getElementById('fullTypeList');
   if (!container) return;
+
+  // Compute live counts per dataFilter bucket
+  const bucketCounts = {};
+  publicationsData.forEach(p => {
+    if (p.type) bucketCounts[p.type] = (bucketCounts[p.type] || 0) + 1;
+  });
+
+  // Deduplicate by dataFilter (so opeds/newspaperArticle/blogPost all merge)
+  const seen = new Set();
+  const deduped = [];
+  allPublicationTypes.forEach(t => {
+    const k = t.dataFilter || t.key;
+    if (!seen.has(k)) { seen.add(k); deduped.push({ ...t, count: bucketCounts[k] || 0 }); }
+  });
+
+  const withPubs    = deduped.filter(t => t.count > 0);
+  const withoutPubs = deduped.filter(t => t.count === 0);
+
   let html = '';
-  const INITIAL_VISIBLE = 5;
-  uniqueTypes.forEach((type, idx) => {
-    const hiddenClass = idx >= INITIAL_VISIBLE ? 'type-hidden' : '';
-    html += `<label class="custom-check ${hiddenClass}" data-type-key="${type.key}">
+  withPubs.forEach(type => {
+    html += `<label class="custom-check" data-type-key="${type.key}">
       <input type="checkbox" data-filter="${type.dataFilter || type.key}" data-type-label="${type.label}">
       <span class="check-box"></span>
       <span class="custom-check-left">
@@ -814,21 +916,35 @@ function renderTypeList() {
       </span>
     </label>`;
   });
+
+  if (withoutPubs.length) {
+    html += `<div id="typeZeroGroup" style="display:none;">`;
+    withoutPubs.forEach(type => {
+      html += `<label class="custom-check" data-type-key="${type.key}" style="opacity:0.38;pointer-events:none;">
+        <input type="checkbox" data-filter="${type.dataFilter || type.key}" data-type-label="${type.label}" disabled>
+        <span class="check-box"></span>
+        <span class="custom-check-left">
+          <span>${type.label}</span>
+          <span class="count-badge">(0)</span>
+        </span>
+      </label>`;
+    });
+    html += `</div>`;
+  }
+
   container.innerHTML = html;
 
-  let typeExpanded = false;
   const showMoreBtn = document.getElementById('showMoreTypesBtn');
-  showMoreBtn.innerText = 'Show more ›';
-  showMoreBtn.onclick = () => {
-    typeExpanded = !typeExpanded;
-    const allItems = document.querySelectorAll('#fullTypeList .custom-check');
-    allItems.forEach((item, idx) => {
-      if (typeExpanded) item.classList.remove('type-hidden');
-      else if (idx >= INITIAL_VISIBLE) item.classList.add('type-hidden');
-      else item.classList.remove('type-hidden');
-    });
-    showMoreBtn.innerText = typeExpanded ? 'Show less' : 'Show more ›';
-  };
+  if (showMoreBtn) {
+    let expanded = false;
+    showMoreBtn.innerText = `Show all ${deduped.length} types ›`;
+    showMoreBtn.onclick = () => {
+      expanded = !expanded;
+      const grp = document.getElementById('typeZeroGroup');
+      if (grp) grp.style.display = expanded ? 'block' : 'none';
+      showMoreBtn.innerText = expanded ? 'Show fewer types' : `Show all ${deduped.length} types ›`;
+    };
+  }
 }
 
 // ===== Year Slider =====

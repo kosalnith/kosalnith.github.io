@@ -1,68 +1,72 @@
-// ----- Publication type definitions -----
-// Counts verified from research.html:
-//   Journal article: 1  | Book chapter: 2 | Working paper: 4
-//   Other pub: 6        | Op-Ed: 15       | Policy brief: 2 | Work in progress: 3
-// Total: 33
+// ----- Publication type definitions (all 37 Zotero types + site-specific) -----
+// HOW TO ADD A NEW PUBLICATION:
+//   1. Add your entry to publicationsData below with pub.type = one of the dataFilter values here.
+//   2. Optionally set pub.zoteroType to the matching zoteroType string for a precise Chicago citation.
+//   3. Counts in the sidebar update automatically — no manual editing needed here.
+//
+// Chicago Manual of Style (17th ed.) notes per type are in formatPubInfo() in research_app.js.
 
 const allPublicationTypes = [
-  { key: "journal_article",         label: "Journal article",                         count: 1,  dataFilter: "articles"  },
-  { key: "article_in_proceeding",   label: "Article in proceeding",                  count: 0,  dataFilter: null        },
-  { key: "book_chapter",            label: "Book chapter",                           count: 2,  dataFilter: "chapters"  },
-  { key: "book",                    label: "Book",                                   count: 0,  dataFilter: null        },
-  { key: "report",                  label: "Report",                                 count: 0,  dataFilter: null        },
-  //{ key: "conf_abstract_conf",      label: "Conference abstract for conference",     count: 0,  dataFilter: null        },
-  //{ key: "conf_abstract_proc",      label: "Conference abstract in proceeding",      count: 0,  dataFilter: null        },
-  //{ key: "phd_thesis",              label: "PhD thesis",                             count: 0,  dataFilter: null        },
-  //{ key: "conf_abstract_journal",   label: "Conference abstract in journal",         count: 0,  dataFilter: null        },
-  //{ key: "paper_no_publisher",      label: "Paper without publisher/journal",        count: 0,  dataFilter: null        },
-  //{ key: "poster",                  label: "Poster",                                 count: 0,  dataFilter: null        },
-  { key: "review_article",          label: "Review article",                         count: 0,  dataFilter: null        },
-  { key: "working_paper",           label: "Working paper",                          count: 4,  dataFilter: "working"   },
-  //{ key: "conf_article_journal",    label: "Conference article in journal",          count: 0,  dataFilter: null        },
-  //{ key: "anthology",               label: "Anthology",                              count: 0,  dataFilter: null        },
-  //{ key: "editorial",               label: "Editorial",                              count: 0,  dataFilter: null        },
-  //{ key: "literature_review",       label: "Literature review",                      count: 0,  dataFilter: null        },
-  //{ key: "comment_debate",          label: "Comment/debate",                         count: 0,  dataFilter: null        },
-  //{ key: "net_publication",         label: "Net publication - Internet publication", count: 0,  dataFilter: null        },
-  //{ key: "other_contribution",      label: "Other contribution",                     count: 0,  dataFilter: null        },
-  //{ key: "contrib_newspaper_review",  label: "Contribution to newspaper - Review",          count: 0, dataFilter: null },
-  //{ key: "contrib_newspaper_feature", label: "Contribution to newspaper - Feature article", count: 0, dataFilter: null },
-  //{ key: "contrib_newspaper_article", label: "Contribution to newspaper - Newspaper article", count: 0, dataFilter: null },
-  //{ key: "preprint",                label: "Preprint",                               count: 0,  dataFilter: null        },
-  //{ key: "encyclopedia_chapter",    label: "Encyclopedia chapter",                   count: 0,  dataFilter: null        },
-  //{ key: "report_chapter",          label: "Report chapter",                         count: 0,  dataFilter: null        },
-  //{ key: "preface_intro",           label: "Preface/Introduction/postscript",        count: 0,  dataFilter: null        },
-  //{ key: "letter",                  label: "Letter",                                 count: 0,  dataFilter: null        },
-  //{ key: "sound_visual",            label: "Sound/Visual production (digital)",      count: 0,  dataFilter: null        },
-  //{ key: "patent",                  label: "Patent",                                 count: 0,  dataFilter: null        },
-  //{ key: "contrib_newspaper_comment", label: "Contribution to newspaper - Comment/debate", count: 0, dataFilter: null },
-  //{ key: "compendium_notes",        label: "Compendium/lecture notes",               count: 0,  dataFilter: null        },
-  //{ key: "memorandum",              label: "Memorandum",                             count: 0,  dataFilter: null        },
-  //{ key: "doctoral_thesis",         label: "Doctoral thesis",                        count: 0,  dataFilter: null        },
-  //{ key: "case_report",             label: "Case Report",                            count: 0,  dataFilter: null        },
-  //{ key: "computer_programme",      label: "Computer programme",                     count: 0,  dataFilter: null        },
-  //{ key: "comment",                 label: "Comment",                                count: 0,  dataFilter: null        },
-  //{ key: "memorandum_contribution", label: "Memorandum contribution",                count: 0,  dataFilter: null        },
-  //{ key: "2d_3d",                   label: "2D/3D (Physical product)",                count: 0,  dataFilter: null        },
-  //{ key: "interactive_production",  label: "Interactive production",                 count: 0,  dataFilter: null        },
-  //{ key: "qanda_hearing",           label: "Question & Answer/hearing",              count: 0,  dataFilter: null        },
-  //{ key: "compendium_chapter",      label: "Compendium/lecture notes chapter",       count: 0,  dataFilter: null        },
-  //{ key: "qanda_contribution",      label: "Question & Answer/hearing contribution", count: 0,  dataFilter: null        },
-  { key: "article",                 label: "Article",                                count: 0,  dataFilter: null        },
-  //{ key: "doctoral_thesis_dup",     label: "Doctoral Thesis",                        count: 0,  dataFilter: null        },
-  //{ key: "dataset",                 label: "Dataset",                                count: 0,  dataFilter: null        },
-  //{ key: "masters_thesis",          label: "Master's Thesis",                        count: 0,  dataFilter: null        }
+  // ── Core research ────────────────────────────────────────────────────────────
+  { key: "journalArticle",      zoteroType: "journalArticle",      label: "Journal article",        count: 0, dataFilter: "articles"      },
+  { key: "bookSection",         zoteroType: "bookSection",         label: "Book chapter",           count: 0, dataFilter: "chapters"      },
+  { key: "book",                zoteroType: "book",                label: "Book",                   count: 0, dataFilter: "books"         },
+  { key: "thesis",              zoteroType: "thesis",              label: "Thesis / Dissertation",  count: 0, dataFilter: "thesis"        },
+  { key: "manuscript",          zoteroType: "manuscript",          label: "Manuscript",             count: 0, dataFilter: "manuscript"    },
+  { key: "preprint",            zoteroType: "preprint",            label: "Preprint",               count: 0, dataFilter: "preprints"     },
+  { key: "report",              zoteroType: "report",              label: "Report",                 count: 0, dataFilter: "reports"       },
+  { key: "document",            zoteroType: "document",            label: "Document",               count: 0, dataFilter: "documents"     },
+  { key: "dataset",             zoteroType: "dataset",             label: "Dataset",                count: 0, dataFilter: "datasets"      },
+  { key: "software",            zoteroType: "software",            label: "Software",               count: 0, dataFilter: "software"      },
+  // ── Conference & presentations ────────────────────────────────────────────────
+  { key: "conferencePaper",     zoteroType: "conferencePaper",     label: "Conference paper",       count: 0, dataFilter: "confpapers"    },
+  { key: "presentation",        zoteroType: "presentation",        label: "Presentation",           count: 0, dataFilter: "presentations" },
+  // ── Journalism & commentary ───────────────────────────────────────────────────
+  { key: "newspaperArticle",    zoteroType: "newspaperArticle",    label: "Newspaper article",      count: 0, dataFilter: "opeds"         },
+  { key: "magazineArticle",     zoteroType: "magazineArticle",     label: "Magazine article",       count: 0, dataFilter: "magazine"      },
+  { key: "blogPost",            zoteroType: "blogPost",            label: "Blog post",              count: 0, dataFilter: "opeds"         },
+  { key: "forumPost",           zoteroType: "forumPost",           label: "Forum post",             count: 0, dataFilter: "forum"         },
+  { key: "webpage",             zoteroType: "webpage",             label: "Web page",               count: 0, dataFilter: "webpage"       },
+  // ── Reference works ───────────────────────────────────────────────────────────
+  { key: "encyclopediaArticle", zoteroType: "encyclopediaArticle", label: "Encyclopedia article",   count: 0, dataFilter: "encyclopedia"  },
+  { key: "dictionaryEntry",     zoteroType: "dictionaryEntry",     label: "Dictionary entry",       count: 0, dataFilter: "dictionary"    },
+  { key: "map",                 zoteroType: "map",                 label: "Map",                    count: 0, dataFilter: "maps"          },
+  // ── Legal & policy ────────────────────────────────────────────────────────────
+  { key: "case",                zoteroType: "case",                label: "Legal case",             count: 0, dataFilter: "legalcase"     },
+  { key: "bill",                zoteroType: "bill",                label: "Bill / Legislation",     count: 0, dataFilter: "bills"         },
+  { key: "statute",             zoteroType: "statute",             label: "Statute",                count: 0, dataFilter: "statutes"      },
+  { key: "hearing",             zoteroType: "hearing",             label: "Hearing",                count: 0, dataFilter: "hearings"      },
+  { key: "patent",              zoteroType: "patent",              label: "Patent",                 count: 0, dataFilter: "patents"       },
+  { key: "standard",            zoteroType: "standard",            label: "Standard",               count: 0, dataFilter: "standards"     },
+  // ── Audiovisual & media ───────────────────────────────────────────────────────
+  { key: "film",                zoteroType: "film",                label: "Film",                   count: 0, dataFilter: "film"          },
+  { key: "tvBroadcast",         zoteroType: "tvBroadcast",         label: "TV broadcast",           count: 0, dataFilter: "tv"            },
+  { key: "radioBroadcast",      zoteroType: "radioBroadcast",      label: "Radio broadcast",        count: 0, dataFilter: "radio"         },
+  { key: "podcast",             zoteroType: "podcast",             label: "Podcast",                count: 0, dataFilter: "podcast"       },
+  { key: "audioRecording",      zoteroType: "audioRecording",      label: "Audio recording",        count: 0, dataFilter: "audio"         },
+  { key: "videoRecording",      zoteroType: "videoRecording",      label: "Video recording",        count: 0, dataFilter: "video"         },
+  { key: "artwork",             zoteroType: "artwork",             label: "Artwork",                count: 0, dataFilter: "artwork"       },
+  // ── Personal communications ───────────────────────────────────────────────────
+  { key: "interview",           zoteroType: "interview",           label: "Interview",              count: 0, dataFilter: "interviews"    },
+  { key: "letter",              zoteroType: "letter",              label: "Letter",                 count: 0, dataFilter: "letters"       },
+  { key: "email",               zoteroType: "email",               label: "Email",                  count: 0, dataFilter: "email"         },
+  { key: "instantMessage",      zoteroType: "instantMessage",      label: "Instant message",        count: 0, dataFilter: "im"            },
+  // ── Site-specific types (kept for backward compatibility) ─────────────────────
+  { key: "working_paper",       zoteroType: null,                  label: "Working paper",          count: 0, dataFilter: "working"       },
+  { key: "op_ed",               zoteroType: null,                  label: "Op-Ed / Commentary",     count: 0, dataFilter: "opeds"         },
+  { key: "policy_brief",        zoteroType: null,                  label: "Policy brief",           count: 0, dataFilter: "policy"        },
+  { key: "work_in_progress",    zoteroType: null,                  label: "Work in progress",       count: 0, dataFilter: "progress"      },
+  { key: "other_publication",   zoteroType: null,                  label: "Other publication",      count: 0, dataFilter: "other"         },
 ];
 
-allPublicationTypes.push({ key: "op_ed",            label: "Op-Ed / Commentary", count: 15, dataFilter: "opeds"    });
-allPublicationTypes.push({ key: "policy_brief",     label: "Policy brief",       count: 2,  dataFilter: "policy"   });
-allPublicationTypes.push({ key: "work_in_progress", label: "Work in progress",   count: 3,  dataFilter: "progress" });
-allPublicationTypes.push({ key: "other_publication",label: "Other publication",  count: 6,  dataFilter: "other"    });
-
+// uniqueTypes: deduplicated by dataFilter so "Newspaper article", "Blog post", and "Op-Ed"
+// all sharing dataFilter:"opeds" collapse to a single sidebar entry.
+// We keep the FIRST entry per dataFilter as the representative label.
 const uniqueTypes = [];
-const seenLabels = new Set();
-for (let t of allPublicationTypes) {
-  if (!seenLabels.has(t.label)) { seenLabels.add(t.label); uniqueTypes.push(t); }
+const seenFilters = new Set();
+for (const t of allPublicationTypes) {
+  const key = t.dataFilter || t.key;
+  if (!seenFilters.has(key)) { seenFilters.add(key); uniqueTypes.push(t); }
 }
 
 // ─── Year counts (verified from publications list below) ───────
@@ -462,7 +466,7 @@ const publicationsData = [
     outlet: "National Bank of Cambodia — 5th Annual Macroeconomic Conference",
     type: "other", year: "2018", oa: false, lang: "en", award: true,
     breadcrumb: "Other publication › Conference paper",
-    abstract: "Comparing Cambodian agriculture to Southeast Asian neighbors over 22 years (1996–2018), this paper identifies factors constraining the transition from extensive to intensive agriculture, including high production costs, limited technology use, and low market prices.",
+    abstract: "In this paper we analysis to identify the factor constraining on Cambodian agriculture in transforming from extensive to intensive agriculture. The objective of this study was to examine the general situation of Cambodian agriculture by comparing with neighboring countries in Southeast Asia from a period of 22 years (1996 – 2018) through cultivate areas, technical using, technologies using, fertilizer using, agricultural infrastructure system, agricultural production cost, agricultural output, agricultural market and climate change. The results show that the Cambodian agriculture sector is still at a level where there is significant need to improve the capacity of farmers, the new technologies use and the prevention of climate change. However, the production cost is still high cost and agricultural output has been in low prices. It also causes for farmers to lose confidence in farming and they will be stop working in the sector. Moreover, we also have other policies to improve agriculture sector in Cambodia.",
     keywords: ["Agriculture","Intensive Farming","Productivity","Southeast Asia","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
     sdgs: ["SDG 2 - Zero Hunger","SDG 8 - Decent Work and Economic Growth","SDG 9 - Industry, Innovation, and Infrastructure"],
