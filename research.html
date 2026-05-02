@@ -99,7 +99,6 @@
           <button class="su-multi-menu__nav-toggle su-multi-menu__nav-toggle--right" aria-expanded="false">Menu</button>
           <ul class="su-multi-menu__menu su-multi-menu__menu-lv1">
             <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="index.html"><span class="su-multi-menu__link-text-wrapper">Home</span></a></li>
-            <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="bio.html"><span class="su-multi-menu__link-text-wrapper">Bio</span></a></li>
             <li class="su-multi-menu__item su-multi-menu__item--active-trail su-multi-menu__item--current"><a aria-current="true" class="su-multi-menu__link" href="research.html"><span class="su-multi-menu__link-text-wrapper">Research</span></a></li>
             <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="activity.html"><span class="su-multi-menu__link-text-wrapper">Activity</span></a></li>
             <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="press.html"><span class="su-multi-menu__link-text-wrapper">Press</span></a></li>
@@ -341,10 +340,10 @@
     </div>
   </footer>
 
-  <button id="back-to-top" aria-label="Back to top">
-    <i class="fas fa-chevron-up"></i>
+  <button id="back-to-top">
+    <span class="fas fa-chevron-up"></span>
     Back to Top
-  </button>
+    </button>
 
 </div><!-- dialog-off-canvas-main-canvas -->
 
@@ -412,17 +411,7 @@
 <script src="static/js/search.js"></script>
 
 <script>
-// Back to top
-(function() {
-  var btn = document.getElementById('back-to-top');
-  if (!btn) return;
-  window.addEventListener('scroll', function() {
-    btn.classList.toggle('visible', window.scrollY > 400);
-  }, { passive: true });
-  btn.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-})();
+
 
 // Desktop filter collapse/expand
 (function() {

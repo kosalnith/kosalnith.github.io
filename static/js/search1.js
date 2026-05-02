@@ -340,12 +340,7 @@
     li.className = 'su-multi-menu__item';
     li.style.cssText = 'display:flex!important;align-items:center!important;margin-left:4px!important;';
     li.innerHTML = `<button id="site-search-btn" title="Search (Ctrl+K)" aria-label="Search">${icoSearch(17, 2.5)}<span>Search</span></button>`;
-    var dmLi = document.getElementById('dm-toggle-li');
-    if (dmLi) {
-      ul.insertBefore(li, dmLi);
-    } else {
-      ul.appendChild(li);
-    }
+    ul.appendChild(li);
 
     var overlay = document.createElement('div');
     overlay.id = 'ss-overlay';

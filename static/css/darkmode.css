@@ -26,14 +26,117 @@ li.dm-toggle-li {
 
 /* On mobile, show inside the open dropdown */
 @media (max-width: 991px) {
+  /* ── Dark mode toggle li — match nav item style ── */
   li.dm-toggle-li {
     display: flex !important;
+    align-items: center !important;
     padding: 1.2rem 2.4rem !important;
     border-bottom: 1px solid #53565a !important;
   }
 
   html.dark-mode li.dm-toggle-li {
     border-bottom-color: #3a3836 !important;
+  }
+
+  /* ── Dark mode toggle button — icon only, no label, no border box ── */
+  li.dm-toggle-li .dm-toggle {
+    width: 28px !important;
+    height: 28px !important;
+    border: none !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #f7f6f3 !important;
+  }
+
+  html.dark-mode li.dm-toggle-li .dm-toggle {
+    color: #f7f6f3 !important;
+  }
+
+  li.dm-toggle-li .dm-toggle:hover,
+  li.dm-toggle-li .dm-toggle:focus {
+    background: rgba(255,255,255,0.1) !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  /* No text label — icon only */
+  li.dm-toggle-li .dm-toggle::after {
+    content: none !important;
+  }
+
+  /* Icon clearly visible at nav scale */
+  li.dm-toggle-li .dm-icon svg {
+    width: 22px !important;
+    height: 22px !important;
+    stroke: currentColor !important;
+  }
+
+  /* ── Search li — match nav item style ── */
+  .su-multi-menu .su-multi-menu__menu-lv1 li:has(#site-search-btn) {
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-bottom: 1px solid #53565a !important;
+  }
+
+  html.dark-mode .su-multi-menu .su-multi-menu__menu-lv1 li:has(#site-search-btn) {
+    border-bottom-color: #3a3836 !important;
+  }
+
+  /* ── Search button — strip pill, look like a nav link ── */
+  #site-search-btn {
+    width: 100% !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 1.2rem 2.4rem !important;
+    background: transparent !important;
+    color: inherit !important;
+    font-size: 1.8rem !important;
+    font-weight: 600 !important;
+    gap: 12px !important;
+    justify-content: flex-start !important;
+    box-shadow: none !important;
+  }
+
+  #site-search-btn:hover {
+    background: rgba(140, 21, 21, 0.06) !important;
+    border: none !important;
+  }
+
+  #site-search-btn span {
+    color: inherit !important;
+    font-size: 1.8rem !important;
+    font-weight: 600 !important;
+  }
+
+  html.dark-mode #site-search-btn {
+    color: #dddddd !important;
+  }
+
+  html.dark-mode #site-search-btn span {
+    color: #dddddd !important;
+  }
+
+  /* ── Mobile ordering: search above dark/light mode toggle ──
+     These order rules guarantee correct order regardless of
+     JS injection timing.                                        */
+  .su-multi-menu .su-multi-menu__menu-lv1 {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .su-multi-menu .su-multi-menu__menu-lv1 li:has(#site-search-btn) {
+    order: 98 !important;
+  }
+
+  .su-multi-menu .su-multi-menu__menu-lv1 li.dm-toggle-li {
+    order: 99 !important;
   }
 }
 
@@ -169,15 +272,15 @@ html.dark-mode {
   --dm-bg-alt:    #1e1d1c;
   --dm-bg-card:   #242322;
   --dm-bg-nav:    #1a1918;
-  --dm-text:      #dddddd;
-  --dm-text-mute: #b8b4ae;
+  --dm-text:      #D6D6D6;
+  --dm-text-mute: #dcdad8;
   --dm-accent:    #8c1514;
   --dm-accent-lt: #c04040;
   --dm-border:    #3a3836;
 
   /* Links throughout the page use the accent red in dark mode */
-  --dm-link:       #a60101;
-  --dm-link-hover: #d94040;
+  --dm-link:       #cc2222;
+  --dm-link-hover: #ff6600;
 }
 
 /* ── Page base ─────────────────────────────────────────────────── */
