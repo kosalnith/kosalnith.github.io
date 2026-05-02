@@ -1,103 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" class="no-js">
+<html lang="en" dir="ltr" prefix="og: https://ogp.me/ns#" class="no-js">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Stamps | Kosal Nith</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Travel Map | Kosal Nith</title>
 
-  <!-- Favicons -->
-  <link rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+  <!-- Page-specific meta -->
+  <meta property="og:title"  content="Travel Map">
+  <meta property="og:url"    content="https://kosalnith.github.io/travelmap.html">
+  <link rel="canonical"      href="https://kosalnith.github.io/travelmap.html">
+  <meta name="twitter:title" content="Travel Map">
 
-  <!-- ① Site-wide stylesheets — same order as activity.html -->
-  <link rel="stylesheet" media="all"   href="static/css/mainFop.css">
-  <link rel="stylesheet" media="all"   href="static/css/main.css">
-  <link rel="stylesheet" media="all"   href="static/css/mainshims.css">
-  <link rel="stylesheet" media="all"   href="static/css/maincontent.css">
-  <link rel="stylesheet" media="all"   href="static/css/mainformat.css">
-  <link rel="stylesheet" media="print" href="static/css/main4L.css">
-
-  <!-- ② Font Awesome — same version as site (6.4.2) -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  <!-- Shared styles -->
+  <link rel="stylesheet" media="all" href="static/css/main.css">
+  <link rel="stylesheet" media="all" href="static/css/mainformat.css">
+  <link rel="stylesheet" media="all" href="static/css/darkmode.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- ③ Flag Icons — cross-platform SVG flags (replaces emoji) -->
+  <!-- Page-specific CSS (only on travelmap.html) -->
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" media="all" href="static/css/travel_map.css">
 
-  <!-- ④ Google Fonts used by the travel map widget -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- ⑤ Leaflet CSS — preconnect for faster tile fetching -->
-  <link rel="preconnect" href="https://unpkg.com">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
-  <!-- ⑥ Leaflet JS — defer so it doesn't block HTML parsing -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
-
-  <!-- ⑦ Travel Map Widget Styles -->
-  <link rel="stylesheet" href="static/css/travel_map.css">
-
+  <!--
+    Favicons, icons, modernizr, Google Analytics,
+    og:site_name, og:type, twitter:card injected by components.js
+  -->
 </head>
-
 <body class="page-research section-research not-front role--anonymous">
-<div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
 
-<!-- ═══════════════════ HEADER — exact match to activity.html ═══════════════════ -->
-<header class="su-masthead su-masthead--right">
-  <a href="#main-content" class="visually-hidden focusable su-skipnav su-skipnav--content">Skip to main content</a>
-  <a href="#secondary-navigation" class="visually-hidden focusable su-skipnav su-skipnav--secondary">Skip to secondary navigation</a>
+  <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
 
-  <div class="su-brand-bar su-brand-bar--default">
-    <div class="su-brand-bar__container">
-      <a class="su-brand-bar__logo" href="https://kosalnith.github.io">
-        <span class="su-brand-bar__link--a11y"> (link is external)</span>
-      </a>
-    </div>
-  </div>
+    <!-- ✅ HEADER SLOT — components.js injects the full header here -->
+    <div id="site-header"></div>
 
-  <section>
-    <div id="block-stanford-basic-branding" class="su-lockup su-lockup--option-a">
-      <a href="https://kosalnith.github.io">
-        <div class="su-lockup__cell1">
-          <div class="su-lockup__wordmark-wrapper">
-            <span class="su-lockup__wordmark">Kosal</span>
-          </div>
-        </div>
-        <div class="su-lockup__cell2">
-          <span class="su-lockup__line1">Nith.</span>
-        </div>
-        <div class="su-lockup__line5"></div>
-      </a>
-    </div>
-
-    <div id="block-stanford-basic-main-navigation" class="system-menu-block main">
-      <nav class="su-multi-menu su-multi-menu--buttons su-multi-menu--right no-js" aria-label="main menu">
-        <button class="su-multi-menu__nav-toggle su-multi-menu__nav-toggle--right" aria-expanded="false">Menu</button>
-        <ul class="su-multi-menu__menu su-multi-menu__menu-lv1">
-          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="index.html"><span class="su-multi-menu__link-text-wrapper">Home</span></a></li>
-          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="bio.html"><span class="su-multi-menu__link-text-wrapper">Bio</span></a></li>
-          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="research.html"><span class="su-multi-menu__link-text-wrapper">Research</span></a></li>
-          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="activity.html"><span class="su-multi-menu__link-text-wrapper">Activity</span></a></li>
-          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="press.html"><span class="su-multi-menu__link-text-wrapper">Press</span></a></li>
-          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="teaching.html"><span class="su-multi-menu__link-text-wrapper">Teaching</span></a></li>
-          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="miscellaneous.html"><span class="su-multi-menu__link-text-wrapper">Miscellaneous</span></a></li>
-          <li class="su-multi-menu__item"><a class="su-multi-menu__link" href="https://kosalnith.substack.com"><span class="su-multi-menu__link-text-wrapper">Blog</span></a></li>
-          <!-- Travel is the active page -->
-          <li class="su-multi-menu__item su-multi-menu__item--active-trail su-multi-menu__item--current">
-            <a aria-current="true" class="su-multi-menu__link" href="personal.html">
-              <span class="su-multi-menu__link-text-wrapper">Personal</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </section>
-</header>
-
-<!-- ═══════════════════ SECTION HEADING ═══════════════════ -->
+    <!-- ═══════════════════ SECTION HEADING ═══════════════════ -->
 <div class="jumpstart-ui--one-column centered-container">
   <section class="panel theme--white" data-type="section" id="academics" data-modular-content="" data-js="panel" data-index="8">
     <header>
@@ -117,7 +58,8 @@
 </div>
 
 <!-- ═══════════════════ MAIN — travel map widget ═══════════════════ -->
-<main class="page-content" id="page-content">
+
+    <main class="page-content" id="page-content">
   <div id="main-content" tabindex="-1"></div>
 
   <div class="tm-page">
@@ -266,6 +208,8 @@
   </div><!-- /.tm-page -->
 </main>
 
+    
+
 <!-- ═══ GALLERY SIDEBARS — fixed, outside all containers so display:none on parent never hides them ═══ -->
 
 <!-- Activity sidebar (left) -->
@@ -322,71 +266,24 @@
 </div>
 
 
-<!-- ═══════════════════ PRE-FOOTER — exact match to activity.html ═══════════════════ -->
-<section id="footer__pre-footer" data-ga-action="Pre-footer">
-  <div class="social">
-    <ul data-ga-action="Social media">
-      <li><a title="Google Scholar" class="xsu-link" href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ&hl=en"><span class="fa fa-google" aria-hidden="true"></span><span class="sr-only-text">Google Scholar</span></a></li>
-      <li><a title="GitHub"         class="xsu-link" href="https://github.com/kosalnith"><span class="fa fa-github" aria-hidden="true"></span><span class="sr-only-text">GitHub</span></a></li>
-      <li><a title="Twitter"        class="xsu-link" href="https://twitter.com/kosalnith"><span class="fa-brands fa-x-twitter" aria-hidden="true"></span><span class="sr-only-text">X</span></a></li>
-      <li><a title="Instagram"      class="xsu-link" href="https://www.instagram.com/kosalnith"><span class="fa fa-instagram" aria-hidden="true"></span><span class="sr-only-text">Instagram</span></a></li>
-      <li><a title="Facebook"       class="xsu-link" href="https://www.facebook.com/kosalnith26"><span class="fa fa-facebook-square" aria-hidden="true"></span><span class="sr-only-text">Facebook</span></a></li>
-      <li><a title="LinkedIn"       class="xsu-link" href="https://www.linkedin.com/in/kosalnith"><span class="fa fa-linkedin" aria-hidden="true"></span><span class="sr-only-text">LinkedIn</span></a></li>
-      <li><a title="YouTube"        class="xsu-link" href="https://www.youtube.com/kosalnith"><span class="fa fa-youtube-play" aria-hidden="true"></span><span class="sr-only-text">YouTube</span></a></li>
-    </ul>
-  </div>
-</section>
 
-<footer id="footer">
-  <div class="su-global-footer">
-    <div class="su-global-footer__container">
-      <div class="su-global-footer__brand">
-        <a id="su-logo" class="su-logo" aria-hidden="true" tabindex="-1" href="">
-          <span class="su-global-footer__link-a11y"> (link is external)</span>
-        </a>
-      </div>
-      <div class="su-global-footer__content">
-        <nav aria-label="global footer menu">
-          <ul class="su-global-footer__menu su-global-footer__menu--global">
-            <li><a href="https://kosalnith.github.io/index.html"         rel="nofollow">Home</a></li>
-            <li><a href="https://kosalnith.github.io/bio.html"           rel="nofollow">Bio</a></li>
-            <li><a href="https://kosalnith.github.io/research.html"      rel="nofollow">Research</a></li>
-            <li><a href="https://kosalnith.github.io/press.html"         rel="nofollow">Press</a></li>
-            <li><a href="https://kosalnith.github.io/miscellaneous.html" rel="nofollow">Miscellaneous</a></li>
-            <li><a href="https://kosalnith.github.io/personal.html"      rel="nofollow">Personal</a></li>
-          </ul>
-          <ul class="su-global-footer__menu su-global-footer__menu--policy">
-            <li><a href="" rel="nofollow">Center for Development Economics and Trade, Cambodia Development Resource Institute</a></li>
-            <br>
-            <li><a href="" rel="nofollow">No. 56, Street 315, Sangkat Boeng Kak II, Khan Tuol Touk, 120508, Phnom Penh, Cambodia</a></li>
-          </ul>
-        </nav>
-        <div class="su-global-footer__copyright">
-          <span>© 2018 – 2026 Kosal Nith.</span>
-          <span>All Rights Reserved.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
 
-<button id="back-to-top">
-  <span class="fas fa-chevron-up"></span>
-  Back to Top
-</button>
+    <!-- ✅ FOOTER SLOT — components.js injects pre-footer + footer here -->
+    <div id="site-footer"></div>
 
-</div><!-- /.dialog-off-canvas-main-canvas -->
+    <!-- ✅ back-to-top injected automatically by components.js -->
 
-<!-- ═══════════════════ SITE JS (same as activity.html) ═══════════════════ -->
-<script src="static/js/js_JBbJf6RwtYhWtZ0OWen2_GCykwMhsYkgnDCUtmawjXI.js"></script>
+  </div><!-- /dialog-off-canvas-main-canvas -->
 
-<!-- ═══════════════════ TRAVEL MAP SCRIPT ═══════════════════
-     All globals prefixed with "tm" to prevent name collisions
-     with the site JS (search.js, activity-widget.js, etc.)
-═══════════════════════════════════════════════════════════ -->
-<script src="static/js/travel_map.js" defer></script>
-<script src="static/js/search.js" defer></script>
+  <!-- Leaflet + site bundle MUST load before travel_map.js -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="static/js/js_JBbJf6RwtYhWtZ0OWen2_GCykwMhsYkgnDCUtmawjXI.js"></script>
+  <script src="static/js/travel_map.js"></script>
 
+  <!-- ✅ components.js — injects header/footer then calls invalidateSize() on the map -->
+  <script src="static/js/components.js"></script>
+  <script src="static/js/darkmode.js"></script>
+  <script src="static/js/search.js"></script>
 
 </body>
 </html>

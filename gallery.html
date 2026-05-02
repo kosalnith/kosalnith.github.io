@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" prefix="og: https://ogp.me/ns#" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery | Kosal Nith</title>
+
+  <!-- Page-specific meta (update per page) -->
+  <meta property="og:title"   content="Gallery">
+  <meta property="og:url"     content="https://kosalnith.github.io/gallery.html">
+  <link rel="canonical"       href="https://kosalnith.github.io/gallery.html">
+  <meta name="twitter:title"  content="Gallery">
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" media="all" href="static/css/main.css">
+  <link rel="stylesheet" media="all" href="static/css/mainformat.css">
+  <link rel="stylesheet" media="all" href="static/css/darkmode.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Favicons, icons, og:site_name etc. are injected by components.js -->
+</head>
+
+<!--
+  CASE 1 — This page has its OWN nav item.
+
+  What was done in components.js:
+    NAV_ITEMS: [
+      ...
+      { label: 'Gallery', href: 'gallery.html' },  ← added here
+    ]
+
+  Result: "Gallery" appears in the nav bar and is underlined when on this page.
+-->
+
+<body class="page-gallery section-gallery not-front role--anonymous">
+
+  <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+
+    <div id="site-header"></div>
+
+    <main class="page-content" id="page-content">
+      <div id="block-stanford-basic-content" class="system-main-block block-system block-stanford-basic-content">
+        <section class="node basic-page node--layout-full">
+          <div class="content">
+
+            <section class="panel theme--white" data-type="section" id="gallery" data-js="panel">
+              <header>
+                <h2 class="center">Gallery</h2>
+                <p>A curated collection of photos from my travels, research, and everyday life.</p>
+              </header>
+
+              <!-- Your gallery content goes here -->
+
+            </section>
+
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+
+  </div>
+
+  <script src="static/js/components.js"></script>
+  <script src="static/js/darkmode.js"></script>
+  <script src="static/js/search.js"></script>
+
+</body>
+</html>
