@@ -1194,6 +1194,8 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
 .research-container .badge-on-hold          { background: #6b7280 !important; }
 /* ── Seeking Collaborators — sky blue (open invitation) ── */
 .research-container .badge-seeking-collab   { background: #0369a1 !important; }
+/* ── Unpublished ── */
+.research-container .badge-unpub            { background: #b70174 !important; }
 
 /* ── Keep old class names working (backward compat) ── */
 .research-container .oa-badge     { background: #1a7a45 !important; }

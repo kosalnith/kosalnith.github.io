@@ -137,6 +137,8 @@ const STAGE_BADGES = [
     icon: "fas fa-lock",             label: "Restricted" },
   { flag: "embargoed",            cls: "badge-embargoed",
     icon: "fas fa-hourglass-half",   label: "Embargoed" },
+  { flag: "unpub",          cls: "badge-unpub",
+    icon: "fas fa-sd-card",           label: "Unpublished"},
   // ── Recognition & impact ───────────────────────────────────
   { flag: "award",                cls: "badge-award",
     icon: "fas fa-trophy",           label: "Award Winner" },

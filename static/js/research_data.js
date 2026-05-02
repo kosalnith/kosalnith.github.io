@@ -140,6 +140,7 @@ const sdgItems = [
 //   policyImpact            — cited in policy documents or government reports
 //   onHold                  — paused temporarily
 //   seekingCollaborators    — looking for co-authors or research partners
+//   unpub                   - unpublished papers 
 const publicationsData = [
 
   // ══ Newspaper Articles / Op-Eds (14) — CMOS 18 §14.191 ══════════════════════
@@ -217,7 +218,7 @@ const publicationsData = [
     ogImage: "https://kosalnith.github.io/static/img/og/will-cambodia-commit-to-protecting-its-forests.png",
     authors: "Kosal Nith", date: "13 Nov 2021", outlet: "The Diplomat",
     zoteroType: "newspaperArticle",
-    type: "opeds", year: "2021", oa: true, lang: "en",
+    type: "opeds", year: "2021", oa: false, restricted: true, lang: "en",
     breadcrumb: "Newspaper article › Op-Ed",
     keywords: ["Deforestation","Forest Policy","Climate","Cambodia"],
     kwStrength: ["full","full","half","none"],
@@ -250,7 +251,7 @@ const publicationsData = [
     ogImage: "https://kosalnith.github.io/static/img/og/rising-inflation-threatens-to-swamp-cambodian-households.png",
     authors: "Kosal Nith", date: "26 May 2021", outlet: "The Diplomat",
     zoteroType: "newspaperArticle",
-    type: "opeds", year: "2021", oa: false, lang: "en",
+    type: "opeds", year: "2021", oa: false, restricted: true, lang: "en",
     breadcrumb: "Newspaper article › Op-Ed",
     keywords: ["Inflation","Household Welfare","Monetary Policy","Cambodia"],
     kwStrength: ["full","full","half","none"],
@@ -261,7 +262,7 @@ const publicationsData = [
     ogImage: "https://kosalnith.github.io/static/img/og/lockdowns-food-security-crisis-must-address-demand-and-supply.png",
     authors: "Kosal Nith & Kimly Lay", date: "4 May 2021", outlet: "VOD",
     zoteroType: "newspaperArticle",
-    type: "opeds", year: "2021", oa: false, lang: "en",
+    type: "opeds", year: "2021", oa: true, lang: "en",
     breadcrumb: "Newspaper article › Op-Ed",
     keywords: ["Food Security","COVID-19","Lockdown","Cambodia"],
     kwStrength: ["full","full","full","none"],
@@ -432,7 +433,7 @@ const publicationsData = [
     zoteroType: "report",
     seriesName: "Future Forum Working Paper",
     month: "April", year_pub: "2022",
-    type: "reports", year: "2022", oa: false, lang: "en",
+    type: "reports", year: "2022", oa: true, lang: "en",
     breadcrumb: "Report › Working paper",
     abstract: "This paper investigates to estimate the distributional effects of monetary policy shocks on macroeconomic aggregates and aggregate consumption. An earning heterogeneity channel, a Fisher channel and an interest rate exposure channel were applied as transmission channels affect aggregate spending when households have different average propensities of consume. Through the Structural VAR model, I find that monetary policy shock pursuant to the exchange rate has positive consequences on inflation, real output and the unemployment rate. Simultaneously, sufficient statistics from Cambodian cross-sectional data in the time period 2014–2020 suggests that all three channels are likely to amplify the effects of monetary policy. Furthermore, I discover that the increase in inequality of household consumption and liabilities over the past 7 years, while decreasing household income and assets inequality over the same period.",
     keywords: ["Monetary Policy","Income Distribution","Structural VAR","Inequality","Cambodia"],
@@ -487,7 +488,7 @@ const publicationsData = [
     ogImage: "https://kosalnith.github.io/static/img/og/mapping-study-youth-and-civil-society-in-urban-cambodia.png",
     authors: "Kosal Nith", date: "Sep 2022", outlet: "Future Forum",
     zoteroType: "report",
-    type: "reports", year: "2022", oa: false, lang: "en",
+    type: "reports", year: "2022", oa: false, restricted: true, lang: "en",
     breadcrumb: "Report › Mapping study",
     abstract: "Cambodia has one of the highest proportions of young people in the world. According to the United Nations Development Programme (2019), around 65.3% of the population is under the age of 30. This demographic dividend presents an opportunity for future prosperity, as the youth population can contribute to economic growth, social welfare, and inclusion. However, many Cambodian youth continue to face challenges in education, employment, and capacity development. Their potential role in promoting positive change is shaped by the support they receive. Barriers to youth participation in civil society include a shrinking democratic space, limited avenues for engagement with policies and politics, restrictive social norms, financial dependence, and a lack of encouragement and support. Despite these challenges, youth participation is vital for building democratic resilience and achieving a peaceful, inclusive, and prosperous society. Civil society organizations in Cambodia are working to harness the potential of youth as agents of change by enhancing their critical thinking and leadership skills, creating spaces for dialogue, and promoting engagement with governance and policy issues. Yet, further understanding is needed to clarify the roles and challenges of youth in civic engagement and social development. The European Union Delegation to Cambodia (EUD) recognises the importance of youth participation and is developing strategies to increase engagement during 2021–2027. To support this, a mapping study on youth and civil society in urban Cambodia was conducted to explore the aspirations, challenges, and needs of youth actors. The study aims to inform EUD’s efforts to empower youth and promote transformative change.",
     keywords: ["Youth","Civil Society","Civic Engagement","Democracy","Cambodia"],
@@ -557,7 +558,7 @@ const publicationsData = [
     ogImage: "https://kosalnith.github.io/static/img/og/monetary-policy-how-does-it-become-a-tool-to-support-poor-households-afford-to-p.png",
     authors: "Kosal Nith", date: "Nov 2022", outlet: "Policy brief",
     zoteroType: "report",
-    type: "reports", year: "2022", oa: false, draftVersion: true, lang: "en",
+    type: "reports", year: "2022", oa: false, draftVersion: true, unpub: true, lang: "en",
     breadcrumb: "Report › Policy brief",
     abstract: "Cambodia's current monetary policy lacks the autonomy to tackle affordable housing due to non-independent monetary tools and high dollarization. Liquidity-providing collateralized operations (LPCO) show promise as an innovative approach, partnering with private banks to offer low-interest mortgages.",
     keywords: ["Monetary Policy","Affordable Housing","Dollarization","Cambodia"],
