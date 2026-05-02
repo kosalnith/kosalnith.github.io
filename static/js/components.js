@@ -41,7 +41,6 @@
     { label: 'Miscellaneous', href: 'miscellaneous.html' },
     { label: 'Blog',          href: 'https://kosalnith.substack.com', external: true },
     { label: 'Personal',      href: 'personal.html' },
-    { label: 'Gallery',       href: 'gallery.html' },
   ];
 
   // ═══════════════════════════════════════════════════════════════
