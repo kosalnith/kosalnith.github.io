@@ -347,6 +347,11 @@ const publicationsData = [
    resources: [
       { label: "Paper", url: "research/papers/camCassava_2026.pdf", icon: "fa-file-pdf" },
       { label: "Slides", url: "research/slides/Kosal_SARED23.pdf", icon: "fa-person-chalkboard" }
+    ],
+    figures: [
+      { file: "ep1.jpg", caption: "Figure 1: Cassava production costs vs. income (2019–2021)" },
+      { file: "ep2.jpg", caption: "Figure 2: Labor productivity by gender and province" },
+      { file: "ep3.jpg", caption: "Table 1: Household-level regression results" }
     ] },
   { title: "Food Science in Cambodia",
     ogImage: "https://kosalnith.github.io/static/img/og/food-science-in-cambodia.png",

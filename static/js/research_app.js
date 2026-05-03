@@ -896,7 +896,10 @@ function renderPublicationsWithPagination() {
             </div>
             ${formatAuthorsChicagoMeta(pub.authors) ? `<div class="pub-meta">${formatAuthorsChicagoMeta(pub.authors)}</div>` : ''}
             <div class="pub-outlet">${formatPubInfo(pub)}</div>
-            <div class="pub-type-label"><i class="${getTypeIcon(pub)}"></i> ${getTypeLabel(pub)}</div>
+            <div class="pub-type-label">
+              <i class="${getTypeIcon(pub)}"></i> ${getTypeLabel(pub)}
+              ${pub.link ? `<a class="link-btn link-btn--inline" href="${pub.link}" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> Open</a>` : ''}
+            </div>
 
             <div class="card-bottom">
 
@@ -909,8 +912,6 @@ function renderPublicationsWithPagination() {
                   <strong>Abstract</strong>
                   <span class="abstract-hint">(click to expand)</span>
                 </button>` : ''}
-                ${pub.abstract && pub.link ? `<span class="pub-actions-sep">·</span>` : ''}
-                ${pub.link ? `<a class="link-btn" href="${pub.link}" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> Open</a>` : ''}
               </div>
 
               ${pub.abstract ? `<div class="abstract-text" style="display:none;">${pub.abstract}</div>` : ''}
@@ -1460,6 +1461,10 @@ function showDetail(idx) {
     <button class="detail-back-btn" onclick="showList()" style="margin:0;white-space:nowrap;">
       <i class="fas fa-list"></i> All publications
     </button>
+    <button class="detail-nav-btn ${!nextPub ? 'disabled' : ''}" onclick="${nextPub ? `showDetail(${idx + 1})` : ''}" style="flex-direction:row-reverse;text-align:right;">
+      <span class="nav-label">Next</span>
+      <i class="fas fa-chevron-right"></i>
+    </button>
     <div class="detail-share-inline">
       <span class="detail-share-label"><i class="fas fa-share-nodes"></i> Share</span>
       <a class="detail-share-inline-btn" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(pub.title)}&url=${encodeURIComponent(shareUrl)}" target="_blank" title="Share on X / Twitter">
@@ -1468,6 +1473,15 @@ function showDetail(idx) {
       <a class="detail-share-inline-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}" target="_blank" title="Share on LinkedIn">
         <i class="fab fa-linkedin-in"></i>
       </a>
+      <a class="detail-share-inline-btn" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}" target="_blank" title="Share on Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a class="detail-share-inline-btn" href="https://www.instagram.com/" target="_blank" title="Share on Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a class="detail-share-inline-btn" href="https://bsky.app/intent/compose?text=${encodeURIComponent(pub.title + ' ' + shareUrl)}" target="_blank" title="Share on Bluesky">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 320" style="width:1.2em;height:1.2em;fill:currentColor;vertical-align:middle;"><path d="M180 142c-16.3-31.8-60.7-90.8-102-120C38 2 0 20 0 60c0 12 6.7 102.7 11 117 14 48.7 64.7 53.7 98 49-34 5-82.7 20.7-84 72-1 36.7 25.7 73 84 73s97-48.3 71-89c26 40.7 71 89 71 89 58.3 0 85-36.3 84-73-1.3-51.3-50-67-84-72 33.3 4.7 84-0.3 98-49C353.3 162.7 360 72 360 60c0-40-38-58-78-20C240.7 51.2 196.3 110.2 180 142z"/></svg>
+      </a>
       <a class="detail-share-inline-btn" href="mailto:?subject=${encodeURIComponent(pub.title)}&body=${encodeURIComponent('Check out this paper: ' + shareUrl)}" title="Share via Email">
         <i class="fas fa-envelope"></i>
       </a>
@@ -1475,18 +1489,15 @@ function showDetail(idx) {
         <i class="fas fa-link" id="copyLinkIcon"></i>
       </button>
     </div>
-    <button class="detail-nav-btn ${!nextPub ? 'disabled' : ''}" onclick="${nextPub ? `showDetail(${idx + 1})` : ''}" style="flex-direction:row-reverse;text-align:right;">
-      <span class="nav-label">Next</span>
-      <i class="fas fa-chevron-right"></i>
-    </button>
   `;
 
   // Breadcrumb
   const typeLabel = pub.breadcrumb || 'Research output';
+  const typeLabelShort = getTypeLabel(pub);
   document.getElementById('detailBreadcrumb').innerHTML =
-    `<a href="#" onclick="showList();return false;"><i class="fas fa-home" style="font-size:1.5rem;margin-right:3px;"></i> Research output</a>
+    `<a href="#" onclick="showList();return false;"><i class="fas fa-home" style="font-size:1.5rem;margin-right:3px;"></i> Research</a>
      <span class="sep">›</span>
-     <span>${typeLabel}</span>
+     <span>${typeLabelShort}</span>
      <span class="sep">›</span>
      <span style="color:#2c3f55;font-weight:500;">${pub.title.substring(0, 60)}${pub.title.length > 60 ? '…' : ''}</span>`;
 
@@ -1570,21 +1581,12 @@ function showDetail(idx) {
 
   // Build main content
   document.getElementById('detailMain').innerHTML = `
-    <div class="detail-type-tag">${typeLabel}</div>
     <h1 class="detail-title">${pub.title}</h1>
     <div class="detail-authors">${formatAuthorsChicagoMeta(pub.authors)}</div>
-    <div class="detail-affil">
-      <i class="fas fa-university" style="color:#9aaebf;margin-right:6px;font-size:1.5rem;"></i>
-      Cambodia Development Resource Institute (CDRI) &nbsp;·&nbsp; Phnom Penh, Cambodia
-    </div>
-    <div class="detail-output-tag">
-      Research output: ${typeLabel}
-      ${getStatusBadges(pub) ? `&nbsp;${getStatusBadges(pub)}` : ''}
-    </div>
+    ${getStatusBadges(pub) ? `<div class="detail-badge-row">${getStatusBadges(pub)}</div>` : ''}
 
     <div class="detail-tab-bar">
       <div class="detail-tab active" onclick="switchDetailTab(this,'overview')">Overview</div>
-      <div class="detail-tab" onclick="switchDetailTab(this,'fingerprint')">Fingerprint</div>
       <div class="detail-tab" onclick="switchDetailTab(this,'cite')">Cite</div>
     </div>
 
@@ -1592,22 +1594,36 @@ function showDetail(idx) {
     <div id="detailTabOverview">
       ${pub.abstract ? `
       <div class="detail-section-title">Abstract</div>
-      <div class="detail-abstract">${pub.abstract}</div>` : `
+      <div class="detail-abstract su-wysiwyg-text"><p>${pub.abstract}</p></div>` : `
       <div style="padding:1.2rem;background:#f9fbfd;border-radius:10px;color:#6c7a8e;font-size:1.6rem;margin-bottom:1.5rem;border:1px solid #e8edf5;">
         <i class="fas fa-info-circle" style="margin-right:6px;"></i>No abstract available for this publication.
       </div>`}
 
+      ${pub.figures && pub.figures.length ? `
+      <div class="detail-section-title">Main Figures</div>
+      <div class="detail-figures-grid detail-figures-count-${pub.figures.length}">
+        ${pub.figures.map(f => `
+        <div class="detail-figure-item">
+          <a href="static/img/research/${f.file}" target="_blank" download title="Download full-size image">
+            <img src="static/img/research/thumbs/${f.file}" alt="${f.caption || f.file}" class="detail-figure-thumb" loading="lazy">
+            <div class="detail-figure-overlay"><i class="fas fa-download"></i> Download</div>
+          </a>
+          ${f.caption ? `<div class="detail-figure-caption">${f.caption}</div>` : ''}
+        </div>`).join('')}
+      </div>` : ''}
+
       <div class="detail-section-title">Publication details</div>
       <table class="detail-meta-table">
-        <tr><td>Authors</td><td>${authorsExpanded}</td></tr>
-        <tr><td>Year</td><td>${yearStr !== 'n.d.' ? yearStr : '<em style="color:#6c7a8e;">Work in progress</em>'}</td></tr>
-        <tr><td>Date</td><td>${pub.date || '—'}</td></tr>
-        <tr><td>Outlet / Journal</td><td>${pub.outlet || '—'}</td></tr>
-        <tr><td>Publication type</td><td>${typeLabel}</td></tr>
-        <tr><td>Language</td><td>${pub.lang === 'fr' ? 'French' : pub.lang === 'km' ? 'Khmer' : 'English'}</td></tr>
-        <tr><td>Open Access</td><td>${pub.oa ? '<span class="status-badge badge-oa"><i class="fas fa-lock-open"></i>Open Access</span>' : '<span style="color:#6c7a8e;">Restricted</span>'}</td></tr>
+        <tr><td>Authors</td><td><p>${authorsExpanded}</p></td></tr>
+        <tr><td>Year</td><td><p>${yearStr !== 'n.d.' ? yearStr : '<em style="color:#6c7a8e;">Work in progress</em>'}</p></td></tr>
+        <tr><td>Date</td><td><p>${pub.date || '—'}</p></td></tr>
+        <tr><td>Outlet / Journal</td><td><p>${pub.outlet || '—'}</p></td></tr>
+        <tr><td>Publication type</td><td><p>${typeLabel}</p></td></tr>
+        <tr><td>Language</td><td><p>${pub.lang === 'fr' ? 'French' : pub.lang === 'km' ? 'Khmer' : 'English'}</p></td></tr>
+        <tr><td>Open Access</td><td>${pub.oa ? '<span class="status-badge badge-oa"><i class="fas fa-lock-open"></i>Open Access</span>' : '<p style="color:#6c7a8e;">Restricted</p>'}</td></tr>
         ${STAGE_BADGES.filter(s => pub[s.flag] && s.flag !== 'oa').length ? `<tr><td>Status</td><td class="detail-status-badges">${STAGE_BADGES.filter(s => pub[s.flag] && s.flag !== 'oa').map(s => `<span class="status-badge ${s.cls}"><i class="${s.icon}"></i>${s.label}</span>`).join(' ')}</td></tr>` : ''}
-        ${pub.link ? `<tr><td>External link</td><td><a href="${pub.link}" target="_blank" style="color:#b1040e;">${pub.link} <i class="fas fa-external-link-alt" style="font-size:1.4rem;"></i></a></td></tr>` : ''}
+        ${pub.link ? `<tr><td>External link</td><td><p><a href="${pub.link}" target="_blank" style="color:#b1040e;">${pub.link} <i class="fas fa-external-link-alt" style="font-size:1.4rem;"></i></a></p></td></tr>` : ''}
+        ${pub.doi ? `<tr><td>DOI</td><td><p><a href="https://doi.org/${pub.doi}" target="_blank" style="color:#b1040e;">https://doi.org/${pub.doi} <i class="fas fa-external-link-alt" style="font-size:1.4rem;"></i></a></p></td></tr>` : ''}
       </table>
 
       ${pub.keywords && pub.keywords.length ? `
@@ -1701,16 +1717,6 @@ function showDetail(idx) {
   document.getElementById('detailSidebar').innerHTML = `
     ${pub.award ? `<div class="detail-award"><i class="fas fa-trophy"></i> Award Winner — Best Paper</div>` : ''}
 
-    ${pub.oa || pub.link ? `
-    <div class="detail-card">
-      <div class="detail-card-title"><i class="fas fa-folder-open" style="margin-right:5px;color:#b1040e;"></i>Access to Publication</div>
-      ${pub.oa ? '<div class="detail-badge-oa"><i class="fas fa-lock-open"></i> Open Access</div>' : ''}
-      ${pub.link ? `<a class="detail-access-link" href="${pub.link}" target="_blank">
-        <span class="access-icon"><i class="fas fa-external-link-alt" style="color:#b1040e;font-size:1.6rem;"></i></span>
-        <span style="font-size:1.6rem;">Open full text<span class="detail-access-sub" style="font-size:1.5rem;">${pub.outlet || 'External link'}</span></span>
-      </a>` : ''}
-    </div>` : ''}
-
     ${pub.downloads ? `
     <div class="detail-card">
       <div class="detail-card-title"><i class="fas fa-chart-bar" style="margin-right:5px;color:#b1040e;"></i>Usage statistics</div>
@@ -1719,45 +1725,6 @@ function showDetail(idx) {
         <div style="line-height:1.3;font-size:1.6rem;"><strong>Downloads</strong><br><span style="font-size:1.5rem;color:#6c7a8e;">Full-text downloads</span></div>
       </div>
     </div>` : ''}
-
-    <div class="detail-card">
-      <div class="detail-card-title"><i class="fas fa-user-circle" style="margin-right:5px;color:#b1040e;"></i>Author profile</div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-        <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#b1040e,#e84655);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:2rem;flex-shrink:0;">K</div>
-        <div>
-          <div style="font-size:1.7rem;font-weight:700;color:#2e2d29;">Kosal Nith</div>
-          <div style="font-size:1.5rem;color:#6c7a8e;">Economist &amp; Researcher</div>
-        </div>
-      </div>
-      <div style="font-size:1.6rem;color:#4b5e77;line-height:1.6;margin-bottom:12px;">
-        <i class="fas fa-map-marker-alt" style="color:#b1040e;margin-right:6px;font-size:1.5rem;"></i>
-        Cambodia Development Resource Institute<br>
-        <span style="margin-left:20px;">Phnom Penh, Cambodia</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px;">
-        <a href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ" target="_blank" class="detail-share-btn">
-          <i class="fas fa-graduation-cap" style="color:#4285F4;"></i> Google Scholar
-        </a>
-        <a href="https://orcid.org/0000-0002-6976-4733" target="_blank" class="detail-share-btn">
-          <i class="fas fa-id-badge" style="color:#A6CE39;"></i> ORCID
-        </a>
-        <a href="https://ideas.repec.org/f/pni504.html" target="_blank" class="detail-share-btn">
-          <i class="fas fa-chart-line" style="color:#b1040e;"></i> IDEAS/RePec
-        </a>
-      </div>
-    </div>
-
-    <div class="detail-card">
-      <div class="detail-card-title"><i class="fas fa-share-alt" style="margin-right:5px;color:#b1040e;"></i>Share</div>
-      <div class="detail-share-row">
-        <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(pub.title)}&url=${encodeURIComponent(pub.link || 'https://kosalnith.com')}" target="_blank" class="detail-share-btn">
-          <i class="fab fa-twitter" style="color:#1da1f2;"></i> Twitter
-        </a>
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pub.link || 'https://kosalnith.com')}" target="_blank" class="detail-share-btn">
-          <i class="fab fa-linkedin" style="color:#0077b5;"></i> LinkedIn
-        </a>
-      </div>
-    </div>
 
   `;
 }

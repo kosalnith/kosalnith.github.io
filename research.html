@@ -55,30 +55,6 @@
       <div class="research-container">
         <div class="research-header">
           <div class="research-title">Research</div>
-          <div class="type-pills">
-            <button class="type-pill" data-filter-type="articles">
-              <span class="pill-number">1</span><span class="pill-label">Journal article</span>
-            </button>
-            <button class="type-pill" data-filter-type="reports">
-              <span class="pill-number">10</span><span class="pill-label">Report</span>
-            </button>
-            <button class="type-pill" data-filter-type="chapters">
-              <span class="pill-number">3</span><span class="pill-label">Book chapter</span>
-            </button>
-            <button class="type-pill" data-filter-type="opeds">
-              <span class="pill-number">14</span><span class="pill-label">Newspaper article</span>
-            </button>
-            <div class="more-wrapper">
-              <button class="type-pill" id="moreButton">
-                <span class="pill-number">5</span><span class="pill-label">More</span>
-              </button>
-              <div id="moreDropdown" class="more-dropdown">
-                <div class="more-item" data-more-type="presentations"><strong>1</strong> Presentation</div>
-                <div class="more-item" data-more-type="confpapers"><strong>1</strong> Conference paper</div>
-                <div class="more-item" data-more-type="progress"><strong>3</strong> Work in progress</div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <!-- Mobile filter toggle button -->
@@ -182,14 +158,34 @@
           </aside>
 
           <div class="main-content">
-            <!-- Show filters button — only visible when sidebar is collapsed -->
-            <button class="sidebar-show-btn" id="sidebarShowBtn">
-              <i class="fas fa-sliders"></i>
-              <span>Show filters</span>
-            </button>
+            <div class="type-pills">
+              <button class="type-pill" data-filter-type="articles">
+                <span class="pill-number">1</span><span class="pill-label">Journal article</span>
+              </button>
+              <button class="type-pill" data-filter-type="reports">
+                <span class="pill-number">10</span><span class="pill-label">Report</span>
+              </button>
+              <button class="type-pill" data-filter-type="chapters">
+                <span class="pill-number">3</span><span class="pill-label">Book chapter</span>
+              </button>
+              <button class="type-pill" data-filter-type="opeds">
+                <span class="pill-number">14</span><span class="pill-label">Newspaper article</span>
+              </button>
+              <div class="more-wrapper">
+                <button class="type-pill" id="moreButton">
+                  <span class="pill-number">5</span><span class="pill-label">More</span>
+                </button>
+                <div id="moreDropdown" class="more-dropdown">
+                  <div class="more-item" data-more-type="presentations"><strong>1</strong> Presentation</div>
+                  <div class="more-item" data-more-type="confpapers"><strong>1</strong> Conference paper</div>
+                  <div class="more-item" data-more-type="progress"><strong>3</strong> Work in progress</div>
+                </div>
+              </div>
+            </div>
+
             <div class="search-section">
               <div class="search-heading">Find Publications</div>
-              <div class="search-subtext">Search across 33 papers, working papers &amp; op-eds</div>
+              <div class="search-subtext">Search all types of publications below</div>
               <div class="search-row">
                 <div class="search-input-wrapper">
                   <i class="fas fa-search"></i>

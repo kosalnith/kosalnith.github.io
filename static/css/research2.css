@@ -643,7 +643,13 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
 #pubDetailView { font-size: 1.6rem; }
 
 
-.detail-container { width: 85vw; margin: 2rem 8vw; max-width: 1400px; }
+.detail-container {
+  width: 85vw;
+  margin: 2rem auto;
+  max-width: 1400px;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
 
 .detail-nav-row {
   display: flex; justify-content: space-between; align-items: center;
@@ -668,7 +674,7 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
 
 .detail-layout { display: flex; gap: 3rem; align-items: flex-start; }
 .detail-main { flex: 1; min-width: 0; }
-.detail-sidebar { width: 300px; flex-shrink: 0; }
+.detail-sidebar { width: 300px; flex-shrink: 0; display: none; }
 
 .detail-type-tag {
   font-size: 1.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
