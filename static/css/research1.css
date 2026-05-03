@@ -560,9 +560,9 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
   display: flex; justify-content: space-between; gap: 1rem;
   padding: 2rem 1.4rem 0.85rem 1.4rem; border-bottom: none;
   border-radius: 8px; transition: background 0.15s;
-  background: transparent;
+  background: #ffffff;
 }
-.publication:hover { background: transparent; }
+.publication:hover { background: #ffffff; }
 .publication:last-child { border-bottom: none; }
 .pub-details { flex: 1; }
 .pub-title {
@@ -1725,10 +1725,10 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
   display: flex !important;
   align-items: flex-start !important;
   gap: 0 !important;
-  background: transparent !important;
+  background: #ffffff !important;
 }
 .research-container .publication:hover {
-  background: transparent !important;
+  background: #ffffff !important;
 }
 .research-container .pub-details {
   flex: 1 1 auto !important;
@@ -1745,15 +1745,15 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
   width: 72px !important;
   height: 72px !important;
   border-radius: 50% !important;
-  background: transparent !important;
-  border: 2px solid transparent !important;
+  background: #ffffff !important;
+  border: 2px solid #ffffff !important;
   box-shadow: none !important;
   text-align: center !important;
   flex-shrink: 0 !important;
   transition: border-color 0.15s, box-shadow 0.15s !important;
 }
 .research-container .download-circle:hover {
-  border-color: transparent !important;
+  border-color: #ffffff !important;
   box-shadow: none !important;
 }
 .research-container .dl-num {
@@ -2272,159 +2272,3 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
   }
 }
 
-
-/* ── Override darkmode.css wildcard [class*="pub-"] rule ── */
-/* Use html.dark-mode body to beat the !important specificity */
-html.dark-mode body .publication,
-html.dark-mode body .pub-details,
-html.dark-mode body .pub-title,
-html.dark-mode body .pub-title a,
-html.dark-mode body .pub-detail-link,
-html.dark-mode body .pub-main,
-html.dark-mode body .pub-resources,
-html.dark-mode body .pub-breadcrumb,
-html.dark-mode body .pub-meta,
-html.dark-mode body .pub-authors,
-html.dark-mode body .pub-outlet,
-html.dark-mode body .pub-type-badge,
-html.dark-mode body .pub-badge-row,
-html.dark-mode body .pub-keywords,
-html.dark-mode body .pub-abstract,
-html.dark-mode body .pub-type-label,
-html.dark-mode body .pub-actions,
-html.dark-mode body .pub-link,
-html.dark-mode body .research-container .publication,
-html.dark-mode body .research-container .pub-details,
-html.dark-mode body .research-container .pub-title,
-html.dark-mode body .research-container .pub-outlet,
-html.dark-mode body .research-container .pub-meta,
-html.dark-mode body .research-container .pub-type-label,
-html.dark-mode body .research-container .pub-actions,
-html.dark-mode body .research-container .pub-resources,
-html.dark-mode body .research-container .pub-keywords {
-  background-color: transparent !important;
-  border-color: transparent !important;
-}
-
-/* Publication cards */
-html.dark-mode .pub-title,
-html.dark-mode .pub-title a,
-html.dark-mode .pub-detail-link {
-  color: var(--dm-text) !important;
-  background-color: transparent !important;
-}
-html.dark-mode .pub-meta,
-html.dark-mode .pub-breadcrumb,
-html.dark-mode .pub-outlet,
-html.dark-mode .pub-authors,
-html.dark-mode .detail-authors {
-  color: var(--dm-text-mute) !important;
-}
-/* Keywords: keep chip style with dark colors */
-html.dark-mode .research-container .pub-kw {
-  background: var(--dm-bg-alt) !important;
-  border-color: var(--dm-border) !important;
-  color: var(--dm-text-mute) !important;
-}
-
-/* Keywords */
-html.dark-mode .pub-kw {
-  background: var(--dm-bg-alt) !important;
-  color: var(--dm-text-mute) !important;
-  border-color: var(--dm-border) !important;
-}
-
-/* Year header */
-html.dark-mode .year-header {
-  border-bottom-color: var(--dm-border) !important;
-}
-
-/* Search section */
-html.dark-mode .search-section {
-  background: transparent !important;
-}
-html.dark-mode .search-row {
-  background: var(--dm-bg-card) !important;
-  border-color: var(--dm-border) !important;
-}
-html.dark-mode .search-row:focus-within {
-  background: var(--dm-bg-card) !important;
-  border-color: #b1040e !important;
-}
-html.dark-mode .search-input-wrapper input {
-  color: var(--dm-text) !important;
-  background: transparent !important;
-}
-
-/* Sidebar */
-html.dark-mode .research-sidebar {
-  background: var(--dm-bg-alt) !important;
-}
-html.dark-mode .filter-section-label,
-html.dark-mode .filter-heading {
-  color: var(--dm-text) !important;
-}
-html.dark-mode .research-sidebar .filter-group {
-  border-color: var(--dm-border) !important;
-}
-html.dark-mode .custom-check {
-  color: var(--dm-text-mute) !important;
-}
-html.dark-mode .sidebar-toggle-btn {
-  background: var(--dm-bg-card) !important;
-  border-color: var(--dm-border) !important;
-  color: var(--dm-text-mute) !important;
-}
-
-/* Sort bar */
-html.dark-mode .sort-bar {
-  border-color: var(--dm-border) !important;
-}
-html.dark-mode .result-count {
-  color: var(--dm-text) !important;
-}
-
-/* Detail page */
-html.dark-mode .detail-container {
-  background: var(--dm-bg) !important;
-}
-html.dark-mode .detail-title {
-  color: var(--dm-text) !important;
-}
-html.dark-mode .detail-abstract,
-html.dark-mode .detail-abstract p {
-  color: var(--dm-text-mute) !important;
-  background: transparent !important;
-}
-html.dark-mode .detail-meta-table td {
-  color: var(--dm-text-mute) !important;
-  border-color: var(--dm-border) !important;
-  background: transparent !important;
-}
-html.dark-mode .detail-meta-table tr:nth-child(even) td {
-  background: var(--dm-bg-alt) !important;
-}
-
-/* Cite box */
-html.dark-mode .cite-box {
-  background: var(--dm-bg-card) !important;
-  border-color: var(--dm-border) !important;
-}
-html.dark-mode .cite-text {
-  color: var(--dm-text-mute) !important;
-}
-html.dark-mode .cite-tab-btn {
-  background: var(--dm-bg-alt) !important;
-  color: var(--dm-text-mute) !important;
-  border-color: var(--dm-border) !important;
-}
-html.dark-mode .cite-tab-btn.active {
-  background: #b1040e !important;
-  color: #fff !important;
-}
-
-/* Mobile filter drawer */
-html.dark-mode .research-sidebar,
-html.dark-mode .filter-sidebar-header {
-  background: var(--dm-bg-card) !important;
-}

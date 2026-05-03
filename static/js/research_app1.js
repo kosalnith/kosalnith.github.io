@@ -1239,35 +1239,8 @@ function initEventListeners() {
     if (!e.target.closest('.more-wrapper')) document.getElementById('moreDropdown').classList.remove('open');
   });
 
-  // ── Mobile filter drawer (tablet & phone) ──────────────────────────────
-  (function initMobileDrawer() {
-    const toggleBtn  = document.getElementById('mobileFilterToggle');
-    const backdrop   = document.getElementById('filterBackdrop');
-    const sidebar    = document.querySelector('.research-sidebar');
-    const closeBtn   = document.getElementById('filterCloseBtn');
-
-    if (!toggleBtn || !backdrop || !sidebar) return;
-
-    function openDrawer() {
-      sidebar.classList.add('filter-open');
-      backdrop.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeDrawer() {
-      sidebar.classList.remove('filter-open');
-      backdrop.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    toggleBtn.addEventListener('click', openDrawer);
-    backdrop.addEventListener('click', closeDrawer);
-    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
-
-    // Close on filter change on mobile
-    sidebar.addEventListener('change', () => {
-      if (window.innerWidth <= 900) setTimeout(closeDrawer, 300);
-    });
-  })();
+  // Sort button
+  const sortBtn = document.getElementById('sortBtn');
   if (sortBtn) {
     sortBtn.addEventListener('click', (e) => {
       e.preventDefault();

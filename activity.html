@@ -69,32 +69,22 @@
                             <!-- ✦ RESEARCH ACTIVITIES WIDGET ✦ -->
                             <div class="research-container">
 
-                              <!-- Header: title + type pills -->
+                              <!-- Header: title only -->
                               <div class="research-header">
                                 <div class="research-title">Research Activities</div>
-                                <div class="type-pills">
-                                  <button class="type-pill" data-filter-type="all">
-                                    <span class="pill-number" id="totalActivitiesCount">0</span>
-                                    <span class="pill-label">All</span>
-                                  </button>
-                                  <button class="type-pill" data-filter-type="Conference presentation">
-                                    <span class="pill-number" id="confCount">0</span>
-                                    <span class="pill-label">Conference presentation</span>
-                                  </button>
-                                  <button class="type-pill" data-filter-type="Seminar">
-                                    <span class="pill-number" id="seminarCount">0</span>
-                                    <span class="pill-label">Seminar</span>
-                                  </button>
-                                  <button class="type-pill" data-filter-type="Workshop">
-                                    <span class="pill-number" id="workshopCount">0</span>
-                                    <span class="pill-label">Workshop</span>
-                                  </button>
-                                  <button class="type-pill" data-filter-type="Organisation">
-                                    <span class="pill-number" id="orgCount">0</span>
-                                    <span class="pill-label">Organisation</span>
-                                  </button>
-                                </div>
                               </div>
+
+                              <!-- Mobile filter toggle bar -->
+                              <div class="mobile-filter-bar">
+                                <button class="mobile-filter-toggle" id="mobileFilterToggle">
+                                  <i class="fas fa-sliders-h"></i>
+                                  <span>Filters</span>
+                                </button>
+                                <span class="mobile-result-count" id="mobileResultCount"></span>
+                              </div>
+
+                              <!-- Backdrop -->
+                              <div class="filter-backdrop" id="filterBackdrop"></div>
 
                               <!-- Two-column: sidebar + main content -->
                               <div class="two-columns">
@@ -103,6 +93,7 @@
                                 <aside class="research-sidebar">
                                   <div class="filter-sidebar-header">
                                     <div class="filter-section-label">Filters for Activities</div>
+                                    <button class="filter-close-btn" id="filterCloseBtn" aria-label="Close filters"><i class="fas fa-times"></i></button>
                                   </div>
 
                                   <!-- Hide / Show toggle -->
@@ -125,11 +116,6 @@
                                     <div class="filter-heading">Year</div>
                                     <div class="year-slider-wrap">
                                       <div class="year-track-outer">
-                                        <!-- Floating labels above thumbs -->
-                                        <div class="year-floating-labels">
-                                          <span class="year-float-label" id="yearMinLabel">–</span>
-                                          <span class="year-float-label" id="yearMaxLabel">–</span>
-                                        </div>
                                         <div class="year-track">
                                           <div class="year-fill" id="yearFill"></div>
                                           <input type="range" id="yearRangeMin">
@@ -153,29 +139,41 @@
                                     </div>
                                   </div>
 
-                                  <!-- Profile links -->
-                                  <div class="filter-group">
-                                    <div class="filter-heading">Profiles</div>
-                                    <div class="profile-links">
-                                      <a href="https://scholar.google.com/citations?user=LG2mrO4AAAAJ" target="_blank">Google Scholar</a>
-                                      <a href="https://orcid.org/0000-0002-6976-4733" target="_blank">ORCID</a>
-                                      <a href="https://ideas.repec.org/f/pni504.html" target="_blank">IDEAS/RePec</a>
-                                    </div>
-                                  </div>
                                 </aside>
 
                                 <!-- Main content: search + results -->
                                 <div class="main-content">
+                                  <div class="type-pills">
+                                    <button class="type-pill" data-filter-type="all">
+                                      <span class="pill-number" id="totalActivitiesCount">0</span>
+                                      <span class="pill-label">All</span>
+                                    </button>
+                                    <button class="type-pill" data-filter-type="Conference presentation">
+                                      <span class="pill-number" id="confCount">0</span>
+                                      <span class="pill-label">Conference presentation</span>
+                                    </button>
+                                    <button class="type-pill" data-filter-type="Seminar">
+                                      <span class="pill-number" id="seminarCount">0</span>
+                                      <span class="pill-label">Seminar</span>
+                                    </button>
+                                    <button class="type-pill" data-filter-type="Workshop">
+                                      <span class="pill-number" id="workshopCount">0</span>
+                                      <span class="pill-label">Workshop</span>
+                                    </button>
+                                    <button class="type-pill" data-filter-type="Organisation">
+                                      <span class="pill-number" id="orgCount">0</span>
+                                      <span class="pill-label">Organisation</span>
+                                    </button>
+                                  </div>
                                   <div class="search-section">
                                     <div class="search-heading">Find Research Activities</div>
-                                    <div class="search-input-wrapper">
-                                      <i class="fas fa-search"></i>
-                                      <input type="text" id="searchInput" placeholder="Search by title, description...">
-                                      <div class="search-divider"></div>
-                                      <div class="search-modes">
-                                        <span class="search-mode-btn active"><i class="fas fa-lightbulb"></i> concept</span>
-                                        <span class="search-mode-btn"><i class="fas fa-align-left"></i> matching text</span>
+                                    <div class="search-subtext">Search across all research activities</div>
+                                    <div class="search-row">
+                                      <div class="search-input-wrapper">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" id="searchInput" placeholder="Title, type, description…">
                                       </div>
+                                      <button class="search-btn" onclick="document.getElementById('searchInput').dispatchEvent(new Event('input'))">Search</button>
                                     </div>
                                   </div>
 

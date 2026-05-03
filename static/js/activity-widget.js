@@ -163,31 +163,42 @@ function renderSdgList() {
 /* ─── 4. Type filter render ─────────────────────────────────────── */
 function renderTypeDetail() {
   const container = document.getElementById('typeDetailList');
-  const frag = document.createDocumentFragment();
-  allActivityTypes.forEach((type, idx) => {
-    const lbl = document.createElement('label');
-    lbl.className = 'custom-check' + (idx >= 5 ? ' type-hidden' : '');
-    lbl.title = type;
-    lbl.innerHTML =
-      `<input type="checkbox" data-activity-type="${type}">` +
-      `<span class="check-box"></span>` +
-      `<span class="custom-check-left">` +
-        `<span>${type}</span>` +
-        `<span class="count-badge">(${_typeCounts[type] || 0})</span>` +
-      `</span>`;
-    frag.appendChild(lbl);
-  });
-  container.innerHTML = '';
-  container.appendChild(frag);
+
+  // Only types with count > 0, sorted A-Z
+  const activeTypes = allActivityTypes
+    .filter(t => (_typeCounts[t] || 0) > 0)
+    .sort((a, b) => a.localeCompare(b));
+
+  function renderList(showAll) {
+    const frag = document.createDocumentFragment();
+    activeTypes.forEach((type, idx) => {
+      const lbl = document.createElement('label');
+      lbl.className = 'custom-check' + (!showAll && idx >= 5 ? ' type-hidden' : '');
+      lbl.innerHTML =
+        `<input type="checkbox" data-activity-type="${type}">` +
+        `<span class="check-box"></span>` +
+        `<span class="custom-check-left">` +
+          `<span>${type}</span>` +
+          `<span class="count-badge">(${_typeCounts[type]})</span>` +
+        `</span>`;
+      frag.appendChild(lbl);
+    });
+    container.innerHTML = '';
+    container.appendChild(frag);
+  }
+
+  renderList(false);
+
+  const toggleBtn = document.getElementById('toggleTypeBtn');
+  // Always show the button
+  toggleBtn.style.display = '';
+  toggleBtn.textContent = 'Show more \u203a';
 
   let expanded = false;
-  document.getElementById('toggleTypeBtn').onclick = () => {
+  toggleBtn.onclick = () => {
     expanded = !expanded;
-    container.querySelectorAll('.custom-check').forEach((c, i) => {
-      if (expanded) c.classList.remove('type-hidden');
-      else if (i >= 5) c.classList.add('type-hidden');
-    });
-    document.getElementById('toggleTypeBtn').textContent = expanded ? 'Show less' : 'Show more \u203a';
+    renderList(expanded);
+    toggleBtn.textContent = expanded ? 'Show less' : 'Show more \u203a';
   };
 }
 
@@ -265,25 +276,9 @@ function updateYearUI() {
   _yr.fill.style.left  = loP + '%';
   _yr.fill.style.width = (hiP - loP) + '%';
 
-  const thumbR = 8;
-  // px position of thumb centre within the track element
-  const thumbPx = p => (p / 100) * (_trackWidth - thumbR * 2) + thumbR;
-
-  // Half-width of each label (measured after first render; fallback 24px)
-  const minHalf = Math.ceil((_yr.minLabel.offsetWidth || 48) / 2);
-  const maxHalf = Math.ceil((_yr.maxLabel.offsetWidth || 48) / 2);
-
-  // Clamp inside [0, trackWidth] so the badge never exits the padded area
-  const loPx = Math.max(minHalf, Math.min(_trackWidth - minHalf, thumbPx(loP)));
-  const hiPx = Math.max(maxHalf, Math.min(_trackWidth - maxHalf, thumbPx(hiP)));
-
-  _yr.minLabel.textContent = lo;
-  _yr.maxLabel.textContent = hi;
-  _yr.minLabel.style.left  = loPx + 'px';
-  _yr.maxLabel.style.left  = hiPx + 'px';
-
-  if (_yr.absMin) _yr.absMin.textContent = yearMin;
-  if (_yr.absMax) _yr.absMax.textContent = yearMax;
+  // Static labels below the slider — show selected range
+  if (_yr.absMin) _yr.absMin.textContent = lo;
+  if (_yr.absMax) _yr.absMax.textContent = hi;
 }
 
 function getYearRange() {
@@ -382,36 +377,98 @@ function renderActivities() {
         details.appendChild(titleEl);
 
         // Role
+        const roleClassMap = {
+          'Presenter':     'role-presenter',
+          'Keynote':       'role-keynote',
+          'Speaker':       'role-speaker',
+          'Co-organiser':  'role-co-organiser',
+          'Organiser':     'role-organiser',
+          'Participant':   'role-participant',
+          'Discussant':    'role-discussant',
+          'Panelist':      'role-panelist',
+          'Chair':         'role-chair',
+          'Consultant':    'role-consultant',
+          'Lecturer':      'role-lecturer',
+          'Supervisor':    'role-supervisor',
+          'Examiner':      'role-examiner',
+          'Editor':        'role-editor',
+          'Reviewer':      'role-reviewer',
+        };
+        const roleCls = roleClassMap[a.role] || 'role-default';
         const personDiv = document.createElement('div');
         personDiv.className = 'activity-person';
-        personDiv.innerHTML = `<span class="role-label">Role:</span><span class="role-badge">${a.role}</span>`;
+        personDiv.innerHTML = `<span class="role-badge ${roleCls}">${a.role}</span>`;
         details.appendChild(personDiv);
 
         // Date
         const dateDiv = document.createElement('div');
         dateDiv.className = 'activity-date';
-        dateDiv.textContent = dateLocation;
+        dateDiv.innerHTML = `<i class="fas fa-calendar-alt activity-icon"></i><span>${a.date}</span>`;
         details.appendChild(dateDiv);
 
-        // Type
+        // Location (separate line if exists)
+        if (a.location) {
+          const locDiv = document.createElement('div');
+          locDiv.className = 'activity-location';
+          locDiv.innerHTML = `<i class="fas fa-map-marker-alt activity-icon"></i><span>${a.location}</span>`;
+          details.appendChild(locDiv);
+        }
+
+        // Type (unique icon per typeCategory)
+        const typeIconMap = {
+          "Talks and presentations in private or public companies":                                         "fa-bullhorn",
+          "Conference organisation or participation":                                                       "fa-calendar-check",
+          "Conference presentations":                                                                       "fa-chalkboard-teacher",
+          "Organisation or participation in workshops, courses, seminars, exhibitions or similar":          "fa-chalkboard",
+          "Peer review of manuscripts":                                                                     "fa-file-alt",
+          "Membership of committees, commissions, boards, councils, associations, organisations, or similar": "fa-users",
+          "Membership of review committee":                                                                 "fa-user-check",
+          "Other":                                                                                          "fa-tag",
+          "Membership of research networks or expert groups":                                               "fa-network-wired",
+          "External examination":                                                                           "fa-clipboard-check",
+          "Guest lecturers":                                                                                "fa-person-chalkboard",
+          "External teaching and course activities at other universities":                                  "fa-university",
+          "Journal editor":                                                                                 "fa-book-open",
+          "Board duties in companies, associations, or public organisations":                               "fa-building",
+          "Visiting another research institution":                                                          "fa-plane",
+          "Consultancy":                                                                                    "fa-briefcase",
+          "Internal examination":                                                                           "fa-clipboard-list",
+          "Hosting a guest lecturer":                                                                       "fa-door-open",
+          "Series editor":                                                                                  "fa-book",
+          "Public Sector Consultancy":                                                                      "fa-landmark",
+          "Editor of unfinished research anthology/collection":                                             "fa-pen-fancy",
+          "External PhD Supervision":                                                                       "fa-user-graduate",
+          "Internal PhD Supervision":                                                                       "fa-user-tie",
+          "Employment with any other public or private company including your own company":                 "fa-id-badge",
+          "Starting your own company":                                                                      "fa-rocket",
+        };
+        const typeIcon = typeIconMap[a.typeCategory] || "fa-tag";
         const typeDiv = document.createElement('div');
         typeDiv.className = 'activity-type-line';
-        typeDiv.textContent = a.typeCategory;
+        typeDiv.innerHTML = `<i class="fas ${typeIcon}"></i><span>${a.typeCategory}</span>`;
         details.appendChild(typeDiv);
 
-        // Resources
+        // Resources — styled like research pub-resources
         if (a.resources && a.resources.length) {
           const resDiv = document.createElement('div');
-          resDiv.className = 'activity-resource';
-          resDiv.textContent = 'Resource: ';
+          resDiv.className = 'pub-resources';
           a.resources.forEach(r => {
             const link = document.createElement('a');
-            link.className = 'resource-link';
+            // Map resource type to btn class + icon
+            const typeMap = {
+              'video':       { cls: 'resource-btn--video',     icon: 'fa-video'        },
+              'photo':       { cls: 'resource-btn--default',   icon: 'fa-image'        },
+              'slides':      { cls: 'resource-btn--slides',    icon: 'fa-file-powerpoint' },
+              'paper':       { cls: 'resource-btn--paper',     icon: 'fa-file-pdf'     },
+              'report':      { cls: 'resource-btn--published', icon: 'fa-file-alt'     },
+              'appendix':    { cls: 'resource-btn--appendix',  icon: 'fa-paperclip'    },
+              'replication': { cls: 'resource-btn--replication','icon': 'fa-database'  },
+              'other':       { cls: 'resource-btn--default',   icon: 'fa-link'         },
+            };
+            const tm = typeMap[r.type] || typeMap['other'];
+            link.className = `resource-btn ${tm.cls}`;
             link.href = r.url; link.target = '_blank'; link.rel = 'noopener';
-            const icon = document.createElement('i');
-            icon.className = `fas ${r.type === 'video' ? 'fa-video' : r.type === 'photo' ? 'fa-image' : 'fa-link'}`;
-            link.appendChild(icon);
-            link.appendChild(document.createTextNode(' ' + r.label));
+            link.innerHTML = `<i class="fas ${tm.icon}"></i>${r.label}`;
             resDiv.appendChild(link);
           });
           details.appendChild(resDiv);
@@ -587,38 +644,32 @@ renderActivities();
   } catch(e) { setSidebarCollapsed(false); }
 })();
 
-/* ─── 14. Mobile drawer (guarded against double-init) ───────────── */
-(function initDrawer() {
-  if (document.getElementById('_filterDrawerInit')) return;
-  const sentinel = document.createElement('div');
-  sentinel.id = '_filterDrawerInit';
-  sentinel.hidden = true;
-  document.body.appendChild(sentinel);
+/* ─── 14. Mobile filter drawer — matches research page ──────────── */
+(function initMobileDrawer() {
+  const toggleBtn = document.getElementById('mobileFilterToggle');
+  const backdrop  = document.getElementById('filterBackdrop');
+  const sidebar   = document.querySelector('.research-sidebar');
+  const closeBtn  = document.getElementById('filterCloseBtn');
 
-  const sidebar = document.querySelector('.research-container .research-sidebar');
-  const twoCol  = document.querySelector('.research-container .two-columns');
-  if (!sidebar || !twoCol) return;
+  if (!toggleBtn || !backdrop || !sidebar) return;
 
-  const overlay = document.createElement('div');
-  overlay.className = 'research-filter-overlay';
-  document.body.appendChild(overlay);
+  function openDrawer() {
+    sidebar.classList.add('filter-open');
+    backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    sidebar.classList.remove('filter-open');
+    backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
 
-  const closeWrap = document.createElement('div');
-  closeWrap.className = 'drawer-close-btn';
-  closeWrap.innerHTML = '<button aria-label="Close filters"><i class="fas fa-times"></i></button>';
-  sidebar.insertBefore(closeWrap, sidebar.firstChild);
+  toggleBtn.addEventListener('click', openDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
 
-  const toggleBtn = document.createElement('button');
-  toggleBtn.className = 'filter-toggle-btn';
-  toggleBtn.innerHTML = '<i class="fas fa-sliders-h"></i> Filters';
-  toggleBtn.setAttribute('aria-label', 'Open filters');
-  twoCol.parentNode.insertBefore(toggleBtn, twoCol);
-
-  const open  = () => { sidebar.classList.add('drawer-open');    overlay.classList.add('active');    document.body.style.overflow = 'hidden'; };
-  const close = () => { sidebar.classList.remove('drawer-open'); overlay.classList.remove('active'); document.body.style.overflow = ''; };
-
-  toggleBtn.addEventListener('click', open);
-  overlay.addEventListener('click', close);
-  closeWrap.querySelector('button').addEventListener('click', close);
-  sidebar.addEventListener('change', () => { if (window.innerWidth <= 860) setTimeout(close, 200); });
+  // Close after filter change on mobile
+  sidebar.addEventListener('change', () => {
+    if (window.innerWidth <= 900) setTimeout(closeDrawer, 300);
+  });
 })();

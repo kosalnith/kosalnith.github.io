@@ -73,9 +73,9 @@
         <div class="two-columns">
 
           <aside class="research-sidebar">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Search in all content</a>
             <div class="filter-sidebar-header">
               <div class="filter-section-label">Filters for Publications</div>
-              <button class="filter-close-btn" id="filterCloseBtn" aria-label="Close filters"><i class="fas fa-times"></i></button>
             </div>
 
             <!-- Hide / Show toggle — always inside the sidebar, below the header -->
@@ -206,6 +206,12 @@
             <div id="paginationContainer" class="pagination"></div>
           </div>
         </div><!-- /.two-columns -->
+
+        <!-- Fixed expand button — always visible when sidebar is collapsed (desktop only) -->
+        <button class="sidebar-expand-tab" id="sidebarExpandTab" aria-label="Show filters" title="Show filters">
+          <i class="fas fa-sliders-h"></i>
+          <span>Filters</span>
+        </button>
 
       </div>
     </div><!-- end pubListView -->
