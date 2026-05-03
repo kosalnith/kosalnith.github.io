@@ -351,10 +351,10 @@ const coAuthorLinks = {
 function formatAuthorsChicagoMeta(authorsStr) {
   if (!authorsStr) return '';
 
-  const parts = authorsStr.split(/\s*&\s*|\s*,\s*(?=[A-Z])/);
-  const coAuthors = parts.slice(1).map(a => a.trim()).filter(Boolean);
+  const parts = authorsStr.split(/\s*&\s*|\s*,\s*(?=[A-Z])/).map(a => a.trim()).filter(Boolean);
+  const coAuthors = parts.filter(a => a !== 'Kosal Nith');
 
-  // Solo author — show nothing
+  // Solo author or only Kosal — show nothing
   if (!coAuthors.length) return '';
 
   // Build co-author list with links
@@ -1513,10 +1513,17 @@ function showDetail(idx) {
   // Citation formats
   const yearStr = pub.year && pub.year !== 'progress' ? pub.year : 'n.d.';
 
-  // Authors are already full names in data (e.g. "Kosal Nith & Yuki Kanayama")
-  // Helper: split on " & " or ", " between authors
+  // Authors are stored as "First Last, First Last & First Last"
+  // Split correctly: split on " & " first, then on ", " only between names (not within)
   function splitAuthors(raw) {
-    return raw.split(/\s*&\s*/).map(a => a.trim()).filter(Boolean);
+    // First normalise: replace " & " with a delimiter, then split on ", " safely
+    // Strategy: split on " & " and ", " but treat each "First Last" as a unit
+    // Names are "First Last" format — split on ", " followed by a capital (next name)
+    // or " & "
+    return raw
+      .split(/\s*&\s*|\s*,\s*(?=[A-Z])/)
+      .map(a => a.trim())
+      .filter(Boolean);
   }
 
   // For APA/Harvard/Chicago: convert "First Last" → "Last, First"
@@ -1531,48 +1538,395 @@ function showDetail(idx) {
   // authorsExpanded = full name string for metadata table / BibTeX / RIS
   const authorsExpanded = pub.authors;
   const authorList = splitAuthors(pub.authors);
+  const zt = pub.zoteroType || '';
 
-  // APA: Last, First, & Last, First (year). Title. Outlet.
+  // ── Shared helpers ──────────────────────────────────────────────────────────
+
+  // "First Last" → "Last, F. M." (APA/Harvard initials)
+  function toInitialsLast(name) {
+    const parts = name.trim().split(/\s+/);
+    const last  = parts[parts.length - 1];
+    const inits = parts.slice(0, -1).map(x => x[0] + '.').join(' ');
+    return inits ? `${last}, ${inits}` : last;
+  }
+
+  // Author list → "Last, F., & Last, F." (APA)
+  function apaAuthors() {
+    const names = authorList.map(toInitialsLast);
+    if (names.length === 1) return names[0];
+    return names.slice(0, -1).join(', ') + ', &amp; ' + names[names.length - 1];
+  }
+
+  // Author list → "Last, F. and Last, F." (Harvard)
+  function harvardAuthors() {
+    const names = authorList.map(toInitialsLast);
+    if (names.length === 1) return names[0];
+    return names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1];
+  }
+
+  // Author list → "Last, First, and First Last" (Chicago)
+  function chicagoAuthors() {
+    const names = authorList.map((a, i) => i === 0 ? toLastFirst(a) : a);
+    if (names.length === 1) return names[0];
+    if (names.length === 2) return names[0] + ', and ' + names[1];
+    return names.slice(0, -1).join(', ') + ', and ' + names[names.length - 1];
+  }
+
+  // Author list → "Last, First and Last, First" (BibTeX)
+  function bibtexAuthors() {
+    return authorList.map(a => toLastFirst(a)).join(' and ');
+  }
+
+  // Editor string helper
+  const edStr = pub.editor ? pub.editor : '';
+  const edRole = pub.editorRole || 'ed.';
+
+  // URL/DOI helpers
+  // Auto-extract DOI from link if not explicitly set
+  const resolvedDoi = pub.doi || (pub.link && pub.link.includes('doi.org/') ? pub.link.split('doi.org/')[1] : null);
+  const doiUrl   = resolvedDoi ? `https://doi.org/${resolvedDoi}` : '';
+  const linkHtml = resolvedDoi
+    ? `<a href="${doiUrl}" target="_blank" style="color:#b1040e;">${doiUrl}</a>`
+    : pub.link
+      ? `<a href="${pub.link}" target="_blank" style="color:#b1040e;">${pub.link}</a>`
+      : '';
+  const doiPlain = resolvedDoi ? doiUrl : (pub.link || '');
+
+  // Date helpers
+  const dateStr = pub.date || (pub.month && yearStr !== 'n.d.' ? `${pub.month} ${yearStr}` : yearStr);
+  const accessStr = pub.accessDate ? ` Accessed ${pub.accessDate}.` : '';
+
+  // ── BibTeX type + field mapping ─────────────────────────────────────────────
+  function toBibtexType() {
+    const m = {
+      journalArticle: 'article',       bookSection: 'incollection',
+      book: 'book',                    thesis: 'phdthesis',
+      manuscript: 'unpublished',       preprint: 'unpublished',
+      report: 'techreport',            document: 'techreport',
+      dataset: 'misc',                 software: 'misc',
+      conferencePaper: 'inproceedings',presentation: 'misc',
+      newspaperArticle: 'article',     magazineArticle: 'article',
+      blogPost: 'misc',                forumPost: 'misc',
+      webpage: 'misc',                 encyclopediaArticle: 'incollection',
+      dictionaryEntry: 'incollection', map: 'misc',
+      case: 'misc',                    bill: 'misc',
+      statute: 'misc',                 hearing: 'misc',
+      patent: 'patent',                standard: 'misc',
+      film: 'misc',                    tvBroadcast: 'misc',
+      radioBroadcast: 'misc',          podcast: 'misc',
+      audioRecording: 'misc',          videoRecording: 'misc',
+      artwork: 'misc',                 interview: 'misc',
+      letter: 'misc',                  email: 'misc',
+      instantMessage: 'misc',
+    };
+    return m[zt] || 'misc';
+  }
+
+  // ── RIS type mapping ────────────────────────────────────────────────────────
+  function toRisType() {
+    const m = {
+      journalArticle: 'JOUR',  bookSection: 'CHAP',    book: 'BOOK',
+      thesis: 'THES',           manuscript: 'UNPB',     preprint: 'UNPB',
+      report: 'RPRT',           document: 'RPRT',       dataset: 'DATA',
+      software: 'COMP',         conferencePaper: 'CONF',presentation: 'CONF',
+      newspaperArticle: 'NEWS', magazineArticle: 'MGZN',blogPost: 'ELEC',
+      forumPost: 'ELEC',        webpage: 'ELEC',        encyclopediaArticle: 'ENCYC',
+      dictionaryEntry: 'DICT',  map: 'MAP',             case: 'CASE',
+      bill: 'BILL',             statute: 'STAT',        hearing: 'HEAR',
+      patent: 'PAT',            standard: 'STD',        film: 'MPCT',
+      tvBroadcast: 'BROAD',     radioBroadcast: 'BROAD',podcast: 'SOUND',
+      audioRecording: 'SOUND',  videoRecording: 'VIDEO',artwork: 'ART',
+      interview: 'INPR',        letter: 'PCOMM',        email: 'PCOMM',
+      instantMessage: 'PCOMM',
+    };
+    return m[zt] || 'GEN';
+  }
+
+  // ── APA 7th Edition ─────────────────────────────────────────────────────────
   function buildAPA(p, yr) {
-    const formatted = authorList.map((a, i) => {
-      const lf = toLastFirst(a);
-      return i === authorList.length - 1 && authorList.length > 1 ? '&amp; ' + lf : lf;
-    }).join(', ');
-    return `${formatted} (${yr}). ${p.title}. <em>${p.outlet || ''}</em>.${p.link ? ` <a href="${p.link}" target="_blank" style="color:#b1040e;">${p.link}</a>` : ''}`;
+    const au = apaAuthors();
+    const doi = linkHtml ? ` ${linkHtml}` : '';
+    const pub_ = p.publisher || p.outlet || '';
+    const inst = p.institution || p.outlet || '';
+
+    switch (zt) {
+      case 'journalArticle':
+        return `${au} (${yr}). ${p.title}. <em>${p.outlet || ''}</em>${p.volume ? `, <em>${p.volume}</em>` : ''}${p.issue ? `(${p.issue})` : ''}${p.pages ? `, ${p.pages}` : ''}.${doi}`;
+      case 'bookSection':
+        return `${au} (${yr}). ${p.title}. In ${edStr ? edStr + ` (${edRole}), ` : ''}<em>${p.outlet || ''}</em>${p.pages ? ` (pp. ${p.pages})` : ''}. ${pub_}.${doi}`;
+      case 'book':
+        return `${au} (${yr}). <em>${p.title}</em>. ${pub_}.${doi}`;
+      case 'thesis':
+        return `${au} (${yr}). <em>${p.title}</em> [${p.thesisType || 'Doctoral dissertation'}, ${inst}].${doi}`;
+      case 'manuscript':
+        return `${au} (${yr}). <em>${p.title}</em> [Unpublished manuscript]. ${inst}.`;
+      case 'preprint':
+        return `${au} (${yr}). <em>${p.title}</em>. ${p.outlet || 'Preprint'}.${doi}`;
+      case 'report':
+      case 'document':
+        return `${au} (${yr}). <em>${p.title}</em>${p.seriesNum ? ` (No. ${p.seriesNum})` : ''}. ${inst}.${doi}`;
+      case 'dataset':
+        return `${au} (${yr}). <em>${p.title}</em> [Data set]. ${inst || pub_}.${doi}`;
+      case 'software':
+        return `${au} (${yr}). <em>${p.title}</em>${p.version ? ` (Version ${p.version})` : ''} [Computer software]. ${pub_}.${doi}`;
+      case 'conferencePaper':
+      case 'presentation':
+        return `${au} (${yr}, ${dateStr}). <em>${p.title}</em> [${zt === 'presentation' ? 'Conference presentation' : 'Paper presentation'}]. ${p.outlet || ''}.${doi}`;
+      case 'newspaperArticle':
+        return `${au} (${yr}, ${dateStr}). ${p.title}. <em>${p.outlet || ''}</em>.${doi}`;
+      case 'magazineArticle':
+        return `${au} (${yr}, ${dateStr}). ${p.title}. <em>${p.outlet || ''}</em>.${doi}`;
+      case 'blogPost':
+        return `${au} (${yr}, ${dateStr}). ${p.title}. <em>${p.outlet || ''}</em>.${doi}`;
+      case 'webpage':
+        return `${au} (${yr}, ${dateStr}). ${p.title}. ${p.outlet || ''}.${doi}${accessStr}`;
+      case 'encyclopediaArticle':
+      case 'dictionaryEntry':
+        return `${au} (${yr}). ${p.title}. In ${edStr ? edStr + ` (${edRole}), ` : ''}<em>${p.outlet || ''}</em>. ${pub_}.${doi}`;
+      case 'patent':
+        return `${au} (${yr}). <em>${p.title}</em>${p.patentNumber ? ` (Patent No. ${p.patentNumber})` : ''}. ${p.outlet || 'Patent Office'}.`;
+      case 'film':
+        return `${au} (${yr}). <em>${p.title}</em> [Film]. ${pub_}.`;
+      case 'tvBroadcast':
+      case 'radioBroadcast':
+        return `${au} (${yr}, ${dateStr}). ${p.title} [${zt === 'tvBroadcast' ? 'TV' : 'Radio'} broadcast episode]. In <em>${p.outlet || ''}</em>. ${pub_}.`;
+      case 'podcast':
+        return `${au} (${yr}, ${dateStr}). ${p.title} [Audio podcast episode]. <em>${p.outlet || ''}</em>.${doi}`;
+      case 'audioRecording':
+        return `${au} (${yr}). <em>${p.title}</em> [Album]. ${pub_}.`;
+      case 'videoRecording':
+        return `${au} (${yr}). <em>${p.title}</em> [Video]. ${pub_}.${doi}`;
+      case 'interview':
+        return `${au} (${yr}, ${dateStr}). [Interview]. ${p.outlet || ''}.`;
+      case 'letter':
+      case 'email':
+      case 'instantMessage':
+        return `${au} (${yr}, ${dateStr}). [${zt === 'letter' ? 'Letter' : zt === 'email' ? 'Email' : 'Message'} to ${p.recipient || 'recipient'}].`;
+      default:
+        return `${au} (${yr}). ${p.title}. ${p.outlet || ''}.${doi}`;
+    }
   }
 
-  // Harvard: Last, First and Last, First (year) 'Title', Outlet.
+  // ── Harvard ─────────────────────────────────────────────────────────────────
   function buildHarvard(p, yr) {
-    const formatted = authorList.map((a, i) => {
-      const lf = toLastFirst(a);
-      return i === authorList.length - 1 && authorList.length > 1 ? 'and ' + lf : lf;
-    }).join(', ');
-    return `${formatted} (${yr}) '${p.title}', <em>${p.outlet || ''}</em>.`;
+    const au = harvardAuthors();
+    const doi = linkHtml ? ` ${linkHtml}` : '';
+    const pub_ = p.publisher || p.outlet || '';
+    const inst = p.institution || p.outlet || '';
+
+    switch (zt) {
+      case 'journalArticle':
+        return `${au} (${yr}) '${p.title}', <em>${p.outlet || ''}</em>${p.volume ? `, vol. ${p.volume}` : ''}${p.issue ? `, no. ${p.issue}` : ''}${p.pages ? `, pp. ${p.pages}` : ''}.${doi}`;
+      case 'bookSection':
+        return `${au} (${yr}) '${p.title}', in ${edStr ? edStr + ` (${edRole}) ` : ''}<em>${p.outlet || ''}</em>, ${pub_}${p.pages ? `, pp. ${p.pages}` : ''}.${doi}`;
+      case 'book':
+        return `${au} (${yr}) <em>${p.title}</em>, ${pub_}.${doi}`;
+      case 'thesis':
+        return `${au} (${yr}) '${p.title}', ${p.thesisType || 'doctoral dissertation'}, ${inst}.`;
+      case 'manuscript':
+        return `${au} (${yr}) '${p.title}', unpublished manuscript, ${inst}.`;
+      case 'preprint':
+        return `${au} (${yr}) '${p.title}', ${p.outlet || 'preprint'}.${doi}`;
+      case 'report':
+      case 'document':
+        return `${au} (${yr}) <em>${p.title}</em>${p.seriesNum ? `, no. ${p.seriesNum}` : ''}, ${inst}.${doi}`;
+      case 'conferencePaper':
+      case 'presentation':
+        return `${au} (${yr}) '${p.title}', paper presented at ${p.outlet || ''}, ${dateStr}.`;
+      case 'newspaperArticle':
+      case 'magazineArticle':
+        return `${au} (${yr}) '${p.title}', <em>${p.outlet || ''}</em>, ${dateStr}.${doi}`;
+      case 'blogPost':
+      case 'webpage':
+        return `${au} (${yr}) '${p.title}', <em>${p.outlet || ''}</em>, ${dateStr}.${doi}${accessStr}`;
+      case 'encyclopediaArticle':
+      case 'dictionaryEntry':
+        return `${au} (${yr}) '${p.title}', in <em>${p.outlet || ''}</em>, ${pub_}.${doi}`;
+      case 'film':
+        return `${au} (${yr}) <em>${p.title}</em> [film], ${pub_}.`;
+      case 'podcast':
+        return `${au} (${yr}) '${p.title}', <em>${p.outlet || ''}</em>, ${dateStr}.${doi}`;
+      default:
+        return `${au} (${yr}) '${p.title}', ${p.outlet || ''}.${doi}`;
+    }
   }
 
-  // Chicago 17th ed: Last, First, First Last, and First Last. YEAR. "Title." Outlet. URL.
-  // e.g. Rossi-Hansberg, Esteban, Pierre-Daniel Sarte, and Felipe Schwartzman. 2026.
-  //      "Cognitive Hubs and Spatial Redistribution." American Economic Journal: Macroeconomics 18 (2): 72–111.
+  // ── Chicago 17th Edition ────────────────────────────────────────────────────
   function buildChicago(p, yr) {
-    const formatted = authorList.map((a, i) => {
-      if (i === 0) return toLastFirst(a);  // first: Last, First
-      return a;                             // subsequent: First Last
-    });
-    const authStr = formatted.length > 2
-      ? formatted.slice(0, -1).join(', ') + ', and ' + formatted[formatted.length - 1]
-      : formatted.length === 2
-        ? formatted[0] + ', and ' + formatted[1]
-        : formatted[0];
-    const outletStr = p.outlet ? `<em>${p.outlet}</em>` : '';
-    const linkStr = p.link ? ` <a href="${p.link}" target="_blank" style="color:#b1040e;">${p.link}</a>` : '';
-    return `${authStr}. ${yr !== 'n.d.' ? yr : 'n.d.'}. "${p.title}." ${outletStr}.${linkStr}`;
+    const au = chicagoAuthors();
+    const doi = linkHtml ? ` ${linkHtml}` : '';
+    const pub_ = p.publisher || p.outlet || '';
+    const inst = p.institution || p.outlet || '';
+
+    switch (zt) {
+      case 'journalArticle':
+        return `${au}. ${yr}. "${p.title}." <em>${p.outlet || ''}</em>${p.volume ? ` ${p.volume}` : ''}${p.issue ? `, no. ${p.issue}` : ''}${p.pages ? `: ${p.pages}` : ''}.${doi}`;
+      case 'bookSection':
+        return `${au}. ${yr}. "${p.title}." In <em>${p.outlet || ''}</em>${edStr ? `, edited by ${edStr}` : ''}${p.pages ? `, ${p.pages}` : ''}. ${pub_}.${doi}`;
+      case 'book':
+        return `${au}. ${yr}. <em>${p.title}</em>. ${pub_}.${doi}`;
+      case 'thesis':
+        return `${au}. ${yr}. "${p.title}." ${p.thesisType || 'PhD diss.'}, ${inst}.`;
+      case 'manuscript':
+        return `${au}. ${yr}. "${p.title}." Unpublished manuscript, ${inst}.`;
+      case 'preprint':
+        return `${au}. ${yr}. "${p.title}." ${p.outlet || 'Preprint'}.${doi}`;
+      case 'report':
+      case 'document':
+        return `${au}. ${yr}. <em>${p.title}</em>${p.seriesNum ? `, no. ${p.seriesNum}` : ''}. ${inst}.${doi}`;
+      case 'dataset':
+        return `${au}. ${yr}. "${p.title}." ${inst || pub_}.${doi}`;
+      case 'conferencePaper':
+      case 'presentation':
+        return `${au}. ${yr}. "${p.title}." Paper presented at ${p.outlet || ''}, ${dateStr}.`;
+      case 'newspaperArticle':
+        return `${au}. "${p.title}." <em>${p.outlet || ''}</em>, ${dateStr}.${doi}`;
+      case 'magazineArticle':
+        return `${au}. "${p.title}." <em>${p.outlet || ''}</em>, ${dateStr}.`;
+      case 'blogPost':
+        return `${au}. "${p.title}." <em>${p.outlet || ''}</em> (blog). ${dateStr}.${doi}`;
+      case 'webpage':
+        return `${au}. "${p.title}." <em>${p.outlet || ''}</em>. ${dateStr}.${doi}${accessStr}`;
+      case 'encyclopediaArticle':
+      case 'dictionaryEntry':
+        return `${au}. ${yr}. "${p.title}." In <em>${p.outlet || ''}</em>. ${pub_}.${doi}`;
+      case 'film':
+        return `${au}. ${yr}. <em>${p.title}</em>. ${pub_}.`;
+      case 'podcast':
+        return `${au}. "${p.title}." <em>${p.outlet || ''}</em>. Podcast audio, ${dateStr}.${doi}`;
+      case 'interview':
+        return `${au}. Interview by ${p.recipient || 'interviewer'}. ${dateStr}.`;
+      case 'letter':
+        return `${au}. ${dateStr}. Letter to ${p.recipient || 'recipient'}.`;
+      default:
+        return `${au}. ${yr}. "${p.title}." ${p.outlet || ''}.${doi}`;
+    }
   }
 
-  const apa      = buildAPA(pub, yearStr);
-  const harvard  = buildHarvard(pub, yearStr);
-  const chicago  = buildChicago(pub, yearStr);
-  const bibtex   = `@article{nith${yearStr},\n  title    = {${pub.title}},\n  author   = {${authorsExpanded}},\n  year     = {${yearStr}},\n  journal  = {${pub.outlet || ''}},${pub.link ? `\n  url      = {${pub.link}},` : ''}\n  keywords = {${(pub.keywords || []).join(', ')}}\n}`;
-  const ris      = `TY  - JOUR\nT1  - ${pub.title}\nAU  - ${authorsExpanded}\nPY  - ${yearStr}\nJO  - ${pub.outlet || ''}\n${pub.link ? `UR  - ${pub.link}\n` : ''}KW  - ${(pub.keywords || []).join('\nKW  - ')}\nER  -`;
+  // ── BibTeX ──────────────────────────────────────────────────────────────────
+  const bibtexType = toBibtexType();
+  const bibtexKey  = toLastFirst(authorList[0]).split(',')[0].toLowerCase().replace(/[^a-z]/g,'') + yearStr;
+  const bibtexAu   = bibtexAuthors();
+  const pub_       = pub.publisher || pub.outlet || '';
+  const inst_      = pub.institution || pub.outlet || '';
+
+  // Type-specific BibTeX fields
+  function bibtexFields() {
+    const base = [
+      `  title        = {${pub.title}}`,
+      `  author       = {${bibtexAu}}`,
+      `  year         = {${yearStr}}`,
+    ];
+    if (resolvedDoi) base.push(`  doi          = {${resolvedDoi}}`);
+    if (pub.link && !resolvedDoi) base.push(`  url          = {${pub.link}}`);
+    if (pub.keywords?.length) base.push(`  keywords     = {${pub.keywords.join(', ')}}`);
+
+    switch (zt) {
+      case 'journalArticle':
+        if (pub.outlet)  base.push(`  journal      = {${pub.outlet}}`);
+        if (pub.volume)  base.push(`  volume       = {${pub.volume}}`);
+        if (pub.issue)   base.push(`  number       = {${pub.issue}}`);
+        if (pub.pages)   base.push(`  pages        = {${pub.pages}}`);
+        break;
+      case 'bookSection':
+        if (pub.outlet)  base.push(`  booktitle    = {${pub.outlet}}`);
+        if (edStr)       base.push(`  editor       = {${edStr}}`);
+        if (pub_)        base.push(`  publisher    = {${pub_}}`);
+        if (pub.pages)   base.push(`  pages        = {${pub.pages}}`);
+        break;
+      case 'book':
+        if (pub_)        base.push(`  publisher    = {${pub_}}`);
+        if (pub.pubCity) base.push(`  address      = {${pub.pubCity}}`);
+        break;
+      case 'thesis':
+        base.splice(2, 1, `  year         = {${yearStr}}`);
+        base.push(`  school       = {${inst_}}`);
+        base.push(`  type         = {${pub.thesisType || 'PhD dissertation'}}`);
+        break;
+      case 'report':
+      case 'document':
+        if (inst_)       base.push(`  institution  = {${inst_}}`);
+        if (pub.seriesNum) base.push(`  number       = {${pub.seriesNum}}`);
+        break;
+      case 'conferencePaper':
+      case 'presentation':
+        if (pub.outlet)  base.push(`  booktitle    = {${pub.outlet}}`);
+        if (dateStr)     base.push(`  note         = {${dateStr}}`);
+        break;
+      case 'newspaperArticle':
+      case 'magazineArticle':
+        if (pub.outlet)  base.push(`  journal      = {${pub.outlet}}`);
+        if (pub.date)    base.push(`  note         = {${pub.date}}`);
+        break;
+      case 'software':
+        if (pub.version) base.push(`  version      = {${pub.version}}`);
+        if (pub_)        base.push(`  organization = {${pub_}}`);
+        break;
+      default:
+        if (pub.outlet)  base.push(`  howpublished = {${pub.outlet}}`);
+        if (pub.date)    base.push(`  note         = {${pub.date}}`);
+    }
+    return base;
+  }
+
+  const bibtex = `@${bibtexType}{${bibtexKey},\n${bibtexFields().join(',\n')}\n}`;
+
+  // ── RIS ─────────────────────────────────────────────────────────────────────
+  function buildRIS(p, yr) {
+    const lines = [`TY  - ${toRisType()}`];
+    lines.push(`TI  - ${p.title}`);
+    authorList.forEach(a => lines.push(`AU  - ${a}`));
+    lines.push(`PY  - ${yr}`);
+
+    switch (zt) {
+      case 'journalArticle':
+        if (p.outlet)  lines.push(`JO  - ${p.outlet}`);
+        if (p.volume)  lines.push(`VL  - ${p.volume}`);
+        if (p.issue)   lines.push(`IS  - ${p.issue}`);
+        if (p.pages)   lines.push(`SP  - ${p.pages.split(/[-–]/)[0].trim()}`,
+                                   `EP  - ${p.pages.split(/[-–]/)[1]?.trim() || ''}`);
+        break;
+      case 'bookSection':
+        if (p.outlet)  lines.push(`BT  - ${p.outlet}`);
+        if (edStr)     lines.push(`A2  - ${edStr}`);
+        if (pub_)      lines.push(`PB  - ${pub_}`);
+        if (p.pages)   lines.push(`SP  - ${p.pages.split(/[-–]/)[0].trim()}`,
+                                   `EP  - ${p.pages.split(/[-–]/)[1]?.trim() || ''}`);
+        break;
+      case 'book':
+        if (pub_)      lines.push(`PB  - ${pub_}`);
+        if (p.pubCity) lines.push(`CY  - ${p.pubCity}`);
+        break;
+      case 'thesis':
+        if (inst_)     lines.push(`PB  - ${inst_}`);
+        lines.push(`M3  - ${p.thesisType || 'PhD dissertation'}`);
+        break;
+      case 'report':
+      case 'document':
+        if (inst_)     lines.push(`PB  - ${inst_}`);
+        if (p.seriesNum) lines.push(`VL  - ${p.seriesNum}`);
+        break;
+      case 'conferencePaper':
+      case 'presentation':
+        if (p.outlet)  lines.push(`T2  - ${p.outlet}`);
+        if (p.date)    lines.push(`N1  - ${p.date}`);
+        break;
+      default:
+        if (p.outlet)  lines.push(`PB  - ${p.outlet}`);
+        if (p.date)    lines.push(`N1  - ${p.date}`);
+    }
+
+    if (p.doi || resolvedDoi)  lines.push(`DO  - ${resolvedDoi || p.doi}`);
+    if (p.link) lines.push(`UR  - ${p.link}`);
+    if (p.keywords?.length) p.keywords.forEach(k => lines.push(`KW  - ${k}`));
+    lines.push(`ER  -`);
+    return lines.join('\n');
+  }
+
+  const apa     = buildAPA(pub, yearStr);
+  const harvard = buildHarvard(pub, yearStr);
+  const chicago = buildChicago(pub, yearStr);
+  const ris     = buildRIS(pub, yearStr);
 
   // Related publications
   const related = publicationsData
@@ -1623,7 +1977,7 @@ function showDetail(idx) {
         <tr><td>Open Access</td><td>${pub.oa ? '<span class="status-badge badge-oa"><i class="fas fa-lock-open"></i>Open Access</span>' : '<p style="color:#6c7a8e;">Restricted</p>'}</td></tr>
         ${STAGE_BADGES.filter(s => pub[s.flag] && s.flag !== 'oa').length ? `<tr><td>Status</td><td class="detail-status-badges">${STAGE_BADGES.filter(s => pub[s.flag] && s.flag !== 'oa').map(s => `<span class="status-badge ${s.cls}"><i class="${s.icon}"></i>${s.label}</span>`).join(' ')}</td></tr>` : ''}
         ${pub.link ? `<tr><td>External link</td><td><p><a href="${pub.link}" target="_blank" style="color:#b1040e;">${pub.link} <i class="fas fa-external-link-alt" style="font-size:1.4rem;"></i></a></p></td></tr>` : ''}
-        ${pub.doi ? `<tr><td>DOI</td><td><p><a href="https://doi.org/${pub.doi}" target="_blank" style="color:#b1040e;">https://doi.org/${pub.doi} <i class="fas fa-external-link-alt" style="font-size:1.4rem;"></i></a></p></td></tr>` : ''}
+        ${resolvedDoi ? `<tr><td>DOI</td><td><p><a href="https://doi.org/${resolvedDoi}" target="_blank" style="color:#b1040e;">https://doi.org/${resolvedDoi} <i class="fas fa-external-link-alt" style="font-size:1.4rem;"></i></a></p></td></tr>` : ''}
       </table>
 
       ${pub.keywords && pub.keywords.length ? `

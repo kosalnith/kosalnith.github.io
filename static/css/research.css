@@ -94,7 +94,6 @@ article.node, .node--type-stanford-page, .su-page-components {
   justify-content: center;
   gap: 0;
   margin-bottom: 1.5rem;
-  border-bottom: 1.5px solid #e5e7eb;
   padding-bottom: 0.5rem;
 }
 .research-container .type-pill {
@@ -567,14 +566,14 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
 .publication:last-child { border-bottom: none; }
 .pub-details { flex: 1; }
 .pub-title {
-  display: block; font-size: 2.8rem !important; font-weight: 700; color: #2e2d29;
+  display: block; font-size: 2.2rem; font-weight: 700; color: #2e2d29;
   margin-bottom: 0.25rem; line-height: 1.3; text-decoration: none;
 }
 .pub-title a { color: #2e2d29; text-decoration: none; }
 .pub-title a:hover { color: #b1040e; text-decoration: underline; }
-.pub-meta { font-size: 2.1rem !important; color: #272727; margin-bottom: 3px; }
+.pub-meta { font-size: 1.9rem !important; color: #272727; margin-bottom: 3px; }
 .pub-meta strong { color: #b1040e; font-weight: 600; }
-.pub-breadcrumb { font-size: 2.1rem !important; color: #272727; font-style: italic; margin-bottom: 4px; }
+.pub-breadcrumb { font-size: 1.9rem !important; color: #272727; font-style: italic; margin-bottom: 4px; }
 
 .pub-badge, .pub-type-badge {
   display: inline-flex; align-items: center; font-size: 1.5rem; font-weight: 650;
@@ -682,7 +681,7 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
   padding: 4px 12px; display: inline-block; margin-bottom: 0.9rem;
 }
 .detail-title {
-  font-size: 4rem; font-weight: 800; color: #2e2d29; line-height: 1.2;
+  font-size: 3rem; font-weight: 800; color: #2e2d29; line-height: 1.2;
   margin-bottom: 0.75rem; letter-spacing: -0.01em;
 }
 .detail-authors { font-size: 1.8rem; color: #b1040e; font-weight: 600; margin-bottom: 0.4rem; }
@@ -787,7 +786,7 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
 }
 .detail-figure-item a:hover .detail-figure-overlay { opacity: 1; }
 .detail-figure-caption {
-  font-size: 1.35rem;
+  font-size: 1.7rem;
   color: #6c7a8e;
   line-height: 1.4;
   text-align: center;
@@ -1205,7 +1204,7 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
 
 /* Outlet info line */
 .research-container .pub-outlet {
-  font-size: 2.1rem !important;
+  font-size: 1.9rem !important;
   color: #272727 !important;
   margin: 0.05rem 0 0.3rem !important;
   line-height: 1.4 !important;

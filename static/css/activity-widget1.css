@@ -87,7 +87,7 @@
   top: 20px;
   max-height: calc(100vh - 40px);
   overflow-y: auto;
-  overflow-x: visible;
+  overflow-x: visible; /* must NOT be hidden — clips the year badge labels */
   scrollbar-width: none;
   -ms-overflow-style: none;
   will-change: transform;
@@ -95,75 +95,34 @@
 }
 .research-container .research-sidebar::-webkit-scrollbar { display: none; }
 
-/* Collapsed state */
-.research-container .research-sidebar.sidebar-collapsed .filter-group,
-.research-container .research-sidebar.sidebar-collapsed .back-link,
-.research-container .research-sidebar.sidebar-collapsed .filter-sidebar-header {
-  display: none !important;
-}
-.research-container .research-sidebar.sidebar-collapsed .sidebar-toggle-btn {
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
-}
-
-/* ── Hide/Show filters button ── */
-.research-container .sidebar-toggle-btn {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  width: 100%;
-  padding: 8px 12px;
-  margin-bottom: 1.2rem;
-  background: #f5f7fa;
-  border: 1.5px solid #e2eaf2;
-  border-radius: 8px;
-  color: #4a5568;
-  font-size: 1.45rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
-  box-sizing: border-box;
-}
-.research-container .sidebar-toggle-btn i {
-  font-size: 1.35rem;
-  color: #b1040e;
-  flex-shrink: 0;
-}
-.research-container .sidebar-toggle-btn:hover {
-  background: #fdf0f0;
-  border-color: #b1040e;
-  color: #b1040e;
-}
-
 .research-container .back-link {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: 1.6rem; color: #b1040e; text-decoration: none;
-  margin-bottom: 0.9rem; font-weight: 600;
+  font-size: 1.6rem; color: #2e2d29; text-decoration: none;
+  margin-bottom: 0.9rem; font-weight: 500;
 }
 .research-container .back-link:hover { text-decoration: underline; }
-.research-container .back-link i { font-size: 1.4rem; }
 
-/* ── Filter section headings ── */
 .research-container .filter-section-label {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #1e2a3e;
-  margin-bottom: 0.5rem;
-}
-.research-container .filter-heading {
-  font-size: 1.55rem;
-  font-weight: 700;
-  color: #1e2a3e;
-  margin-bottom: 0.4rem;
+  display: block;
+  font-size: 1.5rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1px; color: #fff;
+  padding: 0.4rem 0.75rem;
+  background: linear-gradient(90deg, #b1040e, #b1040e);
+  border-radius: 5px; margin-bottom: 0.75rem;
 }
 
-.research-container .research-sidebar .filter-group {
+.research-container .filter-group {
   border-bottom: 1px solid #eef2f6;
-  padding: 0.75rem 0 0.6rem;
+  padding: 0.4rem 0 0.25rem;
   margin: 0;
 }
-.research-container .research-sidebar .filter-group:last-child { border-bottom: none; }
+.research-container .filter-group:last-child { border-bottom: none; }
+
+.research-container .filter-heading {
+  display: block;
+  font-weight: 700; font-size: 1.6rem; text-transform: uppercase;
+  letter-spacing: 0.4px; color: #2e2d29; margin-bottom: 0.25rem;
+}
 
 /* ── Checkbox ── */
 .research-container .check-box {
@@ -181,7 +140,7 @@
 .research-container .custom-check-left > span:first-child {
   flex: 1; min-width: 0; white-space: normal; line-height: 1.3; word-break: break-word;
 }
-.research-container .count-badge { color: #9aa5b4; font-size: 1.5rem; flex-shrink: 0; white-space: nowrap; margin-left: auto; }
+.research-container .count-badge { color: #9aa5b4; font-size: 1.5rem; flex-shrink: 0; white-space: nowrap; }
 
 .research-container .toggle-sdg,
 .research-container .toggle-type {
@@ -293,11 +252,9 @@
 }
 
 /* ── Profile links ── */
-.research-container .profile-links { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
-.research-container .profile-links a {
-  font-size: 1.55rem; color: #b1040e; text-decoration: none; font-weight: 500;
-}
-.research-container .profile-links a:hover { text-decoration: underline; }
+.research-container .profile-links { display: flex; flex-direction: column; gap: 3px; }
+.research-container .profile-links a { font-size: 1.5rem; color: #1f4a7c; text-decoration: none; }
+.research-container .profile-links a:hover { color: #b1040e; text-decoration: underline; }
 
 /* ── Main content ── */
 .research-container .main-content { flex: 1; min-width: 0; }

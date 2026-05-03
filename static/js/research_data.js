@@ -458,7 +458,7 @@ const publicationsData = [
 
   { title: "Assessing MSME Market Dynamics and Resilience in Phnom Penh: Challenges and Opportunities",
     ogImage: "https://kosalnith.github.io/static/img/og/assessing-msme-market-dynamics-and-resilience-in-phnom-penh-challenges-and-oppor.png",
-    authors: "Kosal Nith, Dina Chhorn, I Younan An, Sivly Houy, Muny Nhim Kean & Sosengphyrun Mao",
+    authors: "Dina Chhorn, I Younan An, Kosal Nith, Sivly Houy, Muny Nhim Kean & Sosengphyrun Mao",
     date: "Nov 2025", outlet: "Cambodia Development Resource Institute",
     zoteroType: "report",
     type: "reports", year: "2025", oa: true, lang: "en",

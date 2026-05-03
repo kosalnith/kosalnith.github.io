@@ -555,38 +555,6 @@ renderTypeDetail();
 updateTypePills();
 renderActivities();
 
-/* ─── 13b. Sidebar hide/show toggle (matches research page) ─────── */
-(function initSidebarToggle() {
-  const toggleBtn   = document.getElementById('sidebarToggleBtn');
-  const toggleIcon  = document.getElementById('sidebarToggleIcon');
-  const toggleLabel = document.getElementById('sidebarToggleLabel');
-  const sidebar     = document.querySelector('.research-sidebar');
-
-  if (!toggleBtn || !sidebar) return;
-
-  function setSidebarCollapsed(collapsed) {
-    if (collapsed) {
-      sidebar.classList.add('sidebar-collapsed');
-      if (toggleIcon)  toggleIcon.className  = 'fas fa-eye';
-      if (toggleLabel) toggleLabel.textContent = 'Show filters';
-    } else {
-      sidebar.classList.remove('sidebar-collapsed');
-      if (toggleIcon)  toggleIcon.className  = 'fas fa-eye-slash';
-      if (toggleLabel) toggleLabel.textContent = 'Hide filters';
-    }
-    try { sessionStorage.setItem('activitySidebarCollapsed', collapsed ? '1' : '0'); } catch(e) {}
-  }
-
-  toggleBtn.addEventListener('click', () => {
-    setSidebarCollapsed(!sidebar.classList.contains('sidebar-collapsed'));
-  });
-
-  // Restore saved state
-  try {
-    setSidebarCollapsed(sessionStorage.getItem('activitySidebarCollapsed') === '1');
-  } catch(e) { setSidebarCollapsed(false); }
-})();
-
 /* ─── 14. Mobile drawer (guarded against double-init) ───────────── */
 (function initDrawer() {
   if (document.getElementById('_filterDrawerInit')) return;
