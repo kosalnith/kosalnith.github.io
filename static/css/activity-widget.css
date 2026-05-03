@@ -448,7 +448,7 @@
 .research-container .activity:last-child { }
 
 .research-container .activity-title {
-  display: block; font-size: 2.2rem; font-weight: 700; color: #2e2d29;
+  display: block; font-size: 2.1rem; font-weight: 700; color: #2e2d29;
   margin-bottom: 0.55rem; line-height: 1.35; text-decoration: none;
 }
 .research-container a.activity-title:hover { color: #0f2b4d; text-decoration: underline; }
@@ -497,8 +497,8 @@
 
 /* Date line */
 .research-container .activity-date {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 1.8rem; color: #4a5568; margin-bottom: 0.25rem;
+  display: flex; align-items: center; gap: 5px;
+  font-size: 1.8rem; color: #4a5568; margin-bottom: 0.2rem;
 }
 .research-container .activity-date .activity-icon {
   font-size: 1.5rem; color: #4a5568; flex-shrink: 0;
@@ -506,8 +506,8 @@
 
 /* Location line */
 .research-container .activity-location {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 1.8rem; color: #4a5568; margin-bottom: 0.25rem;
+  display: flex; align-items: center; gap: 5px;
+  font-size: 1.8rem; color: #4a5568; margin-bottom: 0.2rem;
 }
 .research-container .activity-location .activity-icon {
   font-size: 1.5rem; color: #4a5568; flex-shrink: 0;
@@ -517,7 +517,7 @@
 .research-container .activity-type-line {
   display: inline-flex; align-items: center; gap: 5px;
   font-size: 1.7rem; color: #6b7a8d; font-style: normal;
-  margin-top: 0.5rem;
+  margin-top: 0.2rem;
 }
 .research-container .activity-type-line i {
   font-size: 1.4rem; color: #6b7a8d; flex-shrink: 0;
