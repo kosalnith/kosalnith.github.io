@@ -360,12 +360,7 @@
         if (window.innerWidth >= 992) return;
         var el = e.target;
         while (el && el !== menu) {
-          // Close on nav link, search button, or dark/light mode toggle
-          if (
-            (el.tagName === 'A' && el.classList.contains('su-multi-menu__link')) ||
-            el.id === 'site-search-btn' ||
-            el.classList.contains('dm-toggle')
-          ) {
+          if (el.tagName === 'A' && el.classList.contains('su-multi-menu__link')) {
             setTimeout(function () {
               toggle.setAttribute('aria-expanded', 'false');
               menu.classList.add('mobile-hidden');

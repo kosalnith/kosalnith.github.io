@@ -224,9 +224,9 @@
     </div>
 
     <div id="block-stanford-basic-main-navigation" class="system-menu-block main">
-      <nav class="su-multi-menu su-multi-menu--buttons su-multi-menu--right" aria-label="main menu">
-        <button class="su-multi-menu__nav-toggle su-multi-menu__nav-toggle--right" aria-expanded="false" style="position:relative;top:auto;right:auto;margin-left:auto;background:transparent;border:none;box-shadow:none;">Menu</button>
-        <ul class="su-multi-menu__menu su-multi-menu__menu-lv1 mobile-hidden">
+      <nav class="su-multi-menu su-multi-menu--buttons su-multi-menu--right no-js" aria-label="main menu">
+        <button class="su-multi-menu__nav-toggle su-multi-menu__nav-toggle--right" aria-expanded="false">Menu</button>
+        <ul class="su-multi-menu__menu su-multi-menu__menu-lv1">
           ${navItems}
           <li class="su-multi-menu__item dm-toggle-li" id="dm-toggle-li"></li>
         </ul>
@@ -338,46 +338,6 @@
     document.body.appendChild(s);
   }
 
-  function reinitMultiMenu() {
-    document.querySelectorAll('.su-multi-menu').forEach(function (navEl) {
-      var toggle = navEl.querySelector('.su-multi-menu__nav-toggle');
-      var menu   = navEl.querySelector('.su-multi-menu__menu-lv1');
-      if (!toggle || !menu) return;
-
-      toggle.setAttribute('aria-expanded', 'false');
-      menu.classList.add('mobile-hidden');
-
-      if (toggle._knInitDone) return;
-      toggle._knInitDone = true;
-
-      toggle.addEventListener('click', function () {
-        var open = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
-        open ? menu.classList.add('mobile-hidden') : menu.classList.remove('mobile-hidden');
-      });
-
-      menu.addEventListener('click', function (e) {
-        if (window.innerWidth >= 992) return;
-        var el = e.target;
-        while (el && el !== menu) {
-          // Close on nav link, search button, or dark/light mode toggle
-          if (
-            (el.tagName === 'A' && el.classList.contains('su-multi-menu__link')) ||
-            el.id === 'site-search-btn' ||
-            el.classList.contains('dm-toggle')
-          ) {
-            setTimeout(function () {
-              toggle.setAttribute('aria-expanded', 'false');
-              menu.classList.add('mobile-hidden');
-            }, 80);
-            return;
-          }
-          el = el.parentElement;
-        }
-      });
-    });
-  }
-
   function inject() {
     // --- Head tags ---
     injectHead();
@@ -392,7 +352,6 @@
       // Mark active nav after injection
       var nav = document.querySelector('.su-multi-menu');
       if (nav) markActiveNav(nav);
-      reinitMultiMenu();
     }
 
     // --- Footer ---

@@ -23,35 +23,117 @@
   /* ── CSS — all !important to override site styles ── */
   var styleEl = document.createElement('style');
   styleEl.textContent = `
-    /* NAV BUTTON */
+    /* NAV BUTTON — plain link style matching other nav items */
     #site-search-btn {
       display: inline-flex !important;
       align-items: center !important;
-      gap: 8px !important;
+      gap: 6px !important;
       background: transparent !important;
-      border: 2px solid rgba(140,21,21,0.35) !important;
-      border-radius: 999px !important;
-      padding: 9px 20px 9px 14px !important;
+      border: none !important;
+      border-radius: 0 !important;
+      padding: 0 0 0.8em 0 !important;
       cursor: pointer !important;
-      color: #8c1515 !important;
-      font-size: 16px !important;
+      color: #b1040e !important;
+      font-size: 1.9rem !important;
       font-weight: 600 !important;
       line-height: 1 !important;
       white-space: nowrap !important;
-      transition: all .18s !important;
+      transition: color .3s ease-out !important;
       font-family: inherit !important;
       text-decoration: none !important;
       box-shadow: none !important;
       letter-spacing: 0 !important;
+      position: relative !important;
     }
     #site-search-btn:hover {
-      background: rgba(140,21,21,0.08) !important;
-      border-color: rgba(140,21,21,0.6) !important;
+      background: transparent !important;
+      border: none !important;
+      color: #2e2d29 !important;
+      text-decoration: underline !important;
     }
     #site-search-btn span {
-      font-size: 16px !important;
-      color: #8c1515 !important;
+      font-size: 1.9rem !important;
+      color: inherit !important;
       font-weight: 600 !important;
+    }
+    #site-search-btn svg {
+      width: 16px !important;
+      height: 16px !important;
+      color: inherit !important;
+      opacity: 0.75 !important;
+      flex-shrink: 0 !important;
+    }
+
+    /* Desktop: center search button vertically in the nav row */
+    @media (min-width: 992px) {
+      .su-multi-menu__menu-lv1 > li:has(#site-search-btn) {
+        display: flex !important;
+        align-items: center !important;
+        align-self: center !important;
+      }
+      #site-search-btn {
+        padding: 0 !important;
+        align-self: center !important;
+      }
+    }
+
+    /* Dark mode */
+    html.dark-mode #site-search-btn {
+      color: #fff !important;
+    }
+    html.dark-mode #site-search-btn:hover {
+      color: #fff !important;
+      background: transparent !important;
+    }
+    html.dark-mode #site-search-btn svg {
+      color: #fff !important;
+    }
+
+    /* Mobile/tablet: match the dark nav panel link style exactly */
+    @media (max-width: 991px) {
+      #site-search-btn {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 1.6rem 0 1.6rem 2.4rem !important;
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 1px solid #53565a !important;
+        border-radius: 0 !important;
+        color: #fff !important;
+        font-size: 1.8rem !important;
+        font-weight: 600 !important;
+        font-family: inherit !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+        box-shadow: none !important;
+        cursor: pointer !important;
+        white-space: nowrap !important;
+        letter-spacing: 0 !important;
+        line-height: 1.4 !important;
+        transition: none !important;
+        text-decoration: none !important;
+      }
+      #site-search-btn:hover,
+      #site-search-btn:focus {
+        background: transparent !important;
+        text-decoration: none !important;
+        outline: none !important;
+      }
+      #site-search-btn span {
+        color: #fff !important;
+        font-size: 1.8rem !important;
+        font-weight: 600 !important;
+      }
+      #site-search-btn svg {
+        color: #fff !important;
+        opacity: 1 !important;
+        width: 18px !important;
+        height: 18px !important;
+        flex-shrink: 0 !important;
+      }
     }
 
     /* OVERLAY */
@@ -90,6 +172,96 @@
     @keyframes ssMdIn {
       from { opacity:0; transform: translateX(-50%) translateY(-22px) scale(.95); }
       to   { opacity:1; transform: translateX(-50%) translateY(0) scale(1); }
+    }
+
+    /* ── Dark mode modal overrides ── */
+    html.dark-mode #ss-overlay {
+      background: rgba(0,0,0,0.65) !important;
+    }
+    html.dark-mode #ss-modal {
+      background: #1e1e1c !important;
+      box-shadow: 0 48px 120px rgba(0,0,0,.6), 0 4px 24px rgba(0,0,0,.4) !important;
+    }
+    html.dark-mode #ss-input-row {
+      background: #1e1e1c !important;
+      border-bottom-color: #3a3836 !important;
+    }
+    html.dark-mode #ss-search-icon {
+      color: #c0392b !important;
+    }
+    html.dark-mode #ss-input {
+      color: #f7f6f3 !important;
+      background: transparent !important;
+      caret-color: #c0392b !important;
+    }
+    html.dark-mode #ss-input::placeholder {
+      color: #666 !important;
+    }
+    html.dark-mode #ss-clear-btn {
+      background: #333 !important;
+      color: #aaa !important;
+    }
+    html.dark-mode #ss-clear-btn:hover {
+      background: #444 !important;
+      color: #f7f6f3 !important;
+    }
+    html.dark-mode #ss-esc-hint {
+      color: #c0392b !important;
+      border-color: rgba(192,57,43,0.4) !important;
+      background: rgba(192,57,43,0.08) !important;
+    }
+    html.dark-mode #ss-results {
+      background: #1e1e1c !important;
+    }
+    html.dark-mode #ss-results::-webkit-scrollbar-thumb {
+      background: #444 !important;
+    }
+    html.dark-mode .ss-status {
+      color: #666 !important;
+    }
+    html.dark-mode .ss-status strong {
+      color: #aaa !important;
+    }
+    html.dark-mode .ss-page-label {
+      color: #c0392b !important;
+    }
+    html.dark-mode .ss-page-label::after {
+      background: #3a3836 !important;
+    }
+    html.dark-mode .ss-item {
+      color: #f7f6f3 !important;
+    }
+    html.dark-mode .ss-item:hover,
+    html.dark-mode .ss-item.ss-active {
+      background: #2a2a28 !important;
+    }
+    html.dark-mode .ss-item-icon {
+      background: #2a2a28 !important;
+    }
+    html.dark-mode .ss-item-title {
+      color: #f7f6f3 !important;
+    }
+    html.dark-mode .ss-item-snippet {
+      color: #888 !important;
+    }
+    html.dark-mode mark.ss-hl {
+      background: #5a3a1a !important;
+      color: #f7c59f !important;
+    }
+    html.dark-mode #ss-footer {
+      background: #1e1e1c !important;
+      border-top-color: #3a3836 !important;
+    }
+    html.dark-mode .ss-hints {
+      background: transparent !important;
+    }
+    html.dark-mode .ss-hint {
+      color: #666 !important;
+    }
+    html.dark-mode kbd {
+      background: rgba(192,57,43,0.1) !important;
+      color: #c0392b !important;
+      border-color: rgba(192,57,43,0.3) !important;
     }
 
     /* INPUT ROW */
@@ -151,18 +323,20 @@
     #ss-clear-btn.visible { display: flex !important; }
 
     #ss-esc-hint {
-      font-size: 18px !important;
-      color: #aaa !important;
-      border: 2px solid #ddd !important;
-      border-bottom: 3px solid #ccc !important;
-      border-radius: 10px !important;
-      padding: 8px 18px !important;
+      font-size: 13px !important;
+      color: #b1040e !important;
+      border: 1.5px solid rgba(177,4,14,0.35) !important;
+      border-radius: 8px !important;
+      padding: 6px 14px !important;
       flex-shrink: 0 !important;
-      background: #fafafa !important;
+      background: rgba(177,4,14,0.05) !important;
       font-family: inherit !important;
-      font-weight: 500 !important;
+      font-weight: 600 !important;
       white-space: nowrap !important;
       line-height: 1 !important;
+      letter-spacing: .04em !important;
+      text-transform: uppercase !important;
+      cursor: pointer !important;
     }
 
     /* RESULTS */
@@ -302,17 +476,16 @@
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
-      background: #fff !important;
-      border: 1px solid #ddd !important;
-      border-bottom: 2px solid #ccc !important;
+      background: rgba(177,4,14,0.05) !important;
+      border: 1.5px solid rgba(177,4,14,0.2) !important;
       border-radius: 6px !important;
-      min-width: 36px !important;
-      height: 36px !important;
-      padding: 0 12px !important;
-      font-size: 18px !important;
+      min-width: 30px !important;
+      height: 30px !important;
+      padding: 0 10px !important;
+      font-size: 15px !important;
       font-family: inherit !important;
-      color: #999 !important;
-      font-weight: 500 !important;
+      color: #b1040e !important;
+      font-weight: 600 !important;
     }
   `;
   document.head.appendChild(styleEl);
