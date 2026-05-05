@@ -41,7 +41,6 @@
     { label: 'Miscellaneous', href: 'miscellaneous.html' },
     { label: 'Blog',          href: 'https://kosalnith.substack.com', external: true },
     { label: 'Personal',      href: 'personal.html' },
-    { label: 'Gallery',       href: 'gallery.html' },
   ];
 
   // ═══════════════════════════════════════════════════════════════
@@ -225,9 +224,9 @@
     </div>
 
     <div id="block-stanford-basic-main-navigation" class="system-menu-block main">
-      <nav class="su-multi-menu su-multi-menu--buttons su-multi-menu--right no-js" aria-label="main menu">
-        <button class="su-multi-menu__nav-toggle su-multi-menu__nav-toggle--right" aria-expanded="false">Menu</button>
-        <ul class="su-multi-menu__menu su-multi-menu__menu-lv1">
+      <nav class="su-multi-menu su-multi-menu--buttons su-multi-menu--right" aria-label="main menu">
+        <button class="su-multi-menu__nav-toggle su-multi-menu__nav-toggle--right" aria-expanded="false" style="position:relative;top:auto;right:auto;margin-left:auto;background:transparent;border:none;box-shadow:none;">Menu</button>
+        <ul class="su-multi-menu__menu su-multi-menu__menu-lv1 mobile-hidden">
           ${navItems}
           <li class="su-multi-menu__item dm-toggle-li" id="dm-toggle-li"></li>
         </ul>
@@ -339,6 +338,46 @@
     document.body.appendChild(s);
   }
 
+  function reinitMultiMenu() {
+    document.querySelectorAll('.su-multi-menu').forEach(function (navEl) {
+      var toggle = navEl.querySelector('.su-multi-menu__nav-toggle');
+      var menu   = navEl.querySelector('.su-multi-menu__menu-lv1');
+      if (!toggle || !menu) return;
+
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.classList.add('mobile-hidden');
+
+      if (toggle._knInitDone) return;
+      toggle._knInitDone = true;
+
+      toggle.addEventListener('click', function () {
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+        open ? menu.classList.add('mobile-hidden') : menu.classList.remove('mobile-hidden');
+      });
+
+      menu.addEventListener('click', function (e) {
+        if (window.innerWidth >= 992) return;
+        var el = e.target;
+        while (el && el !== menu) {
+          // Close on nav link, search button, or dark/light mode toggle
+          if (
+            (el.tagName === 'A' && el.classList.contains('su-multi-menu__link')) ||
+            el.id === 'site-search-btn' ||
+            el.classList.contains('dm-toggle')
+          ) {
+            setTimeout(function () {
+              toggle.setAttribute('aria-expanded', 'false');
+              menu.classList.add('mobile-hidden');
+            }, 80);
+            return;
+          }
+          el = el.parentElement;
+        }
+      });
+    });
+  }
+
   function inject() {
     // --- Head tags ---
     injectHead();
@@ -353,6 +392,7 @@
       // Mark active nav after injection
       var nav = document.querySelector('.su-multi-menu');
       if (nav) markActiveNav(nav);
+      reinitMultiMenu();
     }
 
     // --- Footer ---
@@ -367,6 +407,31 @@
       document.body.insertAdjacentHTML('beforeend', buildBackToTop());
     }
     initBackToTop();
+
+    // --- Leaflet map fix ---
+    // If this page has a Leaflet map, the header injection shifts the layout.
+    // Call invalidateSize() after a short delay so the map recalculates its dimensions.
+    fixLeafletMap();
+  }
+
+  function fixLeafletMap() {
+    // Only run if Leaflet is loaded on this page
+    if (typeof L === 'undefined') return;
+    setTimeout(function () {
+      // Find every element that Leaflet has attached a map instance to
+      document.querySelectorAll('.leaflet-container').forEach(function (el) {
+        // Leaflet attaches the map object to the container via _leaflet_id
+        var id = el._leaflet_id;
+        if (!id) return;
+        // Walk Leaflet's internal map registry to find the matching instance
+        Object.keys(L.Map._instances || {}).forEach(function (key) {
+          var m = L.Map._instances[key];
+          if (m && m.getContainer && m.getContainer() === el) {
+            m.invalidateSize();
+          }
+        });
+      });
+    }, 300);
   }
 
   // Run after DOM is ready

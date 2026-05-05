@@ -311,7 +311,14 @@
     window.addEventListener('scroll', function () {
       if (scrollTimeout) clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(function () {
-        btn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+        var show = window.pageYOffset > 300;
+        btn.style.display = show ? 'block' : 'none';
+        // Toggle .visible for pages that use opacity-based show (e.g. research.css)
+        if (show) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
       }, 100);
     }, { passive: true });
 

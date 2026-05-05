@@ -352,22 +352,6 @@
   <script src="static/js/components.js"></script>
   <script src="static/js/darkmode.js"></script>
   <script src="static/js/search.js"></script>
-  <!-- Auto-add su-link--external to external links (excludes nav, icons, social) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll("a[href]").forEach(function (a) {
-        var href = a.getAttribute("href");
-        if (!href) return;
-        if (!href.startsWith("http://") && !href.startsWith("https://")) return;
-        if (href.includes("kosalnith.github.io")) return;
-        if (a.classList.contains("xsu-link")) return;
-        if (a.closest("nav, header, .su-masthead, .su-multi-menu, .su-main-nav, .su-global-footer, .su-local-footer, #site-header, #site-footer")) return;
-        if (a.querySelector("span[aria-hidden], i, svg")) return;
-        a.classList.add("su-link--external");
-        if (!a.getAttribute("target")) a.setAttribute("target", "_blank");
-      });
-    });
-  </script>
 
   <!-- Page-specific script (only needed on miscellaneous.html) -->
   <script src="static/js/sidebar.js"></script>

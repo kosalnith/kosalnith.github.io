@@ -705,8 +705,8 @@ article.node, .node--type-stanford-page, .su-page-components {
     gap: 0 !important; flex-wrap: wrap !important;
   }
   .research-container .type-pill { padding: 8px 14px !important; }
-  .research-container .type-pill .pill-number { font-size: 2.4rem !important; }
-  .research-container .type-pill .pill-label  { font-size: 1.2rem !important; }
+  .research-container .type-pill .pill-number { font-size: 3.2rem !important; }
+  .research-container .type-pill .pill-label  { font-size: 2rem !important; }
 
   /* Two-column → single column */
   .research-container .two-columns {
@@ -818,7 +818,9 @@ article.node, .node--type-stanford-page, .su-page-components {
   /* Search section */
   .search-section { padding: 2.5rem 0 2rem !important; }
   .search-heading { font-size: 2.4rem !important; }
-  .search-subtext { font-size: 1.4rem !important; margin-bottom: 18px !important; }
+  .search-subtext { font-size: 2rem !important; margin-bottom: 18px !important; }
+  .search-input-wrapper input, #searchInput { font-size: 1.8rem !important; }
+  .search-input-wrapper input::placeholder { font-size: 1.8rem !important; }
   .search-row { max-width: 100% !important; }
 
   /* Sort bar */
@@ -856,12 +858,15 @@ article.node, .node--type-stanford-page, .su-page-components {
 
   /* Type pills */
   .research-container .type-pill { padding: 6px 10px !important; }
-  .research-container .type-pill .pill-number { font-size: 2rem !important; }
-  .research-container .type-pill .pill-label  { font-size: 1.1rem !important; }
+  .research-container .type-pill .pill-number { font-size: 3rem !important; }
+  .research-container .type-pill .pill-label  { font-size: 2rem !important; }
 
   /* Search */
-  .search-heading { font-size: 2rem !important; }
-  .search-subtext { font-size: 1.3rem !important; }
+  .search-heading { font-size: 2.4rem !important; }
+  .search-subtext { font-size: 2rem !important; }
+  .search-input-wrapper input, #searchInput { font-size: 1.8rem !important; }
+  .search-input-wrapper input::placeholder { font-size: 1.8rem !important; }
+  .search-btn { font-size: 1.8rem !important; }
   .search-input-wrapper input { font-size: 1.6rem !important; }
   .search-btn { padding: 0 20px !important; font-size: 1.5rem !important; }
 

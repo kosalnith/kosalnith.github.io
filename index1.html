@@ -78,7 +78,7 @@
                   <div class="ptype-stanford-wysiwyg paragraph paragraph--type--stanford-wysiwyg paragraph--view-mode--default">
                     <div class="su-wysiwyg-text paragraph stanford-wysiwyg text-long label-hidden">
                       <p>&nbsp;</p>
-                      <p>Welcome to my website! I am a research associate at the Center for Development Economics and Trade of the <a href="http://cdri.org.kh">Cambodia Development Resource Institute</a> and a working group coordinator at the <a href="https://ysi.ineteconomics.org">Young Scholars Initiative</a> of the <a href="https://www.ineteconomics.org"> Institute for New Economic Thinking</a>.
+                      <p>Welcome to my website! I am a research associate at the Center for Development Economics and Trade of the <a href="http://cdri.org.kh" class="su-link--external" target="_blank">Cambodia Development Resource Institute</a> and a working group coordinator at the <a href="https://ysi.ineteconomics.org" class="su-link--external" target="_blank">Young Scholars Initiative</a> of the <a href="https://www.ineteconomics.org" class="su-link--external" target="_blank">Institute for New Economic Thinking</a>.
                       <p>My&nbsp;<a href="https://kosalnith.github.io/research">research interests</a>&nbsp;focus on macroeconomics, monetary economics, economic growth, and economic uncertainty. <a href="">Here</a> is my research statement.</p>
                       <p>
                         If you're interested in talking about my work, please get in touch with me at <a href="mailto:kosal.nith@cdri.org.kh">kosal.nith[at]cdri.org.kh</a>
@@ -394,22 +394,6 @@
   <script async src="https://platform.twitter.com/widgets.js"></script>
   <script src="https://static.elfsight.com/platform/platform.js"></script>
   <script src="static/js/video.js"></script>
-  <!-- Auto-add su-link--external to external links (excludes nav, icons, social) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll("a[href]").forEach(function (a) {
-        var href = a.getAttribute("href");
-        if (!href) return;
-        if (!href.startsWith("http://") && !href.startsWith("https://")) return;
-        if (href.includes("kosalnith.github.io")) return;
-        if (a.classList.contains("xsu-link")) return;
-        if (a.closest("nav, header, .su-masthead, .su-multi-menu, .su-main-nav, .su-global-footer, .su-local-footer, #site-header, #site-footer")) return;
-        if (a.querySelector("span[aria-hidden], i, svg")) return;
-        a.classList.add("su-link--external");
-        if (!a.getAttribute("target")) a.setAttribute("target", "_blank");
-      });
-    });
-  </script>
 
 </body>
 </html>

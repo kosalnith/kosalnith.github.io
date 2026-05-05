@@ -779,6 +779,14 @@ html.dark-mode [class*="pub-"] {
   color: var(--dm-text) !important;
 }
 
+/* pub-resources is a flex container — must stay transparent */
+html.dark-mode .pub-resources,
+html.dark-mode .research-container .pub-resources {
+  background-color: transparent !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
 html.dark-mode .pub-card:hover,
 html.dark-mode .pub-item:hover {
   border-color: var(--dm-accent-lt) !important;
@@ -842,11 +850,20 @@ html.dark-mode .pagination button.active {
 }
 
 /* ── Mobile filter bar ──────────────────────────────────────────── */
-html.dark-mode .mobile-filter-bar,
+html.dark-mode .mobile-filter-bar {
+  background-color: transparent !important;
+  border-color: var(--dm-border) !important;
+}
+html.dark-mode body button.mobile-filter-toggle,
 html.dark-mode .mobile-filter-toggle {
-  background-color: var(--dm-bg-card) !important;
+  background-color: transparent !important;
+  background: transparent !important;
   color: var(--dm-text) !important;
   border-color: var(--dm-border) !important;
+}
+html.dark-mode body button.mobile-filter-toggle:hover {
+  background-color: var(--dm-accent) !important;
+  color: #fff !important;
 }
 
 html.dark-mode .mobile-filter-badge {
@@ -1084,4 +1101,108 @@ html.dark-mode .research-container .resource-btn--published:hover,
 html.dark-mode .research-container .resource-btn--default:hover {
   background: rgba(255,255,255,.14) !important;
   color: #fff !important;
+}
+
+/* ── Activity resource buttons in dark mode ── */
+html.dark-mode .research-container .resource-btn--video,
+html.dark-mode body button.resource-btn--video {
+  background: rgba(14,116,144,.12) !important;
+  background-color: rgba(14,116,144,.12) !important;
+  border-color: rgba(14,116,144,.35) !important;
+  color: #5ec8e0 !important;
+}
+html.dark-mode .research-container .resource-btn--video:hover {
+  background: #0e7490 !important;
+  color: #fff !important;
+  border-color: #0e7490 !important;
+}
+
+/* ── Activity pub-resources row — remove dark background ── */
+html.dark-mode .research-container .pub-resources,
+html.dark-mode body .research-container .pub-resources {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* ── Publication detail page ─────────────────────────────────── */
+
+/* PREV / NEXT nav buttons */
+html.dark-mode body .detail-nav-btn,
+html.dark-mode body button.detail-nav-btn {
+  background: #1e1c1a !important;
+  background-color: #1e1c1a !important;
+  border-color: #3a3836 !important;
+  color: #e05555 !important;
+}
+html.dark-mode .detail-nav-btn .nav-label {
+  color: #666 !important;
+}
+html.dark-mode body .detail-nav-btn:hover:not(.disabled),
+html.dark-mode body button.detail-nav-btn:hover:not(.disabled) {
+  background: #b1040e !important;
+  color: #fff !important;
+  border-color: #b1040e !important;
+}
+html.dark-mode .detail-nav-btn:hover:not(.disabled) .nav-label {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+/* All publications button */
+html.dark-mode body .detail-back-btn,
+html.dark-mode body button.detail-back-btn,
+html.dark-mode body a.detail-back-btn {
+  background: #b1040e !important;
+  background-color: #b1040e !important;
+  color: #fff !important;
+  border-color: #b1040e !important;
+}
+
+/* Tab bar */
+html.dark-mode .detail-tab-bar {
+  border-bottom-color: #3a3836 !important;
+}
+html.dark-mode .detail-tab {
+  color: #888 !important;
+  background: transparent !important;
+}
+html.dark-mode .detail-tab.active {
+  color: #e05555 !important;
+  border-bottom-color: #e05555 !important;
+}
+
+/* Alternating table rows */
+html.dark-mode .detail-meta-table tr:nth-child(even) td {
+  background: #1e1c1a !important;
+}
+html.dark-mode .detail-meta-table tr:nth-child(odd) td {
+  background: transparent !important;
+}
+html.dark-mode .detail-meta-table td {
+  border-color: #2a2826 !important;
+  color: #d6d6d6 !important;
+}
+html.dark-mode .detail-meta-table th,
+html.dark-mode .detail-meta-table td:first-child {
+  color: #aaa !important;
+}
+
+/* Share inline buttons */
+html.dark-mode body .detail-share-inline-btn,
+html.dark-mode body a.detail-share-inline-btn {
+  background: #1e1c1a !important;
+  background-color: #1e1c1a !important;
+  border-color: #3a3836 !important;
+  color: #888 !important;
+}
+html.dark-mode body .detail-share-inline-btn:hover,
+html.dark-mode body a.detail-share-inline-btn:hover {
+  background: #b1040e !important;
+  color: #fff !important;
+  border-color: #b1040e !important;
+}
+
+/* Section titles */
+html.dark-mode .detail-section-title {
+  color: #888 !important;
+  border-bottom-color: #2a2826 !important;
 }
