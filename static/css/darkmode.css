@@ -169,10 +169,10 @@ li.dm-toggle-li {
     order: 0 !important;
   }
 
-  /* Dark mode toggle — same spacing as all other nav items */
+  /* Dark mode toggle — left gap matches other nav item spacing */
   .su-multi-menu .su-multi-menu__menu-lv1 > li.dm-toggle-li {
     order: 1 !important;
-    margin: 0 !important;
+    margin: 0 0 0 36px !important;
     align-self: center !important;
   }
 }
@@ -181,67 +181,35 @@ li.dm-toggle-li {
    TOGGLE BUTTON  (always present, both modes)
    ═══════════════════════════════════════════════════════════════ */
 
-.dm-toggle,
-button.dm-toggle,
-.su-multi-menu .dm-toggle,
-li.dm-toggle-li .dm-toggle,
-li.dm-toggle-li button.dm-toggle {
-  /* Plain — no circle, no border, matches other nav items */
+.dm-toggle {
+  /* Reset the site's global button styles */
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: auto !important;
-  height: auto !important;
-  min-width: 0 !important;
+  width: 34px !important;
+  height: 34px !important;
   padding: 0 !important;
   margin: 0 !important;
   background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
+  border: 1.5px solid #767270 !important;
+  border-radius: 50% !important;
   cursor: pointer !important;
-  color: #b1040e !important;
+  color: #2e2d29 !important;
   box-shadow: none !important;
-  font-size: 0 !important;
+  font-size: 0 !important;         /* hide any text */
   line-height: 1 !important;
   text-decoration: none !important;
-  transition: color 0.3s ease-out !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
   flex-shrink: 0;
   vertical-align: middle;
 }
 
 .dm-toggle:hover,
-.dm-toggle:focus,
-button.dm-toggle:hover,
-button.dm-toggle:focus,
-li.dm-toggle-li .dm-toggle:hover,
-li.dm-toggle-li .dm-toggle:focus {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
+.dm-toggle:focus {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+  border-color: #2e2d29 !important;
   outline: none !important;
-  box-shadow: none !important;
-  color: #2e2d29 !important;
   text-decoration: none !important;
-}
-
-.dm-toggle .dm-icon svg {
-  width: 20px !important;
-  height: 20px !important;
-}
-
-html.dark-mode .dm-toggle,
-html.dark-mode button.dm-toggle,
-html.dark-mode li.dm-toggle-li .dm-toggle {
-  color: #f7f6f3 !important;
-  background: transparent !important;
-  border: none !important;
-}
-
-html.dark-mode .dm-toggle:hover,
-html.dark-mode .dm-toggle:focus {
-  background: transparent !important;
-  color: #f7f6f3 !important;
 }
 
 .dm-icon {
@@ -678,28 +646,36 @@ html.dark-mode .research-title,
 html.dark-mode .research-header,
 html.dark-mode .search-heading,
 html.dark-mode .search-subtext,
-html.dark-mode .filter-section-label,
-html.dark-mode .filter-heading,
 html.dark-mode .sort-bar,
 html.dark-mode .result-count,
 html.dark-mode .detail-nav-row,
 html.dark-mode .detail-breadcrumb {
   color: var(--dm-text) !important;
-  background-color: var(--dm-bg) !important;
+  background-color: transparent !important;
+}
+html.dark-mode .filter-section-label,
+html.dark-mode .filter-heading {
+  color: var(--dm-text) !important;
+  background-color: transparent !important;
 }
 
 /* ── Type pills (Journal article, Working paper…) ───────────────── */
 html.dark-mode .type-pill {
-  background-color: var(--dm-bg-card) !important;
+  background-color: transparent !important;
   color: var(--dm-text) !important;
+  border-color: transparent !important;
+}
+
+html.dark-mode .type-pill:hover {
+  background-color: rgba(255,255,255,.05) !important;
   border-color: var(--dm-border) !important;
 }
 
-html.dark-mode .type-pill:hover,
 html.dark-mode .type-pill.active {
-  background-color: var(--dm-accent) !important;
-  color: #f7f6f3 !important;
-  border-color: var(--dm-accent) !important;
+  background-color: transparent !important;
+  border-bottom-color: #b1040e !important;
+  border-color: transparent !important;
+  border-bottom-color: #b1040e !important;
 }
 
 html.dark-mode .pill-number,
@@ -820,7 +796,23 @@ html.dark-mode .pub-meta,
 html.dark-mode [class*="pub-meta"],
 html.dark-mode [class*="pub-author"],
 html.dark-mode [class*="pub-year"] {
-  color: var(--dm-text-mute) !important;
+  color: #d6d6d6 !important;
+}
+
+/* Publication outlet (italic journal/venue line) */
+html.dark-mode .pub-outlet,
+html.dark-mode .research-container .pub-outlet,
+html.dark-mode .research-container .pub-outlet em {
+  color: #d6d6d6 !important;
+}
+
+/* Abstract toggle button and hint text */
+html.dark-mode .research-container .abstract-toggle-btn,
+html.dark-mode body .research-container button.abstract-toggle-btn,
+html.dark-mode .research-container .abstract-hint {
+  color: #d6d6d6 !important;
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
 html.dark-mode .pub-tag,
@@ -833,10 +825,12 @@ html.dark-mode [class*="pub-badge"] {
 }
 
 /* ── Pagination ─────────────────────────────────────────────────── */
-html.dark-mode .pagination,
+html.dark-mode .pagination {
+  background-color: transparent !important;
+}
 html.dark-mode .pagination button,
 html.dark-mode .pagination a {
-  background-color: var(--dm-bg-card) !important;
+  background-color: transparent !important;
   color: var(--dm-text) !important;
   border-color: var(--dm-border) !important;
 }
@@ -872,4 +866,222 @@ html.dark-mode .filter-backdrop.active {
 /* ── Back link ──────────────────────────────────────────────────── */
 html.dark-mode .back-link {
   color: var(--dm-accent-lt) !important;
+}
+
+/* ── Research / Activity sidebar toggle button — override mainformat.css button{background:#b1040e} ── */
+html.dark-mode body .research-sidebar .sidebar-toggle-btn,
+html.dark-mode body button.sidebar-toggle-btn {
+  background-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+  border-top: 1px solid var(--dm-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--dm-text-mute) !important;
+  padding: 8px 0 !important;
+  margin-bottom: 1rem !important;
+}
+html.dark-mode body .research-sidebar .sidebar-toggle-btn:hover,
+html.dark-mode body button.sidebar-toggle-btn:hover {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: #e05555 !important;
+  text-decoration: none !important;
+}
+html.dark-mode body .research-sidebar .sidebar-toggle-btn i {
+  color: #e05555 !important;
+}
+
+/* ── Research sidebar header — remove card background ── */
+html.dark-mode .filter-sidebar-header,
+html.dark-mode .research-sidebar .filter-sidebar-header {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* ── Filter close button — override mainformat.css button{background:#b1040e} ── */
+html.dark-mode body .research-sidebar .filter-close-btn,
+html.dark-mode body button.filter-close-btn {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--dm-text-mute) !important;
+}
+html.dark-mode body .research-sidebar .filter-close-btn:hover,
+html.dark-mode body button.filter-close-btn:hover {
+  background: rgba(224,85,85,.15) !important;
+  color: #e05555 !important;
+}
+
+/* ── Year range slider — remove track background box in dark mode ── */
+html.dark-mode .research-container .year-track,
+html.dark-mode .research-container .year-track-outer,
+html.dark-mode .research-container .year-slider-wrap {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+html.dark-mode .research-container .year-track {
+  background: #3a3836 !important;
+}
+html.dark-mode .research-container input[type="range"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+html.dark-mode .research-container input[type="range"]::-webkit-slider-runnable-track {
+  background: transparent !important;
+}
+html.dark-mode .research-container input[type="range"]::-webkit-slider-thumb {
+  background: #2a2826 !important;
+  border-color: #b1040e !important;
+  box-shadow: 0 1px 6px rgba(0,0,0,.4) !important;
+}
+html.dark-mode .research-container input[type="range"]::-moz-range-track {
+  background: transparent !important;
+}
+html.dark-mode .research-container input[type="range"]::-moz-range-thumb {
+  background: #2a2826 !important;
+  border-color: #b1040e !important;
+}
+
+/* ── Activity page — unlinked title + date, location, type text ── */
+html.dark-mode .research-container span.activity-title {
+  color: #d6d6d6 !important;
+}
+
+html.dark-mode .research-container .activity-date,
+html.dark-mode .research-container .activity-date span,
+html.dark-mode .research-container .activity-date .activity-icon,
+html.dark-mode .research-container .activity-location,
+html.dark-mode .research-container .activity-location span,
+html.dark-mode .research-container .activity-location .activity-icon,
+html.dark-mode .research-container .activity-type-line,
+html.dark-mode .research-container .activity-type-line span,
+html.dark-mode .research-container .activity-type-line i {
+  color: #d6d6d6 !important;
+}
+
+/* ── Activity sort + export buttons ── */
+html.dark-mode body .research-container .sort-btn,
+html.dark-mode body button.sort-btn {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: rgba(177,4,14,.35) !important;
+  color: #e05555 !important;
+}
+html.dark-mode body .research-container .sort-btn:hover,
+html.dark-mode body button.sort-btn:hover {
+  background: #b1040e !important;
+  color: #fff !important;
+  border-color: #b1040e !important;
+}
+html.dark-mode body .research-container .export-btn,
+html.dark-mode body button.export-btn {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: rgba(31,74,124,.4) !important;
+  color: #6ea8d8 !important;
+}
+html.dark-mode body .research-container .export-btn:hover,
+html.dark-mode body button.export-btn:hover {
+  background: #1f4a7c !important;
+  color: #fff !important;
+  border-color: #1f4a7c !important;
+}
+
+/* ── Research sort + export buttons ── */
+html.dark-mode body .sort-link,
+html.dark-mode body .sort-btn,
+html.dark-mode body a.sort-link,
+html.dark-mode body button.sort-btn {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: rgba(177,4,14,.35) !important;
+  color: #e05555 !important;
+}
+html.dark-mode body .sort-link:hover,
+html.dark-mode body .sort-btn:hover {
+  background: #b1040e !important;
+  color: #fff !important;
+  border-color: #b1040e !important;
+}
+html.dark-mode body .export-link,
+html.dark-mode body .export-btn,
+html.dark-mode body a.export-link,
+html.dark-mode body button.export-btn {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: rgba(31,74,124,.4) !important;
+  color: #6ea8d8 !important;
+}
+html.dark-mode body .export-link:hover,
+html.dark-mode body .export-btn:hover {
+  background: #1f4a7c !important;
+  color: #fff !important;
+  border-color: #1f4a7c !important;
+}
+
+/* ── Resource buttons (Paper, Slides, Replication, Thread, Appendix…) ── */
+html.dark-mode .research-container .resource-btn--paper {
+  background: rgba(177,4,14,.12) !important;
+  border-color: rgba(177,4,14,.35) !important;
+  color: #e05555 !important;
+}
+html.dark-mode .research-container .resource-btn--paper:hover {
+  background: #b1040e !important;
+  color: #fff !important;
+  border-color: #b1040e !important;
+}
+html.dark-mode .research-container .resource-btn--slides {
+  background: rgba(26,95,168,.12) !important;
+  border-color: rgba(26,95,168,.35) !important;
+  color: #6ea8d8 !important;
+}
+html.dark-mode .research-container .resource-btn--slides:hover {
+  background: #1a5fa8 !important;
+  color: #fff !important;
+  border-color: #1a5fa8 !important;
+}
+html.dark-mode .research-container .resource-btn--replication {
+  background: rgba(26,122,69,.12) !important;
+  border-color: rgba(26,122,69,.35) !important;
+  color: #4db87a !important;
+}
+html.dark-mode .research-container .resource-btn--replication:hover {
+  background: #1a7a45 !important;
+  color: #fff !important;
+  border-color: #1a7a45 !important;
+}
+html.dark-mode .research-container .resource-btn--thread {
+  background: rgba(255,255,255,.06) !important;
+  border-color: rgba(255,255,255,.2) !important;
+  color: #d6d6d6 !important;
+}
+html.dark-mode .research-container .resource-btn--thread:hover {
+  background: #333 !important;
+  color: #fff !important;
+  border-color: #555 !important;
+}
+html.dark-mode .research-container .resource-btn--appendix {
+  background: rgba(107,33,168,.12) !important;
+  border-color: rgba(107,33,168,.35) !important;
+  color: #c084fc !important;
+}
+html.dark-mode .research-container .resource-btn--appendix:hover {
+  background: #6b21a8 !important;
+  color: #fff !important;
+  border-color: #6b21a8 !important;
+}
+html.dark-mode .research-container .resource-btn--video,
+html.dark-mode .research-container .resource-btn--published,
+html.dark-mode .research-container .resource-btn--default {
+  background: rgba(255,255,255,.06) !important;
+  border-color: rgba(255,255,255,.15) !important;
+  color: #d6d6d6 !important;
+}
+html.dark-mode .research-container .resource-btn--video:hover,
+html.dark-mode .research-container .resource-btn--published:hover,
+html.dark-mode .research-container .resource-btn--default:hover {
+  background: rgba(255,255,255,.14) !important;
+  color: #fff !important;
 }

@@ -1285,43 +1285,6 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
   color: #fff !important;
   white-space: nowrap !important;
 }
-
-/* Clickable badges override */
-.research-container .status-badge.badge-clickable {
-  pointer-events: auto !important;
-  cursor: pointer !important;
-  transition: filter .15s, transform .15s, box-shadow .15s;
-}
-.research-container .status-badge.badge-clickable:hover {
-  filter: brightness(1.2) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,.3) !important;
-}
-.research-container .status-badge.badge-clickable:active {
-  transform: scale(.96) !important;
-}
-
-.status-chip-bar { padding: 2px 0 12px; }
-.status-chip-bar:empty { display: none; }
-.active-status-chip {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 5px 8px 5px 12px;
-  background: rgba(177,4,14,.09); border: 1.5px solid rgba(177,4,14,.4);
-  border-radius: 100px; font-size: 1.3rem; font-weight: 600; color: #b1040e;
-  animation: chipFadeIn .18s ease;
-}
-@keyframes chipFadeIn { from{opacity:0;transform:scale(.9);}to{opacity:1;} }
-.active-status-chip::before { content:'Filtering: '; font-weight:400; font-size:1.2rem; color:#888; }
-.chip-clear-btn {
-  display:inline-flex; align-items:center; justify-content:center;
-  width:20px; height:20px; border-radius:50%;
-  background:rgba(177,4,14,.15); border:none; cursor:pointer;
-  font-size:1.1rem; color:#b1040e; padding:0; margin-left:2px; transition:background .15s;
-}
-.chip-clear-btn:hover { background:rgba(177,4,14,.3); }
-html.dark-mode .active-status-chip { background:rgba(240,84,26,.12); border-color:rgba(240,84,26,.4); color:#f07050; }
-html.dark-mode .active-status-chip::before { color:#555; }
-html.dark-mode .chip-clear-btn { background:rgba(240,84,26,.2); color:#f07050; }
 .research-container .status-badge i,
 #pubDetailView .status-badge i {
   font-size: 1.1rem !important;
@@ -2355,7 +2318,13 @@ html.dark-mode .pub-breadcrumb,
 html.dark-mode .pub-outlet,
 html.dark-mode .pub-authors,
 html.dark-mode .detail-authors {
-  color: var(--dm-text-mute) !important;
+  color: #d6d6d6 !important;
+}
+
+/* Abstract toggle + hint */
+html.dark-mode .research-container .abstract-toggle-btn,
+html.dark-mode .research-container .abstract-hint {
+  color: #d6d6d6 !important;
 }
 /* Keywords: keep chip style with dark colors */
 html.dark-mode .research-container .pub-kw {

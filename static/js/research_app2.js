@@ -9,7 +9,6 @@ let yearRangeMin = YEAR_MIN_BOUND;
 let yearRangeMax = YEAR_MAX_BOUND;
 let currentDetailIdx = -1;
 let sortOrder = 'desc'; // 'desc' = newest first, 'asc' = oldest first
-let activeStatusFlag = null;
 
 // ===== Filtering =====
 
@@ -159,7 +158,7 @@ const STAGE_BADGES = [
 function getStatusBadges(pub) {
   return STAGE_BADGES
     .filter(s => pub[s.flag])
-    .map(s => `<span class="status-badge ${s.cls} badge-clickable" data-status-flag="${s.flag}" role="button" tabindex="0" title="Filter: ${s.label}"><i class="${s.icon}"></i>${s.label}</span>`)
+    .map(s => `<span class="status-badge ${s.cls}"><i class="${s.icon}"></i>${s.label}</span>`)
     .join('');
 }
 // ──────────────────────────────────────────────────────────────────────────
@@ -290,7 +289,6 @@ function getFilteredPublications() {
     if (selectedSdgs.length) {
       if (!p.sdgs || !p.sdgs.some(s => selectedSdgs.includes(s))) return false;
     }
-    if (activeStatusFlag && !p[activeStatusFlag]) return false;
     return true;
   });
 
@@ -360,9 +358,6 @@ function formatAuthorsChicagoMeta(authorsStr) {
   if (!coAuthors.length) return '';
 
   // Build co-author list with links
-  const isDark = document.documentElement.classList.contains('dark-mode');
-  const wrapColor = isDark ? '#d6d6d6' : '#4a5568';
-
   const coHtml = coAuthors.map(name => {
     const url = coAuthorLinks[name];
     return url
@@ -370,17 +365,17 @@ function formatAuthorsChicagoMeta(authorsStr) {
       : `<span style="color:#2e2d29;">${name}</span>`;
   });
 
-  // Join: "X" / "X, and Y" / "X, Y, and Z" (Oxford comma)
+  // Join: "X" / "X and Y" / "X, Y and Z"
   let coStr;
   if (coHtml.length === 1) {
     coStr = coHtml[0];
   } else if (coHtml.length === 2) {
-    coStr = coHtml[0] + '<span style="color:' + wrapColor + ';">, and </span>' + coHtml[1];
+    coStr = coHtml[0] + ' and ' + coHtml[1];
   } else {
-    coStr = coHtml.slice(0, -1).join('<span style="color:' + wrapColor + ';">, </span>') + '<span style="color:' + wrapColor + ';">, and </span>' + coHtml[coHtml.length - 1];
+    coStr = coHtml.slice(0, -1).join(', ') + ' and ' + coHtml[coHtml.length - 1];
   }
 
-  return '<span style="color:' + wrapColor + ';font-weight:400;">(with ' + coStr + ')</span>';
+  return `<span style="color:#4a5568;font-weight:400;">(with ${coStr})</span>`;
 }
 
 // ===== Publication info line formatter — Chicago Manual of Style (17th ed.) =====
@@ -971,21 +966,6 @@ function renderPublicationsWithPagination() {
   document.getElementById('resultCount').innerText =
     totalItems === 0 ? '0 results' : `${start} - ${end} out of ${totalItems} results`;
 
-  var chipBar = document.getElementById('statusChipBar');
-  if (!chipBar) {
-    chipBar = document.createElement('div');
-    chipBar.id = 'statusChipBar';
-    chipBar.className = 'status-chip-bar';
-    var sortBarEl = document.querySelector('.sort-bar');
-    if (sortBarEl) sortBarEl.insertAdjacentElement('afterend', chipBar);
-  }
-  if (activeStatusFlag) {
-    var bd = STAGE_BADGES.find(function(s){ return s.flag === activeStatusFlag; });
-    chipBar.innerHTML = bd ? '<span class="active-status-chip"><i class="' + bd.icon + '"></i>' + bd.label + '<button class="chip-clear-btn" id="clearStatusChip" title="Clear">&#x2715;</button></span>' : '';
-    var cb = document.getElementById('clearStatusChip');
-    if (cb) cb.onclick = function(){ activeStatusFlag = null; currentPage = 1; renderPublicationsWithPagination(); };
-  } else { chipBar.innerHTML = ''; }
-
   renderPaginationControls(totalPages);
   // Refresh live download counts for newly rendered circles
   if (typeof loadAllDownloadCounts === 'function') loadAllDownloadCounts();
@@ -1233,18 +1213,6 @@ function initEventListeners() {
       updateYearSliderUI();
       updateFiltersAndResetPage();
     });
-  });
-
-  document.getElementById('publicationsContainer').addEventListener('click', function(e) {
-    var badge = e.target.closest('.badge-clickable');
-    if (!badge) return;
-    var flag = badge.getAttribute('data-status-flag');
-    if (!flag) return;
-    activeStatusFlag = (activeStatusFlag === flag) ? null : flag;
-    currentPage = 1;
-    renderPublicationsWithPagination();
-    var anchor = document.querySelector('.sort-bar') || document.getElementById('publicationsContainer');
-    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   // More dropdown items

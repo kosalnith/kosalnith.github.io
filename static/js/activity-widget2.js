@@ -294,7 +294,6 @@ let currentPage   = 1;
 const ITEMS_PER_PAGE = 30;
 let currentSearch = '';
 let sortOrder     = 'desc';
-let activeRoleFilter = null;
 
 function getFilteredActivities() {
   let filtered = activities;
@@ -328,8 +327,6 @@ function getFilteredActivities() {
   const selectedTypes = Array.from(document.querySelectorAll('#typeDetailList input:checked'))
     .map(cb => cb.getAttribute('data-activity-type'));
   if (selectedTypes.length) filtered = filtered.filter(a => selectedTypes.includes(a.typeCategory));
-
-  if (activeRoleFilter) filtered = filtered.filter(a => a.role === activeRoleFilter);
 
   // Sort using pre-computed keys — zero regex cost
   return filtered.slice().sort((a, b) =>
@@ -400,7 +397,7 @@ function renderActivities() {
         const roleCls = roleClassMap[a.role] || 'role-default';
         const personDiv = document.createElement('div');
         personDiv.className = 'activity-person';
-        personDiv.innerHTML = `<span class="role-badge ${roleCls} role-badge-clickable" data-role="${a.role.replace(/"/g, '&quot;')}" role="button" tabindex="0" title="Filter by role: ${a.role}">${a.role}</span>`;
+        personDiv.innerHTML = `<span class="role-badge ${roleCls}">${a.role}</span>`;
         details.appendChild(personDiv);
 
         // Date
@@ -489,22 +486,6 @@ function renderActivities() {
   countEl.textContent = total === 0
     ? '0 results'
     : `${start + 1} \u2013 ${Math.min(start + pageItems.length, total)} out of ${total} results`;
-
-  var chipBar = document.getElementById('roleChipBar');
-  if (!chipBar) {
-    chipBar = document.createElement('div');
-    chipBar.id = 'roleChipBar';
-    chipBar.className = 'status-chip-bar';
-    var sortBarEl = document.querySelector('.sort-bar');
-    if (sortBarEl) sortBarEl.insertAdjacentElement('afterend', chipBar);
-  }
-  if (activeRoleFilter) {
-    chipBar.innerHTML = '<span class="active-status-chip"><i class="fas fa-user-tag"></i>' + activeRoleFilter + '<button class="chip-clear-btn" id="clearRoleChip" title="Clear">&#x2715;</button></span>';
-    var clearBtn = document.getElementById('clearRoleChip');
-    if (clearBtn) clearBtn.onclick = function(){ activeRoleFilter = null; currentPage = 1; renderActivities(); };
-  } else {
-    chipBar.innerHTML = '';
-  }
 
   const sortBtn = document.getElementById('sortBtn');
   if (sortBtn) {
@@ -622,19 +603,6 @@ document.getElementById('paginationContainer').addEventListener('click', e => {
   renderActivities();
   const rc = document.querySelector('.research-container');
   if (rc) window.scrollTo({ top: rc.offsetTop - 20, behavior: 'smooth' });
-});
-
-/* ─── 12b. Role badge click filter ─────────────────────────────── */
-document.getElementById('activitiesContainer').addEventListener('click', function(e) {
-  var badge = e.target.closest('.role-badge-clickable');
-  if (!badge) return;
-  var role = badge.getAttribute('data-role');
-  if (!role) return;
-  activeRoleFilter = (activeRoleFilter === role) ? null : role;
-  currentPage = 1;
-  renderActivities();
-  var anchor = document.querySelector('.sort-bar') || document.getElementById('activitiesContainer');
-  if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
 /* ─── 13. Init ──────────────────────────────────────────────────── */
