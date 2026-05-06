@@ -448,16 +448,17 @@ document.getElementById('tm-reset-btn').addEventListener('click', () => {
 /* ── STATS ───────────────────────────────────────────────────── */
 document.getElementById('tm-s-n').textContent = tmCountries.length;
 document.getElementById('tm-nations-badge').textContent = tmCountries.length + ' nations';
+/* Auto-detect continent from lat/lng — no manual map needed */
 function tmGetContinent(lat, lng) {
-  if (lat > 35 && lng > -25 && lng < 65)   return 'Europe';
-  if (lat > -40 && lat < 40 && lng > -20 && lng < 55) return 'Africa';
-  if (lat > 5  && lng > 25  && lng < 180)  return 'Asia';
-  if (lat < 5  && lng > 95  && lng < 180)  return 'Oceania';
-  if (lat > 15 && lng > -170 && lng < -50) return 'North America';
-  if (lat <= 15 && lng > -85 && lng < -30) return 'South America';
-  return 'Other';
+  if (lat > 35 && lng > -25 && lng < 65)   return "Europe";
+  if (lat > -40 && lat < 40 && lng > -20 && lng < 55) return "Africa";
+  if (lat > 5  && lng > 25  && lng < 180)  return "Asia";
+  if (lat < 5  && lng > 95  && lng < 180)  return "Oceania";
+  if (lat > 15 && lng > -170 && lng < -50) return "North America";
+  if (lat <= 15 && lng > -85 && lng < -30) return "South America";
+  return "Other";
 }
-document.getElementById('tm-s-c').textContent =
+document.getElementById("tm-s-c").textContent =
   new Set(tmCountries.map(function(c){ return tmGetContinent(c.lat, c.lng); })).size;
 
 /* ── PANEL TOGGLE ────────────────────────────────────────────── */
@@ -804,6 +805,9 @@ function tmFitHeight() {
   /* 16px wrapper padding + 8px visual gap */
   const used = header.offsetHeight + headingH + toggleH + 16 + 8;
   const minH = window.innerWidth <= 480 ? 420 : window.innerWidth <= 768 ? 500 : 680;
+
+
+
   shell.style.height = Math.max(minH, vh - used) + 'px';
   tmMap.invalidateSize();
 }
