@@ -448,17 +448,16 @@ document.getElementById('tm-reset-btn').addEventListener('click', () => {
 /* ── STATS ───────────────────────────────────────────────────── */
 document.getElementById('tm-s-n').textContent = tmCountries.length;
 document.getElementById('tm-nations-badge').textContent = tmCountries.length + ' nations';
-/* Auto-detect continent from lat/lng — no manual map needed */
 function tmGetContinent(lat, lng) {
-  if (lat > 35 && lng > -25 && lng < 65)   return "Europe";
-  if (lat > -40 && lat < 40 && lng > -20 && lng < 55) return "Africa";
-  if (lat > 5  && lng > 25  && lng < 180)  return "Asia";
-  if (lat < 5  && lng > 95  && lng < 180)  return "Oceania";
-  if (lat > 15 && lng > -170 && lng < -50) return "North America";
-  if (lat <= 15 && lng > -85 && lng < -30) return "South America";
-  return "Other";
+  if (lat > 35 && lng > -25 && lng < 65)   return 'Europe';
+  if (lat > -40 && lat < 40 && lng > -20 && lng < 55) return 'Africa';
+  if (lat > 5  && lng > 25  && lng < 180)  return 'Asia';
+  if (lat < 5  && lng > 95  && lng < 180)  return 'Oceania';
+  if (lat > 15 && lng > -170 && lng < -50) return 'North America';
+  if (lat <= 15 && lng > -85 && lng < -30) return 'South America';
+  return 'Other';
 }
-document.getElementById("tm-s-c").textContent =
+document.getElementById('tm-s-c').textContent =
   new Set(tmCountries.map(function(c){ return tmGetContinent(c.lat, c.lng); })).size;
 
 /* ── PANEL TOGGLE ────────────────────────────────────────────── */
@@ -792,23 +791,38 @@ document.getElementById("tm-s-c").textContent =
   }
 })();
 
-/* ── MAP HEIGHT: fills most of the viewport below header + toggle bar ─ */
+/* ── MAP HEIGHT: fills viewport below header + toggle bar ─ */
 function tmFitHeight() {
-  const header     = document.querySelector('header.su-masthead');
-  const shell      = document.getElementById('tm-shell');
-  const toggleBar  = document.querySelector('.tm-view-toggle-bar');
-  const heading    = document.getElementById('academics');
-  if (!header || !shell) return;
+  const shell = document.getElementById('tm-shell');
+  if (!shell) return;
+  const header = document.querySelector('header.su-masthead')
+              || document.querySelector('header[role="banner"]')
+              || document.querySelector('#site-header')
+              || document.querySelector('header');
+  const toggleBar = document.querySelector('.tm-view-toggle-bar');
+  const heading   = document.getElementById('academics');
   const vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+  const w  = window.innerWidth;
+  const headerH  = header    ? header.offsetHeight    : 0;
   const toggleH  = toggleBar ? toggleBar.offsetHeight : 0;
   const headingH = heading   ? heading.offsetHeight   : 0;
-  /* 16px wrapper padding + 8px visual gap */
-  const used = header.offsetHeight + headingH + toggleH + 16 + 8;
-  const minH = window.innerWidth <= 480 ? 420 : window.innerWidth <= 768 ? 500 : 680;
+  const used = headerH + headingH + toggleH + 8; /* 8px gap below toggle bar */
 
-
-
-  shell.style.height = Math.max(minH, vh - used) + 'px';
+  let h;
+  if (w > 1024) {
+    /* Desktop — fill as much of the viewport as possible, minimum 85vh */
+    h = Math.max(Math.round(vh * 0.85), vh - used, 800);
+  } else if (w > 768) {
+    /* Small desktop / large tablet */
+    h = Math.max(720, vh - used);
+  } else if (w > 480) {
+    /* Tablet portrait */
+    h = Math.max(680, vh - used);
+  } else {
+    /* Phone */
+    h = Math.max(560, vh - used);
+  }
+  shell.style.height = h + 'px';
   tmMap.invalidateSize();
 }
 tmFitHeight();
@@ -927,9 +941,11 @@ if (window.visualViewport) {
 /* ══════════════════════════════════════════════════════════════
    GALLERY — search + filter state
 ══════════════════════════════════════════════════════════════ */
-let tmGalleryQuery      = '';
-let tmGalleryCountries  = new Set();   /* multi-select */
-let tmGalleryTypes      = new Set();   /* multi-select */
+let tmGalleryQuery     = '';
+let tmGalleryCountries = new Set();
+let tmGalleryTypes     = new Set();
+let tmGalleryPage      = 1;          /* current page, 1-based */
+const TM_PAGE_SIZE     = 30;         /* cards per page */
 
 function tmUpdateFilterBadge(id, set) {
   const badge = document.getElementById(id);
@@ -957,6 +973,7 @@ function tmBuildGalleryFilters() {
         else tmGalleryCountries.add(c.name);
         btn.classList.toggle('tm-gf-chip--on', tmGalleryCountries.has(c.name));
         tmUpdateFilterBadge('tm-gf-country-badge', tmGalleryCountries);
+        tmGalleryPage = 1;
         tmRenderGallery();
       });
       countryChips.appendChild(btn);
@@ -983,6 +1000,7 @@ function tmBuildGalleryFilters() {
         else tmGalleryTypes.add(key);
         btn.classList.toggle('tm-gf-chip--on', tmGalleryTypes.has(key));
         tmUpdateFilterBadge('tm-gf-type-badge', tmGalleryTypes);
+        tmGalleryPage = 1;
         tmRenderGallery();
       });
       typeChips.appendChild(btn);
@@ -994,23 +1012,28 @@ function tmBuildGalleryFilters() {
     tmGalleryCountries.clear();
     countryChips?.querySelectorAll('.tm-gf-chip').forEach(b => b.classList.remove('tm-gf-chip--on'));
     tmUpdateFilterBadge('tm-gf-country-badge', tmGalleryCountries);
+    tmGalleryPage = 1;
     tmRenderGallery();
   });
   document.getElementById('tm-gf-type-reset')?.addEventListener('click', () => {
     tmGalleryTypes.clear();
     typeChips?.querySelectorAll('.tm-gf-chip').forEach(b => b.classList.remove('tm-gf-chip--on'));
     tmUpdateFilterBadge('tm-gf-type-badge', tmGalleryTypes);
+    tmGalleryPage = 1;
     tmRenderGallery();
   });
 
-  /* ── Search ── */
+  /* ── Search — debounced so gallery doesn't rebuild on every keystroke ── */
   const inp = document.getElementById('tm-gallery-search');
   const clearBtn = document.getElementById('tm-gallery-search-clear');
+  let _searchTimer = null;
   if (inp) {
     inp.addEventListener('input', e => {
       tmGalleryQuery = e.target.value;
       if (clearBtn) clearBtn.style.display = tmGalleryQuery ? 'flex' : 'none';
-      tmRenderGallery();
+      tmGalleryPage = 1;
+      clearTimeout(_searchTimer);
+      _searchTimer = setTimeout(tmRenderGallery, 180);
     });
   }
   if (clearBtn) {
@@ -1019,6 +1042,7 @@ function tmBuildGalleryFilters() {
       if (inp) inp.value = '';
       tmGalleryQuery = '';
       clearBtn.style.display = 'none';
+      tmGalleryPage = 1;
       tmRenderGallery();
     });
   }
@@ -1033,31 +1057,27 @@ function tmBuildGalleryFilters() {
     document.querySelectorAll('.tm-gf-chip').forEach(b => b.classList.remove('tm-gf-chip--on'));
     tmUpdateFilterBadge('tm-gf-country-badge', tmGalleryCountries);
     tmUpdateFilterBadge('tm-gf-type-badge', tmGalleryTypes);
+    tmGalleryPage = 1;
     tmRenderGallery();
   });
 }
 
 /* ══════════════════════════════════════════════════════════════
-   GALLERY RENDERER
+   GALLERY RENDERER — paginated (TM_PAGE_SIZE cards per page)
 ══════════════════════════════════════════════════════════════ */
 function tmRenderGallery() {
   const container = document.getElementById('tm-gallery-countries');
   const activeBar = document.getElementById('tm-gallery-active-bar');
   const countEl   = document.getElementById('tm-gallery-result-count');
   if (!container) return;
-  container.innerHTML = '';
 
   const q = tmGalleryQuery.toLowerCase().trim();
 
-  /* Filter countries + cities */
-  let totalCards = 0;
-  const sections = [];
-
+  /* ── 1. Build complete flat list of filtered cards ── */
+  const allCards = [];
   tmCountries.forEach(country => {
-    /* Country filter — show if none selected OR country is in set */
     if (tmGalleryCountries.size > 0 && !tmGalleryCountries.has(country.name)) return;
 
-    /* Filter cities then sort A → Z by name */
     const matchingCities = country.cities.filter(city => {
       const matchesType   = tmGalleryTypes.size === 0 || tmGalleryTypes.has(city.type);
       const matchesSearch = !q ||
@@ -1066,7 +1086,7 @@ function tmRenderGallery() {
       return matchesType && matchesSearch;
     }).sort((a, b) => a.name.localeCompare(b.name));
 
-    /* Merge cities that share the same name into one card */
+    /* Merge same-named cities into one card */
     const mergedMap = new Map();
     matchingCities.forEach(city => {
       const key = city.name.trim().toLowerCase();
@@ -1076,74 +1096,76 @@ function tmRenderGallery() {
         m.types.push({ type: city.type, lat: city.lat, lng: city.lng });
       } else {
         mergedMap.set(key, {
-          name:  city.name,
-          desc:  city.desc,
-          lat:   city.lat,
-          lng:   city.lng,
-          imgs:  [...city.imgs],
+          name: city.name, desc: city.desc,
+          lat: city.lat, lng: city.lng,
+          imgs: [...city.imgs],
           types: [{ type: city.type, lat: city.lat, lng: city.lng }],
         });
       }
     });
-    const mergedCities = Array.from(mergedMap.values());
-
-    if (mergedCities.length > 0) {
-      sections.push({ country, cities: mergedCities });
-      totalCards += mergedCities.length;
-    }
+    mergedMap.forEach(city => allCards.push({ country, city }));
   });
 
-  /* Active bar */
+  const totalCards = allCards.length;
+
+  /* ── 2. Active filter bar ── */
   const hasFilter = q || tmGalleryCountries.size > 0 || tmGalleryTypes.size > 0;
   if (activeBar) {
     activeBar.style.display = hasFilter ? 'flex' : 'none';
     if (countEl) countEl.textContent = `${totalCards} location${totalCards !== 1 ? 's' : ''} found`;
   }
 
-  if (sections.length === 0) {
+  container.innerHTML = '';
+
+  if (totalCards === 0) {
     container.innerHTML = '<p class="tm-gallery-empty"><i class="fa-solid fa-magnifying-glass"></i><br>No locations match your filters.</p>';
+    tmRenderPagination(0, 0);
     return;
   }
 
-  sections.forEach(({ country, cities }) => {
+  /* ── 3. Pagination — clamp current page ── */
+  const totalPages = Math.ceil(totalCards / TM_PAGE_SIZE);
+  tmGalleryPage    = Math.min(Math.max(1, tmGalleryPage), totalPages);
+  const startIdx   = (tmGalleryPage - 1) * TM_PAGE_SIZE;
+  const pageCards  = allCards.slice(startIdx, startIdx + TM_PAGE_SIZE);
+
+  /* ── 4. Re-group this page's cards by country for section headers ── */
+  const sectionsMap = new Map();
+  pageCards.forEach(({ country, city }) => {
+    if (!sectionsMap.has(country.name)) sectionsMap.set(country.name, { country, cities: [] });
+    sectionsMap.get(country.name).cities.push(city);
+  });
+
+  /* ── 5. Render sections ── */
+  sectionsMap.forEach(({ country, cities }) => {
     const section = document.createElement('div');
     section.className = 'tm-gc-section';
 
-    const header = document.createElement('div');
-    header.className = 'tm-gc-country-header';
-    header.innerHTML = `
+    const hdr = document.createElement('div');
+    hdr.className = 'tm-gc-country-header';
+    hdr.innerHTML = `
       <span class="tm-gc-flag fi fi-${country.flag}"></span>
       <h3 class="tm-gc-country-name">${country.name}</h3>
       <span class="tm-gc-country-desc">${country.desc}</span>`;
-    section.appendChild(header);
+    section.appendChild(hdr);
 
     const locGrid = document.createElement('div');
     locGrid.className = 'tm-gc-locations';
 
     cities.forEach(city => {
-      /* city may be a merged entry: city.types = [{type, lat, lng}, ...] */
-      const allImgs  = city.imgs;          /* raw name strings — no URLs yet */
-      const n        = allImgs.length;
-
-      /* Primary type = first entry; used for card accent colour */
-      const primaryT = tmPinTypes[city.types[0].type] || tmPinTypes.default;
-
-      /* Use first entry's coords as the map jump target */
+      const allImgs    = city.imgs;
+      const n          = allImgs.length;
       const primaryLat = city.types[0].lat;
       const primaryLng = city.types[0].lng;
-
-      /* Unique card ID = name-slug so back-button can find it */
-      const cardId = city.name.trim().toLowerCase().replace(/\s+/g, '_');
+      const cardId     = city.name.trim().toLowerCase().replace(/\s+/g, '_');
 
       const card = document.createElement('div');
       card.className = 'tm-gc-card';
       card.dataset.cardId = cardId;
 
-      /* ── Photo grid ── */
       const photoGrid = document.createElement('div');
       photoGrid.className = 'tm-gc-photo-wrap';
       photoGrid.innerHTML = tmGalleryPhotoGrid(allImgs);
-
       if (n > 1) {
         const badge = document.createElement('span');
         badge.className = 'tm-gc-photo-count';
@@ -1151,12 +1173,10 @@ function tmRenderGallery() {
         photoGrid.querySelector('.tm-gc-photos').appendChild(badge);
       }
 
-      /* ── Type badges — one per distinct type ── */
       const typeBadgesHtml = city.types.map(({ type }) => {
         const t = tmPinTypes[type] || tmPinTypes.default;
         return `<div class="tm-gc-type-badge" style="color:${t.color};background:${t.color}14;border-color:${t.color}30">
-          <i class="${t.icon}"></i> ${t.label}
-        </div>`;
+          <i class="${t.icon}"></i> ${t.label}</div>`;
       }).join('');
 
       const info = document.createElement('div');
@@ -1172,7 +1192,6 @@ function tmRenderGallery() {
       card.appendChild(photoGrid);
       card.appendChild(info);
 
-      /* Pass raw names — tmOpenLb handles thumb→full upgrade internally */
       card.querySelectorAll('.tm-gc-ph').forEach(ph => {
         ph.style.cursor = 'zoom-in';
         ph.addEventListener('click', function(e) {
@@ -1188,20 +1207,15 @@ function tmRenderGallery() {
         tmLastGalleryCardName = city.name;
         document.getElementById('tm-btn-map').click();
         const backBar = document.getElementById('tm-back-bar');
-        const backBtn = document.getElementById('tm-back-btn');
         if (backBar) backBar.style.display = 'flex';
-        if (backBtn) {
-          const nameEl = document.getElementById('tm-back-city-name');
-          if (nameEl) nameEl.textContent = city.name;
-        }
+        const nameEl = document.getElementById('tm-back-city-name');
+        if (nameEl) nameEl.textContent = city.name;
         setTimeout(() => {
           tmMap.flyTo([lat, lng], 14, { duration: 1.4 });
           setTimeout(() => {
             tmAllMarkers.forEach(({ marker }) => {
               const pos = marker.getLatLng();
-              if (Math.abs(pos.lat - lat) < 0.001 && Math.abs(pos.lng - lng) < 0.001) {
-                marker.openPopup();
-              }
+              if (Math.abs(pos.lat - lat) < 0.001 && Math.abs(pos.lng - lng) < 0.001) marker.openPopup();
             });
           }, 1500);
         }, 100);
@@ -1213,6 +1227,79 @@ function tmRenderGallery() {
     section.appendChild(locGrid);
     container.appendChild(section);
   });
+
+  /* ── 6. Pagination bar ── */
+  tmRenderPagination(totalPages, totalCards);
+}
+
+/* ── Pagination bar ── */
+function tmRenderPagination(totalPages, totalCards) {
+  document.getElementById('tm-pagination')?.remove();
+  if (totalPages <= 1) return;
+
+  const startCard = (tmGalleryPage - 1) * TM_PAGE_SIZE + 1;
+  const endCard   = Math.min(tmGalleryPage * TM_PAGE_SIZE, totalCards);
+
+  const bar = document.createElement('nav');
+  bar.id = 'tm-pagination';
+  bar.className = 'tm-pagination';
+  bar.setAttribute('aria-label', 'Gallery pages');
+
+  function scrollTop() {
+    document.querySelector('.tm-gallery-top')
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* Prev */
+  const prev = document.createElement('button');
+  prev.className = 'tm-pg-btn tm-pg-prev' + (tmGalleryPage === 1 ? ' tm-pg-btn--disabled' : '');
+  prev.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+  prev.setAttribute('aria-label', 'Previous page');
+  prev.disabled = tmGalleryPage === 1;
+  if (tmGalleryPage > 1) prev.addEventListener('click', () => { tmGalleryPage--; tmRenderGallery(); scrollTop(); });
+  bar.appendChild(prev);
+
+  /* Page buttons with smart ellipsis */
+  const pages = new Set([1, totalPages]);
+  for (let p = tmGalleryPage - 1; p <= tmGalleryPage + 1; p++) {
+    if (p >= 1 && p <= totalPages) pages.add(p);
+  }
+  const sorted = [...pages].sort((a, b) => a - b);
+  let last = 0;
+  sorted.forEach(p => {
+    if (last && p - last > 1) {
+      const ell = document.createElement('span');
+      ell.className = 'tm-pg-ellipsis';
+      ell.textContent = '…';
+      bar.appendChild(ell);
+    }
+    const btn = document.createElement('button');
+    btn.className = 'tm-pg-btn' + (p === tmGalleryPage ? ' tm-pg-btn--active' : '');
+    btn.textContent = p;
+    btn.setAttribute('aria-label', `Page ${p}`);
+    if (p === tmGalleryPage) btn.setAttribute('aria-current', 'page');
+    else btn.addEventListener('click', () => { tmGalleryPage = p; tmRenderGallery(); scrollTop(); });
+    bar.appendChild(btn);
+    last = p;
+  });
+
+  /* Next */
+  const next = document.createElement('button');
+  next.className = 'tm-pg-btn tm-pg-next' + (tmGalleryPage === totalPages ? ' tm-pg-btn--disabled' : '');
+  next.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+  next.setAttribute('aria-label', 'Next page');
+  next.disabled = tmGalleryPage === totalPages;
+  if (tmGalleryPage < totalPages) next.addEventListener('click', () => { tmGalleryPage++; tmRenderGallery(); scrollTop(); });
+  bar.appendChild(next);
+
+  /* Info text */
+  const info = document.createElement('p');
+  info.className = 'tm-pg-info';
+  info.textContent = `Showing ${startCard}–${endCard} of ${totalCards} locations`;
+  bar.appendChild(info);
+
+  const container = document.getElementById('tm-gallery-countries');
+  container?.parentNode?.insertBefore(bar, container.nextSibling);
 }
 
 /* Init filters once */

@@ -1442,11 +1442,10 @@ html.dark-mode .detail-no-abstract {
 /* ── Abstract text ────────────────────────────────────────── */
 .research-container .abstract-text {
   margin: 0.1rem 0 0 !important;
-  font-size: 1.6rem !important;
+  font-size: 1.8rem !important;
   color: #2c3f55 !important;
   line-height: 1.75 !important;
   padding: 0.85rem 1.2rem !important;
-  background: #f9fbfd !important;
   border-left: 3px solid #b1040e !important;
   border-radius: 0 6px 6px 0 !important;
 }

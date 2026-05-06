@@ -413,8 +413,8 @@ const publicationsData = [
 
   { title: "20 Years of FDI in Cambodia: Towards Upper Middle-Income Status and Beyond",
     ogImage: "https://kosalnith.github.io/static/img/og/20-years-of-fdi-in-cambodia-towards-upper-middle-income-status-and-beyond.png",
-    authors: "Kosal Nith, Simona Iammarino & Sumontheany Muth",
-    date: "May 2024", outlet: "CDRI Working Paper 149",
+    authors: "Simona Iammarino & Sumontheany Muth & Kosal Nith",
+    date: "May 2024", outlet: "Cambodia Development Resource Institute",
     zoteroType: "report",
     seriesName: "CDRI Working Paper",
     seriesNum: "149",
@@ -579,7 +579,7 @@ const publicationsData = [
     authors: "Kosal Nith", date: "8 May 2020",
     outlet: "Cambodia Development Center, Essay Contest 2019",
     zoteroType: "report",
-    type: "reports", year: "2020", oa: true, lang: "en", award: true,
+    type: "reports", year: "2020", oa: true, lang: "km", award: true,
     breadcrumb: "Report › Policy brief",
     keywords: ["Industry 4.0","Technology","Economic Development","Cambodia"],
     kwStrength: ["full","full","half","none"],
@@ -590,6 +590,22 @@ const publicationsData = [
       { label: "Slides", url: "research/slides/IP4.0_CDC.pdf", icon: "fa-person-chalkboard" }
     ] },
 
+
+ // ══ Documents (1) ═════════════════════════════════════
+    { title: "LaTeX Econ Slides Template",
+    ogImage: "https://kosalnith.github.io/static/img/og/how-should-cambodia-prepare-for-the-fourth-industrial-revolution.png",
+    authors: "Kosal Nith", date: "May 2026",
+    outlet: "Kosal Nith",
+    zoteroType: "document",
+    type: "documents", year: "2026", oa: true, lang: "hm",
+    breadcrumb: "Document",
+    keywords: ["Presentation","Slides","Speaking","Economics"],
+    kwStrength: ["full","full","half","none"],
+    sdgs: ["SDG 8 - Decent Work and Economic Growth","SDG 4 - Quality Education"],
+    resources: [
+      { label: "White Mode", url: "", icon: "fa-person-chalkboard" },
+      { label: "Dark Mode", url: "", icon: "fa-person-chalkboard" }
+    ] },
   // ══ Work in Progress (3) ═════════════════════════════════════
 
   { title: "Dollarization and Monetary Policy in Cambodia: Challenges, International Lessons, and Policy Implications",
