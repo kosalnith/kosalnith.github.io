@@ -1388,3 +1388,44 @@ html.dark-mode body .detail-meta-table tr:nth-child(odd):hover td {
   background-color: #23211f !important;
   transition: background 0.15s;
 }
+
+/* ── Mobile filter drawer dark mode ── */
+@media (max-width: 900px) {
+  html.dark-mode .research-sidebar {
+    background: #1e1c1a !important;
+  }
+  html.dark-mode .filter-sidebar-header {
+    background: #1e1c1a !important;
+    border-bottom-color: #3a3836 !important;
+  }
+  html.dark-mode .research-sidebar::before {
+    background: #3a3836 !important;
+  }
+  html.dark-mode .research-sidebar .filter-group {
+    border-bottom-color: #2a2826 !important;
+  }
+  html.dark-mode .filter-close-btn {
+    background: #2a2826 !important;
+    color: #aaa !important;
+  }
+  html.dark-mode .filter-close-btn:hover {
+    background: #b1040e !important;
+    color: #fff !important;
+  }
+  html.dark-mode .mobile-filter-toggle {
+    background: #2a2826 !important;
+    color: #d6d6d6 !important;
+  }
+  html.dark-mode .mobile-filter-toggle:hover {
+    background: #b1040e !important;
+    color: #fff !important;
+  }
+  html.dark-mode .mobile-result-count {
+    color: #777 !important;
+  }
+  /* Meta table: dark label on mobile stacked layout */
+  html.dark-mode .detail-meta-table td:first-child {
+    color: #666 !important;
+    background: transparent !important;
+  }
+}
