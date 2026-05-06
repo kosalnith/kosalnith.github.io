@@ -84,7 +84,7 @@
   pointer-events: auto;
 }
 
-html.dark-mode .otp-sidebar {
+body.dark-mode .otp-sidebar {
   background: transparent;
   scrollbar-color: #555 transparent;
 }
@@ -103,7 +103,7 @@ html.dark-mode .otp-sidebar {
 .otp-sidebar::-webkit-scrollbar-thumb:hover {
   background: #888;
 }
-html.dark-mode .otp-sidebar::-webkit-scrollbar-thumb {
+body.dark-mode .otp-sidebar::-webkit-scrollbar-thumb {
   background: #555;
 }
 
@@ -129,10 +129,10 @@ html.dark-mode .otp-sidebar::-webkit-scrollbar-thumb {
   width: 100%;
 }
 .otp-sidebar__header:hover { opacity: 0.75; }
-html.dark-mode .otp-sidebar__header { color: #e0e0e0; }
+body.dark-mode .otp-sidebar__header { color: #e0e0e0; }
 
 .otp-sidebar__icon { flex-shrink: 0; color: #444; }
-html.dark-mode .otp-sidebar__icon { color: #aaa; }
+body.dark-mode .otp-sidebar__icon { color: #aaa; }
 
 .otp-sidebar__toggle-icon {
   margin-left: auto;
@@ -163,11 +163,11 @@ html.dark-mode .otp-sidebar__icon { color: #aaa; }
   transition: color 0.12s;
 }
 .otp-sidebar__link:hover { color: #111; text-decoration: none; }
-html.dark-mode .otp-sidebar__link { color: #999; }
-html.dark-mode .otp-sidebar__link:hover { color: #eee; }
+body.dark-mode .otp-sidebar__link { color: #999; }
+body.dark-mode .otp-sidebar__link:hover { color: #eee; }
 
 .otp-sidebar__link.is-active { color: #c00; font-weight: 600; }
-html.dark-mode .otp-sidebar__link.is-active { color: #ff6b6b; }
+body.dark-mode .otp-sidebar__link.is-active { color: #ff6b6b; }
 
 /* L2 sub-links */
 .otp-sidebar__sublist { padding-left: 14px; margin: 1px 0 4px; }
@@ -178,9 +178,9 @@ html.dark-mode .otp-sidebar__link.is-active { color: #ff6b6b; }
 }
 .otp-sidebar__link--sub:hover { color: #333; }
 .otp-sidebar__link--sub.is-active { color: #c00; font-weight: 600; }
-html.dark-mode .otp-sidebar__link--sub { color: #777; }
-html.dark-mode .otp-sidebar__link--sub:hover { color: #ccc; }
-html.dark-mode .otp-sidebar__link--sub.is-active { color: #e0e0e0; }
+body.dark-mode .otp-sidebar__link--sub { color: #777; }
+body.dark-mode .otp-sidebar__link--sub:hover { color: #ccc; }
+body.dark-mode .otp-sidebar__link--sub.is-active { color: #e0e0e0; }
 
 /* Mobile sidebar — slide-in panel */
 @media (max-width: 1024px) {
@@ -204,7 +204,7 @@ html.dark-mode .otp-sidebar__link--sub.is-active { color: #e0e0e0; }
     transition: right 0.28s cubic-bezier(.4,0,.2,1);
     overflow-y: auto;
   }
-  html.dark-mode .otp-sidebar { background: #1c1c1c; border-left-color: #333; }
+  body.dark-mode .otp-sidebar { background: #1c1c1c; border-left-color: #333; }
   .otp-sidebar.mobile-active { right: 0; }
 
   /* On mobile, collapsed class doesn't hide list */
@@ -246,7 +246,7 @@ html.dark-mode .otp-sidebar__link--sub.is-active { color: #e0e0e0; }
     font-family: sans-serif;
     font-weight: 500;
   }
-  html.dark-mode .otp-touch-handle { background: #222; border-color: #444; color: #aaa; }
+  body.dark-mode .otp-touch-handle { background: #222; border-color: #444; color: #aaa; }
 
   .otp-overlay {
     display: none;

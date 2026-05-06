@@ -1034,23 +1034,15 @@ function renderPaginationControls(totalPages) {
 function renderSdgList() {
   const container = document.getElementById('sdgList');
   if (!container) return;
-
-  // Auto-compute SDG counts from publication data
-  const sdgCounts = {};
-  (publicationsData || []).forEach(p => {
-    if (p.sdgs) p.sdgs.forEach(s => { sdgCounts[s] = (sdgCounts[s] || 0) + 1; });
-  });
-
   let html = '';
   sdgItems.forEach((item, idx) => {
-    const count = sdgCounts[item.label] || 0;
     const hiddenClass = idx >= 6 ? 'sdg-hidden' : '';
     html += `<label class="custom-check ${hiddenClass}">
       <input type="checkbox" class="sdg-checkbox" data-sdg="${item.label}">
       <span class="check-box"></span>
       <span class="custom-check-left">
         <span>${item.label}</span>
-        <span class="count-badge">(${count})</span>
+        <span class="count-badge">(${item.count})</span>
       </span>
     </label>`;
   });
@@ -2355,57 +2347,10 @@ function initDownloadTracking() {
   });
 }
 
-
-// ===== Auto-update all filter counts from data =====
-function updateAllCounts() {
-  const pubs = publicationsData || [];
-
-  // OA count
-  const oaCount = pubs.filter(p => p.oa).length;
-  const oaBadge = document.querySelector('#oaFilterCheckbox')
-    ?.closest('label')?.querySelector('.count-badge');
-  if (oaBadge) oaBadge.textContent = '(' + oaCount + ')';
-
-  // Language counts
-  const langCounts = { en: 0, fr: 0, km: 0 };
-  pubs.forEach(p => { if (p.lang && langCounts[p.lang] !== undefined) langCounts[p.lang]++; });
-  document.querySelectorAll('input[data-lang]').forEach(inp => {
-    const badge = inp.closest('label')?.querySelector('.count-badge');
-    if (badge) badge.textContent = '(' + (langCounts[inp.dataset.lang] || 0) + ')';
-  });
-
-  // Type pill counts
-  const typeCounts = {};
-  pubs.forEach(p => { typeCounts[p.type] = (typeCounts[p.type] || 0) + 1; });
-
-  document.querySelectorAll('.type-pill[data-filter-type]').forEach(btn => {
-    const t = btn.dataset.filterType;
-    if (!t || t === 'all') return;
-    const numEl = btn.querySelector('.pill-number');
-    if (numEl) numEl.textContent = typeCounts[t] || 0;
-  });
-
-  // "More" dropdown items
-  document.querySelectorAll('.more-item[data-more-type]').forEach(el => {
-    const strong = el.querySelector('strong');
-    if (strong) strong.textContent = typeCounts[el.dataset.moreType] || 0;
-  });
-
-  // "More" pill total
-  const morePill = document.getElementById('moreButton');
-  if (morePill) {
-    const moreTotal = ['presentations','confpapers','progress']
-      .reduce((s, t) => s + (typeCounts[t] || 0), 0);
-    const numEl = morePill.querySelector('.pill-number');
-    if (numEl) numEl.textContent = moreTotal;
-  }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   renderSdgList();
   initYearSlider();
   renderTypeList();
-  updateAllCounts();
   renderPublicationsWithPagination();
   initEventListeners();
   initStickySidebar();

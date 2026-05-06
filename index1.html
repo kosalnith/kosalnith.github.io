@@ -148,7 +148,16 @@
                                         <div class="su-margin-bottom paragraph stanford-lists su-list-headline string label-hidden">
                                           <h2>What's New...</h2>
                                         </div>
-                                        <ol class="updates-list" id="whats-new-list"></ol>
+                                        <ol class="updates-list">
+                                          <li>&#10687; I appreciate to work with Prof. Sovannroeun Samreth on Determinants of Informal Borrowing in Cambodia. We have sent the manuscript to the journal.</li>
+                                          
+                                          <li>&#10687; I will present my paper on Does Social Captial Strengthen Household Resilience in Cambodia? Evidence from Panel Data on the <a href="https://www.plurale-oekonomik.de/workshop-2025/"> 6th Pluralumn* Workshop</a> on Empowering Young Mind, online (Hamburg, Germany), 27-29 August 2025. </li>
+                                          <li>&#10687;  I am back to work with Future Forum, my first career organisation, as a research fellow under the Inclusive Fellowship Program. I will be in this fellowship for one year, from June 2025 to May 2026.</li>
+                                          <li>&#10687; I will attend an important convening on Global Post-Neoliberalism Fellowship Program on 29th August to 1st September 2025, in Lusaka, Zambia.</li>
+                                          
+                                         
+                                                                        
+                                        </ol>
  <div class="js-pager__items pager" data-drupal-views-infinite-scroll-pager="">
                                               <div class="pager__item">
                                               <a class="button" href="updates.html" title="Load more items" rel="next">Load More News</a>
@@ -220,11 +229,41 @@
                                             <div class="stanford-events-list-page view stanford-events list-page js-view-dom-id-896b86aefb9ce0a6eb933e1bc2bc5fb3fcdd08d9af76b2b7f553c9ca79aafae0">
                                               <div>
 
-                                                <ul class="su-list-unstyled" id="upcoming-events-list"></ul>
+                                                <ul class="su-list-unstyled">
+<li><div class="su-event-list-item">
+<div class="su-event-list-item__date">
+<div class="su-date-stacked su-date-stacked--no-background" aria-hidden="true">
+<span class="su-event-start-month">Feb</span>
+<span class="su-event-start-date">11</span>
+</div>
+</div>
+
+<div class="su-event-list-item__details">
+<span class="event-list-item__type">
+<a href="" hreflang="en">Book Launch</a></span>
+<h2 class="field-content"><a class="su-link" href="">
+  Navigating Digital Transformation and Regional Resilience
+
+</a></h2> <div class="event-list-item__subheadline">
+<h3>Organized by Cambodia Development Resource Institute and Canada-in-Asia Conference 2026</h3></div> 
+<div class="views-field-su-event-date-time"><span class="date-icon" aria-hidden="true"></span> <div>
+<time datetime="2023-11-02T16:30:00-07:00">Wednesday, February 11, 2026 | 2:00am</time> - 
+<time datetime="2023-11-02T18:00:00-07:00">4:00pm GMT+8</time>
+</div></div>    <div class="views-field-su-event-address"><span class="map-icon" aria-hidden="true"></span>
+<p class="address" translate="no"><span class="address-line1">Swissôtel Hotels and Resorts, 2 Stamford Road, 178882, Singapore</span><br>
+</p></div><div class="views-field-su-event-address views-field-su-entered-event-address"></div>
+
+<div class="views-field-su-event-edit">
+<div class="field-content su-events-edit-article"></div></div>
+</div>
+</div>
+</li>
+
+
                                               </div>
-                                              <div class="js-pager__items pager">
+                                              <div class="js-pager__items pager" data-drupal-views-infinite-scroll-pager="">
                                               <div class="pager__item">
-                                              <a class="button" href="activity.html">View All Activities</a>
+                                              <a class="button" href="events.html" title="Load more items" rel="next">Load More Events</a>
                                               </div>
                                               </div>
                                             </div>
@@ -355,11 +394,22 @@
   <script async src="https://platform.twitter.com/widgets.js"></script>
   <script src="https://static.elfsight.com/platform/platform.js"></script>
   <script src="static/js/video.js"></script>
-
-  <!-- Data sources & home widgets -->
-  <script src="static/js/updates-data.js"></script>
-  <script src="static/js/activity-data.js"></script>
-  <script src="static/js/home-widgets.js"></script>
+  <!-- Auto-add su-link--external to external links (excludes nav, icons, social) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("a[href]").forEach(function (a) {
+        var href = a.getAttribute("href");
+        if (!href) return;
+        if (!href.startsWith("http://") && !href.startsWith("https://")) return;
+        if (href.includes("kosalnith.github.io")) return;
+        if (a.classList.contains("xsu-link")) return;
+        if (a.closest("nav, header, .su-masthead, .su-multi-menu, .su-main-nav, .su-global-footer, .su-local-footer, #site-header, #site-footer")) return;
+        if (a.querySelector("span[aria-hidden], i, svg")) return;
+        a.classList.add("su-link--external");
+        if (!a.getAttribute("target")) a.setAttribute("target", "_blank");
+      });
+    });
+  </script>
 
 </body>
 </html>

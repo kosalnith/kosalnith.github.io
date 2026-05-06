@@ -91,23 +91,23 @@ const yearItems = [
 
 // ─── SDG data — matched to Kosal Nith's research themes ────────
 const sdgItems = [
-  { label: "SDG 1 - No Poverty"                                },
-  { label: "SDG 2 - Zero Hunger"                               },
-  { label: "SDG 3 - Good Health and Well-being"                },
-  { label: "SDG 4 - Quality Education"                         },
-  { label: "SDG 5 - Gender Equality"                           },
-  { label: "SDG 6 - Clean Water and Sanitation"                },
-  { label: "SDG 7 - Affordable and Clean Energy"               },
-  { label: "SDG 8 - Decent Work and Economic Growth"           },
-  { label: "SDG 9 - Industry, Innovation, and Infrastructure"  },
-  { label: "SDG 10 - Reduced Inequalities"                     },
-  { label: "SDG 11 - Sustainable Cities and Communities"       },
-  { label: "SDG 12 - Responsible Consumption and Production"   },
-  { label: "SDG 13 - Climate Action"                           },
-  { label: "SDG 14 - Life Below Water"                         },
-  { label: "SDG 15 - Life on Land"                             },
-  { label: "SDG 16 - Peace, Justice and Strong Institutions"   },
-  { label: "SDG 17 - Partnerships for the Goals"               }
+  { label: "SDG 1 - No Poverty",                                count: 8  },
+  { label: "SDG 2 - Zero Hunger",                               count: 6  },
+  { label: "SDG 3 - Good Health and Well-being",                count: 2  },
+  { label: "SDG 4 - Quality Education",                         count: 3  },
+  { label: "SDG 5 - Gender Equality",                           count: 4  },
+  { label: "SDG 6 - Clean Water and Sanitation",                count: 1  },
+  { label: "SDG 7 - Affordable and Clean Energy",               count: 3  },
+  { label: "SDG 8 - Decent Work and Economic Growth",           count: 14 },
+  { label: "SDG 9 - Industry, Innovation, and Infrastructure",  count: 9  },
+  { label: "SDG 10 - Reduced Inequalities",                     count: 10 },
+  { label: "SDG 11 - Sustainable Cities and Communities",       count: 6  },
+  { label: "SDG 12 - Responsible Consumption and Production",   count: 4  },
+  { label: "SDG 13 - Climate Action",                           count: 5  },
+  { label: "SDG 14 - Life Below Water",                         count: 1  },
+  { label: "SDG 15 - Life on Land",                             count: 4  },
+  { label: "SDG 16 - Peace, Justice and Strong Institutions",   count: 5  },
+  { label: "SDG 17 - Partnerships for the Goals",               count: 7  }
 ];
 
 // ─── Publications data ─────────────────────────────────────────
