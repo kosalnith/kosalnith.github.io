@@ -1250,3 +1250,141 @@ html.dark-mode .map-icon:before {
 html.dark-mode .su-event-list-item {
   border-color: var(--dm-border) !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   CITE PANEL — detail page dark mode
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Tab buttons (inactive) */
+html.dark-mode .cite-tab-btn {
+  background: #1e1c1a !important;
+  color: #999 !important;
+  border-color: #3a3836 !important;
+}
+html.dark-mode .cite-tab-btn:hover {
+  background: #2a2826 !important;
+  color: #e05555 !important;
+  border-color: #e05555 !important;
+}
+html.dark-mode .cite-tab-btn.active {
+  background: #b1040e !important;
+  color: #fff !important;
+  border-color: #b1040e !important;
+  box-shadow: 0 -3px 10px rgba(177,4,14,0.25) !important;
+}
+
+/* Cite box wrapper */
+html.dark-mode .cite-box-wrap {
+  background: #1a1917 !important;
+  border-color: #3a3836 !important;
+}
+
+/* Cite text */
+html.dark-mode .cite-text {
+  color: #d6d6d6 !important;
+}
+
+/* Copy button — was white/invisible in dark mode */
+html.dark-mode .cite-copy-btn {
+  background: #2a2826 !important;
+  color: #e05555 !important;
+  border-color: #3a3836 !important;
+}
+html.dark-mode .cite-copy-btn:hover {
+  background: #b1040e !important;
+  color: #fff !important;
+  border-color: #b1040e !important;
+}
+
+/* Export RIS / Export BibTeX buttons */
+html.dark-mode .cite-export-btn {
+  background: #8c1514 !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 3px 10px rgba(177,4,14,0.2) !important;
+}
+html.dark-mode .cite-export-btn:hover {
+  background: #b1040e !important;
+  box-shadow: 0 4px 14px rgba(177,4,14,0.35) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   KEYWORD BUTTONS — detail page dark mode
+   ═══════════════════════════════════════════════════════════════ */
+
+html.dark-mode .detail-keyword {
+  background: rgba(177,4,14,0.12) !important;
+  border-color: rgba(177,4,14,0.35) !important;
+  color: #e05555 !important;
+  box-shadow: none !important;
+}
+html.dark-mode .detail-keyword:hover {
+  background: #b1040e !important;
+  color: #fff !important;
+  border-color: #b1040e !important;
+  box-shadow: 0 3px 10px rgba(177,4,14,0.3) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PUBLICATION DETAILS TABLE — stronger dark mode overrides
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Force all cells dark — beats the light-mode nth-child rules */
+html.dark-mode body .detail-meta-table td,
+html.dark-mode body .detail-meta-table th,
+html.dark-mode body .detail-meta-table tr td {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+html.dark-mode body .detail-meta-table tr:nth-child(even) td {
+  background: rgba(255,255,255,0.04) !important;
+  background-color: rgba(255,255,255,0.04) !important;
+}
+html.dark-mode body .detail-meta-table tr:nth-child(odd) td {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Subtle highlight on row hover instead of white */
+html.dark-mode body .detail-meta-table tr:hover td {
+  background: rgba(177,4,14,0.07) !important;
+  background-color: rgba(177,4,14,0.07) !important;
+  transition: background 0.15s;
+}
+
+/* Cell text colours */
+html.dark-mode body .detail-meta-table td,
+html.dark-mode body .detail-meta-table td p {
+  color: #d6d6d6 !important;
+  border-color: #2a2826 !important;
+}
+html.dark-mode body .detail-meta-table td:first-child {
+  color: #999 !important;
+}
+
+/* ── No-abstract info box ── */
+html.dark-mode body .detail-no-abstract,
+html.dark-mode .detail-no-abstract {
+  background: #1a1917 !important;
+  background-color: #1a1917 !important;
+  border-color: #3a3836 !important;
+  color: #777 !important;
+}
+
+/* ── No-abstract box — boost specificity to beat inline styles ── */
+html.dark-mode body .detail-no-abstract,
+html.dark-mode body #pubDetailView .detail-no-abstract {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: #3a3836 !important;
+  color: #666 !important;
+}
+
+/* ── Publication details table row hover — solid dark colour ── */
+html.dark-mode body .detail-meta-table tr:hover td,
+html.dark-mode body .detail-meta-table tr:nth-child(even):hover td,
+html.dark-mode body .detail-meta-table tr:nth-child(odd):hover td {
+  background: #23211f !important;
+  background-color: #23211f !important;
+  transition: background 0.15s;
+}

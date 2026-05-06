@@ -370,12 +370,12 @@ function formatAuthorsChicagoMeta(authorsStr) {
       : `<span style="color:#2e2d29;">${name}</span>`;
   });
 
-  // Join: "X" / "X, and Y" / "X, Y, and Z" (Oxford comma)
+  // Join: "X" / "X and Y" / "X, Y, and Z" (Oxford comma for 3+)
   let coStr;
   if (coHtml.length === 1) {
     coStr = coHtml[0];
   } else if (coHtml.length === 2) {
-    coStr = coHtml[0] + '<span style="color:' + wrapColor + ';">, and </span>' + coHtml[1];
+    coStr = coHtml[0] + '<span style="color:' + wrapColor + ';"> and </span>' + coHtml[1];
   } else {
     coStr = coHtml.slice(0, -1).join('<span style="color:' + wrapColor + ';">, </span>') + '<span style="color:' + wrapColor + ';">, and </span>' + coHtml[coHtml.length - 1];
   }
@@ -1770,7 +1770,7 @@ function showDetail(idx) {
       case 'instantMessage':
         return `${au} (${yr}, ${dateStr}). [${zt === 'letter' ? 'Letter' : zt === 'email' ? 'Email' : 'Message'} to ${p.recipient || 'recipient'}].`;
       default:
-        return `${au} (${yr}). ${p.title}. ${p.outlet || ''}.${doi}`;
+        return `${au} (${yr}). ${p.title}${p.outlet ? `. ${p.outlet}` : ''}.${doi}`;
     }
   }
 
@@ -1814,7 +1814,7 @@ function showDetail(idx) {
       case 'podcast':
         return `${au} (${yr}) '${p.title}', <em>${p.outlet || ''}</em>, ${dateStr}.${doi}`;
       default:
-        return `${au} (${yr}) '${p.title}', ${p.outlet || ''}.${doi}`;
+        return `${au} (${yr}) '${p.title}'${p.outlet ? `, ${p.outlet}` : ''}.${doi}`;
     }
   }
 
@@ -1824,28 +1824,31 @@ function showDetail(idx) {
     const doi = linkHtml ? ` ${linkHtml}` : '';
     const pub_ = p.publisher || p.outlet || '';
     const inst = p.institution || p.outlet || '';
+    // Chicago places the year inline as ". YEAR. " — if yr already ends with
+    // a period (e.g. "n.d."), use it as-is to avoid double dots like "n.d.."
+    const yrDot = yr.endsWith('.') ? yr : `${yr}.`;
 
     switch (zt) {
       case 'journalArticle':
-        return `${au}. ${yr}. "${p.title}." <em>${p.outlet || ''}</em>${p.volume ? ` ${p.volume}` : ''}${p.issue ? `, no. ${p.issue}` : ''}${p.pages ? `: ${p.pages}` : ''}.${doi}`;
+        return `${au}. ${yrDot} "${p.title}." <em>${p.outlet || ''}</em>${p.volume ? ` ${p.volume}` : ''}${p.issue ? `, no. ${p.issue}` : ''}${p.pages ? `: ${p.pages}` : ''}.${doi}`;
       case 'bookSection':
-        return `${au}. ${yr}. "${p.title}." In <em>${p.outlet || ''}</em>${edStr ? `, edited by ${edStr}` : ''}${p.pages ? `, ${p.pages}` : ''}. ${pub_}.${doi}`;
+        return `${au}. ${yrDot} "${p.title}." In <em>${p.outlet || ''}</em>${edStr ? `, edited by ${edStr}` : ''}${p.pages ? `, ${p.pages}` : ''}. ${pub_}.${doi}`;
       case 'book':
-        return `${au}. ${yr}. <em>${p.title}</em>. ${pub_}.${doi}`;
+        return `${au}. ${yrDot} <em>${p.title}</em>. ${pub_}.${doi}`;
       case 'thesis':
-        return `${au}. ${yr}. "${p.title}." ${p.thesisType || 'PhD diss.'}, ${inst}.`;
+        return `${au}. ${yrDot} "${p.title}." ${p.thesisType || 'PhD diss.'}, ${inst}.`;
       case 'manuscript':
-        return `${au}. ${yr}. "${p.title}." Unpublished manuscript, ${inst}.`;
+        return `${au}. ${yrDot} "${p.title}." Unpublished manuscript, ${inst}.`;
       case 'preprint':
-        return `${au}. ${yr}. "${p.title}." ${p.outlet || 'Preprint'}.${doi}`;
+        return `${au}. ${yrDot} "${p.title}." ${p.outlet || 'Preprint'}.${doi}`;
       case 'report':
       case 'document':
-        return `${au}. ${yr}. <em>${p.title}</em>${p.seriesNum ? `, no. ${p.seriesNum}` : ''}. ${inst}.${doi}`;
+        return `${au}. ${yrDot} <em>${p.title}</em>${p.seriesNum ? `, no. ${p.seriesNum}` : ''}. ${inst}.${doi}`;
       case 'dataset':
-        return `${au}. ${yr}. "${p.title}." ${inst || pub_}.${doi}`;
+        return `${au}. ${yrDot} "${p.title}." ${inst || pub_}.${doi}`;
       case 'conferencePaper':
       case 'presentation':
-        return `${au}. ${yr}. "${p.title}." Paper presented at ${p.outlet || ''}, ${dateStr}.`;
+        return `${au}. ${yrDot} "${p.title}." Paper presented at ${p.outlet || ''}, ${dateStr}.`;
       case 'newspaperArticle':
         return `${au}. "${p.title}." <em>${p.outlet || ''}</em>, ${dateStr}.${doi}`;
       case 'magazineArticle':
@@ -1856,9 +1859,9 @@ function showDetail(idx) {
         return `${au}. "${p.title}." <em>${p.outlet || ''}</em>. ${dateStr}.${doi}${accessStr}`;
       case 'encyclopediaArticle':
       case 'dictionaryEntry':
-        return `${au}. ${yr}. "${p.title}." In <em>${p.outlet || ''}</em>. ${pub_}.${doi}`;
+        return `${au}. ${yrDot} "${p.title}." In <em>${p.outlet || ''}</em>. ${pub_}.${doi}`;
       case 'film':
-        return `${au}. ${yr}. <em>${p.title}</em>. ${pub_}.`;
+        return `${au}. ${yrDot} <em>${p.title}</em>. ${pub_}.`;
       case 'podcast':
         return `${au}. "${p.title}." <em>${p.outlet || ''}</em>. Podcast audio, ${dateStr}.${doi}`;
       case 'interview':
@@ -1866,7 +1869,7 @@ function showDetail(idx) {
       case 'letter':
         return `${au}. ${dateStr}. Letter to ${p.recipient || 'recipient'}.`;
       default:
-        return `${au}. ${yr}. "${p.title}." ${p.outlet || ''}.${doi}`;
+        return `${au}. ${yrDot} "${p.title}."${p.outlet ? ` ${p.outlet}.` : ''}${doi}`;
     }
   }
 
@@ -2016,7 +2019,7 @@ function showDetail(idx) {
       ${pub.abstract ? `
       <div class="detail-section-title">Abstract</div>
       <div class="detail-abstract su-wysiwyg-text"><p>${pub.abstract}</p></div>` : `
-      <div style="padding:1.2rem;background:#f9fbfd;border-radius:10px;color:#6c7a8e;font-size:1.6rem;margin-bottom:1.5rem;border:1px solid #e8edf5;">
+      <div class="detail-no-abstract">
         <i class="fas fa-info-circle" style="margin-right:6px;"></i>No abstract available for this publication.
       </div>`}
 
