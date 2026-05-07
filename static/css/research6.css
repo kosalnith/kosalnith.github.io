@@ -564,58 +564,41 @@ hr { margin: 0.75rem 0; border: none; border-top: 1px solid #eef2f6; }
 
 /* ── Pagination ── */
 .pagination {
-  margin-top: 2.5rem;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 0.75rem;
-  padding: 1.4rem 0 0.5rem; border-top: 2px solid #f0e8e8;
+  margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 0.75rem; padding: 1.4rem 0 0.5rem; border-top: 2px solid #f0e8e8;
 }
-.pagination-pages {
-  display: flex; align-items: center; gap: 4px;
-}
-.pagination a.pg-num,
-.pagination span.pg-num {
-  all: unset;
-  display: inline-flex; align-items: center; justify-content: center;
+.pagination-pages { display: flex; align-items: center; gap: 4px; }
+.pagination a, .pagination span.pg-num {
+  all: unset; display: inline-flex; align-items: center; justify-content: center;
   width: 38px; height: 38px; border-radius: 10px;
-  font-size: 1.5rem; font-weight: 500;
-  color: #4a5568; background: #f7f8fa;
-  border: 1.5px solid #e8ecf1;
+  font-size: 1.6rem; font-weight: 500; color: #4a5568;
+  background: #f7f8fa; border: 1.5px solid #e8ecf1;
   cursor: pointer; transition: all 0.18s ease;
 }
-.pagination a.pg-num:hover {
+.pagination a:hover {
   background: #fff5f5; border-color: #b1040e; color: #b1040e;
   box-shadow: 0 2px 8px rgba(177,4,14,0.12); transform: translateY(-1px);
 }
 .pagination span.pg-num.active-page {
   background: #b1040e; border-color: #b1040e; color: #fff; font-weight: 700;
   box-shadow: 0 4px 12px rgba(177,4,14,0.35); transform: translateY(-1px);
-  cursor: default;
 }
 .pagination .ellipsis {
-  all: unset; font-size: 1.5rem; color: #b0b8c4;
-  padding: 0 4px; pointer-events: none; letter-spacing: 1px;
+  all: unset; font-size: 1.6rem; color: #b0b8c4; padding: 0 4px; pointer-events: none; letter-spacing: 1px;
 }
 .pagination-nav {
   -webkit-appearance: none; -moz-appearance: none; appearance: none;
   margin: 0; font-family: inherit;
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-width: 110px; height: 40px;
-  padding: 0 22px; border-radius: 10px;
-  font-size: 1.5rem; font-weight: 650; letter-spacing: 0.01em;
-  line-height: 1; white-space: nowrap;
-  cursor: pointer; transition: all 0.2s ease; text-decoration: none;
-  box-sizing: border-box;
-  background: #b1040e; color: #fff;
-  border: 2px solid #b1040e;
-  box-shadow: 0 4px 14px rgba(177,4,14,0.28);
+  min-width: 110px; height: 40px; padding: 0 22px; border-radius: 10px;
+  font-size: 1.6rem; font-weight: 650; letter-spacing: 0.01em; line-height: 1;
+  white-space: nowrap; cursor: pointer; transition: all 0.2s ease; text-decoration: none;
+  background: #b1040e; color: #fff; border: 2px solid #b1040e;
+  box-shadow: 0 4px 14px rgba(177,4,14,0.28); box-sizing: border-box;
 }
 .pagination-nav:not(.disabled):hover {
   background: #8c0310; border-color: #8c0310;
   box-shadow: 0 6px 18px rgba(177,4,14,0.38); transform: translateY(-2px);
-}
-.pagination-nav:not(.disabled):active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(177,4,14,0.22);
 }
 .pagination-nav.disabled, .pagination-nav:disabled {
   background: #f0f2f5; color: #b8c0cc; border: 2px solid #e2e6ea;
@@ -2004,8 +1987,10 @@ html.dark-mode .detail-no-abstract {
     align-items: center !important;
     gap: 0.75rem !important;
   }
-  .pagination-nav { width: 100% !important; justify-content: center !important; }
-  .pagination-nav { min-width: 90px !important; padding: 0 14px !important; }
+  .pagination-nav {
+    width: 100% !important;
+    justify-content: center !important;
+  }
 
   /* Detail view */
   .detail-container {
@@ -2751,5 +2736,80 @@ html.dark-mode .filter-sidebar-header {
   .sort-bar {
     font-size: 1.35rem !important;
     gap: 6px !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DARK MODE — MOBILE FILTER DRAWER
+   These rules are appended last so they beat all prior !important
+   rules (including those inside earlier @media blocks).
+   ════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  /* Drawer shell */
+  html.dark-mode .research-sidebar {
+    background: #1e1c1a !important;
+  }
+  /* Sticky header row */
+  html.dark-mode .filter-sidebar-header {
+    background: #1e1c1a !important;
+    border-bottom-color: #3a3836 !important;
+  }
+  /* Drag handle pill */
+  html.dark-mode .research-sidebar::before {
+    background: #3a3836 !important;
+  }
+  /* Filter group panels — make transparent so drawer bg shows through */
+  html.dark-mode .research-sidebar .filter-group,
+  html.dark-mode .filter-group {
+    background: transparent !important;
+    background-color: transparent !important;
+    border-bottom-color: #2a2826 !important;
+  }
+  /* Close button */
+  html.dark-mode .filter-close-btn {
+    background: #2a2826 !important;
+    color: #aaa !important;
+  }
+  html.dark-mode .filter-close-btn:hover {
+    background: #b1040e !important;
+    color: #fff !important;
+  }
+  /* Mobile filter toggle button */
+  html.dark-mode .mobile-filter-toggle {
+    background: #2a2826 !important;
+    color: #d6d6d6 !important;
+    box-shadow: none !important;
+  }
+  html.dark-mode .mobile-filter-toggle:hover {
+    background: #b1040e !important;
+    color: #fff !important;
+  }
+  html.dark-mode .mobile-result-count {
+    color: #777 !important;
+  }
+  /* Filter section label */
+  html.dark-mode .filter-section-label {
+    color: #d6d6d6 !important;
+    background: none !important;
+  }
+  /* Sidebar toggle btn inside drawer */
+  html.dark-mode .research-sidebar .sidebar-toggle-btn {
+    background: transparent !important;
+    border-top-color: #3a3836 !important;
+    color: #888 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  html.dark-mode .research-sidebar {
+    background: #1e1c1a !important;
+  }
+  html.dark-mode .filter-sidebar-header {
+    background: #1e1c1a !important;
+  }
+  html.dark-mode .filter-group,
+  html.dark-mode .research-sidebar .filter-group {
+    background: transparent !important;
+    background-color: transparent !important;
   }
 }

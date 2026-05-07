@@ -1,5 +1,5 @@
 // ===== Constants & State =====
-const ITEMS_PER_PAGE = 30;
+const ITEMS_PER_PAGE = 50;
 const YEAR_MIN_BOUND = 2018;
 const YEAR_MAX_BOUND = 2026;
 
@@ -1031,34 +1031,25 @@ function renderPaginationControls(totalPages) {
   if (!container) return;
   if (totalPages <= 1) { container.innerHTML = ''; return; }
 
-  // Prev button
   let html = '';
-  if (currentPage > 1)
-    html += `<a class="pagination-nav" data-page="${currentPage - 1}"><i class="fas fa-chevron-left"></i> Prev</a>`;
-  else
-    html += `<span class="pagination-nav disabled"><i class="fas fa-chevron-left"></i> Prev</span>`;
+  if (currentPage > 1) html += `<a data-page="${currentPage - 1}"><i class="fas fa-chevron-left"></i> Previous</a>`;
+  else html += `<span class="disabled"><i class="fas fa-chevron-left"></i> Previous</span>`;
 
-  // Page numbers
-  html += '<div class="pagination-pages">';
   let startPage = Math.max(1, currentPage - 3);
   let endPage = Math.min(totalPages, startPage + 6);
   if (endPage - startPage < 6 && startPage > 1) startPage = Math.max(1, endPage - 6);
 
-  if (startPage > 1) html += `<a class="pg-num" data-page="1">1</a>`;
-  if (startPage > 2) html += `<span class="ellipsis">…</span>`;
+  if (startPage > 1) html += `<a data-page="1">1</a>`;
+  if (startPage > 2) html += `<span class="ellipsis">...</span>`;
   for (let i = startPage; i <= endPage; i++) {
-    if (i === currentPage) html += `<span class="pg-num active-page">${i}</span>`;
-    else html += `<a class="pg-num" data-page="${i}">${i}</a>`;
+    if (i === currentPage) html += `<span class="active-page">${i}</span>`;
+    else html += `<a data-page="${i}">${i}</a>`;
   }
-  if (endPage < totalPages - 1) html += `<span class="ellipsis">…</span>`;
-  if (endPage < totalPages) html += `<a class="pg-num" data-page="${totalPages}">${totalPages}</a>`;
-  html += '</div>';
+  if (endPage < totalPages - 1) html += `<span class="ellipsis">...</span>`;
+  if (endPage < totalPages) html += `<a data-page="${totalPages}">${totalPages}</a>`;
 
-  // Next button
-  if (currentPage < totalPages)
-    html += `<a class="pagination-nav" data-page="${currentPage + 1}">Next <i class="fas fa-chevron-right"></i></a>`;
-  else
-    html += `<span class="pagination-nav disabled">Next <i class="fas fa-chevron-right"></i></span>`;
+  if (currentPage < totalPages) html += `<a data-page="${currentPage + 1}">Next <i class="fas fa-chevron-right"></i></a>`;
+  else html += `<span class="disabled">Next <i class="fas fa-chevron-right"></i></span>`;
 
   container.innerHTML = html;
   container.querySelectorAll('a[data-page]').forEach(link => {
@@ -2280,6 +2271,9 @@ function filterByKeyword(keyword) {
 // CSS position:sticky can be broken when any ancestor has overflow:hidden/auto/scroll.
 // This JS fallback detects that situation and switches to position:fixed instead.
 function initStickySidebar() {
+  // On mobile/tablet (<=900px) the sidebar is a slide-up drawer -- skip sticky JS entirely
+  if (window.innerWidth <= 900) return;
+
   const sidebar = document.querySelector('.research-sidebar');
   if (!sidebar) return;
 

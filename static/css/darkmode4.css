@@ -697,7 +697,7 @@ html.dark-mode .more-item:hover {
 
 /* ── Filter sidebar ─────────────────────────────────────────────── */
 html.dark-mode .filter-group {
-  background-color: var(--dm-bg) !important;
+  background-color: transparent !important;
   border-color: var(--dm-border) !important;
   color: var(--dm-text) !important;
 }
@@ -823,13 +823,6 @@ html.dark-mode .research-container .abstract-hint {
   background-color: transparent !important;
 }
 
-/* Abstract expanded text */
-html.dark-mode .research-container .abstract-text,
-html.dark-mode .research-container .abstract-text p {
-  color: #d6d6d6 !important;
-  border-left-color: #b1040e !important;
-}
-
 html.dark-mode .pub-tag,
 html.dark-mode .pub-badge,
 html.dark-mode [class*="pub-tag"],
@@ -863,14 +856,28 @@ html.dark-mode .mobile-filter-bar {
 }
 html.dark-mode body button.mobile-filter-toggle,
 html.dark-mode .mobile-filter-toggle {
-  background-color: transparent !important;
-  background: transparent !important;
-  color: var(--dm-text) !important;
-  border-color: var(--dm-border) !important;
-}
-html.dark-mode body button.mobile-filter-toggle:hover {
-  background-color: var(--dm-accent) !important;
+  background-color: #1e2a3e !important;
+  background: #1e2a3e !important;
   color: #fff !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 10px 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 1.5rem !important;
+  font-weight: 650 !important;
+  cursor: pointer !important;
+  letter-spacing: 0.02em !important;
+  box-shadow: 0 2px 10px rgba(30,42,62,0.35) !important;
+  transition: background 0.15s, transform 0.15s !important;
+}
+html.dark-mode body button.mobile-filter-toggle:hover,
+html.dark-mode .mobile-filter-toggle:hover {
+  background-color: #b1040e !important;
+  background: #b1040e !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
 }
 
 html.dark-mode .mobile-filter-badge {
@@ -1428,7 +1435,10 @@ html.dark-mode body .detail-meta-table tr:nth-child(odd):hover td {
   html.dark-mode .research-sidebar::before {
     background: #3a3836 !important;
   }
-  html.dark-mode .research-sidebar .filter-group {
+  html.dark-mode .research-sidebar .filter-group,
+  html.dark-mode .filter-group {
+    background: transparent !important;
+    background-color: transparent !important;
     border-bottom-color: #2a2826 !important;
   }
   html.dark-mode .filter-close-btn {
@@ -1440,12 +1450,22 @@ html.dark-mode body .detail-meta-table tr:nth-child(odd):hover td {
     color: #fff !important;
   }
   html.dark-mode .mobile-filter-toggle {
-    background: #2a2826 !important;
-    color: #d6d6d6 !important;
+    background: #1e2a3e !important;
+    background-color: #1e2a3e !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 10px 20px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    box-shadow: 0 2px 10px rgba(30,42,62,0.35) !important;
   }
   html.dark-mode .mobile-filter-toggle:hover {
     background: #b1040e !important;
+    background-color: #b1040e !important;
     color: #fff !important;
+    transform: translateY(-1px) !important;
   }
   html.dark-mode .mobile-result-count {
     color: #777 !important;

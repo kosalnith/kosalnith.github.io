@@ -723,28 +723,16 @@ article.node, .node--type-stanford-page, .su-page-components {
   }
   .mobile-filter-toggle {
     all: unset;
-    cursor: pointer !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    background: #1e2a3e !important;
-    background-color: #1e2a3e !important;
-    color: #fff !important;
-    font-size: 1.5rem !important;
-    font-weight: 650 !important;
-    padding: 10px 20px !important;
-    border-radius: 10px !important;
-    border: none !important;
-    letter-spacing: 0.02em !important;
-    transition: background 0.15s, transform 0.15s !important;
-    box-shadow: 0 2px 10px rgba(30,42,62,0.18) !important;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #1e2a3e; color: #fff;
+    font-size: 1.5rem; font-weight: 650;
+    padding: 10px 20px; border-radius: 10px;
+    letter-spacing: 0.02em;
+    transition: background 0.15s, transform 0.15s;
+    box-shadow: 0 2px 10px rgba(30,42,62,0.18);
   }
-  .mobile-filter-toggle:hover {
-    background: #b1040e !important;
-    background-color: #b1040e !important;
-    color: #fff !important;
-    transform: translateY(-1px) !important;
-  }
+  .mobile-filter-toggle:hover { background: #b1040e; transform: translateY(-1px); }
   .mobile-result-count { font-size: 1.4rem; font-weight: 600; color: #6b7a8d; }
 
   /* Backdrop */
