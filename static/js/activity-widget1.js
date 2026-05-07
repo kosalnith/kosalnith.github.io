@@ -499,12 +499,9 @@ function renderActivities() {
     if (sortBarEl) sortBarEl.insertAdjacentElement('afterend', chipBar);
   }
   if (activeRoleFilter) {
-    chipBar.innerHTML = '<span class="active-status-chip"><i class="fas fa-user-tag"></i>' + activeRoleFilter + '<span class="chip-clear-btn" id="clearRoleChip" title="Clear" role="button" tabindex="0" aria-label="Clear filter">&#x2715;</span></span>';
+    chipBar.innerHTML = '<span class="active-status-chip"><i class="fas fa-user-tag"></i>' + activeRoleFilter + '<button class="chip-clear-btn" id="clearRoleChip" title="Clear">&#x2715;</button></span>';
     var clearBtn = document.getElementById('clearRoleChip');
-    if (clearBtn) {
-      clearBtn.onclick = function(){ activeRoleFilter = null; currentPage = 1; renderActivities(); };
-      clearBtn.onkeydown = function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clearBtn.onclick(); } };
-    }
+    if (clearBtn) clearBtn.onclick = function(){ activeRoleFilter = null; currentPage = 1; renderActivities(); };
   } else {
     chipBar.innerHTML = '';
   }

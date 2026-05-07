@@ -300,14 +300,7 @@ const tmFull  = (name) => `static/img/explore/${name}.jpg`;
 /* ── MAP ─────────────────────────────────────────────────────── */
 const tmMap = L.map('tm-map', { zoomControl:false, attributionControl:false }).setView([20,10], 2.2);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-  {
-    subdomains:    'abcd',
-    maxZoom:       19,
-    minZoom:       2,
-    keepBuffer:    4,        /* pre-load 4 tiles beyond viewport edge during pan */
-    updateWhenIdle:true,     /* only fetch new tiles after panning stops, not during */
-    crossOrigin:   true,     /* enables browser HTTP cache to reuse tiles across sessions */
-  }).addTo(tmMap);
+  { subdomains:'abcd', maxZoom:19, minZoom:2 }).addTo(tmMap);
 L.control.zoom({ position:'bottomright' }).addTo(tmMap);
 
 const tmCountryIcon = () => L.divIcon({
@@ -399,21 +392,16 @@ tmCountries.forEach(c => {
       .bindPopup(tmCityPopupHtml(c, city), { maxWidth:410, minWidth:350, className:'tm-popup', offset:[0,-8] })
       .bindTooltip(`📍 ${city.name}`, { sticky:true, offset:[0,-14], direction:'top', className:'tm-tt' })
       .on('popupopen', () => {
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          const content = document.querySelector('.leaflet-popup-content');
-          if (!content || content._tmBound) return; /* already delegated — skip */
-          content._tmBound = true;
-          content.style.cursor = 'default';
-          content.addEventListener('click', function(e) {
-            const ph = e.target.closest('.tm-ph');
-            if (!ph) return;
-            e.stopPropagation();
+        setTimeout(() => {
+          document.querySelectorAll('.leaflet-popup-content .tm-ph').forEach(ph => {
             ph.style.cursor = 'zoom-in';
-            tmOpenLb(imgNames, parseInt(ph.dataset.idx) || 0, city.name);
+            ph.addEventListener('click', function(e) {
+              e.stopPropagation();
+              /* overflow tile (last visible when >6 photos) opens at idx 5 */
+              tmOpenLb(imgNames, parseInt(this.dataset.idx) || 0, city.name);
+            });
           });
-          /* Cursor hint on each photo tile — set once, no repeated listeners */
-          content.querySelectorAll('.tm-ph').forEach(ph => ph.style.cursor = 'zoom-in');
-        }));
+        }, 80);
       });
     marker.addTo(tmMap);
     /* Store marker reference for filter toggling */
@@ -450,11 +438,7 @@ function tmRenderList(filter) {
   });
 }
 tmRenderList('');
-let _listTimer = null;
-document.getElementById('tm-search').addEventListener('input', e => {
-  clearTimeout(_listTimer);
-  _listTimer = setTimeout(() => tmRenderList(e.target.value), 160);
-});
+document.getElementById('tm-search').addEventListener('input', e => tmRenderList(e.target.value));
 document.getElementById('tm-reset-btn').addEventListener('click', () => {
   tmMap.flyTo([20,10], 2.2, { duration:1.5 });
   tmMap.closePopup();
@@ -496,13 +480,67 @@ document.getElementById('tm-s-c').textContent =
 
 /* ════════════════════════════════════════════════════════════
    DESTINATIONS — Mobile FAB + Bottom Sheet
-   Styles live in travel_map.css (no runtime injection needed)
+   Styles injected via <style> to survive CSS conflicts.
 ════════════════════════════════════════════════════════════ */
 (function tmDestinationsSheet() {
   var shell = document.getElementById('tm-shell');
   if (!shell) return;
 
-  /* Styles are in travel_map.css — removed 47-rule JS injection */
+  var style = document.createElement('style');
+  style.textContent = [
+    '.tm-destinations-fab{display:none;position:absolute;bottom:16px;left:16px;z-index:200;align-items:center;gap:7px;background:rgba(247,246,246,0.97);border:1px solid rgba(223,223,223,0.685);border-radius:100px;padding:10px 18px 10px 14px;box-shadow:0 8px 32px rgba(26,22,18,.12);cursor:pointer;pointer-events:all;color:#4a4035;font-size:1.5rem;font-weight:600;transition:background .18s,color .18s,transform .15s;white-space:nowrap;}',
+    '.tm-destinations-fab i{color:#f0441a;font-size:1.5rem;}',
+    '.tm-destinations-fab:hover{background:rgba(200,96,26,.08);color:#f0441a;transform:scale(1.03);}',
+    '.tm-destinations-sheet{display:none;position:fixed;inset:0;z-index:99997;align-items:flex-end;justify-content:center;background:rgba(10,8,6,.55);opacity:0;pointer-events:none;transition:opacity .25s ease;}',
+    '.tm-destinations-sheet.tm-ds--open{opacity:1;pointer-events:all;}',
+    '.tm-ds-inner{width:100%;max-width:480px;background:#fff;border-radius:22px 22px 0 0;box-shadow:0 -8px 40px rgba(26,22,18,.18);display:flex;flex-direction:column;max-height:78vh;transform:translateY(100%);transition:transform .35s cubic-bezier(.16,1,.3,1);overflow:hidden;}',
+    '.tm-destinations-sheet.tm-ds--open .tm-ds-inner{transform:translateY(0);}',
+    '.tm-ds-handle{width:36px;height:4px;border-radius:100px;background:#d0ccc8;margin:12px auto 0;flex-shrink:0;display:block;}',
+    '.tm-ds-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 12px;flex-shrink:0;border-bottom:1px solid rgba(180,170,160,.2);}',
+    '.tm-ds-title{font-size:1.8rem;font-weight:700;color:#1a1612;white-space:nowrap;}',
+    '.tm-ds-badge{background:rgba(200,96,26,.08)!important;border:1px solid rgba(200,96,26,.18)!important;border-radius:100px!important;padding:3px 12px!important;margin:0 10px!important;font-size:1.4rem!important;font-weight:600!important;color:#f0441a!important;white-space:nowrap!important;display:inline-block!important;}',
+    '.tm-ds-close{width:32px;height:32px;border-radius:50%;flex-shrink:0;background:rgba(180,170,160,.15);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#9a8e82;font-size:1.5rem;transition:background .18s,color .18s;}',
+    '.tm-ds-close:hover{background:#f0441a;color:#fff;}',
+    '.tm-ds-search-row{position:relative;padding:12px 16px 8px;flex-shrink:0;}',
+    '.tm-ds-search-row i{position:absolute;left:29px;top:50%;transform:translateY(-50%);color:#9a8e82;font-size:1.5rem;pointer-events:none;}',
+    '.tm-ds-search-row input{width:100%;background:#f5f3f0;border:1.5px solid #e0ddd8;border-radius:14px;padding:11px 14px 11px 40px;font-size:1.6rem;color:#1a1612;outline:none;appearance:none;-webkit-appearance:none;box-shadow:none;transition:border-color .2s,background .2s;}',
+    '.tm-ds-search-row input::placeholder{color:#b0a89e;}',
+    '.tm-ds-search-row input:focus{border-color:#f0441a;background:#fff;box-shadow:0 0 0 3px rgba(240,68,26,.08);}',
+    '.tm-ds-list{flex:1;overflow-y:auto;padding:6px 14px 8px;scrollbar-width:thin;scrollbar-color:#d0ccc8 transparent;}',
+    '.tm-ds-list::-webkit-scrollbar{width:4px;}',
+    '.tm-ds-list::-webkit-scrollbar-thumb{background:#d0ccc8;border-radius:4px;}',
+    '.tm-ds-item{display:flex;align-items:center;gap:12px;padding:10px 10px 10px 12px;border-radius:14px;cursor:pointer;border:1px solid transparent;margin-bottom:2px;transition:background .15s,border-color .15s;position:relative;overflow:hidden;}',
+    '.tm-ds-item::before{content:"";position:absolute;left:0;top:20%;bottom:20%;width:0;background:#f0441a;border-radius:0 3px 3px 0;transition:width .18s;}',
+    '.tm-ds-item:hover{background:#f5f3f0;border-color:#e0ddd8;}',
+    '.tm-ds-item:hover::before{width:3px;}',
+    '.tm-ds-flag{width:36px;height:36px;background:#f0eeec;border-radius:10px;border:1px solid #e0ddd8;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.9rem;}',
+    '.tm-ds-flag .fi{border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.15);}',
+    '.tm-ds-body{flex:1;min-width:0;}',
+    '.tm-ds-name{font-size:1.6rem;font-weight:600;color:#1a1612;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2;margin:0;}',
+    '.tm-ds-desc{font-size:1.4rem;color:#9a8e82;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}',
+    '.tm-ds-arrow{color:#c8c0b8;font-size:1.4rem;flex-shrink:0;transition:color .15s,transform .15s;}',
+    '.tm-ds-item:hover .tm-ds-arrow{color:#f0441a;transform:translateX(2px);}',
+    '.tm-ds-footer{padding:12px 16px 20px;flex-shrink:0;border-top:1px solid rgba(180,170,160,.2);}',
+    '.tm-ds-reset{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:1.5px solid #e0ddd8;border-radius:12px;padding:12px;cursor:pointer;font-size:1.6rem;font-weight:500;color:#9a8e82;transition:all .2s;}',
+    '.tm-ds-reset:hover{background:rgba(240,68,26,.06);border-color:rgba(240,68,26,.3);color:#f0441a;}',
+    '@media(max-width:768px){.tm-destinations-fab{display:flex!important;}.tm-destinations-sheet{display:flex!important;}}',
+    'html.dark-mode .tm-destinations-fab{background:rgba(30,28,26,.97);border-color:rgba(60,54,48,.9);color:#c4bcb4;}',
+    'html.dark-mode .tm-destinations-sheet{background:rgba(0,0,0,.7);}',
+    'html.dark-mode .tm-ds-inner{background:#1e1c1a;}',
+    'html.dark-mode .tm-ds-handle{background:#3a3630;}',
+    'html.dark-mode .tm-ds-header{border-bottom-color:rgba(58,52,46,.6);}',
+    'html.dark-mode .tm-ds-title{color:#f0eeec;}',
+    'html.dark-mode .tm-ds-badge{background:rgba(240,84,26,.12)!important;border-color:rgba(240,84,26,.24)!important;color:#f0541a!important;}',
+    'html.dark-mode .tm-ds-close{background:rgba(60,54,48,.5);color:#7a7268;}',
+    'html.dark-mode .tm-ds-search-row input{background:#252220;border-color:#3a3630;color:#f0eeec;}',
+    'html.dark-mode .tm-ds-item:hover{background:#252220;border-color:#3a3630;}',
+    'html.dark-mode .tm-ds-flag{background:#252220;border-color:#3a3630;}',
+    'html.dark-mode .tm-ds-name{color:#f0eeec;}',
+    'html.dark-mode .tm-ds-desc{color:#7a7268;}',
+    'html.dark-mode .tm-ds-footer{border-top-color:rgba(58,52,46,.6);}',
+    'html.dark-mode .tm-ds-reset{border-color:#3a3630;color:#4a4640;}',
+  ].join('\n');
+  document.head.appendChild(style);
 
   var fab = document.createElement('button');
   fab.className = 'tm-destinations-fab';
@@ -788,24 +826,18 @@ function tmFitHeight() {
   tmMap.invalidateSize();
 }
 tmFitHeight();
-/* Debounced resize */
+/* Debounced resize — prevents tmFitHeight firing dozens of times per second
+   during window resize or mobile address-bar scroll, which caused heavy CPU load */
 let tmResizeTimer = null;
 function tmDebouncedFitHeight() {
   clearTimeout(tmResizeTimer);
   tmResizeTimer = setTimeout(tmFitHeight, 120);
 }
 window.addEventListener('resize', tmDebouncedFitHeight);
-/* visualViewport fires for address-bar show/hide on mobile.
-   Only attach on mobile (≤1024px) to avoid double-firing with window.resize on desktop. */
-if (window.visualViewport && window.innerWidth <= 1024) {
+/* Also refit when mobile browser chrome shows/hides (address bar scroll) */
+if (window.visualViewport) {
   window.visualViewport.addEventListener('resize', tmDebouncedFitHeight);
 }
-
-/* ── Pause live-dot animation when tab is hidden — stops idle GPU/CPU usage ── */
-document.addEventListener('visibilitychange', () => {
-  const dot = document.querySelector('.tm-live-dot');
-  if (dot) dot.style.animationPlayState = document.hidden ? 'paused' : 'running';
-});
 
 /* ══════════════════════════════════════════════════════════════
    VIEW TOGGLE — Map ↔ Gallery
@@ -1198,10 +1230,6 @@ function tmRenderGallery() {
 
   /* ── 6. Pagination bar ── */
   tmRenderPagination(totalPages, totalCards);
-
-  /* ── 7. Start IntersectionObserver for lazy-loading gallery images ── */
-  /* Small rAF delay so DOM is fully painted before observing */
-  requestAnimationFrame(tmObserveGalleryImages);
 }
 
 /* ── Pagination bar ── */
@@ -1212,90 +1240,44 @@ function tmRenderPagination(totalPages, totalCards) {
   const startCard = (tmGalleryPage - 1) * TM_PAGE_SIZE + 1;
   const endCard   = Math.min(tmGalleryPage * TM_PAGE_SIZE, totalCards);
 
-  /* ── Dark mode detection ── */
-  const dark = document.documentElement.classList.contains('dark-mode');
+  /* ── Shared inline style helpers — defeat mainformat.css button{background:#b1040e} ── */
+  const BASE = [
+    'display:inline-flex','align-items:center','justify-content:center',
+    'min-width:38px','height:38px','padding:0 10px',
+    'border-radius:10px','font-size:1.45rem','font-weight:500',
+    'cursor:pointer','line-height:1','white-space:nowrap',
+    'transition:border-color .15s,background .15s,color .15s',
+    '-webkit-appearance:none','appearance:none','text-decoration:none',
+  ].join(';');
 
-  /* ── Colour tokens (inline so site CSS can't override) ── */
-  const C = dark ? {
-    bg:         '#1e1c1a',   /* button face */
-    border:     '#3a3630',   /* button border */
-    text:       '#c4bcb4',   /* button number */
-    bgHover:    '#2a2826',
-    borderHover:'#f0541a',
-    textHover:  '#f0541a',
-    bgActive:   '#f0541a',   /* filled orange pill */
-    borderActive:'#f0541a',
-    textActive: '#ffffff',
-    bgDisabled: '#171513',
-    borderDisabled:'#252220',
-    textDisabled:'#3a3630',
-    ellipsis:   '#4a4640',
-    infoText:   '#5a5450',
-    navBg:      'rgba(30,28,26,.7)',
-  } : {
-    bg:         '#ffffff',
-    border:     '#e0dcd6',
-    text:       '#4a4035',
-    bgHover:    '#fff8f6',
-    borderHover:'#f0441a',
-    textHover:  '#f0441a',
-    bgActive:   '#f0441a',   /* filled orange pill */
-    borderActive:'#f0441a',
-    textActive: '#ffffff',
-    bgDisabled: '#f7f6f4',
-    borderDisabled:'#ede9e3',
-    textDisabled:'#c8c0b8',
-    ellipsis:   '#9a8e82',
-    infoText:   '#9a8e82',
-    navBg:      'rgba(245,243,240,.85)',
-  };
+  const STYLE_NORMAL   = BASE + ';background:#fff!important;border:1.5px solid #ddd!important;color:#4a4035!important;box-shadow:none!important;';
+  const STYLE_ACTIVE   = BASE + ';background:#fff!important;border:2.5px solid #f0441a!important;color:#f0441a!important;font-weight:700!important;box-shadow:0 0 0 3px rgba(240,68,26,.15)!important;font-size:1.55rem!important;';
+  const STYLE_DISABLED = BASE + ';background:#faf9f7!important;border:1.5px solid #ede9e3!important;color:#c8c0b8!important;cursor:default!important;box-shadow:none!important;';
 
-  /* ── Base styles shared by all buttons ── */
-  const BASE = 'display:inline-flex;align-items:center;justify-content:center;' +
-    'min-width:40px;height:40px;padding:0 12px;border-radius:10px;' +
-    'font-size:1.5rem;font-weight:500;cursor:pointer;line-height:1;' +
-    'white-space:nowrap;transition:none;text-decoration:none;' +
-    '-webkit-appearance:none;appearance:none;font-family:inherit;';
-
-  function styleNormal()   { return BASE + `background:${C.bg}!important;border:1.5px solid ${C.border}!important;color:${C.text}!important;box-shadow:none!important;`; }
-  function styleHover()    { return BASE + `background:${C.bgHover}!important;border:1.5px solid ${C.borderHover}!important;color:${C.textHover}!important;box-shadow:none!important;`; }
-  function styleActive()   { return BASE + `background:${C.bgActive}!important;border:1.5px solid ${C.borderActive}!important;color:${C.textActive}!important;font-weight:700!important;box-shadow:0 2px 12px rgba(240,68,26,.35)!important;cursor:default!important;`; }
-  function styleDisabled() { return BASE + `background:${C.bgDisabled}!important;border:1.5px solid ${C.borderDisabled}!important;color:${C.textDisabled}!important;box-shadow:none!important;cursor:default!important;opacity:.5!important;`; }
-
-  /* ── Wrapper nav ── */
   const bar = document.createElement('nav');
   bar.id = 'tm-pagination';
+  bar.className = 'tm-pagination';
   bar.setAttribute('aria-label', 'Gallery pages');
-  bar.style.cssText = 'display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;' +
-    `padding:28px 16px 52px;max-width:1200px;margin:0 auto;`;
 
   function scrollTop() {
     document.querySelector('.tm-gallery-top')
       ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  /* ── Helper: make a nav button ── */
-  function makeNavBtn(iconClass, disabled, onClick) {
-    const btn = document.createElement('button');
-    btn.setAttribute('style', disabled ? styleDisabled() : styleNormal());
-    btn.innerHTML = `<i class="${iconClass}" style="font-size:1.1rem;pointer-events:none;"></i>`;
-    btn.disabled = disabled;
-    if (!disabled) {
-      btn.addEventListener('mouseenter', () => btn.setAttribute('style', styleHover()));
-      btn.addEventListener('mouseleave', () => btn.setAttribute('style', styleNormal()));
-      btn.addEventListener('click', onClick);
-    }
-    return btn;
-  }
-
   /* ── Prev ── */
-  const prev = makeNavBtn('fa-solid fa-chevron-left', tmGalleryPage === 1, () => {
-    tmGalleryPage--; tmRenderGallery(); scrollTop();
-  });
+  const prev = document.createElement('button');
+  prev.setAttribute('style', tmGalleryPage === 1 ? STYLE_DISABLED : STYLE_NORMAL);
+  prev.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
   prev.setAttribute('aria-label', 'Previous page');
+  prev.disabled = tmGalleryPage === 1;
+  if (tmGalleryPage > 1) {
+    prev.addEventListener('mouseenter', () => prev.style.cssText = STYLE_NORMAL + ';border-color:#f0441a!important;color:#f0441a!important;');
+    prev.addEventListener('mouseleave', () => prev.setAttribute('style', STYLE_NORMAL));
+    prev.addEventListener('click', () => { tmGalleryPage--; tmRenderGallery(); scrollTop(); });
+  }
   bar.appendChild(prev);
 
-  /* ── Page numbers with smart ellipsis ── */
+  /* ── Page number buttons with smart ellipsis ── */
   const pages = new Set([1, totalPages]);
   for (let p = tmGalleryPage - 1; p <= tmGalleryPage + 1; p++) {
     if (p >= 1 && p <= totalPages) pages.add(p);
@@ -1303,25 +1285,28 @@ function tmRenderPagination(totalPages, totalCards) {
   const sorted = [...pages].sort((a, b) => a - b);
   let last = 0;
   sorted.forEach(p => {
-    /* Ellipsis gap */
     if (last && p - last > 1) {
       const ell = document.createElement('span');
-      ell.style.cssText = `display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:40px;color:${C.ellipsis};font-size:1.5rem;cursor:default;user-select:none;`;
+      ell.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:38px;color:#9a8e82;font-size:1.45rem;cursor:default;';
       ell.textContent = '…';
       bar.appendChild(ell);
     }
 
     const isActive = p === tmGalleryPage;
     const btn = document.createElement('button');
-    btn.setAttribute('style', isActive ? styleActive() : styleNormal());
+    btn.setAttribute('style', isActive ? STYLE_ACTIVE : STYLE_NORMAL);
     btn.setAttribute('aria-label', `Page ${p}`);
-    btn.textContent = p;
     if (isActive) {
       btn.setAttribute('aria-current', 'page');
-      btn.disabled = true;
+      /* Active page: number + subtle indicator dot below */
+      btn.innerHTML = `<span style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+        <span>${p}</span>
+        <span style="width:5px;height:5px;border-radius:50%;background:#f0441a;display:block;"></span>
+      </span>`;
     } else {
-      btn.addEventListener('mouseenter', () => btn.setAttribute('style', styleHover()));
-      btn.addEventListener('mouseleave', () => btn.setAttribute('style', styleNormal()));
+      btn.textContent = p;
+      btn.addEventListener('mouseenter', () => btn.style.cssText = STYLE_NORMAL + ';border-color:#f0441a!important;color:#f0441a!important;');
+      btn.addEventListener('mouseleave', () => btn.setAttribute('style', STYLE_NORMAL));
       btn.addEventListener('click', () => { tmGalleryPage = p; tmRenderGallery(); scrollTop(); });
     }
     bar.appendChild(btn);
@@ -1329,15 +1314,22 @@ function tmRenderPagination(totalPages, totalCards) {
   });
 
   /* ── Next ── */
-  const next = makeNavBtn('fa-solid fa-chevron-right', tmGalleryPage === totalPages, () => {
-    tmGalleryPage++; tmRenderGallery(); scrollTop();
-  });
+  const next = document.createElement('button');
+  next.setAttribute('style', tmGalleryPage === totalPages ? STYLE_DISABLED : STYLE_NORMAL);
+  next.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
   next.setAttribute('aria-label', 'Next page');
+  next.disabled = tmGalleryPage === totalPages;
+  if (tmGalleryPage < totalPages) {
+    next.addEventListener('mouseenter', () => next.style.cssText = STYLE_NORMAL + ';border-color:#f0441a!important;color:#f0441a!important;');
+    next.addEventListener('mouseleave', () => next.setAttribute('style', STYLE_NORMAL));
+    next.addEventListener('click', () => { tmGalleryPage++; tmRenderGallery(); scrollTop(); });
+  }
   bar.appendChild(next);
 
   /* ── Info text ── */
   const info = document.createElement('p');
-  info.style.cssText = `width:100%;text-align:center;font-size:1.3rem;color:${C.infoText};margin:8px 0 0;letter-spacing:.02em;`;
+  info.className = 'tm-pg-info';
+  info.style.cssText = 'width:100%;text-align:center;font-size:1.3rem;color:#9a8e82;margin:6px 0 0;';
   info.textContent = `Showing ${startCard}–${endCard} of ${totalCards} locations`;
   bar.appendChild(info);
 
@@ -1349,12 +1341,13 @@ function tmRenderPagination(totalPages, totalCards) {
 tmBuildGalleryFilters();
 function tmGalleryPhotoGrid(imgs) {
   const n = imgs.length;
+  /* All tiles always load from the thumbs folder — fast, small, consistent.
+     Full-res is only fetched when the user explicitly clicks to open the lightbox. */
   const th = name => `static/img/explore/thumbs/${name}.jpg`;
-  /* Use data-src so IntersectionObserver can swap in src when tile enters viewport */
   const tile = (name, idx, extra) => {
     const overflow = (extra !== undefined)
       ? `<div class="tm-gc-more">+${extra}</div>` : '';
-    return `<div class="tm-gc-ph" data-idx="${idx}"><img data-src="${th(name)}" alt="" loading="lazy">${overflow}</div>`;
+    return `<div class="tm-gc-ph" data-idx="${idx}"><img src="${th(name)}" loading="lazy" alt="">${overflow}</div>`;
   };
 
   if (n === 1) return `<div class="tm-gc-photos tm-gc-photos--1">${tile(imgs[0],0)}</div>`;
@@ -1362,6 +1355,7 @@ function tmGalleryPhotoGrid(imgs) {
   if (n === 3) return `<div class="tm-gc-photos tm-gc-photos--3">${tile(imgs[0],0)}${tile(imgs[1],1)}${tile(imgs[2],2)}</div>`;
   if (n === 4) return `<div class="tm-gc-photos tm-gc-photos--4">${tile(imgs[0],0)}${tile(imgs[1],1)}${tile(imgs[2],2)}${tile(imgs[3],3)}</div>`;
 
+  /* ── 5+ photos: hero top + 4 strip tiles; last strip tile shows +N overflow ── */
   const extra = n - 5;
   const stripTiles = imgs.slice(1, 5).map((name, i) => {
     const isOverflow = extra > 0 && i === 3;
@@ -1369,41 +1363,9 @@ function tmGalleryPhotoGrid(imgs) {
   }).join('');
 
   return `<div class="tm-gc-photos tm-gc-photos--5plus">
-    <div class="tm-gc-ph tm-gc-ph--hero" data-idx="0"><img data-src="${th(imgs[0])}" alt="" loading="lazy"></div>
+    <div class="tm-gc-ph tm-gc-ph--hero" data-idx="0"><img src="${th(imgs[0])}" loading="lazy" alt=""></div>
     <div class="tm-gc-ph-strip">${stripTiles}</div>
   </div>`;
-}
-
-/* ── Gallery IntersectionObserver — swaps data-src → src as cards enter viewport ── */
-let _tmGalleryObserver = null;
-function tmObserveGalleryImages() {
-  /* Disconnect any previous observer before creating a new one */
-  if (_tmGalleryObserver) _tmGalleryObserver.disconnect();
-
-  if (!('IntersectionObserver' in window)) {
-    /* Fallback for old browsers — load all immediately */
-    document.querySelectorAll('.tm-gc-ph img[data-src]').forEach(img => {
-      img.src = img.dataset.src;
-      delete img.dataset.src;
-    });
-    return;
-  }
-
-  _tmGalleryObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const img = entry.target;
-      if (img.dataset.src) {
-        img.src = img.dataset.src;
-        delete img.dataset.src;
-      }
-      _tmGalleryObserver.unobserve(img);
-    });
-  }, { rootMargin: '200px 0px' }); /* start loading 200px before entering viewport */
-
-  document.querySelectorAll('.tm-gc-ph img[data-src]').forEach(img => {
-    _tmGalleryObserver.observe(img);
-  });
 }
 
 

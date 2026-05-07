@@ -11,14 +11,6 @@
   <link rel="canonical"      href="https://kosalnith.github.io/travelmap.html">
   <meta name="twitter:title" content="Travel Map">
 
-  <!-- Resource hints — open connections before browser needs them -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://unpkg.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="dns-prefetch" href="https://basemaps.cartocdn.com">
-
   <!-- Shared styles -->
   <link rel="stylesheet" media="all" href="static/css/main.css">
   <link rel="stylesheet" media="all" href="static/css/mainformat.css">
@@ -30,7 +22,7 @@
   <!-- Page-specific CSS (only on travelmap.html) -->
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" media="all" href="static/css/travel_map.css">
 
@@ -284,13 +276,15 @@
 
   </div><!-- /dialog-off-canvas-main-canvas -->
 
-  <!-- defer on all scripts — HTML parses fully before any JS runs, eliminating render-blocking -->
-  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script defer src="static/js/js_JBbJf6RwtYhWtZ0OWen2_GCykwMhsYkgnDCUtmawjXI.js"></script>
-  <script defer src="static/js/travel_map.js"></script>
-  <script defer src="static/js/components.js"></script>
-  <script defer src="static/js/darkmode.js"></script>
-  <script defer src="static/js/search.js"></script>
+  <!-- Leaflet + site bundle MUST load before travel_map.js -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="static/js/js_JBbJf6RwtYhWtZ0OWen2_GCykwMhsYkgnDCUtmawjXI.js"></script>
+  <script src="static/js/travel_map.js"></script>
+
+  <!-- ✅ components.js — injects header/footer then calls invalidateSize() on the map -->
+  <script src="static/js/components.js"></script>
+  <script src="static/js/darkmode.js"></script>
+  <script src="static/js/search.js"></script>
 
 </body>
 </html>

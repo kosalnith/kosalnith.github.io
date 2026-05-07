@@ -981,12 +981,9 @@ function renderPublicationsWithPagination() {
   }
   if (activeStatusFlag) {
     var bd = STAGE_BADGES.find(function(s){ return s.flag === activeStatusFlag; });
-    chipBar.innerHTML = bd ? '<span class="active-status-chip"><i class="' + bd.icon + '"></i>' + bd.label + '<span class="chip-clear-btn" id="clearStatusChip" title="Clear" role="button" tabindex="0" aria-label="Clear filter">&#x2715;</span></span>' : '';
+    chipBar.innerHTML = bd ? '<span class="active-status-chip"><i class="' + bd.icon + '"></i>' + bd.label + '<button class="chip-clear-btn" id="clearStatusChip" title="Clear">&#x2715;</button></span>' : '';
     var cb = document.getElementById('clearStatusChip');
-    if (cb) {
-      cb.onclick = function(){ activeStatusFlag = null; currentPage = 1; renderPublicationsWithPagination(); };
-      cb.onkeydown = function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cb.onclick(); } };
-    }
+    if (cb) cb.onclick = function(){ activeStatusFlag = null; currentPage = 1; renderPublicationsWithPagination(); };
   } else { chipBar.innerHTML = ''; }
 
   renderPaginationControls(totalPages);

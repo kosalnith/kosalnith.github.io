@@ -870,6 +870,71 @@ function formatPubInfo(pub) {
 
 
 
+/* ── Parse a publication date string into a sortable timestamp ──
+   Handles every format found in research_data.js:
+     "22 Mar 2026"   → D Mon YYYY   (abbreviated month, most precise)
+     "17 Oct 2025"   → D Mon YYYY
+     "Oct 2025"      → abbreviated month + year
+     "June 2022"     → full month name + year
+     "March 2023"    → full month name + year
+     "Jun 2021"      → abbreviated month + year
+     "2026"          → year only → Jan 1 of that year
+     "forthcoming 2026" / "forthcoming" → top of its year group (date unknown)
+     "" / undefined  → epoch 0 (sorts to bottom)
+   Returns a numeric timestamp for direct numeric comparison.   */
+function parsePublicationDate(pub) {
+  const raw = (pub.date || '').trim();
+
+  /* No date at all — fall back to year field at Jan 1 */
+  if (!raw) {
+    const y = parseInt(pub.year);
+    return isNaN(y) ? 0 : new Date(y, 0, 1).getTime();
+  }
+
+  /* "forthcoming YYYY" or just "forthcoming" → top of its year group.
+     Using Dec 31 23:59:59 gives the highest possible timestamp in that year,
+     so it always floats above all real dated publications in descending sort. */
+  const forthMatch = raw.match(/forthcoming\s*(\d{4})?/i);
+  if (forthMatch) {
+    const y = forthMatch[1] ? parseInt(forthMatch[1]) : (parseInt(pub.year) || new Date().getFullYear());
+    return new Date(y, 11, 31, 23, 59, 59).getTime();
+  }
+
+  /* Month name lookup — covers both full names and 3-letter abbreviations */
+  const MONTHS = {
+    january:0, jan:0, february:1, feb:1, march:2, mar:2,
+    april:3, apr:3, may:4, june:5, jun:5, july:6, jul:6,
+    august:7, aug:7, september:8, sep:8, sept:8, october:9, oct:9,
+    november:10, nov:10, december:11, dec:11
+  };
+
+  /* "D Mon YYYY" or "D Month YYYY" e.g. "22 Mar 2026", "5 June 2022" */
+  const dmyMatch = raw.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+  if (dmyMatch) {
+    const mon = MONTHS[dmyMatch[2].toLowerCase()];
+    if (mon !== undefined) return new Date(parseInt(dmyMatch[3]), mon, parseInt(dmyMatch[1])).getTime();
+  }
+
+  /* "Mon YYYY" or "Month YYYY" e.g. "Oct 2025", "June 2022", "March 2023" */
+  const myMatch = raw.match(/^([A-Za-z]+)\s+(\d{4})$/);
+  if (myMatch) {
+    const mon = MONTHS[myMatch[1].toLowerCase()];
+    if (mon !== undefined) return new Date(parseInt(myMatch[2]), mon, 1).getTime();
+  }
+
+  /* Year only e.g. "2026", "2021" */
+  const yMatch = raw.match(/^(\d{4})$/);
+  if (yMatch) return new Date(parseInt(yMatch[1]), 0, 1).getTime();
+
+  /* Last resort: native Date parse (ISO strings etc.) */
+  const d = new Date(raw);
+  if (!isNaN(d.getTime())) return d.getTime();
+
+  /* Absolute fallback: year field */
+  const y = parseInt(pub.year);
+  return isNaN(y) ? 0 : new Date(y, 0, 1).getTime();
+}
+
 function renderPublicationsWithPagination() {
   const filtered = getFilteredPublications();
   const totalItems = filtered.length;
@@ -879,13 +944,25 @@ function renderPublicationsWithPagination() {
   if (currentPage < 1) currentPage = 1;
 
   const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-  const pageItems = filtered.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+
+  /* ── Sort entire filtered list by full date before paginating ──
+     Within the same year, publications are ordered by their exact date
+     (day + month + year), not just by their position in the data array. */
+  const dateSorted = [...filtered].sort((a, b) => {
+    const da = parsePublicationDate(a);
+    const db = parsePublicationDate(b);
+    return sortOrder === 'desc' ? db - da : da - db;
+  });
+
+  const pageItems = dateSorted.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
   const grouped = {};
   pageItems.forEach(p => { if (!grouped[p.year]) grouped[p.year] = []; grouped[p.year].push(p); });
-  const yearOrder = sortOrder === 'desc'
-    ? ['progress','2026','2025','2024','2023','2022','2021','2020','2019','2018']
-    : ['2018','2019','2020','2021','2022','2023','2024','2025','2026','progress'];
+
+  /* Year group order comes from the sorted pageItems — no hardcoded array needed.
+     This preserves the full date sort order within each group. */
+  const yearOrder = [];
+  pageItems.forEach(p => { if (!yearOrder.includes(p.year)) yearOrder.push(p.year); });
 
   let html = '';
   for (let y of yearOrder) {
@@ -981,12 +1058,9 @@ function renderPublicationsWithPagination() {
   }
   if (activeStatusFlag) {
     var bd = STAGE_BADGES.find(function(s){ return s.flag === activeStatusFlag; });
-    chipBar.innerHTML = bd ? '<span class="active-status-chip"><i class="' + bd.icon + '"></i>' + bd.label + '<span class="chip-clear-btn" id="clearStatusChip" title="Clear" role="button" tabindex="0" aria-label="Clear filter">&#x2715;</span></span>' : '';
+    chipBar.innerHTML = bd ? '<span class="active-status-chip"><i class="' + bd.icon + '"></i>' + bd.label + '<button class="chip-clear-btn" id="clearStatusChip" title="Clear">&#x2715;</button></span>' : '';
     var cb = document.getElementById('clearStatusChip');
-    if (cb) {
-      cb.onclick = function(){ activeStatusFlag = null; currentPage = 1; renderPublicationsWithPagination(); };
-      cb.onkeydown = function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cb.onclick(); } };
-    }
+    if (cb) cb.onclick = function(){ activeStatusFlag = null; currentPage = 1; renderPublicationsWithPagination(); };
   } else { chipBar.innerHTML = ''; }
 
   renderPaginationControls(totalPages);

@@ -1444,15 +1444,10 @@ html.dark-mode .detail-no-abstract {
   margin: 0.1rem 0 0 !important;
   font-size: 1.8rem !important;
   color: #2c3f55 !important;
-  line-height: 1.6 !important;
+  line-height: 1.75 !important;
   padding: 0.85rem 1.2rem !important;
   border-left: 3px solid #b1040e !important;
   border-radius: 0 6px 6px 0 !important;
-}
-html.dark-mode .research-container .abstract-text {
-  color: #e6e4e4 !important;           /* warm off-white — easy on the eyes in dark mode */
-  background: rgba(255,255,255,.03) !important;
-  border-left-color: rgba(240,84,26,.5) !important;
 }
 /* Hidden by default — JS removes this class to show */
 .research-container .abstract-text[style*="display: none"],

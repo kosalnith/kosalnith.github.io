@@ -931,26 +931,6 @@ html.dark-mode body button.filter-close-btn:hover {
   color: #e05555 !important;
 }
 
-/* ── Active filter chip × button — override mainformat.css button{background:#b1040e} ──
-   The box visible in dark mode around the × is mainformat.css's red button background
-   bleeding through. This rule beats it using body + class specificity.             ── */
-html.dark-mode body button.chip-clear-btn,
-html.dark-mode body .chip-clear-btn {
-  background: rgba(240,84,26,.2) !important;
-  background-color: rgba(240,84,26,.2) !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  color: #f07050 !important;
-  -webkit-appearance: none !important;
-  appearance: none !important;
-}
-html.dark-mode body button.chip-clear-btn:hover,
-html.dark-mode body .chip-clear-btn:hover {
-  background: rgba(240,84,26,.4) !important;
-  background-color: rgba(240,84,26,.4) !important;
-}
-
 /* ── Year range slider — remove track background box in dark mode ── */
 html.dark-mode .research-container .year-track,
 html.dark-mode .research-container .year-track-outer,
