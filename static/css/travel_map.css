@@ -76,7 +76,7 @@ main.page-content {
   position: relative;
   width: 100%;
   height: calc(100vh - 120px); /* fallback before JS runs */
-  min-height: 800px;            /* desktop minimum */
+  min-height: 900px;            /* desktop minimum */
   overflow: hidden;
   background: var(--tm-sand);
   color: var(--tm-ink);
