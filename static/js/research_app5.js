@@ -868,33 +868,7 @@ function formatPubInfo(pub) {
   ]);
 }
 
-/* ── Parse any date string into a sortable timestamp ──
-   Priority within a year (desc = newest first):
-     1. forthcoming       → Dec 31 23:59:59  TOP (date unknown/future)
-     2. "22 Mar 2026"     → exact day
-     3. "June 2022" / "Oct 2025" → 1st of month (day unknown)
-     4. "2026" year-only  → Jan 1 00:00:00   BOTTOM (month+day unknown) */
-function parsePublicationDate(pub) {
-  const raw = (pub.date || '').trim();
-  const yr  = parseInt(pub.year) || new Date().getFullYear();
 
-  /* Check forthcoming flag OR "forthcoming" in date string → top of year group */
-  if (pub.forthcoming || /forthcoming/i.test(raw)) {
-    return new Date(yr, 11, 31, 23, 59, 59).getTime();
-  }
-
-  if (!raw) return new Date(yr, 0, 1).getTime();
-
-  const MONTHS = { january:0,jan:0,february:1,feb:1,march:2,mar:2,april:3,apr:3,may:4,june:5,jun:5,july:6,jul:6,august:7,aug:7,september:8,sep:8,sept:8,october:9,oct:9,november:10,nov:10,december:11,dec:11 };
-  const dmy = raw.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
-  if (dmy) { const m = MONTHS[dmy[2].toLowerCase()]; if (m !== undefined) return new Date(parseInt(dmy[3]), m, parseInt(dmy[1])).getTime(); }
-  const my = raw.match(/^([A-Za-z]+)\s+(\d{4})$/);
-  if (my) { const m = MONTHS[my[1].toLowerCase()]; if (m !== undefined) return new Date(parseInt(my[2]), m, 1).getTime(); }
-  const y = raw.match(/^(\d{4})$/);
-  if (y) return new Date(parseInt(y[1]), 0, 1).getTime();
-  const d = new Date(raw); if (!isNaN(d.getTime())) return d.getTime();
-  return new Date(yr, 0, 1).getTime();
-}
 
 function renderPublicationsWithPagination() {
   const filtered = getFilteredPublications();
@@ -904,20 +878,14 @@ function renderPublicationsWithPagination() {
   else if (currentPage > totalPages) currentPage = totalPages;
   if (currentPage < 1) currentPage = 1;
 
-  /* Sort by full date before slicing — forthcoming top, year-only bottom */
-  const dateSorted = [...filtered].sort((a, b) => {
-    const da = parsePublicationDate(a), db = parsePublicationDate(b);
-    return sortOrder === 'desc' ? db - da : da - db;
-  });
-
   const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-  const pageItems = dateSorted.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+  const pageItems = filtered.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
   const grouped = {};
   pageItems.forEach(p => { if (!grouped[p.year]) grouped[p.year] = []; grouped[p.year].push(p); });
-  /* Year order derived from sorted list — no hardcoded array needed */
-  const yearOrder = [];
-  pageItems.forEach(p => { if (!yearOrder.includes(p.year)) yearOrder.push(p.year); });
+  const yearOrder = sortOrder === 'desc'
+    ? ['progress','2026','2025','2024','2023','2022','2021','2020','2019','2018']
+    : ['2018','2019','2020','2021','2022','2023','2024','2025','2026','progress'];
 
   let html = '';
   for (let y of yearOrder) {
@@ -978,7 +946,7 @@ function renderPublicationsWithPagination() {
               ${pub.keywords && pub.keywords.length ? `
               <div class="pub-keywords">
                 ${pub.keywords.slice(0, 3).map((k, i) =>
-                  `<span class="pub-kw kw-clickable" role="button" tabindex="0" data-keyword="${k.replace(/"/g,'&quot;')}" title="Find all publications with keyword: ${k.replace(/"/g,'&quot;')}"><span class="pub-kw-dot ${pub.kwStrength[i] || 'none'}"></span>${k}</span>`
+                  `<button class="pub-kw kw-clickable" data-keyword="${k.replace(/"/g,'&quot;')}" title="Find all publications with keyword: ${k.replace(/"/g,'&quot;')}"><span class="pub-kw-dot ${pub.kwStrength[i] || 'none'}"></span>${k}</button>`
                 ).join('')}
               </div>` : ''}
 
@@ -2088,7 +2056,7 @@ function showDetail(idx) {
       ${pub.keywords && pub.keywords.length ? `
       <div class="detail-section-title">Keywords</div>
       <div class="detail-keywords">
-        ${pub.keywords.map(k => `<span class="detail-keyword kw-clickable" role="button" tabindex="0" data-keyword="${k.replace(/"/g,'&quot;')}" title="Find all publications with keyword: ${k.replace(/"/g,'&quot;')}">${k}</span>`).join('')}
+        ${pub.keywords.map(k => `<button class="detail-keyword kw-clickable" data-keyword="${k.replace(/"/g,'&quot;')}" title="Find all publications with keyword: ${k.replace(/"/g,'&quot;')}">${k}</button>`).join('')}
       </div>` : ''}
 
       ${related.length ? `
