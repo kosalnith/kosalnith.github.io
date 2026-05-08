@@ -22,28 +22,50 @@
      All fetchable static pages. Dynamic data (research, activities, updates,
      travel) is indexed separately via indexDynamicData().
   ========================================================================= */
-  var PAGES = [
-    { url: 'index.html',         label: 'Home' },
-    { url: 'bio.html',           label: 'Bio' },
-    { url: 'research.html',      label: 'Research' },
-    { url: 'press.html',         label: 'Press' },
-    { url: 'teaching.html',      label: 'Teaching' },
+  /* =========================================================================
+     1.  CONFIGURATION — driven by search-registry.js
+     All pages and data files are declared in static/js/search-registry.js.
+     To add a new page or data file, edit that file only — no changes here.
+  ========================================================================= */
+  // Fallback manifest used if search-registry.js is not loaded yet
+  var PAGES_FALLBACK = [
+    { url: 'index.html',         label: 'Home'          },
+    { url: 'research.html',      label: 'Research'      },
+    { url: 'activity.html',      label: 'Activities'    },
+    { url: 'press.html',         label: 'Press'         },
+    { url: 'teaching.html',      label: 'Teaching'      },
     { url: 'miscellaneous.html', label: 'Miscellaneous' },
-    { url: 'personal.html',      label: 'Personal' },
-    { url: 'events.html',        label: 'Events' },
-    { url: 'explore.html',       label: 'Explore' },
-    { url: 'food.html',          label: 'Food' },
-    { url: 'foot.html',          label: 'Foot' },
-    { url: 'friends.html',       label: 'Friends' },
-    { url: 'pastevents.html',    label: 'Past Events' },
-    { url: 'trees.html',         label: 'Trees' },
-    { url: 'updates.html',       label: 'Updates' },
-    { url: 'work.html',          label: 'Work' },
-    { url: 'activity.html',      label: 'Activities' },
-    { url: 'cv.html',            label: 'CV' },
-    { url: 'contact.html',       label: 'Contact' },
-    { url: 'travelmap.html',     label: 'Travel Map' },
+    { url: 'personal.html',      label: 'Personal'      },
+    { url: 'updates.html',       label: 'Updates'       },
+    { url: 'travelmap.html',     label: 'Travel Map'    },
+    { url: 'work.html',          label: 'Work'          },
+    { url: 'friends.html',       label: 'Friends'       },
+    { url: 'foot.html',          label: 'Foot'          },
+    { url: 'trees.html',         label: 'Trees'         },
+    { url: 'food.html',          label: 'Food'          },
+    { url: 'bio.html',           label: 'Bio'           },
+    { url: 'cv.html',            label: 'CV'            },
+    { url: 'contact.html',       label: 'Contact'       },
+    { url: 'events.html',        label: 'Events'        },
+    { url: 'pastevents.html',    label: 'Past Events'   },
+    { url: 'explore.html',       label: 'Explore'       },
   ];
+
+  var DATA_FILES_FALLBACK = [
+    { src: 'static/js/research_data.js',  id: 'ss-ds-research',  indexer: 'research'   },
+    { src: 'static/js/activity-data.js',  id: 'ss-ds-activity',  indexer: 'activities' },
+    { src: 'static/js/updates-data.js',   id: 'ss-ds-updates',   indexer: 'updates'    },
+    { src: 'static/js/travel_map.js',     id: 'ss-ds-travel',    indexer: 'travel'     },
+    { src: 'static/js/static-content.js', id: 'ss-ds-static',    indexer: 'static'     },
+  ];
+
+  function getRegistry() {
+    var r = window.__searchRegistry || {};
+    return {
+      pages:     (r.pages     && r.pages.length)     ? r.pages     : PAGES_FALLBACK,
+      dataFiles: (r.dataFiles && r.dataFiles.length) ? r.dataFiles : DATA_FILES_FALLBACK,
+    };
+  }
 
   var INDEX = [], loaded = false, loading = false, activeIdx = -1;
 
@@ -273,473 +295,259 @@
   }
 
   /* =========================================================================
-     6.  STATIC PAGE INDEXER
+     6.  INDEX BUILDER — registry-driven, offline-first
+     Reads static/js/search-registry.js to know what to index.
+     To add a new page or data file, edit search-registry.js only.
   ========================================================================= */
+  function injectScript(src, id, cb) {
+    if (document.getElementById(id)) { cb(); return; }
+    var s = document.createElement('script');
+    s.id = id; s.src = src;
+    s.onload = cb; s.onerror = cb;
+    document.head.appendChild(s);
+  }
+
   function buildIndex() {
     loading = true;
-    // Index any data already on the current page first
-    indexDynamicData();
+    var resultsEl = document.getElementById('ss-results');
+    if (resultsEl) resultsEl.innerHTML = '<div class="ss-status">Loading&#8230;</div>';
 
-    var rem = PAGES.length;
-    PAGES.forEach(function (page) {
-      fetch(page.url)
-        .then(function (r) { return r.ok ? r.text() : ''; })
-        .then(function (html) { if (html) parsePageIntoIndex(html, page); })
-        .catch(function () {})
-        .finally(function () {
-          if (--rem === 0) {
-            loaded = true; loading = false;
-            var q = (document.getElementById('ss-input') || {}).value;
-            q = q ? q.trim() : '';
-            if (q.length >= 2) {
-              renderResults(q);
-            } else {
-              var r = document.getElementById('ss-results');
-              if (r) r.innerHTML = '<div class="ss-status">Ready &#8212; ' + INDEX.length + ' entries across all pages</div>';
-            }
-          }
+    injectScript('static/js/search-registry.js', 'ss-registry', function () {
+      var reg = getRegistry();
+      var rem = reg.dataFiles.length || 1;
+
+      function onDataReady() {
+        if (--rem > 0) return;
+        indexAllData(reg.dataFiles);
+
+        var isOffline = window.location.protocol === 'file:';
+        if (isOffline) { loaded = true; loading = false; finishIndex(); return; }
+
+        var pageRem = reg.pages.length || 1;
+        reg.pages.forEach(function (page) {
+          fetch(page.url)
+            .then(function (r) { return r.ok ? r.text() : ''; })
+            .then(function (html) { if (html) parsePageIntoIndex(html, page); })
+            .catch(function () {})
+            .finally(function () {
+              if (--pageRem === 0) { loaded = true; loading = false; finishIndex(); }
+            });
         });
+      }
+
+      if (reg.dataFiles.length === 0) { onDataReady(); }
+      else reg.dataFiles.forEach(function (df) { injectScript(df.src, df.id, onDataReady); });
     });
   }
 
+  function finishIndex() {
+    var inp = document.getElementById('ss-input');
+    var q   = inp ? inp.value.trim() : '';
+    if (q.length >= 2) renderResults(q);
+    else {
+      var r = document.getElementById('ss-results');
+      if (r) r.innerHTML = '<div class="ss-status">Ready &#8212; ' + INDEX.length + ' entries indexed</div>';
+    }
+  }
+
+  /** Parse a static HTML page into one-entry-per-section index entries */
   function parsePageIntoIndex(html, page) {
     var doc = new DOMParser().parseFromString(html, 'text/html');
-    // Remove chrome that should never be in results
-    ['nav', 'header', 'footer', 'script', 'style', 'noscript',
-     '#site-header', '#site-footer', '.su-masthead', '.su-global-footer',
-     '.su-local-footer', '#dm-toggle-li'].forEach(function (sel) {
+    ['nav','header','footer','script','style','noscript','#site-header','#site-footer',
+     '.su-masthead','.su-global-footer','.su-local-footer','#dm-toggle-li'].forEach(function (sel) {
       doc.querySelectorAll(sel).forEach(function (el) { el.remove(); });
     });
     var main = doc.querySelector('main') || doc.querySelector('.page-content') || doc.body;
     var curH = page.label;
-
-    var SELECTORS = [
-      'h1','h2','h3','h4',
-      'p','li','td','.cv-row',
-      // Research
-      '.pub-title','.pub-authors','.pub-meta','.pub-abstract','.pub-keywords',
-      // Activity
-      '.activity-title','.activity-meta','.activity-desc','.su-event-list-item h2',
-      // Updates / news
-      '.update-item','.news-item','.whats-new-item',
-      // Travel / map
-      '.place-name','.place-desc','.place-card h3','.place-card p',
-      '.trip-name','.trip-desc','.country-name','.location-title',
-      '.map-popup','.map-label','.travel-entry',
-      // Food
-      '.food-name','.food-desc','.restaurant-name',
-      // Bio / general
-      '.kn-bio-inner p','.su-wysiwyg-text p'
-    ].join(',');
-
-    main.querySelectorAll(SELECTORS).forEach(function (node) {
+    var sections = {}, order = [];
+    main.querySelectorAll('h1,h2,h3,h4,p,li,td,.cv-row,.kn-bio-inner,.su-wysiwyg-text').forEach(function (node) {
       var tag  = node.tagName.toLowerCase();
       var text = node.textContent.replace(/\s+/g, ' ').trim();
       if (!text || text.length < 4) return;
-
       if (/^h[1-4]$/.test(tag)) {
         curH = text;
-        push({ url: page.url, pageLabel: page.label, heading: text, text: text, isHeading: true, category: 'page' });
-      } else if (
-        node.children.length === 0 || tag === 'p' || tag === 'li' ||
-        node.classList.contains('cv-row') || node.tagName === 'TD'
-      ) {
-        push({ url: page.url, pageLabel: page.label, heading: curH, text: text, isHeading: false, category: 'page' });
+        if (!sections[curH]) { sections[curH] = ''; order.push(curH); }
+      } else {
+        if (!sections[curH]) { sections[curH] = ''; order.push(curH); }
+        sections[curH] += ' ' + text;
       }
+    });
+    var seen = new Set();
+    order.forEach(function (h) {
+      var blob = (h + ' ' + (sections[h] || '')).trim();
+      var k = page.url + '|' + h.slice(0, 80);
+      if (seen.has(k) || blob.length < 4) return;
+      seen.add(k);
+      push({ url: page.url, pageLabel: page.label, heading: h, text: blob,
+             isHeading: h !== page.label, category: 'page' });
     });
   }
 
   /* =========================================================================
-     7.  DYNAMIC DATA INDEXERS
-     Called immediately when modal opens (data on this page) and again after
-     all static fetches complete. Deduplication in renderResults handles overlaps.
+     7.  DATA INDEXERS
+     indexAllData() routes each data file to the right indexer based on
+     the 'indexer' field in search-registry.js.
+     'auto' indexer handles any unknown data format automatically.
   ========================================================================= */
-  function indexDynamicData() {
-    indexResearchData();
-    indexActivitiesData();
-    indexUpdatesData();
-    indexTravelData();
-  }
-
-  /* ── 7a. Research publications (research_data.js → publications[]) ───── */
-  function indexResearchData() {
-    if (typeof publications === 'undefined' || !Array.isArray(publications)) return;
-    publications.forEach(function (pub) {
-      var id    = pub.id || pub.key || '';
-      var title = (pub.title || '').trim();
-      var url   = id ? deepLink('research.html', 'pub', id) : 'research.html';
-
-      if (title) push({ url: url, pageLabel: 'Research', heading: title, text: title, isHeading: true, category: 'research' });
-
-      // Authors (array or string)
-      var authors = Array.isArray(pub.authors) ? pub.authors.join(', ') : (pub.authors || '');
-      if (authors) push({ url: url, pageLabel: 'Research', heading: title || 'Research', text: authors, isHeading: false, category: 'research' });
-
-      // Abstract / description
-      var abstract = stripHtml(pub.abstract || pub.description || '');
-      if (abstract) push({ url: url, pageLabel: 'Research', heading: title || 'Research', text: abstract, isHeading: false, category: 'research' });
-
-      // Venue: journal / publisher / booktitle / series / conference
-      var venue = [pub.journal, pub.venue, pub.publisher, pub.booktitle, pub.series, pub.conference]
-        .filter(Boolean).join(' · ');
-      if (venue) push({ url: url, pageLabel: 'Research', heading: title || 'Research', text: venue + (pub.year ? ' (' + pub.year + ')' : ''), isHeading: false, category: 'research' });
-
-      // Type / category
-      if (pub.type) push({ url: url, pageLabel: 'Research', heading: title || 'Research', text: pub.type, isHeading: false, category: 'research' });
-
-      // Keywords
-      var kws = Array.isArray(pub.keywords) ? pub.keywords.join(', ') : (pub.keywords || '');
-      if (kws) push({ url: url, pageLabel: 'Research', heading: title || 'Research', text: kws, isHeading: false, category: 'research' });
-
-      // SDGs
-      var sdgs = Array.isArray(pub.sdgs) ? pub.sdgs.join(', ') : (pub.sdgs || '');
-      if (sdgs) push({ url: url, pageLabel: 'Research', heading: title || 'Research', text: 'SDG ' + sdgs, isHeading: false, category: 'research' });
-
-      // Co-authors (sometimes a separate field)
-      var coauthors = Array.isArray(pub.coauthors) ? pub.coauthors.join(', ') : (pub.coauthors || '');
-      if (coauthors) push({ url: url, pageLabel: 'Research', heading: title || 'Research', text: coauthors, isHeading: false, category: 'research' });
-
-      // Notes / extra text
-      var notes = stripHtml(pub.note || pub.notes || pub.comment || '');
-      if (notes) push({ url: url, pageLabel: 'Research', heading: title || 'Research', text: notes, isHeading: false, category: 'research' });
-
-      // Language
-      if (pub.language) push({ url: url, pageLabel: 'Research', heading: title || 'Research', text: pub.language, isHeading: false, category: 'research' });
+  function indexAllData(dataFiles) {
+    dataFiles.forEach(function (df) {
+      switch (df.indexer) {
+        case 'research':   indexResearchData();    break;
+        case 'activities': indexActivitiesData();  break;
+        case 'updates':    indexUpdatesData();     break;
+        case 'travel':     indexTravelData();      break;
+        case 'static':     indexStaticContent();   break;
+        case 'auto':       indexAutoData(df);      break;
+        default:           indexAutoData(df);      break;
+      }
     });
   }
 
-  /* ── 7b. Activities (activity-data.js → activities[]) ────────────────── */
+  /* ── 7a. Research  (publicationsData[]) ──────────────────────────────── */
+  function indexResearchData() {
+    var data = (typeof publicationsData !== 'undefined' && Array.isArray(publicationsData))
+               ? publicationsData : null;
+    if (!data) return;
+    data.forEach(function (pub) {
+      var title = (pub.title || '').trim();
+      if (!title) return;
+      var id  = pub.id || pub.key || '';
+      var url = id ? deepLink('research.html', 'pub', id) : 'research.html';
+      var text = [
+        title,
+        typeof pub.authors === 'string' ? pub.authors : (Array.isArray(pub.authors) ? pub.authors.join(', ') : ''),
+        pub.outlet, pub.journal, pub.venue, pub.publisher, pub.booktitle, pub.conference,
+        pub.year, pub.type,
+        Array.isArray(pub.keywords) ? pub.keywords.join(' ') : (pub.keywords || ''),
+        Array.isArray(pub.sdgs) ? pub.sdgs.join(' ') : (Array.isArray(pub.sdg) ? pub.sdg.join(' ') : ''),
+        stripHtml(pub.abstract || pub.description || pub.notes || ''),
+        pub.lang
+      ].filter(Boolean).join(' ');
+      push({ url: url, pageLabel: 'Research', heading: title, text: text, isHeading: false, category: 'research' });
+    });
+  }
+
+  /* ── 7b. Activities  (activities[]) ──────────────────────────────────── */
   function indexActivitiesData() {
     if (typeof activities === 'undefined' || !Array.isArray(activities)) return;
     activities.forEach(function (act) {
-      var dest  = act.titleUrl || 'activity.html';
       var title = (act.title || '').trim();
-
-      if (title) push({ url: dest, pageLabel: 'Activities', heading: title, text: title, isHeading: true, category: 'activity' });
-
-      // Date · location · city · country · role · type
-      var meta = [act.date, act.location, act.city, act.country, act.role, act.type, act.format]
-        .filter(Boolean).join(' · ');
-      if (meta) push({ url: dest, pageLabel: 'Activities', heading: title || 'Activity', text: meta, isHeading: false, category: 'activity' });
-
-      // Description / notes / html
-      var desc = stripHtml(act.description || act.notes || act.html || act.summary || act.abstract || '');
-      if (desc) push({ url: dest, pageLabel: 'Activities', heading: title || 'Activity', text: desc, isHeading: false, category: 'activity' });
-
-      // Organiser / institution / affiliation / host
-      var org = [act.organizer, act.organiser, act.institution, act.affiliation, act.host, act.sponsor]
-        .filter(Boolean).join(', ');
-      if (org) push({ url: dest, pageLabel: 'Activities', heading: title || 'Activity', text: org, isHeading: false, category: 'activity' });
-
-      // Co-presenters / co-authors
-      var coauth = Array.isArray(act.coauthors) ? act.coauthors.join(', ') : (act.coauthors || '');
-      if (coauth) push({ url: dest, pageLabel: 'Activities', heading: title || 'Activity', text: coauth, isHeading: false, category: 'activity' });
+      if (!title) return;
+      var dest = act.titleUrl || 'activity.html';
+      var text = [
+        title,
+        act.date, act.location, act.role, act.type, act.typeCategory,
+        act.person, act.organizer, act.organiser, act.institution, act.host,
+        stripHtml(act.description || act.notes || act.html || act.summary || ''),
+        Array.isArray(act.keywords) ? act.keywords.join(' ') : (act.keywords || ''),
+        Array.isArray(act.sdg)  ? act.sdg.join(' ')  : (Array.isArray(act.sdgs) ? act.sdgs.join(' ') : '')
+      ].filter(Boolean).join(' ');
+      push({ url: dest, pageLabel: 'Activities', heading: title, text: text, isHeading: false, category: 'activity' });
     });
   }
 
-  /* ── 7c. Updates / News (updates-data.js → updatesData[]) ───────────── */
+  /* ── 7c. Updates  (updatesData[]) ────────────────────────────────────── */
   function indexUpdatesData() {
     if (typeof updatesData === 'undefined' || !Array.isArray(updatesData)) return;
     updatesData.forEach(function (entry) {
-      var raw   = typeof entry === 'object' ? (entry.html || entry.text || '') : String(entry || '');
+      var raw = typeof entry === 'object' ? (entry.html || entry.text || '') : String(entry || '');
       if (!raw) return;
       var plain = stripHtml(raw);
       if (!plain || plain.length < 4) return;
-
-      // Resolve deep-link from first anchor in entry
-      var tmp    = document.createElement('div');
+      var tmp = document.createElement('div');
       tmp.innerHTML = raw;
       var anchor = tmp.querySelector('a[href]');
-      var dest   = 'updates.html';
+      var dest = 'updates.html';
       if (anchor) {
         var href = anchor.getAttribute('href') || '';
-        if (href.includes('kosalnith.github.io')) {
-          dest = href.replace(/^https?:\/\/kosalnith\.github\.io/, '') || 'updates.html';
-        } else if (href && !href.startsWith('http')) {
-          dest = href;
-        } else if (href.startsWith('http')) {
-          dest = href;
-        }
+        if (href.includes('kosalnith.github.io')) dest = href.replace(/^https?:\/\/kosalnith\.github\.io/, '') || 'updates.html';
+        else if (href && !href.startsWith('http')) dest = href;
       }
-
-      var heading = (entry.date ? '[' + entry.date + '] ' : '') + plain.slice(0, 80);
+      var heading = (entry.year ? entry.year + ' · ' : '') + plain.slice(0, 80);
       push({ url: dest, pageLabel: 'Updates', heading: heading, text: plain, isHeading: false, category: 'update' });
     });
   }
 
-  /* ── 7d. Travel / Map / Explore / Travelmap data ─────────────────────── */
-  /**
-   * Three-layer strategy:
-   *
-   *  Layer 1 — Bridge protocol:  travelmap-search-bridge.js (loaded in
-   *    travelmap.html) normalises all data into window.__siteSearchData.travelmap.
-   *    search.js reads that standard key. Also listens for 'siteSearchDataReady'.
-   *
-   *  Layer 2 — Named variable scan: checks 30+ known variable names that
-   *    travelmap / explore / food / foot / trees pages might use.
-   *
-   *  Layer 3 — Heuristic scan: walks all window globals and indexes any array
-   *    of objects that has a name + geo fields (lat/lng, country, city, iso…).
-   *
-   *  Layer 4 — Fetch-eval: fetches the known travelmap data JS files directly
-   *    and evals them in a sandboxed scope to extract data, without needing
-   *    travelmap.html to be open.
-   */
+  /* ── 7d. Travel Map  (tmCountries[]) ─────────────────────────────────── */
   function indexTravelData() {
-    var SOURCES = [
-      // ── Travelmap page (most likely names) ────────────────────────────────
-      { v: 'travelData',        url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'travelMapData',     url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'travelmapData',     url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'stampData',         url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'stamps',            url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'destinations',      url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'visitedCountries',  url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'visitedCities',     url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'travelEntries',     url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'travelLog',         url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'journeys',          url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'trips',             url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'waypoints',         url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'geojsonData',       url: 'travelmap.html', label: 'Travel Map' },
-      { v: 'travelActivities',  url: 'travelmap.html', label: 'Travel Map' },
-      // ── Explore ───────────────────────────────────────────────────────────
-      { v: 'mapData',           url: 'explore.html',   label: 'Explore' },
-      { v: 'placesData',        url: 'explore.html',   label: 'Explore' },
-      { v: 'exploreData',       url: 'explore.html',   label: 'Explore' },
-      { v: 'countriesData',     url: 'explore.html',   label: 'Explore' },
-      { v: 'citiesData',        url: 'explore.html',   label: 'Explore' },
-      { v: 'visitedData',       url: 'explore.html',   label: 'Explore' },
-      { v: 'locationsData',     url: 'explore.html',   label: 'Explore' },
-      { v: 'markersData',       url: 'explore.html',   label: 'Explore' },
-      // ── Food ──────────────────────────────────────────────────────────────
-      { v: 'foodData',          url: 'food.html',      label: 'Food' },
-      { v: 'foodPlaces',        url: 'food.html',      label: 'Food' },
-      { v: 'restaurantData',    url: 'food.html',      label: 'Food' },
-      { v: 'restaurants',       url: 'food.html',      label: 'Food' },
-      { v: 'cafes',             url: 'food.html',      label: 'Food' },
-      // ── Other pages ───────────────────────────────────────────────────────
-      { v: 'footData',          url: 'foot.html',      label: 'Foot' },
-      { v: 'treesData',         url: 'trees.html',     label: 'Trees' },
-      { v: 'friendsData',       url: 'friends.html',   label: 'Friends' },
-    ];
-
-    var indexed = new Set();
-
-    // ── Core place-array indexer ─────────────────────────────────────────────
-    function indexPlaceArray(arr, defaultUrl, pageLabel) {
-      if (!Array.isArray(arr) || !arr.length) return;
-      arr.forEach(function (item) {
-        if (!item || typeof item !== 'object') return;
-        var id   = item.id || item.key || item.iso || item.iso2 || item.iso3 || '';
-        var name = item.name || item.title || item.place || item.city ||
-                   item.country || item.destination || item.label || item.stamp || '';
-        var url  = item.url || item.href || item.link ||
-                   (id ? deepLink(defaultUrl, 'country', id) : defaultUrl);
-
-        if (name) push({ url: url, pageLabel: pageLabel, heading: name, text: name, isHeading: true, category: 'travel' });
-
-        // All geographic fields
-        var geo = [item.country, item.nation, item.continent, item.region,
-                   item.province, item.state, item.district, item.area,
-                   item.city, item.town]
-          .filter(function (v) { return v && v !== name; }).join(', ');
-        if (geo) push({ url: url, pageLabel: pageLabel, heading: name || pageLabel, text: geo, isHeading: false, category: 'travel' });
-
-        // ISO code — searchable (e.g. "KH", "FR")
-        var iso = item.iso || item.iso2 || item.iso3 || item.countryCode || item.code || '';
-        if (iso && iso !== name) push({ url: url, pageLabel: pageLabel, heading: name || pageLabel, text: iso, isHeading: false, category: 'travel' });
-
-        // Description / notes
-        var desc = stripHtml(item.description || item.desc || item.notes ||
-                              item.caption || item.summary || item.info ||
-                              item.details || item.text || '');
-        if (desc) push({ url: url, pageLabel: pageLabel, heading: name || pageLabel, text: desc, isHeading: false, category: 'travel' });
-
-        // Date / year visited
-        var date = [item.date, item.year, item.visited, item.when,
-                    item.period, item.month, item.from, item.to]
-          .filter(Boolean).join(' ');
-        if (date) push({ url: url, pageLabel: pageLabel, heading: name || pageLabel, text: date, isHeading: false, category: 'travel' });
-
-        // Type / activity / category / tags
-        var tags = [
-          Array.isArray(item.tags) ? item.tags.join(', ') : item.tags,
-          item.type, item.category, item.kind, item.activityType,
-          item.purpose, item.reason
-        ].filter(function (v) { return v && v !== name; }).join(', ');
-        if (tags) push({ url: url, pageLabel: pageLabel, heading: name || pageLabel, text: tags, isHeading: false, category: 'travel' });
-
-        // Food / cuisine
-        var cuisine = [item.cuisine, item.food, item.dish, item.specialty, item.menu]
-          .filter(Boolean).join(', ');
-        if (cuisine) push({ url: url, pageLabel: pageLabel, heading: name || pageLabel, text: cuisine, isHeading: false, category: 'travel' });
-
-        // Address
-        if (item.address) push({ url: url, pageLabel: pageLabel, heading: name || pageLabel, text: item.address, isHeading: false, category: 'travel' });
-
-        // Activities sub-array (travelmap has nested activities per country)
-        if (Array.isArray(item.activities) && item.activities.length) {
-          item.activities.forEach(function (act) {
-            var actName = act.name || act.title || act.activity || '';
-            var actText = [actName, act.type, act.date, act.location, act.city,
-                           stripHtml(act.description || act.desc || '')]
-              .filter(Boolean).join(' · ');
-            if (actText) push({ url: url, pageLabel: pageLabel, heading: name || pageLabel, text: actText, isHeading: false, category: 'travel' });
-          });
-        }
+    var countries = (typeof tmCountries !== 'undefined' && Array.isArray(tmCountries)) ? tmCountries : null;
+    if (!countries) return;
+    countries.forEach(function (country) {
+      var cname = (country.name || '').trim();
+      if (!cname) return;
+      push({ url: 'travelmap.html', pageLabel: 'Travel Map', heading: cname,
+             text: [cname, stripHtml(country.desc || ''), country.flag].filter(Boolean).join(' '),
+             isHeading: false, category: 'travel' });
+      if (!Array.isArray(country.cities)) return;
+      country.cities.forEach(function (city) {
+        var pname = (city.name || '').trim();
+        if (!pname) return;
+        var typeLabel = '';
+        try { typeLabel = (typeof tmPinTypes !== 'undefined' && tmPinTypes[city.type]) ? tmPinTypes[city.type].label : (city.type || ''); } catch (e) {}
+        push({ url: 'travelmap.html', pageLabel: 'Travel Map', heading: pname + ', ' + cname,
+               text: [pname, cname, city.type, typeLabel, stripHtml(city.desc || '')].filter(Boolean).join(' '),
+               isHeading: false, category: 'travel' });
       });
-    }
-
-    // ── Layer 1: Bridge protocol ─────────────────────────────────────────────
-    function indexFromBridge() {
-      var sd = window.__siteSearchData;
-      if (!sd) return;
-      if (Array.isArray(sd.travelmap) && sd.travelmap.length) {
-        indexPlaceArray(sd.travelmap, 'travelmap.html', 'Travel Map');
-        indexed.add('__bridge_travelmap');
-      }
-    }
-    indexFromBridge();
-
-    // Also listen for the bridge event (fires if bridge loads after search.js)
-    window.addEventListener('siteSearchDataReady', function (e) {
-      if (e.detail && e.detail.source === 'travelmap') {
-        indexFromBridge();
-        // Re-render if a search is active
-        var inp = document.getElementById('ss-input');
-        if (inp && inp.value.trim().length >= 2) renderResults(inp.value.trim());
-      }
     });
+  }
 
-    // ── Layer 2: Named variable scan ─────────────────────────────────────────
-    SOURCES.forEach(function (src) {
-      try {
-        var arr = window[src.v];
-        if (arr && !indexed.has(src.v)) {
-          indexed.add(src.v);
-          indexPlaceArray(arr, src.url, src.label);
-        }
-      } catch (e) {}
+  /* ── 7e. Static pre-built content  (staticPageContent[]) ─────────────── */
+  function indexStaticContent() {
+    if (typeof staticPageContent === 'undefined' || !Array.isArray(staticPageContent)) return;
+    staticPageContent.forEach(function (entry) {
+      if (!entry.text || entry.text.length < 4) return;
+      push({ url: entry.url, pageLabel: entry.pageLabel, heading: entry.heading || entry.pageLabel,
+             text: entry.text, isHeading: entry.isHeading || false, category: 'page' });
     });
+  }
 
-    // ── Layer 3: Heuristic global scan ──────────────────────────────────────
-    var SKIP_KEYS = new Set(['publications', 'activities', 'updatesData', 'INDEX',
-                             'PAGES', 'history', 'location', 'navigator', 'document',
-                             'window', 'self', 'top', 'frames', 'screen']);
-    SOURCES.forEach(function (s) { SKIP_KEYS.add(s.v); });
+  /* ── 7f. Auto-indexer for any new/unknown data file ──────────────────── */
+  /**
+   * Called for any data file with indexer:'auto' in search-registry.js.
+   * Scans all globals that appeared after the script loaded and indexes
+   * any arrays of objects it finds. Works for any data shape:
+   *   - Objects with name/title → used as heading
+   *   - All string fields joined into the text blob
+   *   - Nested arrays recursively indexed
+   * This means ANY new JS data file added to search-registry.js is
+   * automatically searchable without touching search.js.
+   */
+  function indexAutoData(df) {
+    // Scan all window globals for arrays that look like data records
+    var KNOWN = new Set(['publicationsData','activities','updatesData','tmCountries',
+                         'tmPinTypes','staticPageContent','allPublicationTypes',
+                         'uniqueTypes','yearItems','sdgOptions','__searchRegistry']);
+    var label = df.label || df.id || 'Other';
+    var url   = df.url   || df.src.replace(/^static\/js\//, '').replace(/\.js$/, '.html');
 
     try {
       Object.keys(window).forEach(function (key) {
-        if (SKIP_KEYS.has(key) || indexed.has(key)) return;
-        if (key.startsWith('_') || key.startsWith('webkit') || key.startsWith('on')) return;
+        if (KNOWN.has(key)) return;
+        if (key.startsWith('_') || key.startsWith('on') || key.startsWith('webkit')) return;
         try {
           var val = window[key];
-          if (!Array.isArray(val) || val.length < 1) return;
-          var first = val[0];
-          if (typeof first !== 'object' || !first) return;
-          var hasGeo  = ('lat' in first || 'lng' in first || 'latitude' in first ||
-                         'longitude' in first || 'country' in first || 'city' in first ||
-                         'iso' in first || 'iso2' in first || 'countryCode' in first);
-          var hasName = ('name' in first || 'title' in first || 'place' in first ||
-                         'destination' in first || 'stamp' in first);
-          if (hasGeo && hasName) {
-            indexed.add(key);
-            // Guess the best URL based on key name
-            var guessUrl = key.toLowerCase().includes('travel') || key.toLowerCase().includes('country') ||
-                           key.toLowerCase().includes('stamp') || key.toLowerCase().includes('visit')
-              ? 'travelmap.html' : 'explore.html';
-            var guessLabel = key.toLowerCase().includes('food') || key.toLowerCase().includes('restaurant')
-              ? 'Food' : 'Travel Map';
-            indexPlaceArray(val, guessUrl, guessLabel);
-          }
+          if (!Array.isArray(val) || val.length === 0) return;
+          if (typeof val[0] !== 'object' || !val[0]) return;
+          // Index each item as one entry
+          val.forEach(function (item) {
+            var name = item.name || item.title || item.label || item.heading || '';
+            if (!name) return;
+            // Collect all string values into text blob
+            var parts = [name];
+            Object.keys(item).forEach(function (k) {
+              var v = item[k];
+              if (typeof v === 'string' && v !== name && v.length > 1) parts.push(v);
+              else if (Array.isArray(v)) parts.push(v.filter(function(x){ return typeof x==='string'; }).join(' '));
+            });
+            var text = parts.filter(Boolean).join(' ');
+            push({ url: url, pageLabel: label, heading: name, text: text, isHeading: false, category: 'page' });
+          });
         } catch (e2) {}
       });
     } catch (e) {}
-
-    // ── Layer 4: Fetch-eval travelmap data files directly ───────────────────
-    // This runs at index-build time and fetches the JS data file used by
-    // travelmap.html so we get the data even when that page isn't open.
-    // We try several likely file names.
-    var DATA_FILE_CANDIDATES = [
-      'static/js/travelmap_data.js',
-      'static/js/travelmap-data.js',
-      'static/js/travel-data.js',
-      'static/js/travelData.js',
-      'static/js/stamp-data.js',
-      'static/js/stamps.js',
-      'static/js/destinations.js',
-      'static/js/travel_data.js',
-      'static/js/map-data.js',
-    ];
-
-    // Sandboxed eval: run the JS in an isolated scope and return all arrays
-    // of place-like objects it defines.
-    function evalDataFile(code) {
-      var results = [];
-      try {
-        // Create a proxy object that captures any property assignment
-        var captured = {};
-        var sandbox = new Proxy(captured, {
-          set: function (target, key, value) {
-            target[key] = value;
-            return true;
-          }
-        });
-        // Wrap code so top-level var/let/const assignments go to sandbox
-        // (This works for patterns like: var travelData = [...])
-        var wrapped = '(function(window,self,globalThis){' + code + '})(sandbox,sandbox,sandbox)';
-        // eslint-disable-next-line no-new-func
-        new Function('sandbox', wrapped)(sandbox);
-        Object.keys(captured).forEach(function (k) {
-          var val = captured[k];
-          if (Array.isArray(val) && val.length > 0 && typeof val[0] === 'object') {
-            results.push({ key: k, data: val });
-          }
-        });
-      } catch (e) {
-        // Proxy approach failed — try plain eval as fallback
-        try {
-          var before = Object.keys(window).slice();
-          // eslint-disable-next-line no-eval
-          eval(code);
-          Object.keys(window).forEach(function (k) {
-            if (before.indexOf(k) === -1 && !indexed.has(k)) {
-              var val = window[k];
-              if (Array.isArray(val) && val.length > 0 && typeof val[0] === 'object') {
-                results.push({ key: k, data: val });
-              }
-            }
-          });
-        } catch (e2) {}
-      }
-      return results;
-    }
-
-    var attempted = new Set();
-    DATA_FILE_CANDIDATES.forEach(function (filePath) {
-      if (attempted.has(filePath)) return;
-      attempted.add(filePath);
-      fetch(filePath)
-        .then(function (r) { return r.ok ? r.text() : null; })
-        .then(function (code) {
-          if (!code) return;
-          var arrays = evalDataFile(code);
-          arrays.forEach(function (arr) {
-            if (!indexed.has('__fetch__' + arr.key)) {
-              indexed.add('__fetch__' + arr.key);
-              indexPlaceArray(arr.data, 'travelmap.html', 'Travel Map');
-            }
-          });
-          // Re-run render if a search is active
-          if (loaded) {
-            var inp = document.getElementById('ss-input');
-            if (inp && inp.value.trim().length >= 2) renderResults(inp.value.trim());
-          }
-        })
-        .catch(function () {});
-    });
   }
+
+
 
   /* =========================================================================
      8.  RENDER RESULTS
