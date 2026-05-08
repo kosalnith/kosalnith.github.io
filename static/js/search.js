@@ -45,7 +45,7 @@
     { url: 'travelmap.html',     label: 'Travel Map' },
   ];
 
-  var INDEX = [], loaded = false, loading = false, activeIdx = -1, activeFilter = 'all';
+  var INDEX = [], loaded = false, loading = false, activeIdx = -1;
 
   /* =========================================================================
      2.  CSS  (all !important to survive site cascade)
@@ -87,13 +87,7 @@
     'html.dark-mode #ss-footer{background:#1e1e1c!important;border-top-color:#3a3836!important}',
     'html.dark-mode .ss-hints{background:transparent!important}html.dark-mode .ss-hint{color:#666!important}',
     'html.dark-mode kbd{background:rgba(192,57,43,0.1)!important;color:#c0392b!important;border-color:rgba(192,57,43,0.3)!important}',
-    /* Filter bar */
-    '#ss-filter-bar{display:flex!important;gap:6px!important;padding:10px 20px 0!important;flex-wrap:wrap!important;border-bottom:1px solid #f0f0f0!important;background:#fff!important}',
-    'html.dark-mode #ss-filter-bar{background:#1e1e1c!important;border-color:#3a3836!important}',
-    '.ss-filter-tab{font-size:12px!important;font-weight:700!important;padding:5px 14px!important;border-radius:20px!important;border:1.5px solid transparent!important;background:#f5f5f5!important;color:#666!important;cursor:pointer!important;margin-bottom:8px!important;transition:all .12s!important;font-family:inherit!important;line-height:1!important}',
-    '.ss-filter-tab:hover{background:#ffe8e8!important;color:#8c1515!important;border-color:rgba(140,21,21,0.2)!important}',
-    '.ss-filter-tab.active{background:#8c1515!important;color:#fff!important;border-color:#8c1515!important}',
-    'html.dark-mode .ss-filter-tab{background:#2a2a28!important;color:#aaa!important}html.dark-mode .ss-filter-tab:hover{background:#3a2020!important;color:#e07070!important}html.dark-mode .ss-filter-tab.active{background:#8c1515!important;color:#fff!important}',
+
     /* Category badges */
     '.ss-badge{display:inline-block!important;font-size:10px!important;font-weight:700!important;text-transform:uppercase!important;letter-spacing:.06em!important;padding:2px 7px!important;border-radius:20px!important;margin-left:8px!important;vertical-align:middle!important;flex-shrink:0!important}',
     '.ss-badge--research{background:#fff0f0!important;color:#8c1515!important}',
@@ -186,14 +180,6 @@
         '<button id="ss-clear-btn" title="Clear">&#10005;</button>' +
         '<span id="ss-esc-hint">esc</span>' +
       '</div>' +
-      '<div id="ss-filter-bar">' +
-        '<button class="ss-filter-tab active" data-filter="all">All</button>' +
-        '<button class="ss-filter-tab" data-filter="research">Research</button>' +
-        '<button class="ss-filter-tab" data-filter="activity">Activities</button>' +
-        '<button class="ss-filter-tab" data-filter="update">Updates</button>' +
-        '<button class="ss-filter-tab" data-filter="travel">Travel</button>' +
-        '<button class="ss-filter-tab" data-filter="page">Pages</button>' +
-      '</div>' +
       '<div id="ss-results"><div class="ss-status">Start typing to search&#8230;</div></div>' +
       '<div id="ss-footer">' +
         '<span id="ss-count"></span>' +
@@ -254,16 +240,6 @@
       }
     });
 
-    // Filter tabs
-    document.getElementById('ss-filter-bar').addEventListener('click', function (e) {
-      var tab = e.target.closest('.ss-filter-tab');
-      if (!tab) return;
-      document.querySelectorAll('.ss-filter-tab').forEach(function (t) { t.classList.remove('active'); });
-      tab.classList.add('active');
-      activeFilter = tab.dataset.filter;
-      var q = input.value.trim();
-      if (q.length >= 2 && loaded) renderResults(q);
-    });
   }
 
   function handleArrows(e) {
@@ -791,8 +767,6 @@
     var re        = new RegExp(escRe(q), 'i');
 
     var hits = INDEX.filter(function (item) {
-      // Apply filter tab
-      if (activeFilter !== 'all' && (item.category || 'page') !== activeFilter) return false;
       return re.test(item.text);
     });
 
