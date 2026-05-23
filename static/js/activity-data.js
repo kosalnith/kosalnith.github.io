@@ -462,6 +462,18 @@ const activities = [
      type: "Participation"
   ══════════════════════════════════════════════════ */
   {
+    title: "1st Summer School on Empirical Stock-Flow-Consistent Modelling",
+    titleUrl: "https://ysi.ineteconomics.org/event/first-summer-school-on-empirical-stock-flow-consistent-modelling/",
+    person: "Kosal Nith", role: "Participant",
+    date: "17 Aug 2026 → 21 Aug 2026 (scheduled)", location: "Aalborg University, Aalborg, Denmark",
+    type: "Organisation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar",
+    description: "Participating in an international summer school on empirical economic models.",
+    keywords: ["SFC", "Economy", "Business", "Society"],
+    sdg: ["SDG 13 - Climate Action", "SDG 8 - Decent Work and Economic Growth"],
+    resources: []
+  },
+  
+  {
     title: "International Conference on Climate Change and Its Impacts on the Economy, Business, and Society",
     titleUrl: "https://iccciebs-2026.netlify.app",
     person: "Kosal Nith", role: "Co-organiser",
@@ -536,14 +548,24 @@ const activities = [
      typeCategory: "Conference organisation or participation"
      type: "Organisation"
   ══════════════════════════════════════════════════ */
-
+  {
+    title: "Workshop on Towards Inclusive Digital and Green Economies: Gendered Barriers and Opportunities in Cambodia",
+    titleUrl: "",
+    person: "Kosal Nith", role: "Co-organiser",
+    date: "22 May 2026", location: "Cambodia Development Resource Institute, Phnom Penh, Cambodia",
+    type: "Organisation", typeCategory: "Organisation or participation in workshops, courses, seminars, exhibitions or similar",
+    description: "Co-organiser of the dissemination workshop on inclusive digital and green economies in Cambodia.",
+    keywords: ["Gender", "Digital", "Green Economy", "Gender"],
+    sdg: ["SDG 5 - Gender Equality", "SDG 8 - Decent Work and Economic Growth", "SDG 9 - Industry, Innovation and Infrastructure"],
+    resources: []
+  },
    {
     title: "4th Southeast Asia Economic Research and Development Conference",
     titleUrl: "https://saerdconf.github.io/",
     person: "Kosal Nith", role: "Co-organiser",
     date: "3 Dec 2026 → 4 Dec 2026 (scheduled)", location: "Paññāsāstra University of Cambodia, Siem Reap, Cambodia",
     type: "Organisation", typeCategory: "Conference organisation or participation",
-    description: "Lead organiser of the 3rd annual Southeast Asia Economic Research and Development Conference.",
+    description: "Co-organiser of the 4th annual Southeast Asia Economic Research and Development Conference.",
     keywords: ["Conference", "Southeast Asia", "Economic development"],
     sdg: ["SDG 8 - Decent Work and Economic Growth", "SDG 17 - Partnerships for the Goals"],
     resources: []
