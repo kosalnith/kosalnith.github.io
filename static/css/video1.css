@@ -419,7 +419,7 @@
 
 /* Push bottom-row overlays above the ribbon */
 .kn-photo-cell:nth-child(3) .kn-photo-overlay,
-.kn-photo-cell:nth-child(4) .kn-photo-overlay { padding-bottom: 50px; }
+.kn-photo-cell:nth-child(4) .kn-photo-overlay { padding-bottom: 36px; }
 
 /* ── ANIMATIONS ── */
 @keyframes kn-slideIn {
@@ -442,35 +442,14 @@
   .kn-page {
     flex-direction: column;
     height: auto;
-    overflow: visible;
   }
   .kn-bio-panel {
     width: 100%;
     padding: 36px 24px;
-    overflow: visible;
-    height: auto;
   }
   .kn-bio-inner { max-width: 100%; }
   .kn-photos-panel {
     width: 100%;
-    /* 60vw for photos + 40px for ribbon row */
-    height: calc(60vw + 40px);
-    grid-template-rows: 30vw 30vw 40px;
-  }
-  /* Ribbon sits in its own grid row — no overlap */
-  .kn-usage-ribbon {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    position: static;
-    transform: none !important;
-    transition: none;
-    line-height: 40px;
-    padding: 0 12px;
-    pointer-events: auto;
-  }
-  /* Reset the extra bottom padding since ribbon has its own row */
-  .kn-photo-cell:nth-child(3) .kn-photo-overlay,
-  .kn-photo-cell:nth-child(4) .kn-photo-overlay {
-    padding-bottom: 12px;
+    height: 60vw;
   }
 }

@@ -89,11 +89,11 @@ div.tabs{margin:1em 0;}ul.tabs{margin:0 0 0.5em;padding:0;list-style:none;}.tabs
 .social a[title="ResearchGate"]:hover,
 .social a[title="ResearchGate"]:focus { color: #00ccbb !important; }
 
-/* GitHub — dark charcoal (not white — invisible on light bg) */
+/* GitHub — white/light grey */
 #footer__pre-footer .social a[title="GitHub"]:hover,
 #footer__pre-footer .social a[title="GitHub"]:focus,
 .social a[title="GitHub"]:hover,
-.social a[title="GitHub"]:focus { color: #24292e !important; }
+.social a[title="GitHub"]:focus { color: #ffffff !important; }
 
 /* Twitter / X — black */
 #footer__pre-footer .social a[title="Twitter / X"]:hover,
@@ -101,13 +101,7 @@ div.tabs{margin:1em 0;}ul.tabs{margin:0 0 0.5em;padding:0;list-style:none;}.tabs
 .social a[title="Twitter / X"]:hover,
 .social a[title="Twitter / X"]:focus { color: #000000 !important; }
 
-/* Twitter (legacy title) */
-#footer__pre-footer .social a[title="Twitter"]:hover,
-#footer__pre-footer .social a[title="Twitter"]:focus,
-.social a[title="Twitter"]:hover,
-.social a[title="Twitter"]:focus { color: #000000 !important; }
-
-/* Instagram — pink */
+/* Instagram — gradient workaround: use pink brand colour */
 #footer__pre-footer .social a[title="Instagram"]:hover,
 #footer__pre-footer .social a[title="Instagram"]:focus,
 .social a[title="Instagram"]:hover,

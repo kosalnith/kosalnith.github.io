@@ -5,34 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gallery | Kosal Nith</title>
 
-  <!-- Page-specific meta (update per page) -->
   <meta property="og:title"   content="Gallery">
   <meta property="og:url"     content="https://kosalnith.github.io/gallery.html">
   <link rel="canonical"       href="https://kosalnith.github.io/gallery.html">
   <meta name="twitter:title"  content="Gallery">
 
-  <!-- Shared styles -->
+  <!-- Shared site styles -->
   <link rel="stylesheet" media="all" href="static/css/main.css">
   <link rel="stylesheet" media="all" href="static/css/mainformat.css">
   <link rel="stylesheet" media="all" href="static/css/darkmode.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+
+  <!-- Icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <!-- Favicons, icons, og:site_name etc. are injected by components.js -->
+  <!-- Gallery stylesheet -->
+  <link rel="stylesheet" href="static/css/gallery.css">
 </head>
-
-<!--
-  CASE 1 — This page has its OWN nav item.
-
-  What was done in components.js:
-    NAV_ITEMS: [
-      ...
-      { label: 'Gallery', href: 'gallery.html' },  ← added here
-    ]
-
-  Result: "Gallery" appears in the nav bar and is underlined when on this page.
--->
 
 <body class="page-gallery section-gallery not-front role--anonymous">
 
@@ -41,19 +32,85 @@
     <div id="site-header"></div>
 
     <main class="page-content" id="page-content">
-      <div id="block-stanford-basic-content" class="system-main-block block-system block-stanford-basic-content">
+      <div id="block-stanford-basic-content"
+           class="system-main-block block-system block-stanford-basic-content">
         <section class="node basic-page node--layout-full">
           <div class="content">
 
-            <section class="panel theme--white" data-type="section" id="gallery" data-js="panel">
-              <header>
-                <h2 class="center">Gallery</h2>
-                <p>A curated collection of photos from my travels, research, and everyday life.</p>
+            <!-- ══════════════════════════════════════════════
+                 GALLERY SECTION
+            ═══════════════════════════════════════════════ -->
+            <section class="gallery-section" id="gallery" data-js="panel">
+
+              <!-- Header -->
+              <header class="gallery-header">
+                <div class="gallery-header-left">
+                  <div class="gallery-eyebrow">Selected Works</div>
+                  <h2 class="gallery-title">Through<br><em>the Lens</em></h2>
+                </div>
+                <p class="gallery-subtitle">
+                  Travels, research,<br>
+                  and everyday moments<br>
+                  — curated &amp; archived.
+                </p>
               </header>
 
-              <!-- Your gallery content goes here -->
+              <!-- Count row -->
+              <div class="gallery-count">
+                Showing&nbsp;<strong id="gallery-count-num">50</strong>&nbsp;photographs<span id="gallery-count-range"></span>
+                <div class="count-bar">
+                  <div class="count-bar-fill" id="gallery-count-fill" style="width:100%"></div>
+                </div>
+              </div>
+
+              <!-- Toolbar -->
+              <div class="gallery-toolbar">
+                <span class="filter-label">Filter</span>
+
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="research">Research Activities</button>
+                <button class="filter-btn" data-filter="friends">Friends &amp; Colleagues</button>
+                <button class="filter-btn" data-filter="traveling">Traveling by Foot</button>
+                <button class="filter-btn" data-filter="trees">Tree Collections</button>
+                <button class="filter-btn" data-filter="food">Local Foods</button>
+
+                <div class="toolbar-spacer"></div>
+
+                <!-- Layout toggle -->
+                <div class="layout-toggle" aria-label="Grid layout">
+                  <button class="layout-btn active" data-layout="3col" title="3 columns">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                      <rect x="0" y="0" width="4" height="14" rx="1"/>
+                      <rect x="5" y="0" width="4" height="14" rx="1"/>
+                      <rect x="10" y="0" width="4" height="14" rx="1"/>
+                    </svg>
+                  </button>
+                  <button class="layout-btn" data-layout="2col" title="2 columns">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                      <rect x="0" y="0" width="6" height="14" rx="1"/>
+                      <rect x="8" y="0" width="6" height="14" rx="1"/>
+                    </svg>
+                  </button>
+                  <button class="layout-btn" data-layout="1col" title="1 column">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                      <rect x="0" y="0" width="14" height="14" rx="1"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Grid -->
+              <div class="gallery-grid-wrapper">
+                <div class="gallery-grid layout-3col" id="gallery-grid">
+                  <!-- Items injected by gallery.js -->
+                </div>
+              </div>
+
+              <!-- Pagination -->
+              <nav class="gallery-pagination" id="gallery-pagination" aria-label="Gallery pages"></nav>
 
             </section>
+            <!-- END GALLERY SECTION -->
 
           </div>
         </section>
@@ -64,9 +121,64 @@
 
   </div>
 
+  <!-- ═══════════════════════════════════════════════════════
+       LIGHTBOX
+  ════════════════════════════════════════════════════════ -->
+  <div class="lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <div class="lightbox-backdrop" id="lb-backdrop"></div>
+
+    <div class="lightbox-panel">
+
+      <!-- Image area -->
+      <div class="lightbox-img-area">
+        <button class="lightbox-close" id="lb-close" aria-label="Close">
+          <i class="fa fa-xmark"></i>
+        </button>
+        <img id="lb-img" src="" alt="" style="opacity:0;">
+      </div>
+
+      <!-- Info sidebar -->
+      <div class="lightbox-info">
+        <div class="lb-tag" id="lb-tag">Category</div>
+        <h3 class="lb-title" id="lb-title">Photo Title</h3>
+        <p class="lb-desc" id="lb-desc">Description goes here.</p>
+
+        <hr class="lb-divider">
+
+        <div class="lb-meta-row">
+          <span>Location</span>
+          <span id="lb-location">—</span>
+        </div>
+        <div class="lb-meta-row">
+          <span>Year</span>
+          <span id="lb-date">—</span>
+        </div>
+        <div class="lb-meta-row">
+          <span>Index</span>
+          <span id="lb-index">1 / 12</span>
+        </div>
+
+        <div class="lb-nav">
+          <button class="lb-nav-btn" id="lb-prev">
+            <i class="fa fa-arrow-left"></i>&nbsp; Prev
+          </button>
+          <button class="lb-nav-btn" id="lb-next">
+            Next &nbsp;<i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- END LIGHTBOX -->
+
+  <!-- Scripts -->
   <script src="static/js/components.js"></script>
   <script src="static/js/darkmode.js"></script>
   <script src="static/js/search.js"></script>
+
+  <!-- Gallery script (must load after DOM) -->
+  <script src="static/js/gallery.js"></script>
 
 </body>
 </html>
