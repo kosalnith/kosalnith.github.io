@@ -1198,107 +1198,6 @@
 }
 
 /* ════════════════════════════════════════════════════════════
-   TREE COLLECTIONS — essay layout
-   Pattern: mixed5 → 4-col → 2-col → 5-col (repeat)
-════════════════════════════════════════════════════════════ */
-.gallery-grid.grid--trees { display: none !important; }
-
-.trees-essay-wrap {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
-}
-
-/* Shared image style */
-.trees-photo-item {
-  overflow: hidden !important;
-  cursor: pointer !important;
-}
-
-.trees-photo-item img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
-  display: block !important;
-  filter: saturate(.85) sepia(.1) contrast(1.08) !important;
-  transition: transform .5s ease, filter .4s ease !important;
-}
-
-.trees-photo-item:hover img {
-  transform: scale(1.04) !important;
-  filter: saturate(1.05) sepia(.04) contrast(1.12) !important;
-}
-
-/* Row 1 — mixed5: 1 tall left + 2×2 right */
-.trees-mixed5 {
-  display: grid !important;
-  grid-template-columns: 1fr 2fr !important;
-  gap: 8px !important;
-  height: 500px !important;
-}
-
-.trees-mixed5 .trees-tall {
-  height: 100% !important;
-}
-
-.trees-grid-2x2 {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
-  grid-template-rows: repeat(2, 1fr) !important;
-  gap: 8px !important;
-  height: 100% !important;
-}
-
-.trees-grid-2x2 .trees-small {
-  height: 100% !important;
-}
-
-/* Row 2 — 4-col equal */
-.trees-cols4 {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 8px !important;
-  height: 320px !important;
-}
-
-/* Row 3 — 2-col wide, tall */
-.trees-cols2 {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
-  gap: 8px !important;
-  height: 420px !important;
-}
-
-/* Row 4 — 5-col equal */
-.trees-cols5 {
-  display: grid !important;
-  grid-template-columns: repeat(5, 1fr) !important;
-  gap: 8px !important;
-  height: 260px !important;
-}
-
-/* Responsive */
-@media (max-width: 960px) {
-  .trees-mixed5 { height: 360px !important; }
-  .trees-cols4  { height: 220px !important; }
-  .trees-cols2  { height: 300px !important; }
-  .trees-cols5  { grid-template-columns: repeat(3, 1fr) !important; height: 200px !important; }
-}
-
-@media (max-width: 560px) {
-  .trees-mixed5 { grid-template-columns: 1fr !important; height: auto !important; }
-  .trees-mixed5 .trees-tall { height: 280px !important; }
-  .trees-grid-2x2 { height: auto !important; grid-template-columns: repeat(2, 1fr) !important; }
-  .trees-grid-2x2 .trees-small { height: 140px !important; }
-  .trees-cols4 { grid-template-columns: repeat(2, 1fr) !important; height: auto !important; }
-  .trees-cols4 .trees-photo-item { height: 160px !important; }
-  .trees-cols2 { height: 200px !important; }
-  .trees-cols5 { grid-template-columns: repeat(2, 1fr) !important; height: auto !important; }
-  .trees-cols5 .trees-photo-item { height: 140px !important; }
-}
-
-/* ════════════════════════════════════════════════════════════
    TREE COLLECTIONS — Botanical, scientific, organic
    Full bleed · deep vignette · sepia tones
 ════════════════════════════════════════════════════════════ */
@@ -1370,7 +1269,6 @@
   gap: 10px !important;
 }
 
-.food-photo-row.food-3col { grid-template-columns: repeat(3, 1fr) !important; }
 .food-photo-row.food-4col { grid-template-columns: repeat(4, 1fr) !important; }
 .food-photo-row.food-5col { grid-template-columns: repeat(5, 1fr) !important; }
 
@@ -1381,19 +1279,9 @@
   border-radius: 0 !important;
 }
 
-.food-photo-row.food-3col .food-photo-item img {
-  width: 100% !important;
-  height: 320px !important;
-  object-fit: cover !important;
-  object-position: center !important;
-  display: block !important;
-  filter: saturate(1.1) !important;
-  transition: transform .4s ease, filter .3s ease !important;
-}
-
 .food-photo-row.food-4col .food-photo-item img {
   width: 100% !important;
-  height: 280px !important;
+  height: 220px !important;
   object-fit: cover !important;
   object-position: center !important;
   display: block !important;
@@ -1403,7 +1291,7 @@
 
 .food-photo-row.food-5col .food-photo-item img {
   width: 100% !important;
-  height: 230px !important;
+  height: 175px !important;
   object-fit: cover !important;
   object-position: center !important;
   display: block !important;
@@ -1467,20 +1355,11 @@
 @media (max-width: 960px) {
   .gallery-grid.grid--food { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
   .gallery-grid.grid--food .gallery-item[data-cat="food"] .gallery-img-wrap img { height: 160px !important; }
-  .food-essay-wrap { gap: 8px !important; }
-  .food-photo-row.food-3col .food-photo-item img { height: 220px !important; }
-  .food-photo-row.food-4col .food-photo-item img { height: 180px !important; }
-  .food-photo-row.food-5col .food-photo-item img { height: 150px !important; }
-  .food-photo-row.food-3col { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
 @media (max-width: 560px) {
   .gallery-grid.grid--food { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; }
   .gallery-grid.grid--food .gallery-item[data-cat="food"] .gallery-img-wrap img { height: 140px !important; }
-  .food-photo-row.food-3col,
-  .food-photo-row.food-4col,
-  .food-photo-row.food-5col { grid-template-columns: repeat(2, 1fr) !important; }
-  .food-photo-row .food-photo-item img { height: 150px !important; }
 }
 
 /* ════════════════════════════════════════════════════════════

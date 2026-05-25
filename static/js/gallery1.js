@@ -299,59 +299,7 @@
       title: 'Woodland Edge', location: 'Mondulkiri Plateau', date: '2023',
       desc:  'Dry deciduous woodland — sparse, light-drenched, and full of birds.' },
 
-    /* ── Tree Collections extras (11–20) ─────────────────── */
-    { id: 111, category: 'trees',
-      src:   'https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200&q=85',
-      thumb: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=700&q=80',
-      title: 'Ancient Forest', location: 'Virachey NP', date: '2024',
-      desc:  'Old-growth canopy — centuries of growth in a single frame.' },
-    { id: 112, category: 'trees',
-      src:   'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=85',
-      thumb: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=700&q=80',
-      title: 'Forest Path', location: 'Cardamom Mountains', date: '2023',
-      desc:  'Light through the canopy — the forest at its most hospitable.' },
-    { id: 113, category: 'trees',
-      src:   'https://images.unsplash.com/photo-1476611338391-6f395a0dd82e?w=1200&q=85',
-      thumb: 'https://images.unsplash.com/photo-1476611338391-6f395a0dd82e?w=700&q=80',
-      title: 'Flowering Tree', location: 'Phnom Penh', date: '2024',
-      desc:  'Urban flowering — beauty persisting despite the concrete.' },
-    { id: 114, category: 'trees',
-      src:   'https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?w=1200&q=85',
-      thumb: 'https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?w=700&q=80',
-      title: 'Sunlit Canopy', location: 'Prey Lang', date: '2023',
-      desc:  'Afternoon light hitting the upper canopy — gold and green.' },
-    { id: 115, category: 'trees',
-      src:   'https://images.unsplash.com/photo-1542601906897-cd3438a4f7e0?w=1200&q=85',
-      thumb: 'https://images.unsplash.com/photo-1542601906897-cd3438a4f7e0?w=700&q=80',
-      title: 'Coastal Mangrove', location: 'Koh Kong', date: '2022',
-      desc:  'Salt-tolerant roots — the forest that feeds the sea.' },
-    { id: 116, category: 'trees',
-      src:   'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=1200&q=85',
-      thumb: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=700&q=80',
-      title: 'Bamboo Light', location: 'Kampot', date: '2024',
-      desc:  'Bamboo filtering afternoon light — a green cathedral.' },
-    { id: 117, category: 'trees',
-      src:   'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=85',
-      thumb: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700&q=80',
-      title: 'Deep Green', location: 'Ratanakiri', date: '2023',
-      desc:  'Secondary forest reclaiming its ground — resilience made visible.' },
-    { id: 118, category: 'trees',
-      src:   'https://images.unsplash.com/photo-1518021964703-4b2030f03085?w=1200&q=85',
-      thumb: 'https://images.unsplash.com/photo-1518021964703-4b2030f03085?w=700&q=80',
-      title: 'Pond Reflection', location: 'Siem Reap', date: '2022',
-      desc:  'Trees doubled in still water — nature composing its own symmetry.' },
-    { id: 119, category: 'trees',
-      src:   'https://images.unsplash.com/photo-1478827536114-da961b7f86d2?w=1200&q=85',
-      thumb: 'https://images.unsplash.com/photo-1478827536114-da961b7f86d2?w=700&q=80',
-      title: 'Root Network', location: 'Cardamom Mountains', date: '2024',
-      desc:  'Surface roots spreading wide — the hidden life of a forest made visible.' },
-    { id: 120, category: 'trees',
-      src:   'https://images.unsplash.com/photo-1467803738586-46b7eb7b16a1?w=1200&q=85',
-      thumb: 'https://images.unsplash.com/photo-1467803738586-46b7eb7b16a1?w=700&q=80',
-      title: 'Savanna Treeline', location: 'Mondulkiri', date: '2023',
-      desc:  'Where grassland meets forest — the boundary that defines everything.' },
-
-
+    /* ── Local Foods (10) ─────────────────────────────────── */
     { id: 41, category: 'food',
       src:   'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=700&q=80',
@@ -536,18 +484,15 @@
       (activeKey === 'traveling' ? ' grid--traveling' : '') +
       (activeKey === 'research'  ? ' grid--research'  : '') +
       (activeKey === 'food'      ? ' grid--food'      : '') +
-      (activeKey === 'trees'     ? ' grid--trees'     : '') +
       '';
 
     /* Clean up friends essay wrap when switching away */
     var existingEssay = document.getElementById('friends-essay-wrap');
     var existingFPag  = document.getElementById('friends-pagination');
     var existingFood  = document.getElementById('food-essay-wrap');
-    var existingTrees = document.getElementById('trees-essay-wrap');
     if (existingEssay) existingEssay.remove();
     if (existingFPag)  existingFPag.remove();
     if (existingFood)  existingFood.remove();
-    if (existingTrees) existingTrees.remove();
     grid.style.display = '';
 
     /* Widen wrapper padding for research and friends editorial layouts */
@@ -575,8 +520,6 @@
       renderFriendsEssay();
     } else if (activeKey === 'food') {
       renderFoodEssay();
-    } else if (activeKey === 'trees') {
-      renderTreesEssay();
     } else {
       renderGrid();
       renderPagination();
@@ -601,11 +544,11 @@
 
     /* Pattern: 4, 5, 4, 5 … */
     var photoIdx   = 0;
-    var rowPattern = [3, 4, 5];
+    var rowPattern = [4, 5];
     var rowNum     = 0;
 
     while (photoIdx < slice.length) {
-      var cols      = rowPattern[rowNum % rowPattern.length];
+      var cols      = rowPattern[rowNum % 2];
       var rowPhotos = slice.slice(photoIdx, photoIdx + cols);
       if (rowPhotos.length === 0) break;
 
@@ -836,105 +779,7 @@
     });
     return btn;
   }
-
-  /* ── Trees essay renderer ───────────────────────────────── */
-  /* Pattern per cycle: [1-wide+2-side, 4-col]                 */
-  /* Row A: 1 full-width tall photo + 2 side-by-side (3 total) */
-  /* Row B: 4 equal columns                                     */
-  function renderTreesEssay() {
-    var existing = document.getElementById('trees-essay-wrap');
-    if (existing) existing.remove();
-
-    grid.innerHTML = '';
-    grid.className = 'gallery-grid grid--trees';
-    grid.style.display = 'none';
-
-    var wrap = document.createElement('div');
-    wrap.id        = 'trees-essay-wrap';
-    wrap.className = 'trees-essay-wrap';
-
-    var start    = (currentPage - 1) * PER_PAGE;
-    var slice    = filtered.slice(start, start + PER_PAGE);
-    var photoIdx = 0;
-
-    /* Pattern: [5, 4, 2, 5] = 16 photos per full cycle */
-    var PATTERN = [
-      { type: 'mixed5',  count: 5 },
-      { type: 'cols4',   count: 4 },
-      { type: 'cols2',   count: 2 },
-      { type: 'cols5',   count: 5 },
-    ];
-    var patIdx = 0;
-
-    while (photoIdx < slice.length) {
-      var pat   = PATTERN[patIdx % PATTERN.length];
-      var block = slice.slice(photoIdx, photoIdx + pat.count);
-      if (block.length === 0) break;
-
-      var row = document.createElement('div');
-
-      if (pat.type === 'mixed5') {
-        /* 1 tall left + 2x2 right */
-        row.className = 'trees-row trees-mixed5';
-
-        var leftCell = document.createElement('div');
-        leftCell.className = 'trees-photo-item trees-tall';
-        leftCell.innerHTML = '<img src="' + block[0].thumb + '" alt="' + block[0].title + '" loading="lazy" onerror="this.style.opacity=0.3">';
-        leftCell.addEventListener('click', (function(gi){ return function(){ openLightbox(gi); }; })(start + photoIdx));
-        row.appendChild(leftCell);
-
-        var g2x2 = document.createElement('div');
-        g2x2.className = 'trees-grid-2x2';
-        for (var j = 1; j < block.length && j <= 4; j++) {
-          var c = document.createElement('div');
-          c.className = 'trees-photo-item trees-small';
-          c.innerHTML = '<img src="' + block[j].thumb + '" alt="' + block[j].title + '" loading="lazy" onerror="this.style.opacity=0.3">';
-          c.addEventListener('click', (function(gi){ return function(){ openLightbox(gi); }; })(start + photoIdx + j));
-          g2x2.appendChild(c);
-        }
-        row.appendChild(g2x2);
-
-      } else if (pat.type === 'cols4') {
-        row.className = 'trees-row trees-cols4';
-        block.forEach(function(photo, j) {
-          var c = document.createElement('div');
-          c.className = 'trees-photo-item';
-          c.innerHTML = '<img src="' + photo.thumb + '" alt="' + photo.title + '" loading="lazy" onerror="this.style.opacity=0.3">';
-          c.addEventListener('click', (function(gi){ return function(){ openLightbox(gi); }; })(start + photoIdx + j));
-          row.appendChild(c);
-        });
-
-      } else if (pat.type === 'cols2') {
-        row.className = 'trees-row trees-cols2';
-        block.forEach(function(photo, j) {
-          var c = document.createElement('div');
-          c.className = 'trees-photo-item';
-          c.innerHTML = '<img src="' + photo.thumb + '" alt="' + photo.title + '" loading="lazy" onerror="this.style.opacity=0.3">';
-          c.addEventListener('click', (function(gi){ return function(){ openLightbox(gi); }; })(start + photoIdx + j));
-          row.appendChild(c);
-        });
-
-      } else if (pat.type === 'cols5') {
-        row.className = 'trees-row trees-cols5';
-        block.forEach(function(photo, j) {
-          var c = document.createElement('div');
-          c.className = 'trees-photo-item';
-          c.innerHTML = '<img src="' + photo.thumb + '" alt="' + photo.title + '" loading="lazy" onerror="this.style.opacity=0.3">';
-          c.addEventListener('click', (function(gi){ return function(){ openLightbox(gi); }; })(start + photoIdx + j));
-          row.appendChild(c);
-        });
-      }
-
-      wrap.appendChild(row);
-      photoIdx += block.length;
-      patIdx++;
-    }
-
-    grid.parentNode.appendChild(wrap);
-    renderPagination();
-  }
-
-    function renderGrid() {
+  function renderGrid() {
     grid.innerHTML = '';
 
     var start = (currentPage - 1) * PER_PAGE;
