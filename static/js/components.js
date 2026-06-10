@@ -337,6 +337,24 @@
   }
 
   /* ─────────────────────────────────────────────
+     6. GOOGLE ANALYTICS
+  ───────────────────────────────────────────── */
+
+const script = document.createElement('script');
+script.async = true;
+script.src = 'https://www.googletagmanager.com/gtag/js?id=G-J14VZQQD1L';
+document.head.appendChild(script);
+
+window.dataLayer = window.dataLayer || [];
+
+function gtag() {
+    dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+gtag('config', 'G-J14VZQQD1L');
+
+  /* ─────────────────────────────────────────────
      6. INJECT EVERYTHING
   ───────────────────────────────────────────── */
 

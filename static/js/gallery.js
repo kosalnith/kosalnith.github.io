@@ -15,455 +15,461 @@
     { id:  1, category: 'research',
       src:   'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=700&q=80',
-      title: 'Field Survey', location: 'Phnom Penh, Cambodia', date: '2024',
+      title: 'Field Survey', location: 'Phnom Penh, Cambodia', date: '14 March 2024',
       desc:  'Data collection in the field — recording vegetation plots along transects at dawn.' },
     { id:  2, category: 'research',
       src:   'https://images.unsplash.com/photo-1532094349884-543559849441?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1532094349884-543559849441?w=700&q=80',
-      title: 'Lab Analysis', location: 'University Lab', date: '2023',
+      title: 'Lab Analysis', location: 'University Lab', date: '3 August 2023',
       desc:  'Soil samples processed under the microscope after a week in the field.' },
     { id:  3, category: 'research',
       src:   'https://images.unsplash.com/photo-1564325724739-bae0bd08762c?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1564325724739-bae0bd08762c?w=700&q=80',
-      title: 'Research Conference', location: 'Bangkok, Thailand', date: '2023',
+      title: 'Research Conference', location: 'Bangkok, Thailand', date: '22 November 2023',
       desc:  'Presenting findings at the regional biodiversity symposium.' },
     { id:  4, category: 'research',
       src:   'https://images.unsplash.com/photo-1581093458791-9b3d86fe9b87?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1581093458791-9b3d86fe9b87?w=700&q=80',
-      title: 'Drone Mapping', location: 'Cardamom Mountains', date: '2024',
+      title: 'Drone Mapping', location: 'Cardamom Mountains', date: '7 June 2024',
       desc:  'UAV survey over the forest canopy — capturing canopy height models.' },
     { id:  5, category: 'research',
       src:   'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=700&q=80',
-      title: 'Specimen Collection', location: 'Mondulkiri, Cambodia', date: '2022',
+      title: 'Specimen Collection', location: 'Mondulkiri, Cambodia', date: '19 April 2022',
       desc:  'Botanical specimens carefully pressed and labelled for the herbarium.' },
     { id:  6, category: 'research',
       src:   'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=700&q=80',
-      title: 'Night Trapping', location: 'Virachey NP', date: '2023',
+      title: 'Night Trapping', location: 'Virachey NP', date: '5 September 2023',
       desc:  'Camera traps set at dusk — patience rewarded with rare nocturnal species.' },
     { id:  7, category: 'research',
       src:   'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=700&q=80',
-      title: 'Water Sampling', location: 'Tonle Sap Lake', date: '2024',
+      title: 'Water Sampling', location: 'Tonle Sap Lake', date: '28 January 2024',
       desc:  'Collecting water quality samples along the lake margin at low season.' },
     { id:  8, category: 'research',
       src:   'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=700&q=80',
-      title: 'Community Survey', location: 'Prey Veng Province', date: '2022',
+      title: 'Community Survey', location: 'Prey Veng Province', date: '11 October 2022',
       desc:  'Interviewing farmers about land-use practices for the socio-ecological study.' },
     { id:  9, category: 'research',
       src:   'https://images.unsplash.com/photo-1598128558393-70ff21433be0?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1598128558393-70ff21433be0?w=700&q=80',
-      title: 'GIS Mapping Session', location: 'Remote Office', date: '2023',
+      title: 'GIS Mapping Session', location: 'Remote Office', date: '30 July 2023',
       desc:  'Digitising land-cover boundaries from satellite imagery — hours well spent.' },
     { id: 10, category: 'research',
       src:   'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=700&q=80',
-      title: 'Data Visualisation', location: 'Home Office', date: '2024',
+      title: 'Data Visualisation', location: 'Home Office', date: '16 February 2024',
       desc:  'Turning months of field data into something a policy maker can read.' },
 
     /* ── Friends & Colleagues (10) ────────────────────────── */
     { id: 11, category: 'friends',
       src:   'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80',
-      title: 'A Rocky (and Muddy) Ski Season Concludes in Colorado', location: 'Phnom Penh', date: '2024',
+      title: 'A Rocky (and Muddy) Ski Season Concludes in Colorado', location: 'Phnom Penh', date: '2 December 2024',
       desc:  'Faced with a devastating snow drought and record-high March temperatures, some resorts closed early. But at Aspen Mountain, die-hards celebrated the last day of the season on Sunday.' },
     { id: 12, category: 'friends',
       src:   'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1200&q=90',
       thumb: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&q=90',
-      title: 'Field Partner', location: 'Phnom Penh', date: '2023',
+      title: 'Field Partner', location: 'Phnom Penh', date: '18 May 2023',
       desc:  'Two weeks in the forest together — you learn a lot about someone that way.' },
     { id: 13, category: 'friends',
       src:   'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1200&q=90',
       thumb: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=900&q=90',
-      title: 'Research Colleague', location: 'Siem Reap', date: '2023',
+      title: 'Research Colleague', location: 'Siem Reap', date: '9 March 2023',
       desc:  'The kind of colleague who makes every field trip better.' },
     { id: 14, category: 'friends',
       src:   'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=700&q=80',
-      title: 'Field Team Photo', location: 'Ratanakiri', date: '2022',
+      title: 'Field Team Photo', location: 'Ratanakiri', date: '24 July 2022',
       desc:  'After three weeks in the forest together, these faces feel like family.' },
     { id: 15, category: 'friends',
       src:   'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=700&q=80',
-      title: 'Graduation Day', location: 'Phnom Penh', date: '2022',
+      title: 'Graduation Day', location: 'Phnom Penh', date: '6 October 2023',
       desc:  'Years of work, one photograph — surrounded by people who made it possible.' },
     { id: 16, category: 'friends',
       src:   'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=700&q=80',
-      title: 'Weekend Picnic', location: 'Kep, Cambodia', date: '2024',
+      title: 'Weekend Picnic', location: 'Kep, Cambodia', date: '13 January 2024',
       desc:  'Borrowed a van, packed too much food, zero regrets.' },
     { id: 17, category: 'friends',
       src:   'https://images.unsplash.com/photo-1530099486328-e021101a494a?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1530099486328-e021101a494a?w=700&q=80',
-      title: 'Study Group', location: 'University Library', date: '2023',
+      title: 'Study Group', location: 'University Library', date: '27 August 2023',
       desc:  'Exam prep fuelled by instant noodles and shared anxiety.' },
     { id: 18, category: 'friends',
       src:   'https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?w=700&q=80',
-      title: 'Mentor Meeting', location: 'Campus Cafe', date: '2024',
+      title: 'Mentor Meeting', location: 'Campus Cafe', date: '4 April 2022',
       desc:  'An hour with the right person can change the direction of everything.' },
     { id: 19, category: 'friends',
       src:   'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80',
-      title: 'Collaborative Workshop', location: 'Singapore', date: '2023',
+      title: 'Collaborative Workshop', location: 'Singapore', date: '21 November 2023',
       desc:  'International partners, shared goals, and a whiteboard full of ideas.' },
     { id: 20, category: 'friends',
       src:   'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=700&q=80',
-      title: 'Farewell Party', location: 'Phnom Penh', date: '2022',
+      title: 'Farewell Party', location: 'Phnom Penh', date: '15 June 2022',
       desc:  'Goodbyes are easier when you know the work continues in good hands.' },
     { id: 51, category: 'friends',
       src:   'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=700&q=80',
-      title: 'Research Seminar', location: 'Phnom Penh', date: '2023',
+      title: 'Research Seminar', location: 'Phnom Penh', date: '8 February 2023',
       desc:  'Sharing ideas with the next generation of researchers.' },
     { id: 52, category: 'friends',
       src:   'https://images.unsplash.com/photo-1507537297725-24a1242a56e3?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1507537297725-24a1242a56e3?w=700&q=80',
-      title: 'Morning Coffee', location: 'Siem Reap', date: '2024',
+      title: 'Morning Coffee', location: 'Siem Reap', date: '30 September 2024',
       desc:  'Before the day begins — coffee and conversation with old friends.' },
     { id: 53, category: 'friends',
       src:   'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700&q=80',
-      title: 'Late Night Work', location: 'University Lab', date: '2023',
+      title: 'Late Night Work', location: 'University Lab', date: '17 December 2023',
       desc:  'Deadlines have a way of bringing people together.' },
     { id: 54, category: 'friends',
       src:   'https://images.unsplash.com/photo-1542103749-8ef59b94f47e?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1542103749-8ef59b94f47e?w=700&q=80',
-      title: 'Project Kickoff', location: 'Phnom Penh', date: '2024',
+      title: 'Project Kickoff', location: 'Phnom Penh', date: '25 March 2024',
       desc:  'First meeting, big ambitions, and a shared sense of purpose.' },
     { id: 55, category: 'friends',
       src:   'https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1515169067868-5387ec356754?w=700&q=80',
-      title: 'Conference Hallway', location: 'Bangkok, Thailand', date: '2023',
+      title: 'Conference Hallway', location: 'Bangkok, Thailand', date: '12 July 2023',
       desc:  'The best conversations happen between sessions.' },
     { id: 56, category: 'friends',
       src:   'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=700&q=80',
-      title: 'Team Lunch', location: 'Kampot, Cambodia', date: '2024',
+      title: 'Team Lunch', location: 'Kampot, Cambodia', date: '3 November 2024',
       desc:  'A long table, good food, and a year of shared work to celebrate.' },
     { id: 57, category: 'friends',
       src:   'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&q=80',
-      title: 'Office Hours', location: 'University Campus', date: '2023',
+      title: 'Office Hours', location: 'University Campus', date: '19 January 2023',
       desc:  'Open doors and open questions — the rhythm of academic life.' },
     { id: 58, category: 'friends',
       src:   'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=700&q=80',
-      title: 'Group Discussion', location: 'Phnom Penh', date: '2022',
+      title: 'Group Discussion', location: 'Phnom Penh', date: '7 August 2022',
       desc:  'Four people, three whiteboards, and one stubborn problem.' },
     { id: 59, category: 'friends',
       src:   'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=2000&q=90',
       thumb: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&q=90',
-      title: 'The Long Table', location: 'Phnom Penh, Cambodia', date: '2024',
+      title: 'The Long Table', location: 'Phnom Penh, Cambodia', date: '14 April 2024',
       desc:  'End of a long project — good food, better company, and a table that ran out of chairs.' },
     { id: 60, category: 'friends',
       src:   'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=700&q=80',
-      title: 'Data Sprint', location: 'Remote Office', date: '2023',
+      title: 'Data Sprint', location: 'Remote Office', date: '28 October 2023',
       desc:  'Four laptops, one router, and a dataset that refused to cooperate.' },
     { id: 61, category: 'friends',
       src:   'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=700&q=80',
-      title: 'Strategy Session', location: 'NGO Headquarters', date: '2024',
+      title: 'Strategy Session', location: 'NGO Headquarters', date: '5 May 2024',
       desc:  'Long table, strong opinions, and a plan that actually held together.' },
     { id: 62, category: 'friends',
       src:   'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=700&q=80',
-      title: 'Campus Walk', location: 'Phnom Penh', date: '2022',
+      title: 'Campus Walk', location: 'Phnom Penh', date: '22 September 2022',
       desc:  'Between classes, between ideas — the conversations that matter most.' },
     { id: 63, category: 'friends',
       src:   'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=90',
       thumb: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=85',
-      title: 'End-of-Season Gathering', location: 'Phnom Penh, Cambodia', date: '2023',
+      title: 'End-of-Season Gathering', location: 'Phnom Penh, Cambodia', date: '10 June 2023',
       desc:  'A long table, warm light, and a year of shared work behind us.' },
     { id: 64, category: 'friends',
       src:   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=700&q=80',
-      title: 'Mentorship Hour', location: 'Phnom Penh', date: '2024',
+      title: 'Mentorship Hour', location: 'Phnom Penh', date: '1 March 2024',
       desc:  'The kind of guidance that stays with you long after the hour ends.' },
     { id: 65, category: 'friends',
       src:   'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=700&q=80',
-      title: 'Portrait Afternoon', location: 'Siem Reap', date: '2023',
+      title: 'Portrait Afternoon', location: 'Siem Reap', date: '18 August 2023',
       desc:  'A quiet afternoon between fieldwork and report writing.' },
     { id: 66, category: 'friends',
       src:   'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700&q=80',
-      title: 'Field Partner', location: 'Mondulkiri', date: '2022',
+      title: 'Field Partner', location: 'Mondulkiri', date: '29 January 2022',
       desc:  'Two weeks in the forest — you learn a lot about someone that way.' },
 
     /* ── Traveling by Foot (10) ───────────────────────────── */
     { id: 21, category: 'traveling',
       src:   'https://images.unsplash.com/photo-1501554728187-ce583db33af7?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1501554728187-ce583db33af7?w=700&q=80',
-      title: 'Morning Trail', location: 'Bokor Mountain', date: '2024',
+      title: 'Morning Trail', location: 'Bokor Mountain', date: '11 February 2024',
       desc:  'First light through the mist — every step up worth the view at the top.' },
     { id: 22, category: 'traveling',
       src:   'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=80',
-      title: 'Ridge Walk', location: 'Cardamom Range', date: '2023',
+      title: 'Ridge Walk', location: 'Cardamom Range', date: '6 May 2023',
       desc:  'A narrow path between two valleys — the kind that makes you feel very small.' },
     { id: 23, category: 'traveling',
       src:   'https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=700&q=80',
-      title: 'Village Road', location: 'Stung Treng Province', date: '2022',
+      title: 'Village Road', location: 'Stung Treng Province', date: '23 August 2022',
       desc:  'Red dirt roads, banana groves, and children running alongside.' },
     { id: 24, category: 'traveling',
       src:   'https://images.unsplash.com/photo-1434394354979-a235cd36269d?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1434394354979-a235cd36269d?w=700&q=80',
-      title: 'Waterfall Path', location: 'Chi Phat, Cambodia', date: '2024',
+      title: 'Waterfall Path', location: 'Chi Phat, Cambodia', date: '14 December 2023',
       desc:  'Three hours through dense undergrowth to reach a waterfall nobody else visits.' },
     { id: 25, category: 'traveling',
       src:   'https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=700&q=80',
-      title: 'Temple Grounds', location: 'Angkor, Siem Reap', date: '2023',
+      title: 'Temple Grounds', location: 'Angkor, Siem Reap', date: '3 July 2024',
       desc:  'Walking the outer circuit before the tour groups arrive — stone and silence.' },
     { id: 26, category: 'traveling',
       src:   'https://images.unsplash.com/photo-1499810631641-541e76d678a2?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1499810631641-541e76d678a2?w=700&q=80',
-      title: 'Coastal Walk', location: 'Kep, Cambodia', date: '2024',
+      title: 'Coastal Walk', location: 'Kep, Cambodia', date: '17 March 2023',
       desc:  'Crab claws and sea salt — the shoreline path at low tide.' },
     { id: 27, category: 'traveling',
       src:   'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&q=80',
-      title: 'Paddy Field Route', location: 'Kampot Province', date: '2022',
+      title: 'Paddy Field Route', location: 'Kampot Province', date: '29 October 2022',
       desc:  'Walking between rice paddies at harvest — golden in every direction.' },
     { id: 28, category: 'traveling',
       src:   'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?w=700&q=80',
-      title: 'Forest Descent', location: 'Mondulkiri', date: '2023',
+      title: 'Forest Descent', location: 'Mondulkiri', date: '8 June 2024',
       desc:  'Downhill through secondary forest after a long plateau survey.' },
     { id: 29, category: 'traveling',
       src:   'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80',
-      title: 'Cloud Forest', location: 'Vietnam Border', date: '2023',
+      title: 'Cloud Forest', location: 'Vietnam Border', date: '20 January 2023',
       desc:  'Above 1,800 m the trees disappear into cloud and the path becomes guesswork.' },
     { id: 30, category: 'traveling',
       src:   'https://images.unsplash.com/photo-1455156218388-5e61b526818b?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1455156218388-5e61b526818b?w=700&q=80',
-      title: 'Night Market Walk', location: 'Phnom Penh', date: '2024',
+      title: 'Night Market Walk', location: 'Phnom Penh', date: '12 September 2024',
       desc:  'The city on foot after dark — smells you never catch from a tuk-tuk.' },
 
     /* ── Tree Collections (10) ────────────────────────────── */
     { id: 31, category: 'trees',
       src:   'https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=700&q=80',
-      title: 'Ancient Dipterocarp', location: 'Prey Lang Forest', date: '2024',
+      title: 'Ancient Dipterocarp', location: 'Prey Lang Forest', date: '5 April 2023',
       desc:  'Dipterocarpus alatus — three people cannot reach around its base.' },
     { id: 32, category: 'trees',
       src:   'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700&q=80',
-      title: 'Canopy Layer', location: 'Virachey NP', date: '2023',
+      title: 'Canopy Layer', location: 'Virachey NP', date: '19 November 2022',
       desc:  'Looking straight up into a cathedral of interlocking crowns.' },
     { id: 33, category: 'trees',
       src:   'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=700&q=80',
-      title: 'Strangler Fig', location: 'Ta Prohm, Angkor', date: '2022',
+      title: 'Strangler Fig', location: 'Ta Prohm, Angkor', date: '8 July 2024',
       desc:  'Ficus roots finding purchase where mortar once held.' },
     { id: 34, category: 'trees',
       src:   'https://images.unsplash.com/photo-1518021964703-4b2030f03085?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1518021964703-4b2030f03085?w=700&q=80',
-      title: 'Bamboo Grove', location: 'Kampot', date: '2024',
+      title: 'Bamboo Grove', location: 'Kampot', date: '24 February 2023',
       desc:  'A stand of giant bamboo — technically a grass, but let me have this one.' },
     { id: 35, category: 'trees',
       src:   'https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?w=700&q=80',
-      title: 'Sugar Palm Avenue', location: 'Battambang Province', date: '2023',
+      title: 'Sugar Palm Avenue', location: 'Battambang Province', date: '13 October 2022',
       desc:  "Borassus flabellifer — Cambodia's national tree, silhouetted at dusk." },
     { id: 36, category: 'trees',
       src:   'https://images.unsplash.com/photo-1478827536114-da961b7f86d2?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1478827536114-da961b7f86d2?w=700&q=80',
-      title: 'Root System', location: 'Cardamom Mountains', date: '2024',
+      title: 'Root System', location: 'Cardamom Mountains', date: '1 June 2024',
       desc:  'Buttress roots spreading across the slope — architecture built over centuries.' },
     { id: 37, category: 'trees',
       src:   'https://images.unsplash.com/photo-1542601906897-cd3438a4f7e0?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1542601906897-cd3438a4f7e0?w=700&q=80',
-      title: 'Mangrove Stand', location: 'Koh Kong Province', date: '2023',
+      title: 'Mangrove Stand', location: 'Koh Kong Province', date: '27 March 2023',
       desc:  'Rhizophora at high tide — the forest standing in the sea.' },
     { id: 38, category: 'trees',
       src:   'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=700&q=80',
-      title: 'Rain Tree Shade', location: 'Phnom Penh', date: '2022',
+      title: 'Rain Tree Shade', location: 'Phnom Penh', date: '15 August 2022',
       desc:  'Samanea saman spreading its crown over an entire street.' },
     { id: 39, category: 'trees',
       src:   'https://images.unsplash.com/photo-1476611338391-6f395a0dd82e?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1476611338391-6f395a0dd82e?w=700&q=80',
-      title: 'Flowering Cassia', location: 'Phnom Penh Riverside', date: '2024',
+      title: 'Flowering Cassia', location: 'Phnom Penh Riverside', date: '9 December 2023',
       desc:  'Cassia fistula in full bloom — a tree that looks impossible in April heat.' },
     { id: 40, category: 'trees',
       src:   'https://images.unsplash.com/photo-1467803738586-46b7eb7b16a1?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1467803738586-46b7eb7b16a1?w=700&q=80',
-      title: 'Woodland Edge', location: 'Mondulkiri Plateau', date: '2023',
+      title: 'Woodland Edge', location: 'Mondulkiri Plateau', date: '22 May 2023',
       desc:  'Dry deciduous woodland — sparse, light-drenched, and full of birds.' },
 
     /* ── Tree Collections extras (11–20) ─────────────────── */
     { id: 111, category: 'trees',
       src:   'https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=700&q=80',
-      title: 'Ancient Forest', location: 'Virachey NP', date: '2024',
+      title: 'Ancient Forest', location: 'Virachey NP', date: '17 January 2024',
       desc:  'Old-growth canopy — centuries of growth in a single frame.' },
     { id: 112, category: 'trees',
       src:   'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=700&q=80',
-      title: 'Forest Path', location: 'Cardamom Mountains', date: '2023',
+      title: 'Forest Path', location: 'Cardamom Mountains', date: '4 September 2023',
       desc:  'Light through the canopy — the forest at its most hospitable.' },
     { id: 113, category: 'trees',
       src:   'https://images.unsplash.com/photo-1476611338391-6f395a0dd82e?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1476611338391-6f395a0dd82e?w=700&q=80',
-      title: 'Flowering Tree', location: 'Phnom Penh', date: '2024',
+      title: 'Flowering Tree', location: 'Phnom Penh', date: '26 April 2024',
       desc:  'Urban flowering — beauty persisting despite the concrete.' },
     { id: 114, category: 'trees',
       src:   'https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?w=700&q=80',
-      title: 'Sunlit Canopy', location: 'Prey Lang', date: '2023',
+      title: 'Sunlit Canopy', location: 'Prey Lang', date: '11 July 2023',
       desc:  'Afternoon light hitting the upper canopy — gold and green.' },
     { id: 115, category: 'trees',
       src:   'https://images.unsplash.com/photo-1542601906897-cd3438a4f7e0?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1542601906897-cd3438a4f7e0?w=700&q=80',
-      title: 'Coastal Mangrove', location: 'Koh Kong', date: '2022',
+      title: 'Coastal Mangrove', location: 'Koh Kong', date: '3 March 2022',
       desc:  'Salt-tolerant roots — the forest that feeds the sea.' },
     { id: 116, category: 'trees',
       src:   'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=700&q=80',
-      title: 'Bamboo Light', location: 'Kampot', date: '2024',
+      title: 'Bamboo Light', location: 'Kampot', date: '18 October 2024',
       desc:  'Bamboo filtering afternoon light — a green cathedral.' },
     { id: 117, category: 'trees',
       src:   'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700&q=80',
-      title: 'Deep Green', location: 'Ratanakiri', date: '2023',
+      title: 'Deep Green', location: 'Ratanakiri', date: '7 June 2023',
       desc:  'Secondary forest reclaiming its ground — resilience made visible.' },
     { id: 118, category: 'trees',
       src:   'https://images.unsplash.com/photo-1518021964703-4b2030f03085?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1518021964703-4b2030f03085?w=700&q=80',
-      title: 'Pond Reflection', location: 'Siem Reap', date: '2022',
+      title: 'Pond Reflection', location: 'Siem Reap', date: '29 August 2022',
       desc:  'Trees doubled in still water — nature composing its own symmetry.' },
     { id: 119, category: 'trees',
       src:   'https://images.unsplash.com/photo-1478827536114-da961b7f86d2?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1478827536114-da961b7f86d2?w=700&q=80',
-      title: 'Root Network', location: 'Cardamom Mountains', date: '2024',
+      title: 'Root Network', location: 'Cardamom Mountains', date: '14 February 2024',
       desc:  'Surface roots spreading wide — the hidden life of a forest made visible.' },
     { id: 120, category: 'trees',
       src:   'https://images.unsplash.com/photo-1467803738586-46b7eb7b16a1?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1467803738586-46b7eb7b16a1?w=700&q=80',
-      title: 'Savanna Treeline', location: 'Mondulkiri', date: '2023',
+      title: 'Savanna Treeline', location: 'Mondulkiri', date: '21 November 2023',
       desc:  'Where grassland meets forest — the boundary that defines everything.' },
 
 
     { id: 41, category: 'food',
       src:   'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=700&q=80',
-      title: 'Fish Amok', location: 'Siem Reap', date: '2024',
+      title: 'Fish Amok', location: 'Siem Reap', date: '6 January 2024',
       desc:  "Cambodia's national dish — steamed in banana leaf, coconut and kroeung." },
     { id: 42, category: 'food',
       src:   'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&q=80',
-      title: 'Morning Market', location: 'Phnom Penh', date: '2023',
+      title: 'Morning Market', location: 'Phnom Penh', date: '22 July 2023',
       desc:  'Bai sach chrouk stalls open before sunrise — pork and rice for 2,000 riel.' },
     { id: 43, category: 'food',
       src:   'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=700&q=80',
-      title: 'Fresh Herbs', location: 'Central Market', date: '2024',
+      title: 'Fresh Herbs', location: 'Central Market', date: '10 April 2022',
       desc:  'Lemongrass, kaffir lime, galangal — the base of everything good.' },
     { id: 44, category: 'food',
       src:   'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=700&q=80',
-      title: 'Num Banh Chok', location: 'Kampot', date: '2023',
+      title: 'Num Banh Chok', location: 'Kampot', date: '3 September 2024',
       desc:  'Khmer noodles with green fish curry — eaten on a plastic stool at 7 a.m.' },
     { id: 45, category: 'food',
       src:   'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=700&q=80',
-      title: 'Tropical Fruit', location: 'Battambang', date: '2022',
+      title: 'Tropical Fruit', location: 'Battambang', date: '17 December 2023',
       desc:  'Rambutan, mangosteen, dragon fruit — the dry-season abundance.' },
     { id: 46, category: 'food',
       src:   'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=700&q=80',
-      title: 'BBQ Night', location: 'Phnom Penh', date: '2024',
+      title: 'BBQ Night', location: 'Phnom Penh', date: '28 May 2022',
       desc:  'Roadside grill — skewered corn, pork, and sweet potato over charcoal.' },
     { id: 47, category: 'food',
       src:   'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=700&q=80',
-      title: 'Rice Harvest Meal', location: 'Prey Veng Province', date: '2023',
+      title: 'Rice Harvest Meal', location: 'Prey Veng Province', date: '9 August 2024',
       desc:  'A communal lunch in the field — freshly cooked rice and preserved fish.' },
     { id: 48, category: 'food',
       src:   'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=700&q=80',
-      title: 'Soup Stall', location: 'Night Market, Siem Reap', date: '2023',
+      title: 'Soup Stall', location: 'Night Market, Siem Reap', date: '15 March 2023',
       desc:  'A bowl of kuy teav pulled from a pot simmering since midnight.' },
     { id: 49, category: 'food',
       src:   'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=700&q=80',
-      title: 'Palm Sugar Making', location: 'Kampong Speu', date: '2022',
+      title: 'Palm Sugar Making', location: 'Kampong Speu', date: '2 October 2022',
       desc:  'Watching a family render palm sap into blocks of sugar — three-hour process.' },
     { id: 50, category: 'food',
       src:   'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80',
-      title: 'Dinner Spread', location: 'Phnom Penh', date: '2024',
+      title: 'Dinner Spread', location: 'Phnom Penh', date: '19 June 2024',
       desc:  'A table shared with colleagues after a long field week — the best meal of the year.' },
 
     /* ── Local Foods extras (11–20) ───────────────────────── */
     { id: 101, category: 'food',
       src:   'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=700&q=80',
-      title: 'Spice Market', location: 'Phnom Penh', date: '2024',
+      title: 'Spice Market', location: 'Phnom Penh', date: '7 March 2024',
       desc:  'Turmeric, lemongrass, kaffir lime — the colours of a Khmer kitchen.' },
     { id: 102, category: 'food',
       src:   'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=700&q=80',
-      title: 'Street Noodles', location: 'Siem Reap', date: '2023',
+      title: 'Street Noodles', location: 'Siem Reap', date: '24 August 2023',
       desc:  'A bowl of pho at the corner stall — best eaten standing up.' },
     { id: 103, category: 'food',
       src:   'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=700&q=80',
-      title: 'Vegetable Garden', location: 'Kampot', date: '2023',
+      title: 'Vegetable Garden', location: 'Kampot', date: '12 May 2023',
       desc:  'Morning harvest — what grows here feeds a whole neighbourhood.' },
     { id: 104, category: 'food',
       src:   'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=700&q=80',
-      title: 'Grilled Corn', location: 'Phnom Penh', date: '2024',
+      title: 'Grilled Corn', location: 'Phnom Penh', date: '30 November 2024',
       desc:  'Roadside charcoal, buttered corn — the smell of every evening walk.' },
     { id: 105, category: 'food',
       src:   'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=700&q=80',
-      title: 'Breakfast Plate', location: 'Battambang', date: '2022',
+      title: 'Breakfast Plate', location: 'Battambang', date: '18 February 2022',
       desc:  'Rice, egg, and pickled vegetables — simple and perfect.' },
     { id: 106, category: 'food',
       src:   'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=700&q=80',
-      title: 'Salad Bowl', location: 'Phnom Penh', date: '2024',
+      title: 'Salad Bowl', location: 'Phnom Penh', date: '5 July 2024',
       desc:  'A rare green lunch between field seasons.' },
     { id: 107, category: 'food',
       src:   'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=700&q=80',
-      title: 'Pasta Evening', location: 'Siem Reap', date: '2023',
+      title: 'Pasta Evening', location: 'Siem Reap', date: '21 October 2023',
       desc:  'A rare Italian detour — cooked by a colleague who studied in Rome.' },
     { id: 108, category: 'food',
       src:   'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=700&q=80',
-      title: 'Toast Morning', location: 'Field Camp', date: '2023',
+      title: 'Toast Morning', location: 'Field Camp', date: '8 April 2023',
       desc:  'When field logistics allow a proper breakfast — you celebrate.' },
     { id: 109, category: 'food',
       src:   'https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=700&q=80',
-      title: 'Pancake Stack', location: 'Phnom Penh', date: '2024',
+      title: 'Pancake Stack', location: 'Phnom Penh', date: '26 December 2024',
       desc:  'Weekend mornings deserve something warm and excessive.' },
     { id: 110, category: 'food',
       src:   'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&q=85',
       thumb: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&q=80',
-      title: 'Pizza Night', location: 'Phnom Penh', date: '2022',
+      title: 'Pizza Night', location: 'Phnom Penh', date: '14 September 2022',
       desc:  'End of grant report, beginning of pizza — priorities in order.' },
   ];
 
   /* ── Category config ────────────────────────────────────── */
   var CATS = [
-    { key: 'all',       label: 'All Photos',           color: '#6B7280', icon: 'fa-images'       },
-    { key: 'research',  label: 'Research Activities',  color: '#2563EB', icon: 'fa-flask'        },
-    { key: 'friends',   label: 'Friends & Colleagues', color: '#DB2777', icon: 'fa-user-group'   },
-    { key: 'traveling', label: 'Traveling by Foot',    color: '#059669', icon: 'fa-person-hiking' },
-    { key: 'trees',     label: 'Tree Collections',     color: '#65A30D', icon: 'fa-tree'         },
-    { key: 'food',      label: 'Local Foods',          color: '#D97706', icon: 'fa-bowl-food'    },
+    { key: 'all',       label: 'All Photos',           color: '#6B7280', icon: 'fa-images',
+      desc: 'A complete collection of research activities, people, places, and local discoveries.' },
+    { key: 'research',  label: 'Research Activities',  color: '#2563EB', icon: 'fa-flask',
+      desc: 'Rich learning and research experiences that provide a broad foundation and deep insights into macroeconomic development.' },
+    { key: 'friends',   label: 'Friends & Colleagues', color: '#DB2777', icon: 'fa-user-group',
+      desc: 'Best friends and brilliant colleagues who share experiences with me throughout the progress of my research and personal life.' },
+    { key: 'traveling', label: 'Traveling by Foot',    color: '#059669', icon: 'fa-person-hiking',
+      desc: 'The collection of images depicts my travels, where I either walked from one place to another or used walking as a means to access other forms of transportation.' },
+    { key: 'trees',     label: 'Tree Collections',     color: '#65A30D', icon: 'fa-tree',
+      desc: 'This is a collection of tree images that I captured over the past year, capturing from mountain areas to rainforests, as well as rural and urban areas.' },
+    { key: 'food',      label: 'Local Foods',          color: '#D97706', icon: 'fa-bowl-food',
+      desc: 'The local food offers a delightful culinary journey, primarily showcasing the freshest ingredients sourced directly from nearby farms and producers.' },
   ];
 
   var PER_PAGE    = 30;
@@ -503,6 +509,7 @@
       var btn = document.createElement('button');
       btn.className   = 'gnav-btn' + (cat.key === activeKey ? ' active' : '');
       btn.dataset.key = cat.key;
+      btn.dataset.key = cat.key;
       btn.style.setProperty('--cat-color', cat.color);
       btn.innerHTML =
         '<i class="fa ' + cat.icon + '"></i>' +
@@ -512,6 +519,9 @@
       btn.addEventListener('click', function () {
         activeKey   = cat.key;
         currentPage = 1;
+        /* Clear search when switching sections */
+        if (searchInput) { searchInput.value = ''; searchQuery = ''; }
+        if (searchInfo)  searchInfo.textContent = '';
         buildNav();
         applyFilter();
       });
@@ -530,6 +540,8 @@
     var cat = CATS.find(function (c) { return c.key === activeKey; });
     if (labelText)  labelText.textContent  = cat ? cat.label : '';
     if (labelCount) labelCount.textContent = filtered.length + ' photos';
+    var labelDesc = document.getElementById('gallery-label-desc');
+    if (labelDesc)  labelDesc.textContent  = cat ? cat.desc  : '';
 
     /* NYT-style grid for traveling; editorial for research; photo-essay for friends */
     grid.className = 'gallery-grid' +
@@ -544,10 +556,12 @@
     var existingFPag  = document.getElementById('friends-pagination');
     var existingFood  = document.getElementById('food-essay-wrap');
     var existingTrees = document.getElementById('trees-essay-wrap');
+    var existingAll   = document.getElementById('all-essay-wrap');
     if (existingEssay) existingEssay.remove();
     if (existingFPag)  existingFPag.remove();
     if (existingFood)  existingFood.remove();
     if (existingTrees) existingTrees.remove();
+    if (existingAll)   existingAll.remove();
     grid.style.display = '';
 
     /* Widen wrapper padding for research and friends editorial layouts */
@@ -577,6 +591,8 @@
       renderFoodEssay();
     } else if (activeKey === 'trees') {
       renderTreesEssay();
+    } else if (activeKey === 'all') {
+      renderAllEssay();
     } else {
       renderGrid();
       renderPagination();
@@ -934,7 +950,108 @@
     renderPagination();
   }
 
-    function renderGrid() {
+  /* ── All Photos — "Archive" essay layout ───────────────── */
+  /* Cycle: editorial-3col → fullbleed-3col → hero+2x2 → squares-5col → dense-4col */
+  /* 3 + 3 + 5 + 5 + 4 = 20 photos per cycle                                       */
+  function renderAllEssay() {
+    var existing = document.getElementById('all-essay-wrap');
+    if (existing) existing.remove();
+
+    grid.innerHTML = '';
+    grid.className = 'gallery-grid';
+    grid.style.display = 'none';
+
+    var wrap = document.createElement('div');
+    wrap.id        = 'all-essay-wrap';
+    wrap.className = 'all-essay-wrap';
+
+    var start    = (currentPage - 1) * PER_PAGE;
+    var slice    = filtered.slice(start, start + PER_PAGE);
+    var photoIdx = 0;
+
+    var CYCLE = [
+      { type: 'editorial3', count: 3 },
+      { type: 'fullbleed3', count: 3 },
+      { type: 'hero5',      count: 5 },
+      { type: 'squares5',   count: 5 },
+      { type: 'dense4',     count: 4 },
+    ];
+    var cycleIdx = 0;
+
+    function makeCell(photo, gi, extraClass) {
+      var cell = document.createElement('div');
+      cell.className = 'all-photo-item' + (extraClass ? ' ' + extraClass : '');
+      cell.innerHTML = '<img src="' + photo.thumb + '" alt="' + photo.title + '" loading="lazy" onerror="this.style.opacity=0.3">';
+      cell.addEventListener('click', (function(g){ return function(){ openLightbox(g); }; })(gi));
+      return cell;
+    }
+
+    while (photoIdx < slice.length) {
+      var pat   = CYCLE[cycleIdx % CYCLE.length];
+      var block = slice.slice(photoIdx, photoIdx + pat.count);
+      if (block.length === 0) break;
+
+      var row = document.createElement('div');
+
+      /* ── Row 1: NYT editorial 3-col with title+desc below ── */
+      if (pat.type === 'editorial3') {
+        row.className = 'all-row all-editorial3';
+        block.forEach(function(photo, j) {
+          var card = document.createElement('div');
+          card.className = 'all-editorial-card';
+          card.innerHTML =
+            '<div class="all-photo-item"><img src="' + photo.thumb + '" alt="' + photo.title + '" loading="lazy" onerror="this.style.opacity=0.3"></div>' +
+            '<div class="all-editorial-credit">' + photo.location + '</div>' +
+            '<div class="all-editorial-title">' + photo.title + '</div>' +
+            '<div class="all-editorial-desc">'  + photo.desc   + '</div>';
+          card.querySelector('.all-photo-item').addEventListener('click',
+            (function(g){ return function(){ openLightbox(g); }; })(start + photoIdx + j));
+          row.appendChild(card);
+        });
+
+      /* ── Row 2: Full-bleed 3-col flush (Friends style) ── */
+      } else if (pat.type === 'fullbleed3') {
+        row.className = 'all-row all-fullbleed3';
+        block.forEach(function(photo, j) {
+          row.appendChild(makeCell(photo, start + photoIdx + j));
+        });
+
+      /* ── Row 3: 1 tall hero + 2×2 grid (Trees style) ── */
+      } else if (pat.type === 'hero5') {
+        row.className = 'all-row all-hero5';
+        row.appendChild(makeCell(block[0], start + photoIdx, 'all-hero-tall'));
+        var g2 = document.createElement('div');
+        g2.className = 'all-hero-grid';
+        for (var j = 1; j < block.length && j <= 4; j++) {
+          g2.appendChild(makeCell(block[j], start + photoIdx + j));
+        }
+        row.appendChild(g2);
+
+      /* ── Row 4: 5-col square strip (Traveling style) ── */
+      } else if (pat.type === 'squares5') {
+        row.className = 'all-row all-squares5';
+        block.forEach(function(photo, j) {
+          row.appendChild(makeCell(photo, start + photoIdx + j, 'all-square'));
+        });
+
+      /* ── Row 5: Dense 4-col (Food style) ── */
+      } else if (pat.type === 'dense4') {
+        row.className = 'all-row all-dense4';
+        block.forEach(function(photo, j) {
+          row.appendChild(makeCell(photo, start + photoIdx + j));
+        });
+      }
+
+      wrap.appendChild(row);
+      photoIdx += block.length;
+      cycleIdx++;
+    }
+
+    grid.parentNode.appendChild(wrap);
+    renderPagination();
+  }
+
+  function renderGrid() {
     grid.innerHTML = '';
 
     var start = (currentPage - 1) * PER_PAGE;
@@ -1148,8 +1265,127 @@
     renderLightbox();
   });
 
+  /* ── Search ─────────────────────────────────────────────── */
+  var searchInput   = document.getElementById('gallery-search');
+  var searchInfo    = document.getElementById('gallery-search-results-info');
+  var searchQuery   = '';
+
+  function normalise(str) {
+    return (str || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ');
+  }
+
+  function applySearch() {
+    var q = searchQuery.trim().toLowerCase();
+    if (!q) {
+      /* No query — restore category filter */
+      filtered = activeKey === 'all'
+        ? PHOTOS.slice()
+        : PHOTOS.filter(function (p) { return p.category === activeKey; });
+      if (searchInfo) searchInfo.textContent = '';
+    } else {
+      var pool = activeKey === 'all'
+        ? PHOTOS.slice()
+        : PHOTOS.filter(function (p) { return p.category === activeKey; });
+
+      var terms = q.split(/\s+/).filter(Boolean);
+      filtered = pool.filter(function (photo) {
+        var hay = normalise([photo.title, photo.location, photo.desc, photo.date, photo.category].join(' '));
+        return terms.every(function (t) { return hay.indexOf(t) !== -1; });
+      });
+
+      if (searchInfo) {
+        searchInfo.textContent = filtered.length === 0
+          ? 'No photos found for "' + q + '"'
+          : filtered.length + ' photo' + (filtered.length === 1 ? '' : 's') + ' found for "' + q + '"';
+      }
+    }
+    currentPage = 1;
+    renderCurrentView();
+  }
+
+  function renderCurrentView() {
+    /* Update label count */
+    var labelCount2 = document.getElementById('gallery-label-count');
+    if (labelCount2) labelCount2.textContent = filtered.length + ' photos';
+
+    /* Re-run the correct renderer */
+    var existingEssay = document.getElementById('friends-essay-wrap');
+    var existingFPag  = document.getElementById('friends-pagination');
+    var existingFood  = document.getElementById('food-essay-wrap');
+    var existingTrees = document.getElementById('trees-essay-wrap');
+    var existingAll   = document.getElementById('all-essay-wrap');
+    if (existingEssay) existingEssay.remove();
+    if (existingFPag)  existingFPag.remove();
+    if (existingFood)  existingFood.remove();
+    if (existingTrees) existingTrees.remove();
+    if (existingAll)   existingAll.remove();
+    grid.style.display = '';
+
+    if (activeKey === 'friends') {
+      renderFriendsEssay();
+    } else if (activeKey === 'food') {
+      renderFoodEssay();
+    } else if (activeKey === 'trees') {
+      renderTreesEssay();
+    } else if (activeKey === 'all') {
+      renderAllEssay();
+    } else {
+      renderGrid();
+      renderPagination();
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', function () {
+      searchQuery = searchInput.value;
+      applySearch();
+    });
+    searchInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); searchInput.blur(); }
+      if (e.key === 'Escape') {
+        searchInput.value = '';
+        searchQuery = '';
+        if (searchInfo) searchInfo.textContent = '';
+        applySearch();
+      }
+    });
+  }
+
   /* ── Init ───────────────────────────────────────────────── */
+
+  /* Read hash on load — e.g. gallery.html#research opens that section */
+  var initHash = window.location.hash.replace('#', '');
+  if (initHash && CATS.some(function (c) { return c.key === initHash; })) {
+    activeKey = initHash;
+  }
+
   buildNav();
   applyFilter();
+
+  /* Scroll to gallery section if hash was present */
+  if (initHash && initHash !== 'all') {
+    setTimeout(function () {
+      var section = document.querySelector('.gallery-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+
+  /* Update URL hash when nav button is clicked — makes links shareable */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.gnav-btn');
+    if (btn && btn.dataset.key) {
+      var key = btn.dataset.key;
+      history.replaceState(null, '', key === 'all' ? '#' : '#' + key);
+    }
+  });
+
+  /* Support browser back/forward navigation */
+  window.addEventListener('hashchange', function () {
+    var hash = window.location.hash.replace('#', '');
+    var valid = hash && CATS.some(function (c) { return c.key === hash; });
+    activeKey = valid ? hash : 'all';
+    buildNav();
+    applyFilter();
+  });
 
 })();

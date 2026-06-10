@@ -44,15 +44,6 @@
             <!-- ── Section nav buttons (injected by gallery.js) ── -->
             <nav class="gallery-nav" id="gallery-nav" aria-label="Gallery sections"></nav>
 
-            <!-- ── Active section label + count ── -->
-            <div class="gallery-section-label" id="gallery-section-label">
-              <div class="gallery-label-heading">
-                <span id="gallery-label-text"></span>
-                <span id="gallery-label-count"></span>
-              </div>
-              <p id="gallery-label-desc" class="gallery-label-desc"></p>
-            </div>
-
             <!-- ── Search bar ── -->
             <div class="gallery-search-wrap" id="gallery-search-wrap">
               <div class="gallery-search-box">
@@ -68,6 +59,15 @@
                 />
               </div>
               <div class="gallery-search-results-info" id="gallery-search-results-info"></div>
+            </div>
+
+            <!-- ── Active section label + count ── -->
+            <div class="gallery-section-label" id="gallery-section-label">
+              <div class="gallery-label-heading">
+                <span id="gallery-label-text"></span>
+                <span id="gallery-label-count"></span>
+              </div>
+              <p id="gallery-label-desc" class="gallery-label-desc"></p>
             </div>
 
             <!-- ── Photo grid (injected by gallery.js) ── -->
@@ -92,50 +92,35 @@
 <!-- ════════════ LIGHTBOX ════════════ -->
 <div class="lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <div class="lightbox-backdrop" id="lb-backdrop"></div>
+  <div class="lightbox-panel">
 
-  <button class="lightbox-close" id="lb-close" aria-label="Close">
-    <i class="fa fa-xmark"></i>
-  </button>
+    <div class="lightbox-img-area">
+      <button class="lightbox-close" id="lb-close" aria-label="Close">
+        <i class="fa fa-xmark"></i>
+      </button>
+      <img id="lb-img" src="" alt="" style="opacity:0;">
+    </div>
 
-  <button class="lb-arrow lb-arrow--prev" id="lb-prev" aria-label="Previous photo">
-    <i class="fa fa-chevron-left"></i>
-  </button>
-  <button class="lb-arrow lb-arrow--next" id="lb-next" aria-label="Next photo">
-    <i class="fa fa-chevron-right"></i>
-  </button>
-
-  <div class="lb-panel-wrap">
-    <div class="lightbox-panel">
-      <div class="lightbox-img-area">
-        <!-- Fix 1: onload inline so cached images show immediately -->
-        <img id="lb-img" src="" alt="" style="opacity:0;" onload="this.style.opacity='1';this.style.transform='scale(1)'">
-
-        <div class="lightbox-info" id="lb-info">
-          <!-- lb-tag hidden, kept for JS compatibility -->
-          <span id="lb-tag" style="display:none;"></span>
-          <div class="lb-overlay-bottom">
-            <div class="lb-bottom-main">
-              <h3 class="lb-title" id="lb-title">Title</h3>
-              <p  class="lb-desc"  id="lb-desc">Description.</p>
-            </div>
-            <div class="lb-bottom-meta">
-              <div class="lb-meta-item"><span class="lb-meta-label">Location</span><span class="lb-meta-val" id="lb-location">&mdash;</span></div>
-              <div class="lb-meta-item"><span class="lb-meta-label">Date</span><span class="lb-meta-val" id="lb-date">&mdash;</span></div>
-              <div class="lb-meta-item"><span class="lb-meta-label">Photo</span><span class="lb-meta-val" id="lb-index">1 / 50</span></div>
-            </div>
-          </div>
-          <div class="lb-progress-wrap">
-            <div class="lb-progress-fill" id="lb-progress" style="width:2%"></div>
-          </div>
-        </div>
+    <div class="lightbox-info" id="lb-info">
+      <div class="lb-cat-badge" id="lb-tag">Category</div>
+      <h3 class="lb-title"  id="lb-title">Title</h3>
+      <p  class="lb-desc"   id="lb-desc">Description.</p>
+      <hr class="lb-divider">
+      <div class="lb-meta-row"><span>Location</span><span id="lb-location">&mdash;</span></div>
+      <div class="lb-meta-row"><span>Year</span>    <span id="lb-date">&mdash;</span></div>
+      <div class="lb-meta-row"><span>Photo</span>   <span id="lb-index">1 / 50</span></div>
+      <div class="lb-progress-wrap">
+        <div class="lb-progress-fill" id="lb-progress" style="width:2%"></div>
+      </div>
+      <div class="lb-nav">
+        <button class="lb-nav-btn" id="lb-prev"><i class="fa fa-arrow-left"></i> Previous</button>
+        <button class="lb-nav-btn" id="lb-next">Next <i class="fa fa-arrow-right"></i></button>
       </div>
     </div>
+
   </div>
 </div>
 <!-- END LIGHTBOX -->
-
-<!-- Fix 2: reset body scroll on load in case lightbox left it stuck -->
-<script>document.body.style.overflow = '';</script>
 
 <script src="static/js/components.js"></script>
 <script src="static/js/darkmode.js"></script>
