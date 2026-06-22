@@ -313,16 +313,23 @@ const publicationsData = [
 
   { title: "Determinants of Informal Borrowing: Evidence from Households in 11 Rural Villages in Cambodia",
     ogImage: "https://kosalnith.github.io/static/img/og/determinants-of-informal-borrowing-evidence-from-households-in-11-rural-villages.png",
-    authors: "Kosal Nith & Sovannroeun Samreth", date: "2026",
+    authors: "Sovannroeun Samreth & Kosal Nith", date: "2026",
     outlet: "Journal of International Development Studies",
-    month: "forthcoming",
+    month: "34(3), 15-26,",
+    publisher: "The Japan Society for International Development",
     zoteroType: "journalArticle",
-    type: "articles", year: "2026", oa: false, lang: "en", forthcoming: true,
+    type: "articles", year: "2026", oa: true, lang: "en",
     breadcrumb: "Journal article › Research › peer-review",
     abstract: "Informal borrowing remains an important source of financing for rural Cambodian households, exposing them to exploitative interest rates. This study examines the determinants of informal credit reliance using survey data from 1,183 households in 11 villages. We analyze how financial literacy, measured based on understanding of basic financial and economic concepts, social capital (based on community-based group participation), and household characteristics shape borrowing behavior. Higher financial literacy is significantly correlated with a lower likelihood of relying on informal loans. Finance- or credit-related group membership reduces informal borrowing; other community group membership does not. Household income and residential land ownership reduce reliance on informal borrowing. Household head’s age has nonlinear effects. Reliance on informal credit initially declines with age, reflecting greater experience. Increases observed at older ages may be related to changing economic circumstances. Combining financial literacy enhancement, income improvement, and finance-related community networks can promote safe and sustainable financial inclusion in Cambodia.",
     keywords: ["Informal Borrowing","Financial Literacy","Social Capital","Rural Households","Cambodia"],
     kwStrength: ["full","full","full","half","none"],
-    sdgs: ["SDG 1 - No Poverty","SDG 8 - Decent Work and Economic Growth","SDG 10 - Reduced Inequalities"] },
+    link: "https://doi.org/10.32204/jids.34.3_15",
+    sdgs: ["SDG 1 - No Poverty","SDG 8 - Decent Work and Economic Growth","SDG 10 - Reduced Inequalities"],
+  resources: [
+      { label: "Paper", url: "research/papers/Samreth2026.pdf", icon: "fa-file-pdf" },
+      { label: "Slides", url: "research/slides/", icon: "fa-person-chalkboard" }
+    ],
+   },
 
   // ══ Book Chapters (2) ════════════════════════════════════════
 
@@ -337,7 +344,7 @@ const publicationsData = [
     publisher: "Springer",
     pubCity: "Singapore",
     month: "October", year_pub: "2025",
-    type: "chapters", year: "2026", oa: true, lang: "en",
+    type: "chapters", year: "2025", oa: true, lang: "en",
     breadcrumb: "Book chapter › Research › peer-review",
     abstract: "Although the agriculture sector in Cambodia was initially considered less vulnerable to the COVID-19 pandemic, cassava farmers experienced severe economic hardship due to the increase in input prices, fluctuations in output prices, and challenges in infrastructure development. However, these aggregate impacts hide the disproportionate repercussions faced by cash crop farmers, who were more severely affected by public health restrictions and market disruptions. Using data from 301 cassava-farming households across five major cultivation provinces, this study examines the pandemic’s impact on production, labor productivity, and labor participation in Cambodia. Although the price of fresh cassava slightly increased and the price of cassava chips remained stable, farmers lost income due to the increase in input prices and the fall in productivity. Between 2019 and 2021, average production costs rose by 9.3%, while income declined by 8.5%. Despite expanding cultivated land and increasing hired labor, overall productivity decreased. These findings underscore the vulnerability of Cambodia’s cassava sector to external shocks and highlight the need for targeted policy interventions. The paper concludes with actionable recommendations to enhance value addition, strengthen domestic markets for cassava products, and support a resilient post-pandemic recovery.",
     keywords: ["Cassava","COVID-19","Agricultural Productivity","Gender","Cambodia"],
@@ -353,7 +360,28 @@ const publicationsData = [
       { file: "ep2.jpg", caption: "Figure 2: Labor productivity by gender and province" },
       { file: "ep3.jpg", caption: "Table 1: Household-level regression results" }
     ] },
-  { title: "Food Science in Cambodia",
+
+  
+   { title: "Cambodia–Thailand Border Tensions, Broken Supply Chains: Insights and Foresights",
+    ogImage: "https://kosalnith.github.io/static/img/og/food-science-in-cambodia.png",
+    authors: "Kosal Nith", date: "Infore Memo, December 2025",
+    outlet: "Future Forum",
+    zoteroType: "report",
+    publisher: "Future Forum",
+    month: "December",
+    year_pub: "2025",
+    type: "reports", year: "2025", oa: true, lang: "en",
+    breadcrumb: "Book chapter › Book",
+    abstract: "The border tensions between Cambodia and Thailand have disrupted vital supply chains, which is a significant factor contributing to the slowdown of GDP growth in both nations. The impact, however, differs in nature and timeline. Thailand faces severe short-term consequences, including factory shutdowns due to a lack of raw materials and labor shortages while goods can not be exported to Cambodia. Conversely, Cambodia confronts more profound long-term risks: its automotive industry, heavily reliant on Thai components, could stop operations, while the nation must also manage an influx of returned migrant workers and found a costly structural shift to boost local investment. The optimal solution for both countries is to reopen the border as swiftly as possible, with diplomatic discussions prioritizing their shared economic partnership.",
+    keywords: ["Supply Chain","ASEAN","Cambodia","Border Conflict"],
+    kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 9 - Industry, Innovation, and Infrastructure","SDG 12 - Responsible Consumption and Production"],
+    link: "",
+    resources: [
+      { label: "Paper", url: "research/papers/Nith2025.pdf", icon: "fa-file-pdf" }
+    ] },
+    
+    { title: "Food Science in Cambodia",
     ogImage: "https://kosalnith.github.io/static/img/og/food-science-in-cambodia.png",
     authors: "Kosal Nith", date: "2021",
     outlet: "Micro-Policy Intervention: Contemporary Policy Discussion in Cambodia",
