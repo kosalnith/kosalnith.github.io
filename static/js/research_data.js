@@ -147,7 +147,29 @@ const publicationsData = [
   // Op-eds and commentaries published in newspapers and news websites are
   // Newspaper articles in Zotero. The one conference commentary is a Presentation.
 
-  { title: "Capital Gains Tax Is a Smart Way to Build Infrastructure",
+  { title: "The Middle-Income Trap in Cambodia: An Idea Whose Time Has Come",
+    ogImage: "https://kosalnith.github.io/static/img/og/capital-gains-tax-is-a-smart-way-to-build-infrastructure.png",
+    authors: "Matthew McCartney, Sivly Houy & Kosal Nith", date: "29 Jun 2026", outlet: "Cambodia Development Resource Institute",
+    zoteroType: "newspaperArticle",
+    type: "opeds", year: "2026", oa: true, lang: "en",
+    breadcrumb: "Newspaper article › Op-Ed",
+    keywords: ["Growth","Firm","Middle-income","Investment","Cambodia"],
+    kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 9 - Industry, Innovation, and Infrastructure","SDG 10 - Reduced Inequalities","SDG 17 - Partnerships for the Goals"],
+    link: "https://www.cdri.org.kh/news/the-middle-income-trap-in-cambodia-an-idea-whose-time-has-come" },
+    
+    { title: "Middle-Income Cambodia – Trap or Opportunity: Productivity and Creative Destruction at Firm-Level",
+    ogImage: "https://kosalnith.github.io/static/img/og/capital-gains-tax-is-a-smart-way-to-build-infrastructure.png",
+    authors: "Matthew McCartney, Dina Chhorn & Kosal Nith", date: "31 Jul 2026", outlet: "Cambodia Development Resource Institute",
+    zoteroType: "newspaperArticle",
+    type: "opeds", year: "2026", oa: true, lang: "en",
+    breadcrumb: "Newspaper article › Op-Ed",
+    keywords: ["Growth","Firm","Middle-income","Investment","Cambodia"],
+    kwStrength: ["full","full","full","half","none"],
+    sdgs: ["SDG 9 - Industry, Innovation, and Infrastructure","SDG 10 - Reduced Inequalities","SDG 17 - Partnerships for the Goals"],
+    link: "https://www.cdri.org.kh/news/middle-income-cambodia-trap-or-opportunity-productivity-and-creative-destruction-at-firm-level-part-ii-2" },
+    
+    { title: "Capital Gains Tax Is a Smart Way to Build Infrastructure",
     ogImage: "https://kosalnith.github.io/static/img/og/capital-gains-tax-is-a-smart-way-to-build-infrastructure.png",
     authors: "Kosal Nith", date: "22 Mar 2026", outlet: "Cambodianess",
     zoteroType: "newspaperArticle",

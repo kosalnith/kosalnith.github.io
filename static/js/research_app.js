@@ -347,6 +347,7 @@ const coAuthorLinks = {
   'Sopheak Song':           'https://cdri.org.kh/staff/song-sopheak',
   'Ronald A. Ruran':        'https://scholar.google.com/citations?user=ruran',
   'Hang Panha Hour':        'https://www.linkedin.com/in/hour-hang-panha/',
+  'Matthew McCartney':      'https://cdri.org.kh/staff/matthew-howard-mccartney',
 };
 
 // ===== Author display: only "(with X, Y and Z)" — Kosal Nith omitted (his page) =====
