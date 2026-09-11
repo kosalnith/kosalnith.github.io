@@ -50,7 +50,7 @@ li.dm-toggle-li {
     justify-content: center !important;
     background: transparent !important;
     box-shadow: none !important;
-    color: #8c1515 !important;
+    color: #d81f06 !important;
   }
 
   html.dark-mode li.dm-toggle-li .dm-toggle {
@@ -172,7 +172,7 @@ li.dm-toggle-li {
   /* Dark mode toggle — left gap matches other nav item spacing */
   .su-multi-menu .su-multi-menu__menu-lv1 > li.dm-toggle-li {
     order: 1 !important;
-    margin: 0 0 0 36px !important;
+    margin: 0 !important;
     align-self: center !important;
   }
 }
@@ -194,7 +194,7 @@ li.dm-toggle-li {
   border: none !important;
   border-radius: 50% !important;
   cursor: pointer !important;
-  color: #8c1515 !important;
+  color: #d81f06 !important;
   box-shadow: none !important;
   font-size: 0 !important;         /* hide any text */
   line-height: 1 !important;
@@ -275,6 +275,7 @@ html.dark-mode {
   --dm-text:      #D6D6D6;
   --dm-text-mute: #dcdad8;
   --dm-accent:    #8c1514;
+  /*--dm-accent:    #d81f06;*/
   --dm-accent-lt: #c04040;
   --dm-border:    #3a3836;
 

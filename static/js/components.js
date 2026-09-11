@@ -94,8 +94,8 @@
     { label: 'Travel Map',    href: SITE_URL + '/travelmap.html' },
   ];
 
-  const FOOTER_ORG     = 'Center for Development Economics and Trade, Cambodia Development Resource Institute';
-  const FOOTER_ADDRESS = 'No. 56, Street 315, Sangkat Boeng Kak II, Khan Tuol Touk, 120508, Phnom Penh, Cambodia';
+  const FOOTER_ORG     = '';
+  const FOOTER_ADDRESS = 'Street 87BT, Sangkat Boeng Tumpun 2, Khan Mean Chey, 120612, Phnom Penh, Cambodia';
   const COPYRIGHT_YEAR_START = 2018;
 
 

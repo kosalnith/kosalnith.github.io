@@ -50,7 +50,7 @@ li.dm-toggle-li {
     justify-content: center !important;
     background: transparent !important;
     box-shadow: none !important;
-    color: #f7f6f3 !important;
+    color: #d81f06 !important;
   }
 
   html.dark-mode li.dm-toggle-li .dm-toggle {
@@ -59,7 +59,7 @@ li.dm-toggle-li {
 
   li.dm-toggle-li .dm-toggle:hover,
   li.dm-toggle-li .dm-toggle:focus {
-    background: rgba(255,255,255,0.1) !important;
+    background: rgba(140,21,21,0.08) !important;
     border: none !important;
     outline: none !important;
   }
@@ -172,7 +172,7 @@ li.dm-toggle-li {
   /* Dark mode toggle — left gap matches other nav item spacing */
   .su-multi-menu .su-multi-menu__menu-lv1 > li.dm-toggle-li {
     order: 1 !important;
-    margin: 0 0 0 36px !important;
+    margin: 0 !important;
     align-self: center !important;
   }
 }
@@ -191,23 +191,23 @@ li.dm-toggle-li {
   padding: 0 !important;
   margin: 0 !important;
   background: transparent !important;
-  border: 1.5px solid #767270 !important;
+  border: none !important;
   border-radius: 50% !important;
   cursor: pointer !important;
-  color: #2e2d29 !important;
+  color: #d81f06 !important;
   box-shadow: none !important;
   font-size: 0 !important;         /* hide any text */
   line-height: 1 !important;
   text-decoration: none !important;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
   flex-shrink: 0;
   vertical-align: middle;
 }
 
 .dm-toggle:hover,
 .dm-toggle:focus {
-  background-color: rgba(0, 0, 0, 0.08) !important;
-  border-color: #2e2d29 !important;
+  background-color: rgba(140, 21, 21, 0.08) !important;
+  border: none !important;
   outline: none !important;
   text-decoration: none !important;
 }
@@ -226,7 +226,7 @@ li.dm-toggle-li {
 
 /* "Kosal" color */
 .su-lockup__wordmark {
-  color: #a60101 !important;
+  color: #d81e05 !important;
 }
 
 /* Root cause:
@@ -274,7 +274,8 @@ html.dark-mode {
   --dm-bg-nav:    #1a1918;
   --dm-text:      #D6D6D6;
   --dm-text-mute: #dcdad8;
-  --dm-accent:    #8c1514;
+  --dm-accent:    #d81e05;
+  /*--dm-accent:    #d81f06;*/
   --dm-accent-lt: #c04040;
   --dm-border:    #3a3836;
 
@@ -382,7 +383,7 @@ html.dark-mode .su-site-search {
 /* ── Links — apply dark color to all anchors, override exceptions ── */
 /* Inverted pattern: fewer :not() = faster style matching.            */
 html.dark-mode a {
-  color: var(--dm-link) !important;
+  color: #d81e05 !important;
 }
 
 html.dark-mode a:hover,
@@ -538,16 +539,16 @@ html.dark-mode .su-cta .su-cta__button {
   color: #f7f6f3 !important;
 }
 
-/* Exclude the dark-mode toggle itself (transparent bg — no need) */
+/* Dark mode toggle — no border, match nav icon style */
 html.dark-mode .dm-toggle {
   color: #f7f6f3 !important;
-  border-color: #b8b4ae !important;
+  border: none !important;
 }
 
 html.dark-mode .dm-toggle:hover,
 html.dark-mode .dm-toggle:focus {
   background-color: rgba(247,246,243,0.1) !important;
-  border-color: #f7f6f3 !important;
+  border: none !important;
 }
 
 /* ── Smooth transitions ────────────────────────────────────────── */
@@ -673,9 +674,9 @@ html.dark-mode .type-pill:hover {
 
 html.dark-mode .type-pill.active {
   background-color: transparent !important;
-  border-bottom-color: #b1040e !important;
+  border-bottom-color: #d81e05 !important;
   border-color: transparent !important;
-  border-bottom-color: #b1040e !important;
+  border-bottom-color: #d81e05 !important;
 }
 
 html.dark-mode .pill-number,
@@ -827,7 +828,7 @@ html.dark-mode .research-container .abstract-hint {
 html.dark-mode .research-container .abstract-text,
 html.dark-mode .research-container .abstract-text p {
   color: #d6d6d6 !important;
-  border-left-color: #b1040e !important;
+  border-left-color: #d81e05 !important;
 }
 
 html.dark-mode .pub-tag,
@@ -892,7 +893,7 @@ html.dark-mode .back-link {
   color: var(--dm-accent-lt) !important;
 }
 
-/* ── Research / Activity sidebar toggle button — override mainformat.css button{background:#b1040e} ── */
+/* ── Research / Activity sidebar toggle button — override mainformat.css button{background:#d81e05} ── */
 html.dark-mode body .research-sidebar .sidebar-toggle-btn,
 html.dark-mode body button.sidebar-toggle-btn {
   background-color: transparent !important;
@@ -923,7 +924,7 @@ html.dark-mode .research-sidebar .filter-sidebar-header {
   background-color: transparent !important;
 }
 
-/* ── Filter close button — override mainformat.css button{background:#b1040e} ── */
+/* ── Filter close button — override mainformat.css button{background:#d81e05} ── */
 html.dark-mode body .research-sidebar .filter-close-btn,
 html.dark-mode body button.filter-close-btn {
   background: transparent !important;
@@ -938,7 +939,7 @@ html.dark-mode body button.filter-close-btn:hover {
   color: #e05555 !important;
 }
 
-/* ── Active filter chip × button — override mainformat.css button{background:#b1040e} ──
+/* ── Active filter chip × button — override mainformat.css button{background:#d81e05} ──
    The box visible in dark mode around the × is mainformat.css's red button background
    bleeding through. This rule beats it using body + class specificity.             ── */
 html.dark-mode body button.chip-clear-btn,
@@ -977,7 +978,7 @@ html.dark-mode .research-container input[type="range"]::-webkit-slider-runnable-
 }
 html.dark-mode .research-container input[type="range"]::-webkit-slider-thumb {
   background: #2a2826 !important;
-  border-color: #b1040e !important;
+  border-color: #d81e05 !important;
   box-shadow: 0 1px 6px rgba(0,0,0,.4) !important;
 }
 html.dark-mode .research-container input[type="range"]::-moz-range-track {
@@ -985,7 +986,7 @@ html.dark-mode .research-container input[type="range"]::-moz-range-track {
 }
 html.dark-mode .research-container input[type="range"]::-moz-range-thumb {
   background: #2a2826 !important;
-  border-color: #b1040e !important;
+  border-color: #d81e05 !important;
 }
 
 /* ── Activity page — unlinked title + date, location, type text ── */
@@ -1015,9 +1016,9 @@ html.dark-mode body button.sort-btn {
 }
 html.dark-mode body .research-container .sort-btn:hover,
 html.dark-mode body button.sort-btn:hover {
-  background: #b1040e !important;
+  background: #d81e05 !important;
   color: #fff !important;
-  border-color: #b1040e !important;
+  border-color: #d81e05 !important;
 }
 html.dark-mode body .research-container .export-btn,
 html.dark-mode body button.export-btn {
@@ -1045,9 +1046,9 @@ html.dark-mode body button.sort-btn {
 }
 html.dark-mode body .sort-link:hover,
 html.dark-mode body .sort-btn:hover {
-  background: #b1040e !important;
+  background: #d81e05 !important;
   color: #fff !important;
-  border-color: #b1040e !important;
+  border-color: #d81e05 !important;
 }
 html.dark-mode body .export-link,
 html.dark-mode body .export-btn,
@@ -1072,9 +1073,9 @@ html.dark-mode .research-container .resource-btn--paper {
   color: #e05555 !important;
 }
 html.dark-mode .research-container .resource-btn--paper:hover {
-  background: #b1040e !important;
+  background: #d81e05 !important;
   color: #fff !important;
-  border-color: #b1040e !important;
+  border-color: #d81e05 !important;
 }
 html.dark-mode .research-container .resource-btn--slides {
   background: rgba(26,95,168,.12) !important;
@@ -1166,9 +1167,9 @@ html.dark-mode .detail-nav-btn .nav-label {
 }
 html.dark-mode body .detail-nav-btn:hover:not(.disabled),
 html.dark-mode body button.detail-nav-btn:hover:not(.disabled) {
-  background: #b1040e !important;
+  background: #d81e05 !important;
   color: #fff !important;
-  border-color: #b1040e !important;
+  border-color: #d81e05 !important;
 }
 html.dark-mode .detail-nav-btn:hover:not(.disabled) .nav-label {
   color: rgba(255,255,255,0.75) !important;
@@ -1178,10 +1179,10 @@ html.dark-mode .detail-nav-btn:hover:not(.disabled) .nav-label {
 html.dark-mode body .detail-back-btn,
 html.dark-mode body button.detail-back-btn,
 html.dark-mode body a.detail-back-btn {
-  background: #b1040e !important;
-  background-color: #b1040e !important;
+  background: #d81e05 !important;
+  background-color: #d81e05 !important;
   color: #fff !important;
-  border-color: #b1040e !important;
+  border-color: #d81e05 !important;
 }
 
 /* Tab bar */
@@ -1223,9 +1224,9 @@ html.dark-mode body a.detail-share-inline-btn {
 }
 html.dark-mode body .detail-share-inline-btn:hover,
 html.dark-mode body a.detail-share-inline-btn:hover {
-  background: #b1040e !important;
+  background: #d81e05 !important;
   color: #fff !important;
-  border-color: #b1040e !important;
+  border-color: #d81e05 !important;
 }
 
 /* Section titles */
@@ -1294,9 +1295,9 @@ html.dark-mode .cite-tab-btn:hover {
   border-color: #e05555 !important;
 }
 html.dark-mode .cite-tab-btn.active {
-  background: #b1040e !important;
+  background: #d81e05 !important;
   color: #fff !important;
-  border-color: #b1040e !important;
+  border-color: #d81e05 !important;
   box-shadow: 0 -3px 10px rgba(177,4,14,0.25) !important;
 }
 
@@ -1318,9 +1319,9 @@ html.dark-mode .cite-copy-btn {
   border-color: #3a3836 !important;
 }
 html.dark-mode .cite-copy-btn:hover {
-  background: #b1040e !important;
+  background: #d81e05 !important;
   color: #fff !important;
-  border-color: #b1040e !important;
+  border-color: #d81e05 !important;
 }
 
 /* Export RIS / Export BibTeX buttons */
@@ -1331,7 +1332,7 @@ html.dark-mode .cite-export-btn {
   box-shadow: 0 3px 10px rgba(177,4,14,0.2) !important;
 }
 html.dark-mode .cite-export-btn:hover {
-  background: #b1040e !important;
+  background: #d81e05 !important;
   box-shadow: 0 4px 14px rgba(177,4,14,0.35) !important;
 }
 
@@ -1346,9 +1347,9 @@ html.dark-mode .detail-keyword {
   box-shadow: none !important;
 }
 html.dark-mode .detail-keyword:hover {
-  background: #b1040e !important;
+  background: #d81e05 !important;
   color: #fff !important;
-  border-color: #b1040e !important;
+  border-color: #d81e05 !important;
   box-shadow: 0 3px 10px rgba(177,4,14,0.3) !important;
 }
 
@@ -1436,7 +1437,7 @@ html.dark-mode body .detail-meta-table tr:nth-child(odd):hover td {
     color: #aaa !important;
   }
   html.dark-mode .filter-close-btn:hover {
-    background: #b1040e !important;
+    background: #d81e05 !important;
     color: #fff !important;
   }
   html.dark-mode .mobile-filter-toggle {
@@ -1444,7 +1445,7 @@ html.dark-mode body .detail-meta-table tr:nth-child(odd):hover td {
     color: #d6d6d6 !important;
   }
   html.dark-mode .mobile-filter-toggle:hover {
-    background: #b1040e !important;
+    background: #d81e05 !important;
     color: #fff !important;
   }
   html.dark-mode .mobile-result-count {

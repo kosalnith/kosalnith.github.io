@@ -367,7 +367,7 @@ function formatAuthorsChicagoMeta(authorsStr) {
   const coHtml = coAuthors.map(name => {
     const url = coAuthorLinks[name];
     return url
-      ? `<a href="${url}" target="_blank" style="color:#d81e05;font-weight:600;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${name}</a>`
+      ? `<a href="${url}" target="_blank" style="color:#9f260b;font-weight:600;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${name}</a>`
       : `<span style="color:#2e2d29;">${name}</span>`;
   });
 
@@ -440,7 +440,7 @@ function formatAuthorsChicagoMeta(authorsStr) {
 // ─── Helper ───────────────────────────────────────────────────────────────────
 function _doi(pub) {
   if (!pub.doi) return '';
-  return `DOI: <a href="https://doi.org/${pub.doi}" target="_blank" style="color:#d81e05;">${pub.doi}</a>`;
+  return `DOI: <a href="https://doi.org/${pub.doi}" target="_blank" style="color:#b1040e;">${pub.doi}</a>`;
 }
 function _dateStr(pub) {
   // Prefer explicit month + year_pub; fall back to pub.date
@@ -1211,8 +1211,8 @@ function updateYearSliderUI() {
   // Update static min/max labels below the track to show selected years
   const minStatic = document.getElementById('yearMinStatic');
   const maxStatic = document.getElementById('yearMaxStatic');
-  if (minStatic) { minStatic.textContent = minVal; minStatic.style.color = minVal > YEAR_MIN_BOUND ? '#d81e05' : ''; minStatic.style.fontWeight = minVal > YEAR_MIN_BOUND ? '700' : ''; }
-  if (maxStatic) { maxStatic.textContent = maxVal; maxStatic.style.color = maxVal < YEAR_MAX_BOUND ? '#d81e05' : ''; maxStatic.style.fontWeight = maxVal < YEAR_MAX_BOUND ? '700' : ''; }
+  if (minStatic) { minStatic.textContent = minVal; minStatic.style.color = minVal > YEAR_MIN_BOUND ? '#b1040e' : ''; minStatic.style.fontWeight = minVal > YEAR_MIN_BOUND ? '700' : ''; }
+  if (maxStatic) { maxStatic.textContent = maxVal; maxStatic.style.color = maxVal < YEAR_MAX_BOUND ? '#b1040e' : ''; maxStatic.style.fontWeight = maxVal < YEAR_MAX_BOUND ? '700' : ''; }
 
   // Fill bar
   const fill = document.getElementById('yearFill');
@@ -1698,9 +1698,9 @@ function showDetail(idx) {
   const resolvedDoi = pub.doi || (pub.link && pub.link.includes('doi.org/') ? pub.link.split('doi.org/')[1] : null);
   const doiUrl   = resolvedDoi ? `https://doi.org/${resolvedDoi}` : '';
   const linkHtml = resolvedDoi
-    ? `<a href="${doiUrl}" target="_blank" style="color:#d81e05;">${doiUrl}</a>`
+    ? `<a href="${doiUrl}" target="_blank" style="color:#b1040e;">${doiUrl}</a>`
     : pub.link
-      ? `<a href="${pub.link}" target="_blank" style="color:#d81e05;">${pub.link}</a>`
+      ? `<a href="${pub.link}" target="_blank" style="color:#b1040e;">${pub.link}</a>`
       : '';
   const doiPlain = resolvedDoi ? doiUrl : (pub.link || '');
 
@@ -2091,8 +2091,8 @@ function showDetail(idx) {
         <tr><td>Language</td><td><p>${pub.lang === 'fr' ? 'French' : pub.lang === 'km' ? 'Khmer' : 'English'}</p></td></tr>
         <tr><td>Open Access</td><td>${pub.oa ? '<span class="status-badge badge-oa"><i class="fas fa-lock-open"></i>Open Access</span>' : '<p style="color:#6c7a8e;">Restricted</p>'}</td></tr>
         ${STAGE_BADGES.filter(s => pub[s.flag] && s.flag !== 'oa').length ? `<tr><td>Status</td><td class="detail-status-badges">${STAGE_BADGES.filter(s => pub[s.flag] && s.flag !== 'oa').map(s => `<span class="status-badge ${s.cls}"><i class="${s.icon}"></i>${s.label}</span>`).join(' ')}</td></tr>` : ''}
-        ${pub.link ? `<tr><td>External link</td><td><p><a href="${pub.link}" target="_blank" style="color:#d81e05;">${pub.link} <i class="fas fa-external-link-alt" style="font-size:1.4rem;"></i></a></p></td></tr>` : ''}
-        ${resolvedDoi ? `<tr><td>DOI</td><td><p><a href="https://doi.org/${resolvedDoi}" target="_blank" style="color:#d81e05;">https://doi.org/${resolvedDoi} <i class="fas fa-external-link-alt" style="font-size:1.4rem;"></i></a></p></td></tr>` : ''}
+        ${pub.link ? `<tr><td>External link</td><td><p><a href="${pub.link}" target="_blank" style="color:#b1040e;">${pub.link} <i class="fas fa-external-link-alt" style="font-size:1.4rem;"></i></a></p></td></tr>` : ''}
+        ${resolvedDoi ? `<tr><td>DOI</td><td><p><a href="https://doi.org/${resolvedDoi}" target="_blank" style="color:#b1040e;">https://doi.org/${resolvedDoi} <i class="fas fa-external-link-alt" style="font-size:1.4rem;"></i></a></p></td></tr>` : ''}
       </table>
 
       ${pub.keywords && pub.keywords.length ? `
@@ -2188,7 +2188,7 @@ function showDetail(idx) {
 
     ${pub.downloads ? `
     <div class="detail-card">
-      <div class="detail-card-title"><i class="fas fa-chart-bar" style="margin-right:5px;color:#d81e05;"></i>Usage statistics</div>
+      <div class="detail-card-title"><i class="fas fa-chart-bar" style="margin-right:5px;color:#b1040e;"></i>Usage statistics</div>
       <div class="detail-stat-row">
         <div class="detail-stat-num">${pub.downloads}</div>
         <div style="line-height:1.3;font-size:1.6rem;"><strong>Downloads</strong><br><span style="font-size:1.5rem;color:#6c7a8e;">Full-text downloads</span></div>

@@ -84,6 +84,20 @@ const activities = [
      typeCategory: "Conference presentations"
      type: "Conference presentation"
   ══════════════════════════════════════════════════ */
+
+   {
+    title: "Workshop on Island Economies and Ecological Planning in the Philippines",
+    titleUrl: "https://ysi.ineteconomics.org/event/workshop-on-island-economies-and-ecological-planning-in-the-philippines/2026-12-07/",
+    person: "Kosal Nith", role: "Speaker",
+    date: "7 Dec 2026 → 10 Dec 2026", location: "Department of Community and Environmental Resource Planning, University of the Philippines Los Baños, Manila, the Philippines",
+    type: "Conference presentation", typeCategory: "Conference presentations",
+    description: "Presented research on fiscal policy in Cambodia.",
+    keywords: ["Economic development", "Southeast Asia", "Climate change"],
+    sdg: ["SDG 8 - Decent Work and Economic Growth", "SDG 13 - Climate Action"],
+    resources: []
+  },
+
+
   {
     title: "3rd Southeast Asia Economic Research and Development Conference",
     titleUrl: "https://saerdconf.github.io/",
@@ -477,7 +491,7 @@ const activities = [
     title: "International Conference on Climate Change and Its Impacts on the Economy, Business, and Society",
     titleUrl: "https://iccciebs-2026.netlify.app",
     person: "Kosal Nith", role: "Co-organiser",
-    date: "15 Jul 2026 → 17 Jul 2026 (scheduled)", location: "Pondicherry University, Pondicherry, India",
+    date: "26 Aug 2026 → 28 Aug 2026", location: "Pondicherry University, Pondicherry, India",
     type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Participating in international conference on climate change and its economic and social impacts.",
     keywords: ["Climate change", "Economy", "Business", "Society", "India"],
