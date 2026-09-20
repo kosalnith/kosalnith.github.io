@@ -108,7 +108,7 @@ const activities = [
     keywords: ["Economic development", "Southeast Asia", "Cambodia"],
     sdg: ["SDG 8 - Decent Work and Economic Growth", "SDG 17 - Partnerships for the Goals"],
     resources: [
-      { type: "slides", label: "Slides",    url: "/research/slides/C3_fiscalCam_slides.pdf" },
+      { type: "slides", label: "Slides",    url: "research/slides/C3_fiscalCam_slides.pdf" },
     ]
   },
   {
@@ -121,7 +121,7 @@ const activities = [
     keywords: ["Monetary policy", "Financial inclusion", "Green finance", "Riel", "Cambodia"],
     sdg: ["SDG 8 - Decent Work and Economic Growth", "SDG 10 - Reduced Inequalities", "SDG 13 - Climate Action"],
     resources: [
-       { type: "slides", label: "Slides",    url: "/research/slides/SC_slides_202510.pdf" },
+       { type: "slides", label: "Slides",    url: "research/slides/SC_slides_202510.pdf" },
     ]
   },
   {
@@ -147,7 +147,7 @@ const activities = [
     keywords: ["Youth", "Empowerment", "Education"],
     sdg: ["SDG 4 - Quality Education", "SDG 10 - Reduced Inequalities"],
     resources: [
-       { type: "slides", label: "Slides",    url: "/research/slides/SC_slides_202508.pdf" },
+       { type: "slides", label: "Slides",    url: "research/slides/SC_slides_202508.pdf" },
     ]
   },
   {
@@ -160,7 +160,7 @@ const activities = [
     keywords: ["Post-Keynesian", "Macroeconomics", "Heterodox economics"],
     sdg: ["SDG 8 - Decent Work and Economic Growth", "SDG 10 - Reduced Inequalities"],
     resources: [
-      { type: "slides", label: "Slides",    url: "/research/slides/SC_slides_KN_NPKC.pdf" },
+      { type: "slides", label: "Slides",    url: "research/slides/SC_slides_KN_NPKC.pdf" },
     ]
   },
   {
@@ -173,7 +173,7 @@ const activities = [
     keywords: ["Macroeconomics", "Policy", "Macroeconomic policy"],
     sdg: ["SDG 8 - Decent Work and Economic Growth", "SDG 10 - Reduced Inequalities"],
     resources: [
-    { type: "slides", label: "Slides",    url: "/research/slides/FDICam_Slides_28FMM.pdf" },
+    { type: "slides", label: "Slides",    url: "research/slides/FDICam_Slides_28FMM.pdf" },
     { type: "video", label: "Recording",    url: "https://www.youtube.com/watch?v=LeYho9EKR7E&list=PLRIU-ZP0fg53sxVifh1phP9kuNBDdKlxD" },
     { type: "other", label: "Program",       url: "https://www.boeckler.de/data/downloads/OEA/Veranstaltungen/2024/v_2024_10_24_fmm_programm.pdf" },
   ]
@@ -188,7 +188,7 @@ const activities = [
     keywords: ["Sustainable development", "China", "Southeast Asia", "Regional development"],
     sdg: ["SDG 17 - Partnerships for the Goals", "SDG 8 - Decent Work and Economic Growth", "SDG 13 - Climate Action"],
     resources: [
-      { type: "slides", label: "Slides",    url: "/research/slides/FDICam_Slides_28FMM.pdf" },
+      { type: "slides", label: "Slides",    url: "research/slides/FDICam_Slides_28FMM.pdf" },
     ]
   },
   {
@@ -275,8 +275,8 @@ const activities = [
     keywords: ["research", "development", "economics", "CDRI", "skill"],
     sdg: ["SDG 1 - No Poverty", "SDG 4 - Quality Education", "SDG 8 - Decent Work and Economic Growth"],
     resources: [
-      { type: "slides", label: "Literature Review",    url: "/research/slides/SDF_Workshop_D3_02.pdf" },
-      { type: "slides", label: "Research Plan",    url: "/research/slides/SDF_Workshop_D3_01.pdf" }
+      { type: "slides", label: "Literature Review",    url: "research/slides/SDF_Workshop_D3_02.pdf" },
+      { type: "slides", label: "Research Plan",    url: "research/slides/SDF_Workshop_D3_01.pdf" }
     ]
   },
   
