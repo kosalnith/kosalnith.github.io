@@ -2753,3 +2753,11 @@ html.dark-mode .filter-sidebar-header {
     gap: 6px !important;
   }
 }
+
+/* ── Publication details table: keep values right next to their labels ──
+   (fixed layout + explicit label width, so no other rule can stretch the label column) */
+@media (min-width: 601px) {
+  .detail-meta-table { table-layout: fixed; width: 100%; }
+  .detail-meta-table td:first-child { width: 220px !important; white-space: normal; }
+  .detail-meta-table td:last-child  { width: auto !important; padding-left: 14px; overflow-wrap: anywhere; }
+}

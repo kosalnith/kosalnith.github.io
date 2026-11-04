@@ -1447,13 +1447,8 @@ function initEventListeners() {
       filterByKeyword(kw.getAttribute('data-keyword'));
       return;
     }
-    // Publication detail link
-    const link = e.target.closest('.pub-detail-link');
-    if (link) {
-      e.preventDefault();
-      const idx = parseInt(link.getAttribute('data-pub-idx'));
-      showDetail(idx);
-    }
+    // Publication title links are normal links to research_main/<slug>.html
+    // (one URL per publication; that page renders the detail view itself).
   });
 
   // Keyword clicks on the detail page
@@ -1479,6 +1474,12 @@ function titleToSlug(title) {
     .replace(/-+$/, '');
 }
 
+// Navigate to the one-and-only page of a publication
+function goPub(idx) {
+  const pub = publicationsData[idx];
+  if (pub) window.location.href = 'research_main/' + titleToSlug(pub.title) + '.html';
+}
+
 // Find publication index by slug
 function findIdxBySlug(slug) {
   return publicationsData.findIndex(p => titleToSlug(p.title) === slug);
@@ -1486,9 +1487,9 @@ function findIdxBySlug(slug) {
 
 // Update <meta> OG tags for social sharing
 function updateMetaTags(pub) {
-  const base = 'https://kosalnith.github.io/research_main.html';
+  const base = 'https://kosalnith.github.io/research_main';
   const slug = titleToSlug(pub.title);
-  const url  = `${base}?pub=${slug}`;
+  const url  = `${base}/${slug}.html`;
   const desc = pub.abstract
     ? pub.abstract.substring(0, 200) + '…'
     : `${pub.authors}. ${pub.outlet || ''}. ${pub.year || ''}`;
@@ -1528,6 +1529,8 @@ function updateMetaTags(pub) {
 }
 
 function showList() {
+  // On a publication page, "back to list" means going to research.html
+  if (window.STATIC_PUB_SLUG) { window.location.href = 'research.html'; return; }
   document.getElementById('pubDetailView').style.display = 'none';
   document.getElementById('pubListView').style.display  = 'block';
   window.scrollTo(0, 0);
@@ -1538,7 +1541,7 @@ function showList() {
   const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
   setMeta('meta[property="og:title"]',       'Research output · Kosal Nith');
   setMeta('meta[property="og:description"]', 'Research output by Kosal Nith — economist and researcher at CDRI.');
-  setMeta('meta[property="og:url"]',         'https://kosalnith.github.io/research_main.html');
+  setMeta('meta[property="og:url"]',         'https://kosalnith.github.io/research.html');
   setMeta('meta[property="og:image"]',       'https://kosalnith.github.io/static/img/og-research.png');
   setMeta('meta[name="twitter:image"]',      'https://kosalnith.github.io/static/img/og-research.png');
   setMeta('meta[name="twitter:card"]',       'summary_large_image');
@@ -1553,27 +1556,25 @@ function showDetail(idx) {
   window.scrollTo(0, 0);
   document.title = pub.title + ' · Kosal Nith';
 
-  // Push ?pub=slug to URL (works on both file:// and https://)
+  // The URL is already research_main/<slug>.html, so nothing to push
   const slug    = titleToSlug(pub.title);
-  const newUrl  = `${window.location.pathname}?pub=${slug}`;
-  history.pushState({ view: 'detail', idx }, '', newUrl);
   updateMetaTags(pub);
 
   // Build shareable URL
-  const shareUrl = `https://kosalnith.github.io/research_main.html?pub=${slug}`;
+  const shareUrl = `https://kosalnith.github.io/research_main/${slug}.html`;
 
   // Prev / Next nav
   const prevPub = publicationsData[idx - 1];
   const nextPub = publicationsData[idx + 1];
   document.getElementById('detailNavRow').innerHTML = `
-    <button class="detail-nav-btn ${!prevPub ? 'disabled' : ''}" onclick="${prevPub ? `showDetail(${idx - 1})` : ''}">
+    <button class="detail-nav-btn ${!prevPub ? 'disabled' : ''}" onclick="${prevPub ? `goPub(${idx - 1})` : ''}">
       <i class="fas fa-chevron-left"></i>
       <span class="nav-label">Previous</span>
     </button>
     <button class="detail-back-btn" onclick="showList()" style="margin:0;white-space:nowrap;">
       <i class="fas fa-list"></i> All publications
     </button>
-    <button class="detail-nav-btn ${!nextPub ? 'disabled' : ''}" onclick="${nextPub ? `showDetail(${idx + 1})` : ''}" style="flex-direction:row-reverse;text-align:right;">
+    <button class="detail-nav-btn ${!nextPub ? 'disabled' : ''}" onclick="${nextPub ? `goPub(${idx + 1})` : ''}" style="flex-direction:row-reverse;text-align:right;">
       <span class="nav-label">Next</span>
       <i class="fas fa-chevron-right"></i>
     </button>
@@ -2106,7 +2107,7 @@ function showDetail(idx) {
       <div>
         ${related.map((r) => `
         <div class="detail-related-item">
-          <div class="detail-related-title" onclick="showDetail(${publicationsData.indexOf(r)})">${r.title}</div>
+          <div class="detail-related-title" onclick="goPub(${publicationsData.indexOf(r)})">${r.title}</div>
           <div class="detail-related-meta">${r.authors} · ${r.date || r.year || ''} · ${r.outlet || ''}</div>
         </div>`).join('')}
       </div>` : ''}
@@ -2255,6 +2256,10 @@ function copyPubLink(url) {
 
 // ===== Keyword click — filter publications by keyword =====
 function filterByKeyword(keyword) {
+  if (window.STATIC_PUB_SLUG) {
+    window.location.href = 'research.html?kw=' + encodeURIComponent(keyword);
+    return;
+  }
   // Switch to list view
   showList();
   // Set the search input to the keyword
@@ -2460,11 +2465,21 @@ document.addEventListener('DOMContentLoaded', () => {
   initDownloadTracking();
   loadAllDownloadCounts();
 
-  // On load: read ?pub=slug from query string and open that publication
-  const pubSlug = new URLSearchParams(window.location.search).get('pub');
-  if (pubSlug) {
-    const idx = findIdxBySlug(pubSlug);
+  const qs = new URLSearchParams(window.location.search);
+  if (window.STATIC_PUB_SLUG) {
+    // research_main/<slug>.html: render this publication's detail view
+    const idx = findIdxBySlug(window.STATIC_PUB_SLUG);
     if (idx !== -1) showDetail(idx);
+  } else {
+    // Old shared links research.html?pub=<slug> -> the publication's own page
+    const pubSlug = qs.get('pub');
+    if (pubSlug && findIdxBySlug(pubSlug) !== -1) {
+      window.location.replace('research_main/' + pubSlug + '.html');
+      return;
+    }
+    // research.html?kw=<keyword> (keyword clicked on a publication page)
+    const kw = qs.get('kw');
+    if (kw) filterByKeyword(kw);
   }
 
   // Handle browser back / forward button

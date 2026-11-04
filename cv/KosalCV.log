@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  11 OCT 2026 09:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.17)  30 OCT 2026 23:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -547,11 +547,11 @@ Package rerunfilecheck Info: File `KosalCV.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13411 strings out of 476025
- 210274 string characters out of 5790017
+ 13414 strings out of 476025
+ 210298 string characters out of 5790017
  1866388 words of memory out of 5000000
  33555 multiletter control sequences out of 15000+600000
- 541323 words of font info for 130 fonts, out of 8000000 for 9000
+ 541453 words of font info for 132 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,6n,76p,1004b,445s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
@@ -560,7 +560,7 @@ usr/local/texlive/2023/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/loca
 l/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/
 2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf
 -dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on KosalCV.pdf (5 pages, 94493 bytes).
+Output written on KosalCV.pdf (5 pages, 94673 bytes).
 PDF statistics:
  124 PDF objects out of 1000 (max. 8388607)
  103 compressed objects within 2 object streams

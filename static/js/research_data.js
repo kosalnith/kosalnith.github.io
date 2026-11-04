@@ -583,7 +583,7 @@ const publicationsData = [
     sdgs: ["SDG 4 - Quality Education","SDG 16 - Peace, Justice and Strong Institutions"], 
     resources: [
       { label: "Paper", url: "research/papers/RapportduStage_2018.pdf", icon: "fa-file-pdf" },
-      { label: "Slides", url: "resarch/slides/Internship_Sharing_2018.pdf", icon: "fa-person-chalkboard" }
+      { label: "Slides", url: "research/slides/Internship_Sharing_2018.pdf", icon: "fa-person-chalkboard" }
     ]},
 
   // Paper presented at the National Bank of Cambodia 5th Annual Macroeconomic Conference
@@ -602,7 +602,7 @@ const publicationsData = [
     downloads: 0,
     resources: [
       { label: "Paper", url: "research/papers/RCA_2018.pdf", icon: "fa-file-pdf" },
-      { label: "Slides", url: "resarch/slides/RCA_Slides.pdf", icon: "fa-person-chalkboard" }
+      { label: "Slides", url: "research/slides/RCA_Slides.pdf", icon: "fa-person-chalkboard" }
     ] },
 
   // ══ Policy Briefs (2) — CMOS 18 §14.229 → report ════════════════════════════
