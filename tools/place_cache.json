@@ -1,0 +1,274 @@
+{
+ "en:50.111,8.684:500": {
+  "title": "Haus zur goldenen Waage",
+  "desc": "The Haus zur Goldenen Waage is a medieval half-timbered house in the old town of Frankfurt am Main, which was destroyed in the air raid on 22 March 1944.",
+  "type": "city"
+ },
+ "en:46.659,8.059:500": {
+  "title": "First (Grindelwald)",
+  "desc": "First is a mountain location and minor summit on the slopes of the Schwarzhorn in the Bernese Oberland.",
+  "type": "train"
+ },
+ "en:46.755,8.040:500": {
+  "title": "Brienz railway station",
+  "desc": "Brienz railway station is a railway station in the village of Brienz in the Swiss canton of Bern.",
+  "type": "train"
+ },
+ "en:46.696,7.847:500": null,
+ "en:46.755,7.635:500": {
+  "title": "Thun ship canal",
+  "desc": "The Thun ship canal is a 500-metre long canal in the Swiss canton of Bern.",
+  "type": "train"
+ },
+ "en:46.736,7.657:500": {
+  "title": "Hünegg Castle",
+  "desc": "Hünegg Castle is a castle in the municipality of Hilterfingen of the Canton of Bern in Switzerland. It is a Swiss heritage site of national significance.",
+  "type": "sightseeing"
+ },
+ "en:41.413,2.153:500": {
+  "title": "Parc de Cervantes",
+  "desc": "The Parc de Cervantes is located in the Pedralbes neighborhood, belonging to the Les Corts district, in Barcelona, Catalonia, Spain.",
+  "type": "park"
+ },
+ "en:41.384,2.171:500": {
+  "title": "Virreina Palace",
+  "desc": "The Virreina Palace is a building in the city of Barcelona.",
+  "type": "sightseeing"
+ },
+ "en:41.377,2.192:500": {
+  "title": "La Barceloneta, Barcelona",
+  "desc": "La Barceloneta is a neighborhood in the Ciutat Vella district of Barcelona, Catalonia, Spain.",
+  "type": "photospot"
+ },
+ "en:41.404,2.175:500": {
+  "title": "Sagrada Família (Barcelona Metro)",
+  "desc": "Sagrada Família is a metro station in Barcelona Metro network.",
+  "type": "train"
+ },
+ "en:40.418,-3.699:500": {
+  "title": "Alcalá 20 nightclub fire",
+  "desc": "The Alcalá 20 nightclub fire occurred on 17 December 1983 at 4:45 a.m. at Alcalá 20, a nightclub at number 20 Calle de Alcalá in the centre of Madrid.",
+  "type": "photospot"
+ },
+ "en:40.453,-3.689:500": {
+  "title": "Real Madrid CF",
+  "desc": "Real Madrid Club de Fútbol is a Spanish professional association football club based in Madrid. The club competes in La Liga, the top tier of Spanish football.",
+  "type": "photospot"
+ },
+ "en:48.854,2.301:500": {
+  "title": "Galerie des machines",
+  "desc": "The Galerie des machines was a pavilion built for the 1889 Exposition Universelle in Paris. Located in the Grenelle district, the huge pavilion was made of iron, steel and glass.",
+  "type": "photospot"
+ },
+ "en:48.861,2.336:500": {
+  "title": "Louvre",
+  "desc": "The Louvre is a national art museum in Paris, France.",
+  "type": "museum"
+ },
+ "en:55.672,12.575:500": {
+  "title": "Statue of Asmus Jacob Carstens",
+  "desc": "The Statue of Asmus Jacob Carstens is a statue of German-Danish painter Asmus Jacob Carstens situated in the garden of the Ny Carlsberg Glyptotek, facing Niels Brocks Gade, in Copenhagen, Denmark.",
+  "type": "park"
+ },
+ "en:55.687,12.551:500": {
+  "title": "Holy Cross Church, Copenhagen",
+  "desc": "The Holy Cross Church is a Church of Denmark parish church located at the corner of Kapelvej and Hans Tavsens Gade in the Nørrebro district of Copenhagen, Denmark.",
+  "type": "sightseeing"
+ },
+ "en:-6.361,106.828:500": {
+  "title": "Universitas Indonesia railway station",
+  "desc": "Universitas Indonesia Station is a railway station located in Pondok Cina, Beji, Depok, West Java, Indonesia.",
+  "type": "train"
+ },
+ "en:-6.373,106.834:500": null,
+ "en:-6.387,106.827:500": null,
+ "en:-6.178,106.829:500": {
+  "title": "Gambir railway station",
+  "desc": "Gambir Station is a major railway station in Gambir, Gambir, Central Jakarta, Jakarta, Indonesia.",
+  "type": "train"
+ },
+ "en:-6.117,106.853:500": {
+  "title": "Ancol War Cemetery",
+  "desc": "Ancol War Cemetery, also Dutch Field of Honor Ancol, is a war cemetery in Ancol, Jakarta, in Indonesia.",
+  "type": "photospot"
+ },
+ "en:31.274,120.737:500": {
+  "title": "Xi'an Jiaotong–Liverpool University",
+  "desc": "Xi'an Jiaotong–Liverpool University is a Sino-foreign cooperative university in Suzhou, Jiangsu, China.",
+  "type": "university"
+ },
+ "en:31.324,120.616:500": {
+  "title": "Beisita station",
+  "desc": "Beisita is a station on Line 4 of the Suzhou Metro. The station is located in Gusu District of Suzhou.",
+  "type": "train"
+ },
+ "en:31.305,120.687:500": null,
+ "en:40.078,116.589:500": {
+  "title": "2 Hao Hangzhanlou (Terminal 2) station",
+  "desc": "2 Hao Hangzhanlou station is a station on the Capital Airport Express of the Beijing Subway, serving Terminal 2 at Beijing Capital International Airport.",
+  "type": "airport"
+ },
+ "en:48.206,16.371:500": {
+  "title": "Assassination of Karl von Stürgkh",
+  "desc": "The Assassination of Karl von Stürgkh, the Prime Minister of the government of Cisleithania, took place on October 21, 1916, in the Meissl & Schadn Hotel in Vienna.",
+  "type": "hotel"
+ },
+ "en:47.565,13.656:500": null,
+ "en:47.813,13.045:500": {
+  "title": "Salzburg Hauptbahnhof",
+  "desc": "Salzburg Hauptbahnhof is the main railway station in Salzburg, capital of the federal state of Salzburg in Austria.",
+  "type": "train"
+ },
+ "en:47.274,11.396:500": {
+  "title": "Kompass Karten",
+  "desc": "Kompass Karten is an Austrian map publisher based in Innsbruck, which specialises in hiking maps, and guides, digital maps, and cycling maps and guides. Its range has over 1,000 titles.",
+  "type": "photospot"
+ },
+ "en:47.311,11.384:500": {
+  "title": "Hafelekarspitze",
+  "desc": "The Hafelekarspitze is a mountain in the so-called North Chain north of Innsbruck in Austria.",
+  "type": "sightseeing"
+ },
+ "en:48.141,11.557:500": {
+  "title": "München Hauptbahnhof",
+  "desc": "München Hauptbahnhof or Munich Central Station is the main railway station in the city of Munich, Germany.",
+  "type": "train"
+ },
+ "en:48.262,11.706:500": null,
+ "en:52.308,4.765:500": {
+  "title": "Schiphol Airport station",
+  "desc": "Schiphol Airport station is a major passenger railway station in Haarlemmermeer, Netherlands, beneath the terminal complex of Amsterdam Airport Schiphol, operated by the Nederlandse Spoorwegen.",
+  "type": "airport"
+ },
+ "en:31.151,121.797:500": null,
+ "en:22.651,113.819:500": {
+  "title": "Airport East station",
+  "desc": "Airport East station is an interchange station for Line 1 and Line 12 of Shenzhen Metro in Shenzhen, Guangdong Province, China.",
+  "type": "airport"
+ },
+ "en:22.627,113.808:500": {
+  "title": "Airport station (Shenzhen Metro)",
+  "desc": "Airport station is a station on Line 11 of the Shenzhen Metro. It opened on 28 June 2016.",
+  "type": "airport"
+ },
+ "en:57.050,9.918:500": {
+  "title": "Jomfru Ane Gade",
+  "desc": "Jomfru Ane Gade, colloquially known as Gaden, is a well known street in the city of Aalborg, Denmark. It has gained popularity for the restaurants and pubs lining both sides of the street.",
+  "type": "restaurant"
+ },
+ "en:57.015,9.976:500": {
+  "title": "AAU Faculty of Engineering and Science",
+  "desc": "The AAU Faculty of Engineering and Science is one of five faculties of Aalborg University in Denmark. The faculty was first established in 1995 in Aalborg.",
+  "type": "university"
+ },
+ "en:57.057,9.897:500": {
+  "title": "Aalborg Søfarts- og Marinemuseum",
+  "desc": "Aalborg Søfarts- og Marinemuseum is a marine museum located on the wharf of Aalborg, Denmark.",
+  "type": "museum"
+ },
+ "en:59.326,18.082:500": {
+  "title": "Admiralty House (Stockholm)",
+  "desc": "The Admiralty House is an admiralty house on the islet Skeppsholmen in central Stockholm, Sweden.",
+  "type": "photospot"
+ },
+ "en:8.968,38.766:500": null,
+ "en:-13.122,31.772:500": null,
+ "en:-13.057,31.846:500": null,
+ "en:-13.109,31.754:500": null,
+ "en:-13.096,31.806:500": null,
+ "en:-13.066,31.757:500": null,
+ "en:9.630,124.146:500": null,
+ "en:9.644,124.159:500": null,
+ "en:9.766,123.945:500": null,
+ "en:12.014,79.858:500": {
+  "title": "Pondicherry University",
+  "desc": "Pondicherry University, also known as PU, is a central research university located in Kalapet, Pondicherry, India.",
+  "type": "university"
+ },
+ "en:-0.136,30.030:500": null,
+ "en:-0.074,30.038:500": null,
+ "en:-0.061,30.041:500": null,
+ "en:-0.050,30.050:500": null,
+ "en:-0.034,30.049:500": null,
+ "en:46.745,7.646:500": null,
+ "en:41.386,2.175:500": {
+  "title": "Saüc",
+  "desc": "Saüc was a Michelin starred restaurant in Barcelona, Spain.",
+  "type": "restaurant"
+ },
+ "en:48.859,2.324:500": {
+  "title": "Solférino station",
+  "desc": "Solférino is a station on Line 12 of the Paris Métro in the 7th arrondissement.",
+  "type": "train"
+ },
+ "en:55.676,12.569:500": {
+  "title": "Dragon Fountain (Copenhagen)",
+  "desc": "The Dragon Fountain is a fountain located in the City Hall Square in Copenhagen, Denmark.",
+  "type": "sightseeing"
+ },
+ "en:-6.370,106.829:500": null,
+ "en:22.643,113.816:500": null,
+ "en:57.052,9.913:500": {
+  "title": "Aalborg Business College",
+  "desc": "Aalborg Business College is a business college located in Aalborg, Northern Jutland, Denmark.",
+  "type": "university"
+ },
+ "en:-13.116,31.763:500": null,
+ "en:9.637,124.152:500": null,
+ "en:-0.061,30.043:500": null,
+ "en:-1.930,30.061:500": {
+  "title": "Kinyinya Genocide Memorial",
+  "desc": "The Kinyinya Genocide Memorial is a memorial site located in Kinyinya, Gasabo District, Kigali, Rwanda.",
+  "type": "sightseeing"
+ },
+ "en:-1.625,29.424:500": null,
+ "en:-1.728,29.263:500": null,
+ "en:-1.687,29.234:500": {
+  "title": "2013 Compagnie Africaine d'Aviation Fokker 50 crash",
+  "desc": "On 4 March 2013, a Fokker 50 operated by Compagnie Africaine d'Aviation on a domestic cargo flight from Lodja to Goma, Democratic Republic of the Congo, crashed in poor weather on approach to Goma…",
+  "type": "airport"
+ },
+ "en:-1.701,29.255:500": null,
+ "en:-1.773,29.929:500": null,
+ "en:-0.137,30.036:500": null,
+ "en:-0.029,30.052:500": null,
+ "en:-0.005,30.077:500": null,
+ "en:-0.048,30.079:500": null,
+ "en:-1.992,30.068:500": null,
+ "en:-1.954,30.093:500": {
+  "title": "University of Global Health Equity",
+  "desc": "University of Global Health Equity is a health sciences university in Rwanda. An initiative of Partners In Health, UGHE is a private, not-for-profit, accredited institution.",
+  "type": "university"
+ },
+ "en:13.737,100.528:500": {
+  "title": "Museum of Imagery Technology",
+  "desc": "Museum of Imaging Technology is a museum in Pathum Wan District, Bangkok, Thailand. It is located in Faculty of Science, Chulalongkorn University.",
+  "type": "museum"
+ },
+ "en:13.746,100.490:500": {
+  "title": "Tha Tian Market",
+  "desc": "Tha Tian Market, is one of famous historical ordinary community market in the Phra Nakhon District, Bangkok, Thailand.",
+  "type": "beach"
+ },
+ "en:13.805,100.554:500": {
+  "title": "Chatuchak Park MRT station",
+  "desc": "Chatuchak Park station is a Bangkok MRT station on the Blue Line. It is located under the eastern part of Chatuchak Park.",
+  "type": "train"
+ },
+ "en:0.511,30.318:500": null,
+ "en:3.119,101.658:500": {
+  "title": "Faculty of Medicine, University of Malaya",
+  "desc": "The Faculty of Medicine, Universiti Malaya is one of the thirteen faculties of the Universiti Malaya.",
+  "type": "university"
+ },
+ "en:3.150,101.710:500": {
+  "title": "KH Tower",
+  "desc": "KH Tower is a 36-storey, 152 m tall skyscraper in Kuala Lumpur, Malaysia. Between 1983 and 1984, it was the tallest building in Malaysia, the second to surpass the height of 150 m.",
+  "type": "sightseeing"
+ },
+ "en:3.238,101.684:500": {
+  "title": "Batu Caves Murugan Statue",
+  "desc": "Batu Caves Murugan Statue, is a 42.7 metres tall statue of the Hindu god Murugan at Batu Caves in Selangor, Malaysia.",
+  "type": "photospot"
+ }
+}

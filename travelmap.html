@@ -286,6 +286,7 @@
 
   <!-- defer on all scripts — HTML parses fully before any JS runs, eliminating render-blocking -->
   <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="static/js/travel_data_auto.js"></script>  <!-- auto photo places (tools/build_photos.py) — must load before travel_map.js -->
   <script defer src="static/js/travel_map.js"></script>
   <script defer src="static/js/components.js"></script>
   <script defer src="static/js/darkmode.js"></script>

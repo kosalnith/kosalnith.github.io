@@ -577,6 +577,40 @@ function tmCityPopupHtml(country, city) {
     </div>`;
 }
 
+/* ── AUTO PHOTOS ─────────────────────────────────────────────────
+   static/js/travel_data_auto.js (made by tools/build_photos.py from photo GPS data)
+   is merged into the hand-written list above. Photos already used by a hand-written
+   place are skipped, so nothing is duplicated and your own entries always win. */
+(function tmMergeAutoPhotos(){
+  /* 0. Hide hand-written places whose photos don't exist in static/img/explore.
+        (list written by tools/build_photos.py; if it's missing nothing is hidden) */
+  const have = Array.isArray(window.TM_EXISTING_IMGS) ? new Set(window.TM_EXISTING_IMGS) : null;
+  if (have) {
+    for (let i = tmCountries.length - 1; i >= 0; i--) {
+      const c = tmCountries[i];
+      c.cities = c.cities
+        .map(ci => Object.assign({}, ci, { imgs: (ci.imgs || []).filter(n => have.has(n)) }))
+        .filter(ci => ci.imgs.length);
+      if (!c.cities.length) tmCountries.splice(i, 1);
+    }
+  }
+
+  const auto = window.TM_AUTO_COUNTRIES;
+  if (!Array.isArray(auto)) { tmCountries.sort((a, b) => a.name.localeCompare(b.name)); return; }
+  const used = new Set();
+  tmCountries.forEach(c => c.cities.forEach(ci => (ci.imgs || []).forEach(n => used.add(n))));
+  auto.forEach(ac => {
+    const cities = ac.cities
+      .map(ci => Object.assign({}, ci, { imgs: ci.imgs.filter(n => !used.has(n)) }))
+      .filter(ci => ci.imgs.length);
+    if (!cities.length) return;
+    const existing = tmCountries.find(c => c.name.toLowerCase() === ac.name.toLowerCase());
+    if (existing) existing.cities.push.apply(existing.cities, cities);
+    else tmCountries.push({ name:ac.name, lat:ac.lat, lng:ac.lng, flag:ac.flag, desc:ac.desc, cities });
+  });
+  tmCountries.sort((a, b) => a.name.localeCompare(b.name));
+})();
+
 let tmActiveItem   = null;
 const tmAllMarkers = [];        /* { marker, type } — populated in forEach below */
 const tmActiveFilters = new Set(); /* empty = show all */
@@ -1334,7 +1368,7 @@ function tmRenderGallery() {
         photoGrid.querySelector('.tm-gc-photos').appendChild(badge);
       }
 
-      const typeBadgesHtml = city.types.map(({ type }) => {
+      const typeBadgesHtml = [...new Set(city.types.map(x => x.type))].map((type) => {   /* one badge per distinct type */
         const t = tmPinTypes[type] || tmPinTypes.default;
         return `<div class="tm-gc-type-badge" style="color:${t.color};background:${t.color}14;border-color:${t.color}30">
           <i class="${t.icon}"></i> ${t.label}</div>`;
