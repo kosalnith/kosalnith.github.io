@@ -1407,4 +1407,9 @@ function tmObserveGalleryImages() {
 }
 
 
+
+  /* Expose data for site-wide search (search.js reads these) */
+  window.tmCountries = tmCountries;
+  window.tmPinTypes  = tmPinTypes;
+
 })(); /* end IIFE */

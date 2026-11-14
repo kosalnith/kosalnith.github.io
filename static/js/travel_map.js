@@ -299,15 +299,208 @@ const tmFull  = (name) => `static/img/explore/${name}.jpg`;
 
 /* ── MAP ─────────────────────────────────────────────────────── */
 const tmMap = L.map('tm-map', { zoomControl:false, attributionControl:false }).setView([20,10], 2.2);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-  {
-    subdomains:    'abcd',
-    maxZoom:       19,
-    minZoom:       2,
-    keepBuffer:    4,        /* pre-load 4 tiles beyond viewport edge during pan */
-    updateWhenIdle:true,     /* only fetch new tiles after panning stops, not during */
-    crossOrigin:   true,     /* enables browser HTTP cache to reuse tiles across sessions */
-  }).addTo(tmMap);
+/* ── BASEMAPS ────────────────────────────────────────────────────
+   Google-Maps-style looks that need NO API key (Esri).
+   Optional: paste a free MapTiler key below (https://cloud.maptiler.com/account/keys/)
+   to get the closest-to-Google vector-quality "Streets" style as the default. */
+const TM_MAPTILER_KEY = '';   /* e.g. 'abc123XYZ' — leave '' to use Esri */
+
+const tmTileOpts = { minZoom:2, keepBuffer:4, updateWhenIdle:true, crossOrigin:true };
+const tmEsri = (svc, extra) => L.tileLayer(
+  `https://server.arcgisonline.com/ArcGIS/rest/services/${svc}/MapServer/tile/{z}/{y}/{x}`,
+  Object.assign({ maxZoom:18, attribution:'Tiles &copy; Esri' }, tmTileOpts, extra));
+
+const tmBase = {};
+if (TM_MAPTILER_KEY) {
+  tmBase['Streets'] = L.tileLayer(
+    `https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}@2x.png?key=${TM_MAPTILER_KEY}`,
+    Object.assign({ maxZoom:20, tileSize:512, zoomOffset:-1,
+      attribution:'&copy; MapTiler &copy; OpenStreetMap contributors' }, tmTileOpts));
+}
+tmBase['Streets']   = tmBase['Streets'] || tmEsri('World_Street_Map');
+tmBase['Satellite'] = L.layerGroup([
+  tmEsri('World_Imagery'),
+  tmEsri('Reference/World_Boundaries_and_Places', { maxZoom:18, attribution:'' }),
+  tmEsri('Reference/World_Transportation',        { maxZoom:18, attribution:'' }),
+]);
+tmBase['Terrain']   = tmEsri('World_Topo_Map');
+
+tmBase['Streets'].addTo(tmMap);
+const tmLayersCtl = L.control.layers(tmBase, null, { position:'bottomright', collapsed:true }).addTo(tmMap);
+
+/* ── Label language: show ONE language instead of "English + local script" ──
+   'en' = English only. Set to 'km' for Khmer, 'fr', 'zh', etc. (falls back to the local name). */
+const TM_LABEL_LANG = 'en';
+function tmLabelLang(style, lang = TM_LABEL_LANG) {
+  const field = ['coalesce',
+    ['get', 'name:' + lang], ['get', 'name_' + lang],
+    ['get', 'name:latin'],   ['get', 'name']];
+  (style.layers || []).forEach(l => {
+    if (l.type !== 'symbol' || !l.layout || l.layout['text-field'] == null) return;
+    const tf = JSON.stringify(l.layout['text-field']);
+    if (/name/.test(tf)) l.layout['text-field'] = field;   /* leave road-number shields (ref) alone */
+  });
+  return style;
+}
+
+/* ── Modern recolour (light + dark) for an OpenFreeMap/MapLibre style JSON ── */
+const TM_PALETTES = {
+  light: {
+    land:'#f4f1eb', water:'#b4d8f0', waterText:'#3f7fae',
+    park:'#d4eac1', parkText:'#46763a', wood:'#cfe6b9',
+    building:'#ebe6dc', buildingLine:'#ddd7ca',
+    sand:'#f3e9c6', hospital:'#f6dcd8', school:'#eee6d4', airport:'#e9e5dd',
+    hwFill:'#fcd78f', hwCase:'#e6b866',
+    roadFill:'#ffffff', roadCase:'#dcd7cc', minorCase:'#e9e4da',
+    rail:'#cdc8be', boundary:'#c2bad4',
+    text:'#33343a', halo:'rgba(255,255,255,0.92)'
+  },
+  dark: {
+    land:'#1f2226', water:'#1b3850', waterText:'#7fb2d9',
+    park:'#243a2d', parkText:'#8cbf84', wood:'#21352a',
+    building:'#2b2e33', buildingLine:'#34373d',
+    sand:'#2f2d27', hospital:'#3a2a2c', school:'#2b2a27', airport:'#292c30',
+    hwFill:'#b28638', hwCase:'#6e5126',
+    roadFill:'#3d4045', roadCase:'#16171a', minorCase:'#1a1b1e',
+    rail:'#4a4d52', boundary:'#5d5675',
+    text:'#e7e8ec', halo:'rgba(26,27,30,0.9)'
+  }
+};
+
+function tmModernStyle(style, mode) {
+  const C = TM_PALETTES[mode || 'light'];
+  (style.layers || []).forEach(l => {
+    const id = (l.id || '').toLowerCase();
+    const p = l.paint = l.paint || {};
+    if (l.type === 'background') {
+      p['background-color'] = C.land;
+    } else if (l.type === 'fill') {
+      if (/water/.test(id))                                   p['fill-color'] = C.water;
+      else if (/park|grass|garden|pitch|golf|recreation|meadow|green/.test(id)) p['fill-color'] = C.park;
+      else if (/wood|forest|scrub|farm|orchard|vineyard/.test(id))              p['fill-color'] = C.wood;
+      else if (/sand|beach/.test(id))                         p['fill-color'] = C.sand;
+      else if (/hospital/.test(id))                           p['fill-color'] = C.hospital;
+      else if (/school|university|college/.test(id))          p['fill-color'] = C.school;
+      else if (/aeroway|airport/.test(id))                    p['fill-color'] = C.airport;
+      else if (/building/.test(id)) { p['fill-color'] = C.building; p['fill-outline-color'] = C.buildingLine; }
+      else if (/landuse|landcover|residential|commercial|industrial/.test(id)) p['fill-color'] = C.land;
+    } else if (l.type === 'line') {
+      const casing = /casing|outline|case/.test(id);
+      if (/water/.test(id))                                   p['line-color'] = C.water;
+      else if (/rail|transit|subway/.test(id))                p['line-color'] = C.rail;
+      else if (/boundary|admin/.test(id)) { p['line-color'] = C.boundary; p['line-opacity'] = 0.8; }
+      else if (/motorway|trunk/.test(id))                     p['line-color'] = casing ? C.hwCase : C.hwFill;
+      else if (/road|street|highway|minor|service|link|path|track|pedestrian|bridge|tunnel|primary|secondary|tertiary/.test(id))
+                                                              p['line-color'] = casing ? C.roadCase : C.roadFill;
+    } else if (l.type === 'symbol') {
+      p['text-color'] = /water|ocean|sea|lake|river/.test(id) ? C.waterText
+                      : /park|nature|forest/.test(id)         ? C.parkText
+                      : C.text;
+      p['text-halo-color'] = C.halo;
+      p['text-halo-width'] = 1.4;
+      p['text-halo-blur']  = 0.4;
+      /* declutter: small points of interest only appear when zoomed in */
+      if (/^poi/.test(id)) l.minzoom = Math.max(l.minzoom || 0, 15);
+    }
+  });
+  return style;
+}
+
+/* ── Polished controls (layer switcher, zoom, attribution) — injected so no CSS edit is needed ── */
+(function tmModernUI(){
+  const st = document.createElement('style');
+  st.textContent = `
+    #tm-map { background:#f4f1eb; }
+    html.dark-mode #tm-map { background:#1f2226; }
+    #tm-map .leaflet-control-zoom, #tm-map .leaflet-control-layers {
+      border:none !important; border-radius:14px; overflow:hidden;
+      box-shadow:0 6px 24px rgba(20,20,30,.18), 0 1px 3px rgba(20,20,30,.12) !important;
+      background:rgba(255,255,255,.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    }
+    #tm-map .leaflet-control-zoom a {
+      width:38px; height:38px; line-height:38px; font-size:20px; color:#33343a;
+      background:transparent; border-bottom:1px solid rgba(0,0,0,.07);
+    }
+    #tm-map .leaflet-control-zoom a:last-child { border-bottom:none; }
+    #tm-map .leaflet-control-zoom a:hover { background:rgba(0,0,0,.05); }
+    #tm-map .leaflet-control-layers-toggle { width:38px; height:38px; background-size:20px; }
+    #tm-map .leaflet-control-layers-expanded { padding:10px 14px; font:500 13px/1.9 'Plus Jakarta Sans',system-ui,sans-serif; color:#33343a; }
+    #tm-map .leaflet-control-layers label { margin:0; cursor:pointer; }
+    #tm-map .leaflet-control-attribution {
+      background:rgba(255,255,255,.7); backdrop-filter:blur(6px); border-radius:10px 10px 0 0;
+      font:400 10px 'Plus Jakarta Sans',system-ui,sans-serif; color:#666; padding:2px 8px;
+    }
+    #tm-map .leaflet-control-attribution a { color:#555; }
+    html.dark-mode #tm-map .leaflet-control-zoom,
+    html.dark-mode #tm-map .leaflet-control-layers { background:rgba(36,38,42,.9); }
+    html.dark-mode #tm-map .leaflet-control-zoom a,
+    html.dark-mode #tm-map .leaflet-control-layers-expanded { color:#e7e8ec; }
+    html.dark-mode #tm-map .leaflet-control-zoom a { border-bottom-color:rgba(255,255,255,.08); }
+    html.dark-mode #tm-map .leaflet-control-zoom a:hover { background:rgba(255,255,255,.08); }
+    html.dark-mode #tm-map .leaflet-control-attribution { background:rgba(30,32,36,.7); color:#aaa; }
+    html.dark-mode #tm-map .leaflet-control-attribution a { color:#bbb; }
+    #tm-map .leaflet-tile { transition:opacity .25s ease; }
+  `;
+  document.head.appendChild(st);
+  /* smoother, finer zoom steps */
+  tmMap.options.zoomSnap = 0.5;
+  tmMap.options.zoomDelta = 0.5;
+  tmMap.options.wheelPxPerZoomLevel = 100;
+})();
+
+/* ── OPENFREEMAP — free forever, no API key, no usage limits ──────────
+   Modern Google-Maps-style vector basemap (openfreemap.org).
+   Loads MapLibre GL + its Leaflet bridge; falls back to the Esri basemap if anything fails. */
+(function tmOpenFreeMap(){
+  const css = document.createElement('link');
+  css.rel = 'stylesheet';
+  css.href = 'https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css';
+  document.head.appendChild(css);
+
+  const load = (src) => new Promise((ok, fail) => {
+    const el = document.createElement('script');
+    el.src = src; el.async = false; el.onload = ok; el.onerror = fail;
+    document.head.appendChild(el);
+  });
+
+  load('https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js')
+    .then(() => load('https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.22/leaflet-maplibre-gl.js'))
+    .then(() => Promise.all(['bright','liberty','positron'].map(n =>
+        fetch('https://tiles.openfreemap.org/styles/' + n).then(r => r.json()))))
+    .then(([brightJson, libertyJson, positronJson]) => {
+      const attr = '<a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a> '
+                 + '&copy; <a href="https://www.openmaptiles.org/" target="_blank" rel="noopener">OpenMapTiles</a> '
+                 + 'Data from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>';
+      const ofm = (style) => L.maplibreGL({
+        style: (typeof style === 'string') ? 'https://tiles.openfreemap.org/styles/' + style : style,
+        attribution: attr,
+        minZoom: 2,
+      });
+      const clone   = (o) => JSON.parse(JSON.stringify(o));
+      const mapLight = ofm(tmLabelLang(tmModernStyle(clone(brightJson), 'light')));
+      const mapDark  = ofm(tmLabelLang(tmModernStyle(clone(brightJson), 'dark')));
+      const liberty  = ofm(tmLabelLang(libertyJson));
+      const light    = ofm(tmLabelLang(positronJson));
+
+      /* swap Esri for OpenFreeMap as the default */
+      Object.values(tmBase).forEach(l => tmMap.hasLayer(l) && tmMap.removeLayer(l));
+      tmLayersCtl.addBaseLayer(mapLight, 'Map');
+      tmLayersCtl.addBaseLayer(mapDark,  'Night');
+      tmLayersCtl.addBaseLayer(liberty,  'Detailed');
+      tmLayersCtl.addBaseLayer(light,    'Minimal');
+
+      const isDark = () => document.documentElement.classList.contains('dark-mode');
+      (isDark() ? mapDark : mapLight).addTo(tmMap);
+
+      /* follow the site's dark-mode toggle automatically */
+      new MutationObserver(() => {
+        const want = isDark() ? mapDark : mapLight, other = isDark() ? mapLight : mapDark;
+        if (tmMap.hasLayer(other)) { tmMap.removeLayer(other); want.addTo(tmMap); }
+      }).observe(document.documentElement, { attributes:true, attributeFilter:['class'] });
+    })
+    .catch(() => console.warn('OpenFreeMap failed to load — staying on Esri basemap.'));
+})();
+L.control.attribution({ position:'bottomleft', prefix:false }).addTo(tmMap);
 L.control.zoom({ position:'bottomright' }).addTo(tmMap);
 
 const tmCountryIcon = () => L.divIcon({
