@@ -9,9 +9,10 @@ generate_thumbs.py
    **Skips thumbnails that already exist** (use --force-thumbs to regenerate all).
 4. Reads each photo's GPS and writes static/js/travel_data_auto.js (country + place
    auto-detected) by running tools/build_photos.py. Skip with --no-locations.
-5. WORK PAGE (static/img/work/): converts HEIC/DNG there too, makes <name>_s.jpg thumbnails
-   (skips existing ones, incl. old names like name_S.jpg / names.jpg), and lists photos that are
-   not on work.html yet. Add --add-to-work to insert them automatically (newest first).
+5. WORK PAGE (static/img/work/): converts HEIC/DNG there too, makes thumbnails in
+   static/img/work/thumbs/, and keeps static/js/work_photos.js up to date:
+   every photo in the folder is listed there, NEW photos go to the TOP (newest first), and
+   each photo's title can be edited in that file (work.html reads it).
 
 Requirements:
     pip install Pillow pillow-heif reverse_geocoder pycountry
@@ -21,10 +22,12 @@ Usage:
     python generate_thumbs.py
     python generate_thumbs.py --force-conversion       # reconvert HEIC/DNG to JPG (overwrite)
     python generate_thumbs.py --force-thumbs           # regenerate all thumbnails (overwrite)
-    python generate_thumbs.py --add-to-work            # also add new work photos to work.html
+    python generate_thumbs.py --clean-old-thumbs       # delete old name_s.jpg thumbnails in static/img/work
 """
 
 import argparse
+import html as htmllib
+import json
 import re
 import subprocess
 import sys
@@ -56,9 +59,13 @@ HEIC_JPG_QUALITY = 100                    # maximum quality for HEIC→JPG
 HEIC_SUBSAMPLING = 0                      # 0 = 4:4:4 (no chroma subsampling)
 DNG_JPG_QUALITY = 100                     # quality for DNG→JPG (used by ImageMagick)
 EXTENSIONS   = {".jpg", ".jpeg", ".png", ".webp"}  # for thumbnails
-WORK_DIR     = Path("static/img/work")    # photos shown on work.html (thumbnail = <name>_s.jpg, same folder)
-WORK_HTML    = Path("work.html")
-WORK_GRID_ID = "work-grid"
+WORK_DIR     = Path("static/img/work")    # photos shown on work.html
+WORK_THUMBS  = WORK_DIR / "thumbs"        # their small versions
+WORK_JSON    = Path("static/js/work_photos.js")   # list + titles + order (edit titles here)
+WORK_JSON_OLD = [Path("tools/work_photos.js"), Path("static/tools/work_photos.js"), Path("static/tools/work_photos.json"), Path("static/data/work_photos.json")]   # older locations — imported once
+WORK_HTML    = Path("work.html")          # only read once, to import your existing cards
+WORK_THUMB_SIZE = (1000, 2000)            # work thumbnails are 1000px wide (also for portrait photos) so the uniform crop stays sharp
+WORK_THUMB_QUALITY = 75
 # ─────────────────────────────────────────────────────────────────
 
 
@@ -156,18 +163,19 @@ def convert_folder(folder: Path, force: bool):
             print("     ✓ Done" if convert_dng_to_jpg(dng_path, jpg_path, DNG_JPG_QUALITY) else "     ✗ Failed")
 
 
-def thumb_batch(sources, dst_for, force: bool, label: str):
+def thumb_batch(sources, dst_for, force: bool, label: str, size=None, quality=None):
     """Make thumbnails for `sources`; dst_for(src)->Path. Returns list of sources newly thumbnailed."""
     total_orig = total_thumb = skipped = errors = 0
     made = []
-    print(f"\n🖼️  {label}: {len(sources)} image(s) — max {MAX_SIZE[0]}×{MAX_SIZE[1]}px, quality {THUMB_QUALITY}")
+    size, quality = size or MAX_SIZE, quality or THUMB_QUALITY
+    print(f"\n🖼️  {label}: {len(sources)} image(s) — max {size[0]}×{size[1]}px, quality {quality}")
     for src in sorted(sources):
         dst = dst_for(src)
         if dst is None or (not force and dst.exists()):
             skipped += 1
             continue
         try:
-            orig_b, thumb_b = make_thumb(src, dst, MAX_SIZE, THUMB_QUALITY)
+            orig_b, thumb_b = make_thumb(src, dst, size, quality)
             saving = (1 - thumb_b / orig_b) * 100 if orig_b else 0
             print(f"  ✓ {src.name:<40} {orig_b/1024:>7.1f} KB → {thumb_b/1024:>6.1f} KB ({saving:.0f}% smaller)")
             total_orig += orig_b; total_thumb += thumb_b; made.append(src)
@@ -180,68 +188,141 @@ def thumb_batch(sources, dst_for, force: bool, label: str):
     return made
 
 
-# ── work.html helpers ────────────────────────────────────────────
-_THUMB_SUFFIXES = ("_s", "_S")
-
+# ── work page helpers ───────────────────────────────────────────
 def work_originals():
-    """Full-size photos in static/img/work (thumbnails like name_s.jpg / name_S.jpg / names.jpg excluded)."""
+    """Full-size photos in static/img/work (old thumbnails like name_s.jpg / name_S.jpg / names.jpg excluded)."""
     files = [p for p in WORK_DIR.iterdir() if p.is_file() and p.suffix.lower() in EXTENSIONS]
     stems = {p.stem for p in files}
+    return [p for p in files if not is_old_thumb(p, stems)]
+
+def is_old_thumb(p: Path, stems):
+    st = p.stem
+    if st.endswith(("_s", "_S")):                              # name_s / name_S
+        return True
+    return st[-1:] in ("s", "S") and st[:-1] in stems          # names  (old style: NUM24 + NUM24s)
+
+def refresh_small_work_thumbs():
+    """Thumbnails made by an older version were only up to 800x560 (too small for portrait photos in the uniform
+    frame). Delete those so they are re-made at full width."""
+    n = 0
+    for src in work_originals():
+        t = WORK_THUMBS / f"{src.stem}.jpg"
+        if not t.exists():
+            continue
+        try:
+            with Image.open(t) as ti, Image.open(src) as si:
+                if ti.width < WORK_THUMB_SIZE[0] - 2 and ImageOps.exif_transpose(si).width > ti.width + 2:
+                    t.unlink(); n += 1
+        except Exception:
+            pass
+    if n:
+        print(f"\n♻️  Re-making {n} small work thumbnail(s) at {WORK_THUMB_SIZE[0]}px wide.")
+
+def added_time(p: Path):
+    """When the photo was added: file creation time (macOS) or modified time."""
+    stt = p.stat()
+    return getattr(stt, "st_birthtime", stt.st_mtime)
+
+def title_from_name(stem: str):
+    return re.sub(r"[_\-]+", " ", stem).strip().title()
+
+def seed_from_html():
+    """First run only: import the cards already in work.html (order + titles are kept)."""
+    if not WORK_HTML.exists():
+        return []
+    html = WORK_HTML.read_text(encoding="utf-8")
     out = []
-    for p in files:
-        st = p.stem
-        if st.endswith(_THUMB_SUFFIXES):                      # name_s / name_S
-            continue
-        if st[-1:] in ("s", "S") and st[:-1] in stems:        # names  (old style: NUM24 + NUM24s)
-            continue
-        out.append(p)
+    for sec in re.findall(r'<section class="highlight">(.*?)</section>', html, flags=re.S):
+        href  = re.search(r'<a href="([^"]+)"', sec)
+        thumb = re.search(r'<img src="([^"]+)"', sec)
+        title = re.search(r'<p>\s*<span[^>]*>(.*?)</span>\s*</p>', sec, flags=re.S)
+        if href:
+            out.append({"image": href.group(1),
+                        "thumb": thumb.group(1) if thumb else href.group(1),
+                        "title": htmllib.unescape(re.sub(r"<[^>]+>", "", title.group(1))).strip() if title else title_from_name(Path(href.group(1)).stem)})
     return out
 
-def work_thumb_path(src: Path):
-    """Where the thumbnail should go, or an existing one (old naming) so it is not duplicated."""
-    for name in (f"{src.stem}_s.jpg", f"{src.stem}_S.jpg", f"{src.stem}s.jpg", f"{src.stem}S.jpg"):
-        if (WORK_DIR / name).exists():
-            return WORK_DIR / name
-    return WORK_DIR / f"{src.stem}_s.jpg"
+WORK_JS_HEADER = """/* Photos shown on work.html — edit a "title" here, save, and refresh the page (top of the list = top of the page).
+   • Every photo is shown in the same-size frame (3:2); if a head gets cut, add  "focus": "50% 15%"  (x y) to that line.
+   • "hidden": true on a line hides that photo.  • Keep the format: one {...} per line, commas between lines.
+   • New photos in static/img/work/ are added at the TOP automatically by:  python3 generate_thumbs.py */
+window.WORK_PHOTOS = [
+"""
 
-def photo_date(p: Path):
+def save_work_json(entries):
+    WORK_JSON.parent.mkdir(parents=True, exist_ok=True)
+    body = ",\n".join("  " + json.dumps(e, ensure_ascii=False) for e in entries)
+    WORK_JSON.write_text(WORK_JS_HEADER + body + "\n];\n", encoding="utf-8")
+
+def load_work_js(path=None):
+    """Read window.WORK_PHOTOS = [ ... ]; from the .js file. Raises ValueError with a clear message if it was edited wrongly."""
+    path = path or WORK_JSON
+    text = path.read_text(encoding="utf-8")
+    start = text.index("[", text.index("WORK_PHOTOS"))
+    end = text.rindex("]")
+    arr = re.sub(r",\s*\]\s*$", "]", text[start:end + 1])          # tolerate a trailing comma
     try:
-        with Image.open(p) as im:
-            ex = im.getexif()
-            when = ex.get_ifd(0x8769).get(36867) or ex.get(306)
-        if when:
-            return datetime.strptime(str(when)[:19], "%Y:%m:%d %H:%M:%S")
-    except Exception:
-        pass
-    return datetime.fromtimestamp(p.stat().st_mtime)
+        return json.loads(arr)
+    except json.JSONDecodeError as e:
+        line = arr[:e.pos].count("\n") + 1
+        raise ValueError(f"{path} has a typo near line {line + text[:start].count(chr(10))}: {e.msg} "
+                         f"(check quotes \" and commas , between lines)")
 
-def work_card_html(src: Path, thumb: Path):
-    title = re.sub(r"[_\-]+", " ", src.stem).strip().title()
-    return (f'<section class="highlight">\n<figure class="landscape">\n  <picture>\n'
-            f'    <a href="{WORK_DIR.as_posix()}/{src.name}" target="_blank"><img src="{WORK_DIR.as_posix()}/{thumb.name}" alt="{title}"></a>\n'
-            f'  </picture>\n</figure>\n<p><span style="font-weight: 400;">{title}</span></p>\n</section>\n')
+def update_work_json():
+    """Keep static/js/work_photos.js in sync with the photos in static/img/work."""
+    if WORK_JSON.exists():
+        try:
+            entries = load_work_js()
+        except ValueError as e:
+            print(f"\n✗ {e}\n  Nothing was changed. Fix that line and run the script again.")
+            return
+    elif any(o.exists() for o in WORK_JSON_OLD):
+        old = next(o for o in WORK_JSON_OLD if o.exists())
+        try:
+            entries = load_work_js(old) if old.suffix == ".js" else json.loads(old.read_text(encoding="utf-8"))
+        except (ValueError, json.JSONDecodeError) as e:
+            print(f"\n✗ Could not read {old}: {e}\n  Nothing was changed."); return
+        print(f"\n📄 Imported {len(entries)} photos from the older {old} (titles + order kept).")
+    else:
+        entries = seed_from_html()
+        if entries:
+            print(f"\n📄 First run: imported {len(entries)} existing cards from {WORK_HTML} (titles + order kept).")
 
-def handle_work_page(add: bool):
-    html = WORK_HTML.read_text(encoding="utf-8") if WORK_HTML.exists() else ""
-    used = set(re.findall(r'static/img/work/([^"\']+?)\.(?:jpe?g|png|webp)', html, flags=re.I))
-    missing = [p for p in work_originals() if p.stem not in used and work_thumb_path(p).exists()]
-    if not missing:
-        print("\n✅ work.html already lists every photo in static/img/work.")
-        return
-    missing.sort(key=photo_date, reverse=True)                # newest first
-    print(f"\n📄 {len(missing)} photo(s) in {WORK_DIR} are not on work.html yet:")
-    for p in missing:
-        print(f"   • {p.name}")
-    if not add:
-        print("   Run:  python3 generate_thumbs.py --add-to-work   to add them (titles come from file names — edit them in work.html).")
-        return
-    m = re.search(r'<div[^>]*id="' + WORK_GRID_ID + r'"[^>]*>', html)
-    if not m:
-        print(f'   ✗ Could not find <div id="{WORK_GRID_ID}"> in work.html — see instructions.')
-        return
-    cards = "\n".join(work_card_html(p, work_thumb_path(p)) for p in missing)
-    WORK_HTML.write_text(html[:m.end()] + "\n\n" + cards + "\n" + html[m.end():], encoding="utf-8")
-    print(f"   ✓ Added to the top of the grid in {WORK_HTML}. Titles are taken from the file names — edit them there.")
+    originals = {f"{WORK_DIR.as_posix()}/{p.name}": p for p in work_originals()}
+    known = {e["image"] for e in entries}
+
+    # thumbnails of photos in static/img/work now live in static/img/work/thumbs/
+    for e in entries:
+        if e["image"] in originals:
+            e["thumb"] = f"{WORK_THUMBS.as_posix()}/{originals[e['image']].stem}.jpg"
+
+    # new photos -> TOP, newest first
+    new = sorted((p for img, p in originals.items() if img not in known), key=added_time, reverse=True)
+    added = [{"image": f"{WORK_DIR.as_posix()}/{p.name}",
+              "thumb": f"{WORK_THUMBS.as_posix()}/{p.stem}.jpg",
+              "title": title_from_name(p.stem)} for p in new]
+    entries = added + entries
+    save_work_json(entries)
+
+    missing = [e["image"] for e in entries if e["image"].startswith(WORK_DIR.as_posix()) and e["image"] not in originals]
+    print(f"\n📄 {WORK_JSON}: {len(entries)} photo(s) on the work page, {len(added)} new at the top.")
+    for e in added:
+        print(f"   ＋ {Path(e['image']).name}  →  \"{e['title']}\"   (edit the title in {WORK_JSON})")
+    if missing:
+        print(f"   ⚠ {len(missing)} entry/entries point to a file that is not in {WORK_DIR} (they stay hidden on the site): "
+              + ", ".join(Path(m).name for m in missing))
+
+def clean_old_thumbs():
+    """Delete old name_s.jpg-style thumbnails (only if the original and the new thumbnail exist)."""
+    files = [p for p in WORK_DIR.iterdir() if p.is_file() and p.suffix.lower() in EXTENSIONS]
+    stems = {p.stem for p in files}
+    n = 0
+    for p in files:
+        if is_old_thumb(p, stems):
+            base = p.stem[:-2] if p.stem.endswith(("_s", "_S")) else p.stem[:-1]
+            if (WORK_DIR / f"{base}.jpg").exists() and (WORK_THUMBS / f"{base}.jpg").exists():
+                p.unlink(); n += 1
+    print(f"\n🧹 Deleted {n} old thumbnail file(s) from {WORK_DIR}.")
 
 
 def main():
@@ -254,8 +335,8 @@ def main():
                         help="Skip the auto-location step (tools/build_photos.py).")
     parser.add_argument("--strip-gps", action="store_true",
                         help="After locating photos, remove GPS/EXIF from the full-size photos (public-site privacy).")
-    parser.add_argument("--add-to-work", action="store_true",
-                        help="Insert work-page photos that are not on work.html yet (newest first).")
+    parser.add_argument("--clean-old-thumbs", action="store_true",
+                        help="Delete old name_s.jpg-style thumbnails in static/img/work (after the new thumbs/ folder is made).")
     args = parser.parse_args()
 
     if not SOURCE_DIR.exists():
@@ -273,14 +354,16 @@ def main():
     else:
         print("\n❌ No images found for travel-gallery thumbnails.")
 
-    # ────────── 4. Work-page thumbnails → static/img/work/<name>_s.jpg ──────────
+    # ────────── 4. Work page: thumbs/ folder + photo list (work_photos.json) ──────────
     if WORK_DIR.exists():
-        thumb_batch(work_originals(), lambda s: None if (work_thumb_path(s).exists() and not args.force_thumbs)
-                    else work_thumb_path(s), args.force_thumbs, "Work page")
-        if WORK_HTML.exists():
-            handle_work_page(args.add_to_work)
+        refresh_small_work_thumbs()
+        thumb_batch(work_originals(), lambda s: WORK_THUMBS / (s.stem + ".jpg"), args.force_thumbs, "Work page",
+                    size=WORK_THUMB_SIZE, quality=WORK_THUMB_QUALITY)
+        update_work_json()
+        if args.clean_old_thumbs:
+            clean_old_thumbs()
     else:
-        print(f"\nℹ️  {WORK_DIR} not found – skipping work-page thumbnails.")
+        print(f"\nℹ️  {WORK_DIR} not found – skipping work page.")
 
     # ────────── 5. Auto-locate travel photos from GPS → travel_data_auto.js ──────────
     locator = Path("tools/build_photos.py")

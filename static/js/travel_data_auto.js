@@ -668,11 +668,11 @@ window.TM_AUTO_COUNTRIES = [
     ]
    },
    {
-    "name": "Thun",
+    "name": "Hilterfingen",
     "lat": 46.7452,
     "lng": 7.6462,
     "type": "photospot",
-    "desc": "Photos from Thun, Switzerland.",
+    "desc": "Photos from Hilterfingen, Switzerland.",
     "imgs": [
      "ep95",
      "ep96"
