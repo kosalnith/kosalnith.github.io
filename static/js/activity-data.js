@@ -79,6 +79,20 @@ const activities = [
     ]
   },
 
+  {
+    title: "35th PRAXIS Session Economic Valuation of Ecosystem Services: Applications in Planning and Policy-Making",
+    titleUrl: "",
+    person: "Kosal Nith", role: "Keynote Speaker",
+    date: "7 Dec 2026", location: "Southeast Asian Regional Center for Graduate Study and Research in Agriculture (SEARCA), Los Baños, Laguna, Philippines ",
+    type: "Keynote", typeCategory: "Talks and presentations in private or public companies",
+    description: "Keynote presentation at the session.",
+    keywords: ["Macroeconomics", "Fiscal policy", "Asia", "Income inequality"],
+    sdg: ["SDG 8 - Decent Work and Economic Growth", "SDG 17 - Partnerships for the Goals"],
+    resources: [
+      { type: "slides", label: "Slides",    url: "research/slides/" },
+    ]
+  },
+
   /* ══════════════════════════════════════════════════
      CONFERENCE PRESENTATIONS
      typeCategory: "Conference presentations"
@@ -88,9 +102,9 @@ const activities = [
    {
     title: "Workshop on Island Economies and Ecological Planning in the Philippines",
     titleUrl: "https://ysi.ineteconomics.org/event/workshop-on-island-economies-and-ecological-planning-in-the-philippines/2026-12-07/",
-    person: "Kosal Nith", role: "Speaker",
-    date: "7 Dec 2026 → 10 Dec 2026", location: "Department of Community and Environmental Resource Planning, University of the Philippines Los Baños, Manila, the Philippines",
-    type: "Conference presentation", typeCategory: "Conference presentations",
+    person: "Kosal Nith", role: "Co-organiser",
+    date: "9 Dec 2026 → 10 Dec 2026", location: "Department of Community and Environmental Resource Planning, University of the Philippines Los Baños, Manila, the Philippines",
+    type: "Organisation", typeCategory: "Conference organisation or participation",
     description: "Presented research on fiscal policy in Cambodia.",
     keywords: ["Economic development", "Southeast Asia", "Climate change"],
     sdg: ["SDG 8 - Decent Work and Economic Growth", "SDG 13 - Climate Action"],
